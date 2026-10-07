@@ -1,7 +1,7 @@
 # MY KRAVV
 
-A private AI-assisted investment reasoning workspace. Milestone 1 adds Supabase
-email/password authentication and a private shell to the Milestone 0 foundation.
+A private AI-assisted investment reasoning workspace. Milestone 2 adds owned
+Companies to the authenticated private foundation.
 The UI defaults to Bahasa Indonesia and preserves the Hybrid KRAVV design.
 
 ## Run locally
@@ -14,7 +14,8 @@ npm run dev
 ```
 
 Open <http://localhost:3000>. Anonymous users reach `/auth`; authenticated users
-reach the minimal private shell at `/`. This is a foundation placeholder.
+reach the minimal private shell at `/`. Companies live at `/companies`; Home
+remains a foundation placeholder.
 
 For a new checkout, copy `.env.example` to `.env.local` and fill the development
 project values. Do not overwrite an existing local configuration or commit it.
@@ -31,7 +32,37 @@ are implemented. Validation reports missing configuration without echoing values
 Apply [the settings migration](supabase/migrations/20261007000100_user_settings_and_rls.sql)
 to the configured development project. See [Supabase setup](supabase/README.md)
 for migration and dashboard prerequisites. Sign in with an existing email/password
-account; registration and password recovery are outside this milestone.
+account; registration and password recovery are outside this milestone. Also apply
+[the Company migration](supabase/migrations/20261008000100_companies_and_rls.sql)
+once to the same development project before using Companies.
+
+## Company Slice
+
+`/companies` lists owned active companies by recent metadata update. The archived
+view is available through its quiet **Diarsipkan** link. `/companies/new` needs only
+a name; optional ticker, exchange, sector, and short context sit behind disclosure.
+No ticker lookup, external enrichment, or market data is used.
+
+`/companies/[companyId]` shows company identity and user-entered context.
+`/companies/[companyId]/edit` updates supported metadata and descriptive research
+state. Missing, malformed, and foreign company IDs return the same safe unavailable
+surface. No later reasoning features or fake data populate the workspace.
+
+Ownership is derived from the verified server session, never form data. Every
+query explicitly filters `user_id`, validates the returned owner, and runs under
+the user's RLS session. Separate SELECT/INSERT/UPDATE policies protect Companies;
+column grants prevent ordinary API changes to identity, ownership, or timestamps.
+
+Archiving requires explicit confirmation. It sets `state = ARCHIVED` without
+deletion; the database maintains `archived_at` and `updated_at`. Repeated archive
+operations preserve the original archive timestamp. Archived workspaces can be
+reopened and their metadata corrected; they remain archived. Restore and permanent
+deletion controls are outside this slice. There is no ordinary Company DELETE
+grant or policy. Deleting an Auth account cascades its private data.
+
+Input limits are 200 characters for name, 40 for ticker, 80 for exchange, 120 for
+sector, and 2,000 for context. The name is required; blanks in optional fields are
+stored as NULL. Descriptive states are user-selected labels, not workflow gates.
 
 ## Authentication and authorization
 
@@ -60,15 +91,16 @@ npm start
 ```
 
 `check` runs ESLint, strict TypeScript with generated route types, Prettier, and
-nine deterministic environment/authentication/bootstrap tests. Use `npm run format`
+deterministic environment/authentication/bootstrap/Company tests. Use `npm run format`
 to format application/setup files. Product documentation and visual references are
 excluded from formatting.
 
 The opt-in live suite requires the designated development project, its applied
 migration, and the local app running. It verifies real login, session refresh,
-idempotent bootstrap, cross-user RLS, and the actual login/logout Server Actions
-through HTTP. Random disposable users are removed in `finally`; no other user or
-record is modified. The secret key is used only for this test administration.
+idempotent bootstrap, cross-user RLS, Company creation/list/edit/archive, and actual
+Server Actions through HTTP. Random disposable users are removed in `finally`;
+their companies/settings cascade away and Company cleanup is checked. No other
+user or record is modified. The secret key is used only for test administration.
 
 ```powershell
 $env:MY_KRAVV_LIVE_TESTS = 'development'
@@ -92,17 +124,21 @@ src/app/auth/         Public login surface
 src/app/(private)/    Protected shell, placeholder, loading/error states
 src/components/       Shared shell
 src/features/auth/    Login/logout forms, validation, Server Actions
+src/features/companies/ Company forms, actions, and private navigation
+src/domain/company/   Validated Company fields, states, and runtime row types
 src/lib/env/          Browser-safe configuration
 src/lib/supabase/     Browser client boundary
 src/server/auth/      SSR client, verified session, refresh, auth operations
 src/server/db/        Settings bootstrap and privileged credential boundary
+src/server/companies/ Verified session and settings context for Company requests
 src/server/ai/        Reserved credential boundary; no provider calls
 src/proxy.ts          Server-side route guard
 src/tests/            Deterministic tests; separate opt-in live suite
 supabase/migrations/  Reviewed settings schema and RLS migration
 ```
 
-Only `@supabase/ssr` and `@supabase/supabase-js` were added for this milestone.
+No dependencies were added for Milestone 2. Milestone 1 introduced
+`@supabase/ssr` and `@supabase/supabase-js`.
 No component kit, external fonts, market data, or mock account is included.
 
 ## Product documentation and references
@@ -120,10 +156,10 @@ precedence over legacy names in the original implementation plan.
 
 ## Next milestone
 
-Stop after Authentication + Private Shell. Phase 2 in the implementation plan is
-Companies: an owned company table and RLS, create/list/edit/archive flows, and a
-minimal company workspace with validation and ownership tests. It has not started.
-Raw Thoughts and the AI Gateway remain later phases.
+Stop after the Company Slice. Phase 3 in the implementation plan is Raw Thoughts:
+capture and persist original wording linked to a company, preserve raw content,
+and add the specified initial history behavior. It has not started. The AI Gateway
+remains a later phase.
 
 Implementation references: [installed Next.js guidance](node_modules/next/dist/docs/)
 and [Supabase SSR authentication](https://supabase.com/docs/guides/auth/server-side/creating-a-client).

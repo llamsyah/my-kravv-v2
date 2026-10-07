@@ -1,7 +1,7 @@
 # Supabase development setup
 
-Milestone 1 connects the existing development project to Supabase Auth and adds
-only `user_settings`. Keep development and production projects separate.
+The existing development project provides Supabase Auth, `user_settings`, and
+Milestone 2 `companies`. Keep development and production projects separate.
 
 Apply `migrations/20261007000100_user_settings_and_rls.sql` once to the configured
 development project, using its SQL Editor or a properly linked migration tool.
@@ -27,5 +27,12 @@ See the root README for opt-in live tests. These create random disposable
 development identities, verify sessions and RLS, and delete only those identities
 in `finally`; associated settings cascade away. Never point them at production.
 
-All subsequent schema changes belong in reviewed migrations with ownership
-tests. No Companies table or seed data is included yet.
+Apply `migrations/20261008000100_companies_and_rls.sql` once to the configured
+development project. It adds only the documented Company metadata, an ownership
+index, timestamp/archive trigger, and separate SELECT/INSERT/UPDATE RLS policies.
+Ordinary updates cannot change id, user_id, or creation/update timestamps. Archive
+is an UPDATE; no ordinary DELETE grant/policy or permanent-deletion UI is provided.
+The trigger preserves the first archive timestamp during subsequent corrections.
+
+All subsequent schema changes belong in reviewed migrations with ownership tests.
+There are no seed companies or later reasoning tables yet.

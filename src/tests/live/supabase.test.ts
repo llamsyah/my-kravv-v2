@@ -247,6 +247,7 @@ test(
               ...init,
               headers,
               redirect: "manual",
+              signal: AbortSignal.timeout(15000),
             });
             for (const value of response.headers.getSetCookie()) {
               const [pair] = value.split(";");

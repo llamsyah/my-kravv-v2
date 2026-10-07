@@ -91,6 +91,18 @@ test("Proxy rejects anonymous/forged cookies and preserves refreshed cookies", a
   );
   assert.equal(anonymous.status, 307);
   assert.equal(anonymous.headers.get("location"), "http://localhost:3000/auth");
+  for (const path of [
+    "/companies",
+    "/companies/new",
+    `/companies/${fixtureUserId}`,
+    `/companies/${fixtureUserId}/edit`,
+  ]) {
+    assert.equal(
+      (await updateSession(new NextRequest(`http://localhost:3000${path}`)))
+        .status,
+      307,
+    );
+  }
   const auth = await updateSession(
     new NextRequest("http://localhost:3000/auth"),
   );

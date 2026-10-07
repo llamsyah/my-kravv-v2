@@ -16,6 +16,11 @@ provider errors must never be sent as client props, responses, or logs.
   with safe Bahasa Indonesia feedback. Feature actions perform navigation.
 - `db/user-settings.ts`: insert-if-missing bootstrap, then explicit owner check.
   Repeated or concurrent entry does not reset preferences.
+- `companies/context.ts`: reuses the verified session and settings bootstrap for
+  Company requests. Each action obtains this context before database work.
+- `db/companies.ts`: create/list/lookup/edit/archive using explicit owner filters,
+  validated fields, and checked return rows. No privileged client is used. Foreign
+  and missing records share one unavailable result; provider details stay private.
 - `db/config.ts`: secret-key accessor reserved for explicit administration.
   It is unused by application requests. Opt-in live development tests use it only
   to create and remove their own disposable identities.
