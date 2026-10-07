@@ -1,30 +1,55 @@
 # MY KRAVV
 
-A private AI-assisted investment reasoning workspace. Milestone 0 establishes the
-application foundation only: a Bahasa Indonesia shell, local tooling, and validated
-configuration boundaries. Authentication, persistence, and AI actions are not implemented.
+A private AI-assisted investment reasoning workspace. Milestone 1 adds Supabase
+email/password authentication and a private shell to the Milestone 0 foundation.
+The UI defaults to Bahasa Indonesia and preserves the Hybrid KRAVV design.
 
 ## Run locally
 
-Use Node.js 24 LTS and npm (Node version recorded in `.node-version`).
+Use Node.js 24 LTS and npm (version recorded in `.node-version`).
 
 ```sh
 npm ci
 npm run dev
 ```
 
-Open <http://localhost:3000>. The shell works without credentials or external services.
-For future integrations, copy `.env.example` to `.env.local` and fill in the relevant
-values. Never commit `.env.local`.
+Open <http://localhost:3000>. Anonymous users reach `/auth`; authenticated users
+reach the minimal private shell at `/`. This is a foundation placeholder.
+
+For a new checkout, copy `.env.example` to `.env.local` and fill the development
+project values. Do not overwrite an existing local configuration or commit it.
 
 ```powershell
 Copy-Item .env.example .env.local
 ```
 
-Only `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` are browser-safe.
-`SUPABASE_SERVICE_ROLE_KEY` and `OPENAI_API_KEY` are protected by `server-only` imports.
-Do not expose them through Next.js config, client props, responses, or logs.
-Validation is lazy: a missing integration config throws a clear error only when used.
+Browser-safe variables are `NEXT_PUBLIC_SUPABASE_URL` and
+`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`. `SUPABASE_SECRET_KEY` and `OPENAI_API_KEY`
+are protected by `server-only` imports and never used in client code. No AI calls
+are implemented. Validation reports missing configuration without echoing values.
+
+Apply [the settings migration](supabase/migrations/20261007000100_user_settings_and_rls.sql)
+to the configured development project. See [Supabase setup](supabase/README.md)
+for migration and dashboard prerequisites. Sign in with an existing email/password
+account; registration and password recovery are outside this milestone.
+
+## Authentication and authorization
+
+Request-scoped Supabase SSR clients use the publishable key and session cookies.
+Next.js Proxy verifies claims, refreshes sessions, and propagates cookies to the
+request and response. Server layouts and the private page verify identity with
+`getUser()` before private access. Private responses use `private, no-store`.
+
+The first private entry inserts settings if missing, then checks the returned
+owner. Concurrent or repeated visits preserve preferences. Four RLS policies
+restrict reading, inserting, updating, and deleting to `auth.uid() = user_id`.
+User requests never use the privileged secret key. Logout revokes the current
+session and clears its cookies; private entry then redirects back to `/auth`.
+
+Future private pages should use the private route group and check identity near
+data access. Each new record requires explicit ownership checks and RLS tests.
+Supabase's provider rate limits protect login; production HTTPS, secure project
+configuration, and a separate production database remain deployment requirements.
 
 ## Validation and production
 
@@ -34,65 +59,71 @@ npm run build
 npm start
 ```
 
-`check` runs ESLint, strict TypeScript checks (including generated Next.js route types),
-Prettier checks, and environment-boundary tests using Node's built-in test runner.
-Use `npm run format` to format application/setup files. Existing product documentation
-and visual references are deliberately excluded from formatting.
+`check` runs ESLint, strict TypeScript with generated route types, Prettier, and
+nine deterministic environment/authentication/bootstrap tests. Use `npm run format`
+to format application/setup files. Product documentation and visual references are
+excluded from formatting.
 
-ESLint 9 is pinned for compatibility with the React/import/accessibility plugins
-bundled by `eslint-config-next` (their peer ranges do not yet accept ESLint 10).
-The registry marks ESLint 9 deprecated. The initial audit also reports five high
-severity entries in the development-only `fast-glob` → `micromatch` → `braces`
-chain. No patched `braces` release was available during setup; the suggested forced
-fix downgrades Next.js lint configuration to an incompatible major. Revisit these
-tooling dependencies when compatible upstream updates arrive. The production-only
-audit is clean (`npm audit --omit=dev`).
+The opt-in live suite requires the designated development project, its applied
+migration, and the local app running. It verifies real login, session refresh,
+idempotent bootstrap, cross-user RLS, and the actual login/logout Server Actions
+through HTTP. Random disposable users are removed in `finally`; no other user or
+record is modified. The secret key is used only for this test administration.
+
+```powershell
+$env:MY_KRAVV_LIVE_TESTS = 'development'
+npm run test:live
+Remove-Item Env:MY_KRAVV_LIVE_TESTS
+```
+
+The app URL defaults to `http://127.0.0.1:3000`; override it with
+`MY_KRAVV_TEST_APP_URL` for a different localhost port. Without the opt-in value,
+live tests are skipped. Browser visual verification is separate from HTTP tests.
+
+ESLint 9 is pinned because bundled lint plugins do not yet accept ESLint 10.
+Milestone 0 recorded five high development-only audit entries in the
+`fast-glob` → `micromatch` → `braces` chain; revisit compatible upstream fixes.
+Check production dependencies with `npm audit --omit=dev`.
 
 ## Source layout
 
 ```text
-src/app/              App Router layout, shell page, not-found page, design tokens
-src/components/       Shared application shell
-src/lib/env/          Public Supabase configuration validation
-src/server/db/        Server-only database credential boundary
-src/server/ai/        Server-only AI credential boundary; no provider calls
-src/tests/            Environment validation and public/private separation checks
-supabase/migrations/  Reserved for future reviewed SQL migrations (currently empty)
+src/app/auth/         Public login surface
+src/app/(private)/    Protected shell, placeholder, loading/error states
+src/components/       Shared shell
+src/features/auth/    Login/logout forms, validation, Server Actions
+src/lib/env/          Browser-safe configuration
+src/lib/supabase/     Browser client boundary
+src/server/auth/      SSR client, verified session, refresh, auth operations
+src/server/db/        Settings bootstrap and privileged credential boundary
+src/server/ai/        Reserved credential boundary; no provider calls
+src/proxy.ts          Server-side route guard
+src/tests/            Deterministic tests; separate opt-in live suite
+supabase/migrations/  Reviewed settings schema and RLS migration
 ```
 
-The UI uses local system serif/sans-serif fonts and plain CSS. There is no font
-download, component kit, market data, or mock account. Navigation includes only the
-existing Beranda route. The page is a foundation placeholder, not the final Home.
-Feature/domain/auth directories will arrive with their first implementation.
+Only `@supabase/ssr` and `@supabase/supabase-js` were added for this milestone.
+No component kit, external fonts, market data, or mock account is included.
 
 ## Product documentation and references
 
-Read [the original project overview](docs/README.md) and
-[Product Foundation](docs/MY_KRAVV_Product_Foundation_v0.1.md) first, followed by
+Read [the original overview](docs/README.md),
+[Product Foundation](docs/MY_KRAVV_Product_Foundation_v0.1.md),
 [MVP Scope](docs/05-mvp-scope.md), [Technical Architecture](docs/06-technical-architecture.md),
-[Page Responsibilities](docs/07-page-responsibilities.md), and
-[Design Direction](docs/08-design-direction.md), and
-[Implementation Plan](docs/11-implementation-plan.md).
-
-[Visual reference guidance](public/visual-references/visual-references-README.md)
-explains the desktop/mobile images. They guide atmosphere and hierarchy; product
-documentation takes priority. Original documents and all ten images remain intact.
-
-Repository naming differs from the task brief: the original overview is
-`docs/README.md`, Product Foundation uses its versioned filename above, and the
-visual guide is `visual-references-README.md`. No originals were renamed.
-The implementation plan became available during setup and was reviewed before
-completion. This task's configuration-only scope takes precedence over its broader
-Supabase project provisioning checklist; no external account or project is created.
+[Design Direction](docs/08-design-direction.md), [Database Schema](docs/09-database-schema.md),
+and [Implementation Plan](docs/11-implementation-plan.md).
+[Visual guidance](public/visual-references/visual-references-README.md) describes
+the desktop/mobile images. Documentation takes priority; original documents and
+all ten images remain intact. Their actual filenames differ from the task brief;
+no originals were renamed. The task's current publishable/secret key model takes
+precedence over legacy names in the original implementation plan.
 
 ## Next milestone
 
-Stop after Milestone 0. [Phase 1 in the implementation plan](docs/11-implementation-plan.md#8-phase-1--authentication--private-shell)
-is **Authentication + Private Shell**: Supabase Auth, protected routes, a session
-helper, user settings bootstrap, logout, and private navigation. Verify that signed-out
-users cannot access private pages, sessions survive refresh, settings are created once,
-and logout works. Add protected-route, session, and settings-ownership tests then.
-Companies and the AI Gateway remain separate later phases.
+Stop after Authentication + Private Shell. Phase 2 in the implementation plan is
+Companies: an owned company table and RLS, create/list/edit/archive flows, and a
+minimal company workspace with validation and ownership tests. It has not started.
+Raw Thoughts and the AI Gateway remain later phases.
 
-Implementation references: [Next.js installation](https://nextjs.org/docs/app/getting-started/installation)
-and [Supabase server-side auth](https://supabase.com/docs/guides/auth/server-side).
+Implementation references: [installed Next.js guidance](node_modules/next/dist/docs/)
+and [Supabase SSR authentication](https://supabase.com/docs/guides/auth/server-side/creating-a-client).

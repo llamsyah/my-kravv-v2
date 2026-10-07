@@ -2,19 +2,19 @@ import { z } from "zod";
 
 const supabaseSchema = z.object({
   url: z.url({ protocol: /^https?$/ }),
-  anonKey: z.string().trim().min(1),
+  publishableKey: z.string().trim().startsWith("sb_publishable_").min(20),
 });
 
-/** Read lazily: the foundation shell does not need a Supabase project. */
+/** Only public-safe values may be read by browser and authenticated SSR clients. */
 export function getPublicSupabaseConfig() {
   const result = supabaseSchema.safeParse({
     url: process.env.NEXT_PUBLIC_SUPABASE_URL,
-    anonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    publishableKey: process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
   });
 
   if (!result.success) {
     throw new Error(
-      "Set a valid NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY before using Supabase.",
+      "Set a valid NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY before using Supabase.",
     );
   }
 

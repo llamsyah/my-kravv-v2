@@ -2,15 +2,16 @@ import "server-only";
 import { z } from "zod";
 
 /** Reserved for explicit administrative work; user requests must use Auth + RLS. */
-export function getSupabaseServiceRoleKey(): string {
+export function getSupabaseSecretKey(): string {
   const result = z
     .string()
     .trim()
-    .min(1)
-    .safeParse(process.env.SUPABASE_SERVICE_ROLE_KEY);
+    .startsWith("sb_secret_")
+    .min(20)
+    .safeParse(process.env.SUPABASE_SECRET_KEY);
   if (!result.success) {
     throw new Error(
-      "Set SUPABASE_SERVICE_ROLE_KEY before using administrative database operations.",
+      "Set SUPABASE_SECRET_KEY before using administrative database operations.",
     );
   }
   return result.data;

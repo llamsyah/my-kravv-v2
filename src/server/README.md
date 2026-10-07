@@ -1,19 +1,25 @@
 # Server boundaries
 
-Milestone 0 prepares configuration only. Nothing here makes network requests.
-All executable files under this directory must import `server-only` so Next.js
-rejects their use in Client Components. Do not send their return values as client
-props, API responses, or log entries.
+All executable files in this directory import `server-only`. Credentials and
+provider errors must never be sent as client props, responses, or logs.
 
-- `db/config.ts`: service-role credential accessor, reserved for explicit admin
-  work. It must never become the default client for user requests because it
-  bypasses RLS. The public URL/anon-key configuration is in `src/lib/env/public.ts`.
-- `ai/config.ts`: credential boundary for the future AI Gateway. Add provider SDK,
-  validated output contracts, usage/cost controls, and explicit authenticated
-  actions only when implementing that milestone.
-- Future `auth/`: Supabase Auth session handling and server-side identity checks.
-  Add request-scoped SSR clients, cookie refresh, and ownership enforcement with
-  the authentication milestone. The current shell has no session or private data.
+- `auth/client.ts`: request-scoped Supabase SSR client using the publishable key
+  and request cookies. User requests always run under RLS.
+- `auth/proxy.ts`: verifies claims and refreshes cookies before private entry.
+  Cookies propagate to the request and response; responses use `private, no-store`.
+- `auth/session.ts`: verifies identity with `getUser()` on the server. React cache
+  deduplicates within a render only. Never authorize with `getSession()` or client
+  state alone.
+- `auth/workspace.ts`: checks identity near private data, then bootstraps settings
+  for that verified user's id.
+- `auth/operations.ts`: validated password login and current-session logout,
+  with safe Bahasa Indonesia feedback. Feature actions perform navigation.
+- `db/user-settings.ts`: insert-if-missing bootstrap, then explicit owner check.
+  Repeated or concurrent entry does not reset preferences.
+- `db/config.ts`: secret-key accessor reserved for explicit administration.
+  It is unused by application requests. Opt-in live development tests use it only
+  to create and remove their own disposable identities.
+- `ai/config.ts`: reserved credential boundary; no AI provider calls exist yet.
 
-Add domain logic and feature directories alongside their first real feature;
-do not create empty services or placeholder endpoints.
+Future features must check authenticated identity, record ownership, and RLS
+together. Add directories only when their first implementation is needed.

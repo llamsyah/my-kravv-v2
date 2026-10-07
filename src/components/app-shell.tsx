@@ -1,7 +1,13 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-export function AppShell({ children }: { children: ReactNode }) {
+export function AppShell({
+  children,
+  privateNavigation,
+}: {
+  children: ReactNode;
+  privateNavigation?: ReactNode;
+}) {
   return (
     <div className="app-shell">
       <a className="skip-link" href="#main-content">
@@ -15,11 +21,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             </span>
             <span>MY KRAVV</span>
           </Link>
-          <nav aria-label="Navigasi utama">
-            <Link className="nav-link" href="/">
-              Beranda
-            </Link>
-          </nav>
+          {privateNavigation}
           <span className="edition">Ruang pemikiran investasi</span>
         </div>
       </header>

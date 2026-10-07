@@ -1,4 +1,7 @@
-export default function HomePage() {
+import { getPrivateWorkspace } from "@/server/auth/workspace";
+
+export default async function HomePage() {
+  await getPrivateWorkspace();
   return (
     <>
       <section className="intro" aria-labelledby="page-title">

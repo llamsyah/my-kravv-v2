@@ -1,13 +1,13 @@
 import assert from "node:assert/strict";
 import { afterEach, beforeEach, test } from "node:test";
 import { getPublicSupabaseConfig } from "../lib/env/public.ts";
-import { getSupabaseServiceRoleKey } from "../server/db/config.ts";
+import { getSupabaseSecretKey } from "../server/db/config.ts";
 import { getOpenAIConfig } from "../server/ai/config.ts";
 
 const keys = [
   "NEXT_PUBLIC_SUPABASE_URL",
-  "NEXT_PUBLIC_SUPABASE_ANON_KEY",
-  "SUPABASE_SERVICE_ROLE_KEY",
+  "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY",
+  "SUPABASE_SECRET_KEY",
   "OPENAI_API_KEY",
 ] as const;
 let previous: Record<string, string | undefined>;
@@ -26,32 +26,34 @@ afterEach(() => {
 
 test("missing credentials fail only when an integration is requested", () => {
   assert.throws(getPublicSupabaseConfig, /NEXT_PUBLIC_SUPABASE_URL/);
-  assert.throws(getSupabaseServiceRoleKey, /SUPABASE_SERVICE_ROLE_KEY/);
+  assert.throws(getSupabaseSecretKey, /SUPABASE_SECRET_KEY/);
   assert.throws(getOpenAIConfig, /OPENAI_API_KEY/);
 });
 
 test("blank credentials and non-HTTP URLs are rejected without echoing values", () => {
   process.env.NEXT_PUBLIC_SUPABASE_URL = "javascript:private-test-value";
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY = "example-public-key";
+  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_example-public-key";
   assert.throws(getPublicSupabaseConfig, (error: Error) => {
     assert.ok(!error.message.includes("private-test-value"));
     return true;
   });
-  process.env.SUPABASE_SERVICE_ROLE_KEY = " ";
+  process.env.SUPABASE_SECRET_KEY = " ";
   process.env.OPENAI_API_KEY = " ";
-  assert.throws(getSupabaseServiceRoleKey);
+  assert.throws(getSupabaseSecretKey);
   assert.throws(getOpenAIConfig);
 });
 
-test("public configuration exposes only URL and anon key", () => {
+test("public configuration exposes only URL and publishable key", () => {
   process.env.NEXT_PUBLIC_SUPABASE_URL = "http://127.0.0.1:54321";
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY = "example-public-key";
-  process.env.SUPABASE_SERVICE_ROLE_KEY = "example-server-only-key";
+  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_example-public-key";
+  process.env.SUPABASE_SECRET_KEY = "sb_secret_example-server-only-key";
   process.env.OPENAI_API_KEY = "example-ai-key";
   assert.deepEqual(getPublicSupabaseConfig(), {
     url: "http://127.0.0.1:54321",
-    anonKey: "example-public-key",
+    publishableKey: "sb_publishable_example-public-key",
   });
-  assert.equal(getSupabaseServiceRoleKey(), "example-server-only-key");
+  assert.equal(getSupabaseSecretKey(), "sb_secret_example-server-only-key");
   assert.deepEqual(getOpenAIConfig(), { apiKey: "example-ai-key" });
 });
