@@ -16,12 +16,14 @@
     "format:check": "prettier --check .",
     "test": "node --conditions=react-server --test src/tests/*.test.ts",
     "test:live": "node --env-file=.env.local --conditions=react-server --test src/tests/live/*.test.ts",
+    "test:ai-smoke": "node --env-file=.env.local --conditions=react-server scripts/ai-smoke.ts",
     "check": "npm run lint && npm run typecheck && npm run format:check && npm test"
   },
   "dependencies": {
     "@supabase/ssr": "0.12.7",
     "@supabase/supabase-js": "2.117.3",
     "next": "16.4.0",
+    "openai": "7.30.0",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "server-only": "0.0.1",

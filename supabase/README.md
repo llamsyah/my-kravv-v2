@@ -21,7 +21,8 @@ development and HTTPS URLs in production. No OAuth provider is needed.
 
 Use `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` for
 browser and request-scoped server clients. `SUPABASE_SECRET_KEY` is privileged
-and never used for application user requests. Keep it in `.env.local` only.
+and used only for administration and narrow server AI accounting. Ordinary content
+operations use user JWTs and RLS. Keep it in `.env.local` only.
 
 See the root README for opt-in live tests. These create random disposable
 development identities, verify sessions and RLS, and delete only those identities
@@ -73,3 +74,24 @@ existing ownership FKs cascade children. A restricted trigger removes deleted
 Thought history atomically. Restrictive future FKs reject and roll back unsafe
 deletion. No service key is used by application user requests, no trash or
 deleted-content event is created, and backups retain provider-specific semantics.
+
+Milestone 4's migration is
+`migrations/20261008000400_ai_runs_and_budget_reservations.sql`.
+Its successful application to the configured development project was confirmed
+by the user and verified through live accounting/RLS tests. Apply once after
+Milestone 3.5 on new installations; do not replay it. PostgreSQL 15+ is required
+for Company-only nulling of the composite ownership foreign key.
+
+It adds owner-readable `ai_runs` and `ai_run_attempts`, bounded metadata without
+private prompt/response content, and service-only accounting RPCs. Users cannot
+write costs or release reservations. The gateway first authenticates
+and authorize context using the ordinary user client, then use a separate narrow
+server accounting client. The service-only SECURITY INVOKER RPCs are
+`reserve_ai_run`, `start_ai_run_attempt`, `record_ai_run_attempt`, `finish_ai_run`.
+They use empty search paths and explicit owner predicates. Per-user transaction
+advisory locks serialize budget reservations; settings row locks protect checks.
+Existing non-AI operations keep their current RLS path.
+Reservations include both allowed attempts; unknown usage and interrupted logging
+retain conservative holds. Company deletion retains accounting with NULL Company;
+account deletion cascades it. See
+[the Milestone 4 report](../docs/13-milestone-4-implementation-notes.md).

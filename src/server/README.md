@@ -26,10 +26,14 @@ provider errors must never be sent as client props, responses, or logs.
   All queries use the user's RLS client with explicit ownership filters and
   validated return rows. History writes are atomic database trigger operations;
   no privileged client or separate API history insert is used.
-- `db/config.ts`: secret-key accessor reserved for explicit administration.
-  It is unused by application requests. Opt-in live development tests use it only
-  to create and remove their own disposable identities.
-- `ai/config.ts`: reserved credential boundary; no AI provider calls exist yet.
+- `db/config.ts`: privileged credential accessor for explicit administration and
+  narrow AI accounting. It never reads user context with elevated privileges.
+- `db/ai-runs.ts`: service-only reservation, attempt and finalization closures,
+  explicit owner checks and safe logging failures. Owners cannot forge charges.
+- `ai/`: lazy provider configuration, inert role registry, validated gateway,
+  selected owned context, bounded provider calls, token/cost accounting and safe
+  errors. See [the internal AI contract](ai/README.md). No product AI role or
+  ordinary page/action invokes this infrastructure.
 
 Future features must check authenticated identity, record ownership, and RLS
 together. Add directories only when their first implementation is needed.

@@ -1,7 +1,7 @@
 import "server-only";
 import { z } from "zod";
 
-/** Reserved for explicit administrative work; user requests must use Auth + RLS. */
+/** Administration and narrow AI accounting only. User content uses Auth + RLS. */
 export function getSupabaseSecretKey(): string {
   const result = z
     .string()

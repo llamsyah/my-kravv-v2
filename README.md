@@ -1,7 +1,7 @@
 # MY KRAVV
 
-A private AI-assisted investment reasoning workspace. Milestone 3 adds immutable
-Raw Thoughts and initial history to the owned Company foundation.
+A private AI-assisted investment reasoning workspace. Milestone 4 adds internal
+AI infrastructure to the existing Company, Thought and data-control foundation.
 The UI defaults to Bahasa Indonesia and preserves the Hybrid KRAVV design.
 
 ## Run locally
@@ -25,9 +25,12 @@ Copy-Item .env.example .env.local
 ```
 
 Browser-safe variables are `NEXT_PUBLIC_SUPABASE_URL` and
-`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`. `SUPABASE_SECRET_KEY` and `OPENAI_API_KEY`
-are protected by `server-only` imports and never used in client code. No AI calls
-are implemented. Validation reports missing configuration without echoing values.
+`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`. `SUPABASE_SECRET_KEY`, `GROQ_API_KEY` and
+`OPENAI_API_KEY` are protected by `server-only` imports and never used in client
+code. Internal AI calls require explicit invocation; no product AI roles or
+automatic calls are implemented. See [AI setup](src/server/ai/README.md) for
+required model capabilities, pricing/FX and optional smoke-test authorization.
+Validation reports missing configuration without echoing values.
 
 Apply [the settings migration](supabase/migrations/20261007000100_user_settings_and_rls.sql)
 to the configured development project. See [Supabase setup](supabase/README.md)
@@ -116,7 +119,8 @@ request and response. Server layouts and the private page verify identity with
 The first private entry inserts settings if missing, then checks the returned
 owner. Concurrent or repeated visits preserve preferences. Four RLS policies
 restrict reading, inserting, updating, and deleting to `auth.uid() = user_id`.
-User requests never use the privileged secret key. Logout revokes the current
+Ordinary content requests use user JWTs; narrowly scoped server AI accounting
+uses the privileged key after separate authentication/ownership checks. Logout revokes the current
 session and clears its cookies; private entry then redirects back to `/auth`.
 
 Future private pages should use the private route group and check identity near
@@ -133,7 +137,7 @@ npm start
 ```
 
 `check` runs ESLint, strict TypeScript with generated route types, Prettier, and
-deterministic environment/authentication/bootstrap/Company/Thought tests. Use `npm run format`
+deterministic environment/authentication/bootstrap/Company/Thought/AI tests. Use `npm run format`
 to format application/setup files. Product documentation and visual references are
 excluded from formatting.
 
@@ -143,7 +147,10 @@ idempotent bootstrap, cross-user RLS, Company creation/list/edit/archive, and ac
 Server Actions through HTTP, plus exact raw preservation, immutable API permissions,
 Thought ownership/history, and archived capture denial. Random disposable users
 are removed in `finally`; their private data cascades away and cleanup is checked. No other
-user or record is modified. The secret key is used only for test administration.
+user or record is modified. AI database tests additionally verify owner-only
+accounting, concurrent budget reservations and unknown-usage holds with a mocked
+provider. No AI provider quota is consumed by normal tests. The secret key is used
+for test administration and narrowly scoped AI accounting.
 
 ```powershell
 $env:MY_KRAVV_LIVE_TESTS = 'development'
@@ -174,16 +181,17 @@ src/features/thoughts/ Composer, history, and authenticated capture action
 src/lib/env/          Browser-safe configuration
 src/lib/supabase/     Browser client boundary
 src/server/auth/      SSR client, verified session, refresh, auth operations
-src/server/db/        Settings bootstrap and privileged credential boundary
+src/server/db/        Owned content operations, settings and narrow AI accounting
 src/server/companies/ Verified session and settings context for Company requests
-src/server/ai/        Reserved credential boundary; no provider calls
+src/server/ai/        Internal gateway, inert roles, providers, context and costs
 src/proxy.ts          Server-side route guard
 src/tests/            Deterministic tests; separate opt-in live suite
-supabase/migrations/  Settings, Companies, Thoughts, initial history, and RLS
+supabase/migrations/  Settings, content, data control, AI accounting and RLS
 ```
 
 No dependencies were added for Milestones 2 or 3. Milestone 1 introduced
 `@supabase/ssr` and `@supabase/supabase-js`.
+Milestone 4 adds the pinned official `openai` SDK for Groq/OpenAI compatibility.
 No component kit, external fonts, market data, or mock account is included.
 
 ## Product documentation and references
@@ -210,9 +218,14 @@ Drafts are scoped to user/context in local storage, without encryption, and clea
 only after matching confirmed saves, discard, or reaching the signed-out screen.
 Do not leave sensitive drafts on a shared browser profile.
 
-Stop after Milestone 3.5. Phase 4 in the implementation plan is AI
-Infrastructure: Gateway, registries, run persistence, cost estimation, and context
-building. It has not started. No AI provider calls exist.
+Milestone 4 implements the server-only gateway, inactive role registries, run
+persistence, cost estimates and explicit context boundaries. The AI migration is
+confirmed applied to the configured development project. Read the
+[implementation and verification report](docs/13-milestone-4-implementation-notes.md).
+Verified model pricing and USD/IDR conversion still need local configuration before
+a real operation. The optional single Groq smoke test requires separate explicit
+authorization; no real provider request has occurred. Phase 5 is the Refine Slice;
+it has not started. Stop after Milestone 4.
 
 Implementation references: [installed Next.js guidance](node_modules/next/dist/docs/)
 and [Supabase SSR authentication](https://supabase.com/docs/guides/auth/server-side/creating-a-client).
