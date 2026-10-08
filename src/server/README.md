@@ -21,6 +21,11 @@ provider errors must never be sent as client props, responses, or logs.
 - `db/companies.ts`: create/list/lookup/edit/archive using explicit owner filters,
   validated fields, and checked return rows. No privileged client is used. Foreign
   and missing records share one unavailable result; provider details stay private.
+- `db/thoughts.ts`: authenticated capture after owned/active parent checks, exact
+  original preservation, Company-specific keyset history, and recent Thoughts.
+  All queries use the user's RLS client with explicit ownership filters and
+  validated return rows. History writes are atomic database trigger operations;
+  no privileged client or separate API history insert is used.
 - `db/config.ts`: secret-key accessor reserved for explicit administration.
   It is unused by application requests. Opt-in live development tests use it only
   to create and remove their own disposable identities.

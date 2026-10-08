@@ -1,7 +1,7 @@
 # MY KRAVV
 
-A private AI-assisted investment reasoning workspace. Milestone 2 adds owned
-Companies to the authenticated private foundation.
+A private AI-assisted investment reasoning workspace. Milestone 3 adds immutable
+Raw Thoughts and initial history to the owned Company foundation.
 The UI defaults to Bahasa Indonesia and preserves the Hybrid KRAVV design.
 
 ## Run locally
@@ -15,7 +15,7 @@ npm run dev
 
 Open <http://localhost:3000>. Anonymous users reach `/auth`; authenticated users
 reach the minimal private shell at `/`. Companies live at `/companies`; Home
-remains a foundation placeholder.
+supports Company-linked quick capture and recent original thoughts.
 
 For a new checkout, copy `.env.example` to `.env.local` and fill the development
 project values. Do not overwrite an existing local configuration or commit it.
@@ -35,6 +35,9 @@ for migration and dashboard prerequisites. Sign in with an existing email/passwo
 account; registration and password recovery are outside this milestone. Also apply
 [the Company migration](supabase/migrations/20261008000100_companies_and_rls.sql)
 once to the same development project before using Companies.
+Also apply [the Thought migration](supabase/migrations/20261008000200_thoughts_and_initial_history.sql)
+once to that project before using Raw Thoughts. Its application has been confirmed
+for the configured development project.
 
 ## Company Slice
 
@@ -64,6 +67,45 @@ Input limits are 200 characters for name, 40 for ticker, 80 for exchange, 120 fo
 sector, and 2,000 for context. The name is required; blanks in optional fields are
 stored as NULL. Descriptive states are user-selected labels, not workflow gates.
 
+## Raw Thought Slice
+
+Write freely inside `/companies/[companyId]`, or choose an active Company in the
+small Beranda composer. Only freeform text and Company are required; intent stays
+NULL. The canonical names `raw_content` and `intent` follow the database schema,
+rather than the conceptual `raw_text`/`intent_type` names in the domain document.
+No Thought status or update timestamp is invented.
+
+The server validates nonblank text without transforming it, verifies the parent,
+and derives ownership from the verified session. The original submitted string
+is stored exactly, including whitespace, tabs, and line breaks. Browser textarea
+and form encoding determine submitted line endings; the server does not normalize
+them. NUL characters are rejected because PostgreSQL TEXT cannot store them. A
+100,000-character application limit keeps long capture within the existing Server
+Action request budget. Content is never silently truncated.
+
+Company history lists 20 original Thoughts per request, newest first, with UUID
+ascending as a deterministic tie-breaker. Validated timestamp/UUID keyset links
+reach older entries without offset shifts. Entries open their full escaped text
+with original formatting, identity, and capture time (currently WIB). Beranda
+shows five recent original thoughts with Company links. This is initial history,
+not a full Timeline interface or a completed Home dashboard.
+
+An insert trigger creates one `THOUGHT_CREATED` event in the same transaction;
+failure rolls back both writes. Composite ownership foreign keys and separate
+SELECT/INSERT RLS policies protect Thoughts. Ordinary INSERT grants cover only
+owner/parent/content; UPDATE/DELETE permissions are absent. Originals, identity,
+ownership, and capture timestamps cannot be rewritten through the user API.
+Timeline events are owner-readable and writable only by a restricted database
+trigger. The app uses the ordinary authenticated client throughout.
+
+Archived Companies retain readable thoughts/history. New capture is rejected by
+the server and database, including concurrent archive/capture guarded by a Company
+row lock. Company metadata correction remains available. Failed saves retain the
+draft; a draft rejected after archive is shown read-only for copying. Submit
+controls are disabled while saving. Drafts are not persisted across browser
+reloads, and ambiguous network failures do not have retry idempotency; separate
+intentional identical Thoughts remain valid.
+
 ## Authentication and authorization
 
 Request-scoped Supabase SSR clients use the publishable key and session cookies.
@@ -91,15 +133,16 @@ npm start
 ```
 
 `check` runs ESLint, strict TypeScript with generated route types, Prettier, and
-deterministic environment/authentication/bootstrap/Company tests. Use `npm run format`
+deterministic environment/authentication/bootstrap/Company/Thought tests. Use `npm run format`
 to format application/setup files. Product documentation and visual references are
 excluded from formatting.
 
 The opt-in live suite requires the designated development project, its applied
 migration, and the local app running. It verifies real login, session refresh,
 idempotent bootstrap, cross-user RLS, Company creation/list/edit/archive, and actual
-Server Actions through HTTP. Random disposable users are removed in `finally`;
-their companies/settings cascade away and Company cleanup is checked. No other
+Server Actions through HTTP, plus exact raw preservation, immutable API permissions,
+Thought ownership/history, and archived capture denial. Random disposable users
+are removed in `finally`; their private data cascades away and cleanup is checked. No other
 user or record is modified. The secret key is used only for test administration.
 
 ```powershell
@@ -126,6 +169,8 @@ src/components/       Shared shell
 src/features/auth/    Login/logout forms, validation, Server Actions
 src/features/companies/ Company forms, actions, and private navigation
 src/domain/company/   Validated Company fields, states, and runtime row types
+src/domain/thought/   Original-text validation, row types, and history cursors
+src/features/thoughts/ Composer, history, and authenticated capture action
 src/lib/env/          Browser-safe configuration
 src/lib/supabase/     Browser client boundary
 src/server/auth/      SSR client, verified session, refresh, auth operations
@@ -134,10 +179,10 @@ src/server/companies/ Verified session and settings context for Company requests
 src/server/ai/        Reserved credential boundary; no provider calls
 src/proxy.ts          Server-side route guard
 src/tests/            Deterministic tests; separate opt-in live suite
-supabase/migrations/  Reviewed settings schema and RLS migration
+supabase/migrations/  Settings, Companies, Thoughts, initial history, and RLS
 ```
 
-No dependencies were added for Milestone 2. Milestone 1 introduced
+No dependencies were added for Milestones 2 or 3. Milestone 1 introduced
 `@supabase/ssr` and `@supabase/supabase-js`.
 No component kit, external fonts, market data, or mock account is included.
 
@@ -156,10 +201,9 @@ precedence over legacy names in the original implementation plan.
 
 ## Next milestone
 
-Stop after the Company Slice. Phase 3 in the implementation plan is Raw Thoughts:
-capture and persist original wording linked to a company, preserve raw content,
-and add the specified initial history behavior. It has not started. The AI Gateway
-remains a later phase.
+Stop after the Raw Thought Slice. Phase 4 in the implementation plan is AI
+Infrastructure: Gateway, registries, run persistence, cost estimation, and context
+building. It has not started. No AI provider calls exist.
 
 Implementation references: [installed Next.js guidance](node_modules/next/dist/docs/)
 and [Supabase SSR authentication](https://supabase.com/docs/guides/auth/server-side/creating-a-client).

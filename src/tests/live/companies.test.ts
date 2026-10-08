@@ -209,7 +209,7 @@ test(
         },
       );
       await t.test(
-        "production HTTP forms create/edit/archive and workspace does not reveal foreign existence",
+        "HTTP forms create/edit/archive and workspace does not reveal foreign existence",
         async () => {
           const http = createLocalHttpSession();
           for (const path of [

@@ -36,3 +36,23 @@ The trigger preserves the first archive timestamp during subsequent corrections.
 
 All subsequent schema changes belong in reviewed migrations with ownership tests.
 There are no seed companies or later reasoning tables yet.
+
+Milestone 3 adds `migrations/20261008000200_thoughts_and_initial_history.sql`.
+Its application to the configured development project has been confirmed. Apply
+it once to new development installations after both earlier migrations.
+
+`thoughts` uses the canonical raw_content/optional intent fields, database capture
+timestamps, and composite Company ownership FK. Owner-scoped SELECT/INSERT RLS
+and column grants allow original capture; no ordinary UPDATE/DELETE is granted.
+Archive capture is denied both in RLS and a caller-scoped trigger with a Company
+SHARE lock to serialize capture against archive. Reads remain allowed after archive.
+
+`timeline_events` uses the documented fields. The narrow SECURITY DEFINER trigger
+appends one THOUGHT_CREATED event from the inserted Thought, atomically. Its search
+path is empty, identifiers are qualified, and ordinary function execution is revoked.
+Only owner SELECT is granted on history; API callers cannot fabricate or rewrite it.
+No new credentials or elevated application client is needed. Account deletion
+cascades Thoughts/events; this slice adds no permanent deletion UI.
+
+Live tests create only marked disposable identities, test ordinary authenticated
+API restrictions and real app forms, and verify cascade cleanup of all four tables.

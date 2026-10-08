@@ -1,7 +1,16 @@
-import { getPrivateWorkspace } from "@/server/auth/workspace";
+import Link from "next/link";
+import { getCompanyContext } from "@/server/companies/context";
+import { getCompanies } from "@/server/db/companies";
+import { getRecentThoughts } from "@/server/db/thoughts";
+import { ThoughtComposer } from "@/features/thoughts/thought-composer";
+import { ThoughtTime } from "@/features/thoughts/thought-history";
 
 export default async function HomePage() {
-  await getPrivateWorkspace();
+  const { supabase, user } = await getCompanyContext();
+  const [companies, recent] = await Promise.all([
+    getCompanies(supabase, user.id),
+    getRecentThoughts(supabase, user.id),
+  ]);
   return (
     <>
       <section className="intro" aria-labelledby="page-title">
@@ -16,19 +25,54 @@ export default async function HomePage() {
           memahami bagaimana pandanganmu berubah.
         </p>
       </section>
-      <section className="workspace-note" aria-labelledby="workspace-title">
-        <div className="section-label">
-          <span className="quiet-node" aria-hidden="true" />
-          <p>AWAL SEBUAH RUANG</p>
-        </div>
-        <div className="workspace-copy">
-          <h2 id="workspace-title">Ruang ini sedang disiapkan.</h2>
-          <p>
-            Ini adalah tampilan awal MY KRAVV. Tempat untuk menyimpan dan
-            meninjau pemikiranmu akan hadir secara bertahap.
+      <section className="thought-capture" aria-labelledby="workspace-title">
+        <p className="section-label">CATAT PEMIKIRAN</p>
+        <h2 id="workspace-title">Satu pemikiran cukup untuk memulai.</h2>
+        {companies.length ? (
+          <ThoughtComposer
+            companies={companies.map(({ id, name }) => ({ id, name }))}
+          />
+        ) : (
+          <p className="company-note">
+            Buat perusahaan terlebih dahulu, lalu tulis apa pun yang sedang kamu
+            pikirkan.{" "}
+            <Link className="text-link" href="/companies/new">
+              Tambah perusahaan →
+            </Link>
           </p>
-          <p className="availability">Pencatatan belum tersedia.</p>
-        </div>
+        )}
+      </section>
+      <section
+        className="thought-history"
+        aria-labelledby="recent-thinking-title"
+      >
+        <p className="section-label">PEMIKIRAN TERBARU</p>
+        <h2 id="recent-thinking-title">Kembali ke pemikiranmu.</h2>
+        {!recent.length && (
+          <p className="company-note">
+            Pemikiran yang kamu simpan akan muncul di sini.
+          </p>
+        )}
+        <ol className="thought-list">
+          {recent.map((thought) => (
+            <li className="thought-entry" key={thought.id}>
+              <div className="thought-meta">
+                <span>ASLI · {thought.companyName}</span>
+                <ThoughtTime value={thought.created_at} />
+              </div>
+              <p className="company-note">
+                {thought.raw_content.slice(0, 180)}
+                {thought.raw_content.length > 180 ? "…" : ""}
+              </p>
+              <Link
+                className="text-link"
+                href={`/companies/${thought.company_id}?focus=${thought.id}#thought-${thought.id}`}
+              >
+                Buka ruang perusahaan →
+              </Link>
+            </li>
+          ))}
+        </ol>
       </section>
     </>
   );
