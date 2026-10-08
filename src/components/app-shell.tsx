@@ -22,7 +22,14 @@ export function AppShell({
             <span>MY KRAVV</span>
           </Link>
           {privateNavigation}
-          <span className="edition">Ruang pemikiran investasi</span>
+          <span className="edition">
+            Ruang pemikiran investasi <span aria-hidden="true">·</span>{" "}
+            {new Intl.DateTimeFormat("id-ID", {
+              day: "numeric",
+              month: "short",
+              timeZone: "Asia/Jakarta",
+            }).format(new Date())}
+          </span>
         </div>
       </header>
       <main id="main-content" tabIndex={-1} className="main-content">

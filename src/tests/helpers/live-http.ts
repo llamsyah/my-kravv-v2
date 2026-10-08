@@ -58,7 +58,13 @@ export function serverActionForm(html: string, id?: string) {
   const form = new FormData();
   for (const input of formHtml.matchAll(/<input\b[^>]*>/g)) {
     const name = input[0].match(/name="([^"]*)"/)?.[1];
-    if (!name || (!name.startsWith("$ACTION_") && name !== "company_id"))
+    if (
+      !name ||
+      (!name.startsWith("$ACTION_") &&
+        !["company_id", "capture_operation_id", "kind", "thought_id"].includes(
+          name,
+        ))
+    )
       continue;
     const value = input[0].match(/value="([^"]*)"/)?.[1] ?? "";
     form.set(

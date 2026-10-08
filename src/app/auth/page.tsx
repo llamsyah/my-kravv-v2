@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { AppShell } from "@/components/app-shell";
 import { LoginForm } from "@/features/auth/login-form";
 import { getVerifiedSession } from "@/server/auth/session";
+import { SignedOutDraftCleanup } from "@/features/thoughts/draft-receipt";
 
 export const dynamic = "force-dynamic";
 
@@ -10,6 +11,7 @@ export default async function AuthPage() {
   if (user) redirect("/");
   return (
     <AppShell>
+      <SignedOutDraftCleanup />
       <section className="auth-layout" aria-labelledby="auth-title">
         <div>
           <p className="eyebrow">RUANG PRIBADI</p>

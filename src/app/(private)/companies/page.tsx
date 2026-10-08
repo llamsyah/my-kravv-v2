@@ -5,14 +5,24 @@ import { companyStateLabels } from "@/domain/company/company";
 export default async function CompaniesPage({
   searchParams,
 }: {
-  searchParams: Promise<{ view?: string }>;
+  searchParams: Promise<{ view?: string; deleted?: string; q?: string }>;
 }) {
-  const archived = (await searchParams).view === "archived";
+  const search = await searchParams;
+  const archived = search.view === "archived";
   const { supabase, user } = await getCompanyContext();
-  const companies = await getCompanies(supabase, user.id, archived);
+  const allCompanies = await getCompanies(supabase, user.id, archived);
+  const query =
+    typeof search.q === "string" ? search.q.slice(0, 200).trim() : "";
+  const companies = allCompanies.filter((company) =>
+    [company.name, company.ticker, company.sector].some((value) =>
+      value
+        ?.toLocaleLowerCase("id-ID")
+        .includes(query.toLocaleLowerCase("id-ID")),
+    ),
+  );
   return (
     <>
-      <section className="company-intro">
+      <section className="company-intro atmospheric-hero archive-hero">
         <p className="eyebrow">ARSIP PENELITIAN PRIBADI</p>
         <h1>Perusahaan</h1>
         <p className="intro-copy">
@@ -21,6 +31,23 @@ export default async function CompaniesPage({
         </p>
       </section>
       <div className="company-toolbar">
+        <form className="company-search" action="/companies">
+          <label className="sr-only" htmlFor="company-search">
+            Cari perusahaan
+          </label>
+          <input
+            id="company-search"
+            name="q"
+            type="search"
+            placeholder="Cari perusahaan…"
+            defaultValue={query}
+            maxLength={200}
+          />
+          {archived && <input type="hidden" name="view" value="archived" />}
+          <button className="quiet-button" type="submit">
+            Cari
+          </button>
+        </form>
         <nav className="company-views" aria-label="Tampilan perusahaan">
           <Link href="/companies" aria-current={!archived ? "page" : undefined}>
             Aktif
@@ -36,6 +63,11 @@ export default async function CompaniesPage({
           Tambah perusahaan <span aria-hidden="true">+</span>
         </Link>
       </div>
+      {search.deleted === "company" && (
+        <p className="thought-success" role="status">
+          Perusahaan beserta pemikiran dan riwayatnya telah dihapus permanen.
+        </p>
+      )}
       <section aria-labelledby="company-list-title">
         <h2 id="company-list-title" className="archive-heading">
           {archived ? "Diarsipkan" : "Perusahaan aktif"}{" "}
@@ -44,9 +76,11 @@ export default async function CompaniesPage({
         {companies.length === 0 ? (
           <div className="company-empty">
             <h2>
-              {archived
-                ? "Belum ada perusahaan di arsip."
-                : "Mulai dari satu perusahaan."}
+              {query
+                ? "Tidak ada perusahaan yang cocok."
+                : archived
+                  ? "Belum ada perusahaan di arsip."
+                  : "Mulai dari satu perusahaan."}
             </h2>
             <p>
               {archived
@@ -103,6 +137,17 @@ export default async function CompaniesPage({
                   >
                     Buka ruang <span aria-hidden="true">→</span>
                   </Link>
+                  <details className="company-row-more">
+                    <summary aria-label={`Kelola ${company.name}`}>⋯</summary>
+                    <div>
+                      <Link href={`/companies/${company.id}/edit`}>
+                        Ubah identitas
+                      </Link>
+                      <Link href={`/companies/${company.id}#data-control`}>
+                        Arsip / hapus perusahaan
+                      </Link>
+                    </div>
+                  </details>
                 </div>
               </li>
             ))}

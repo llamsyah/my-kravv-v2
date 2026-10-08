@@ -10,7 +10,8 @@ import {
 } from "../../domain/thought/thought.ts";
 import { getCompanyById, CompanyUnavailableError } from "./companies.ts";
 
-const columns = "id,user_id,company_id,raw_content,intent,created_at";
+const columns =
+  "id,user_id,company_id,raw_content,intent,created_at,capture_operation_id";
 export class ThoughtDataError extends Error {
   constructor() {
     super("Pemikiran belum bisa dimuat atau disimpan. Silakan coba lagi.");
@@ -40,19 +41,39 @@ export async function createThought(
   const value = thoughtInputSchema.parse(input);
   const company = await getCompanyById(client, userId, value.company_id);
   if (!company) throw new CompanyUnavailableError();
-  if (company.state === "ARCHIVED") throw new ArchivedThoughtError();
-  const { data, error } = await client
-    .from("thoughts")
-    .insert({
-      user_id: userId,
-      company_id: company.id,
-      raw_content: value.raw_content,
-    })
-    .select(columns)
-    .single();
+  if (company.state === "ARCHIVED" && !value.capture_operation_id)
+    throw new ArchivedThoughtError();
+  const query = value.capture_operation_id
+    ? client.rpc("capture_thought", {
+        p_company_id: company.id,
+        p_raw_content: value.raw_content,
+        p_operation_id: value.capture_operation_id,
+      })
+    : client.from("thoughts").insert({
+        user_id: userId,
+        company_id: company.id,
+        raw_content: value.raw_content,
+      });
+  const { data, error } = await query.select(columns).single();
   // The database atomically appends history and independently checks archive/owner.
+  if (error?.code === "23505") throw new CaptureConflictError();
+  if (error && company.state === "ARCHIVED") throw new ArchivedThoughtError();
   if (error || !data) throw new ThoughtDataError();
-  return ownedRow(data, userId, company.id);
+  const saved = ownedRow(data, userId, company.id);
+  if (
+    value.capture_operation_id &&
+    (saved.capture_operation_id !== value.capture_operation_id ||
+      saved.raw_content !== value.raw_content)
+  )
+    throw new ThoughtDataError();
+  return saved;
+}
+export class CaptureConflictError extends Error {
+  constructor() {
+    super(
+      "Identitas simpan sudah dipakai untuk teks berbeda. Salin teks ini, buang draf, lalu mulai pemikiran baru.",
+    );
+  }
 }
 export async function getCompanyThoughts(
   client: SupabaseClient,
@@ -99,4 +120,18 @@ export async function getRecentThoughts(
     if (!company.success) throw new ThoughtDataError();
     return { ...thought, companyName: company.data.name };
   });
+}
+
+export async function getCompanyThoughtCount(
+  client: SupabaseClient,
+  userId: string,
+  companyId: string,
+) {
+  const { count, error } = await client
+    .from("thoughts")
+    .select("id", { count: "exact", head: true })
+    .eq("user_id", userId)
+    .eq("company_id", z.uuid().parse(companyId));
+  if (error || count === null) throw new ThoughtDataError();
+  return count;
 }

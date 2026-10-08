@@ -309,15 +309,13 @@ test(
           assert.equal(workspace.status, 200);
           const workspaceHtml = await workspace.text();
           assert.ok(
-            workspaceHtml.includes("Satu pemikiran cukup untuk memulai."),
+            workspaceHtml.includes("Catat pemikiran"),
             "Authenticated private shell did not render.",
           );
           assert.match(workspace.headers.get("cache-control")!, /no-store/);
           const reload = await request("/");
           assert.ok(
-            (await reload.text()).includes(
-              "Satu pemikiran cukup untuk memulai.",
-            ),
+            (await reload.text()).includes("Catat pemikiran"),
             "Authenticated reload failed.",
           );
           const logout = await request("/", {

@@ -17,6 +17,7 @@ export async function createThoughtAction(
   const { supabase, user } = await getCompanyContext();
   let saved: { id: string; company_id: string };
   try {
+    z.uuid().parse(form.get("capture_operation_id"));
     saved = await createThought(supabase, user.id, readThoughtForm(form));
   } catch (error) {
     return thoughtFailure(error, form);

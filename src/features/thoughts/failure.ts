@@ -2,7 +2,10 @@ import "server-only";
 import { z } from "zod";
 import type { ThoughtFormState } from "../../domain/thought/thought.ts";
 import { CompanyUnavailableError } from "../../server/db/companies.ts";
-import { ArchivedThoughtError } from "../../server/db/thoughts.ts";
+import {
+  ArchivedThoughtError,
+  CaptureConflictError,
+} from "../../server/db/thoughts.ts";
 
 export function thoughtFailure(
   error: unknown,
@@ -18,7 +21,8 @@ export function thoughtFailure(
     };
   if (
     error instanceof CompanyUnavailableError ||
-    error instanceof ArchivedThoughtError
+    error instanceof ArchivedThoughtError ||
+    error instanceof CaptureConflictError
   )
     return { error: error.message, raw_content };
   return {

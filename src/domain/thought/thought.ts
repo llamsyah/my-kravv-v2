@@ -12,6 +12,7 @@ export const thoughtIntents = [
 ] as const;
 export const rawContentLimit = 100_000;
 export const thoughtInputSchema = z.object({
+  capture_operation_id: z.uuid().optional(),
   company_id: z.uuid({ error: "Pilih perusahaan yang tersedia." }),
   raw_content: z
     .string({ error: "Tuliskan pemikiranmu." })
@@ -26,6 +27,7 @@ export const thoughtInputSchema = z.object({
     ),
 });
 export const thoughtRowSchema = z.object({
+  capture_operation_id: z.uuid().nullable().optional(),
   id: z.uuid(),
   user_id: z.uuid(),
   company_id: z.uuid(),
@@ -50,6 +52,9 @@ export function thoughtCursor(thought: Thought) {
 }
 export function readThoughtForm(form: FormData) {
   return {
+    ...(form.has("capture_operation_id")
+      ? { capture_operation_id: form.get("capture_operation_id") }
+      : {}),
     company_id: form.get("company_id"),
     raw_content: form.get("raw_content"),
   };

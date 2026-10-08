@@ -56,3 +56,20 @@ cascades Thoughts/events; this slice adds no permanent deletion UI.
 
 Live tests create only marked disposable identities, test ordinary authenticated
 API restrictions and real app forms, and verify cascade cleanup of all four tables.
+
+Milestone 3.5 adds `migrations/20261008000300_data_control_and_capture_idempotency.sql`.
+Its application to the configured development project is confirmed and live
+verified. Apply once after Milestone 3 on new installations, never replay it.
+
+Nullable per-owner capture operation UUIDs and an authenticated SECURITY INVOKER
+RPC make retries return the same immutable Thought and initial event. Conflicting
+payload reuse fails; distinct operation IDs preserve identical intentional captures.
+The narrow authenticated deletion RPCs use empty search paths and explicit
+`auth.uid()` predicates. Ordinary clients still cannot DELETE tables or UPDATE
+originals/history. Owner DELETE RLS policies provide defense in depth; definer RPC
+ownership checks are mandatory because their function owner can bypass table RLS.
+Company deletion locks the parent and checks its exact name when Thoughts exist;
+existing ownership FKs cascade children. A restricted trigger removes deleted
+Thought history atomically. Restrictive future FKs reject and roll back unsafe
+deletion. No service key is used by application user requests, no trash or
+deleted-content event is created, and backups retain provider-specific semantics.

@@ -423,12 +423,14 @@ test(
           );
           const home = await (await http.request("/")).text();
           assert.ok(home.includes('id="thought-form"'));
-          assert.ok(home.includes("Kembali ke pemikiranmu."));
+          assert.ok(home.includes("Pemikiran terbaru"));
           const quick = serverActionForm(home, "thought-form");
           quick.set("company_id", a.id);
           quick.set("raw_content", "Pemikiran singkat dari Beranda.");
           assert.equal((await http.request("/", quick)).status, 303);
           const stale = serverActionForm(page, "thought-form");
+          // This is a new intentional capture after earlier confirmed saves.
+          stale.set("capture_operation_id", randomUUID());
           stale.set(
             "raw_content",
             "Draft tetap utuh setelah arsip.\n  Baris kedua.",

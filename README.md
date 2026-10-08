@@ -201,7 +201,16 @@ precedence over legacy names in the original implementation plan.
 
 ## Next milestone
 
-Stop after the Raw Thought Slice. Phase 4 in the implementation plan is AI
+Milestone 3.5 implements broader Home/Company/workspace layouts, permanent deletion
+with confirmation, local draft recovery and idempotent capture. Read the
+[implementation and QA report](docs/12-milestone-3.5-implementation-notes.md) for
+browser results and remaining visual-fidelity limits. The original landscape
+asset is still missing; temporary gradients do not constitute full visual sign-off.
+Drafts are scoped to user/context in local storage, without encryption, and clear
+only after matching confirmed saves, discard, or reaching the signed-out screen.
+Do not leave sensitive drafts on a shared browser profile.
+
+Stop after Milestone 3.5. Phase 4 in the implementation plan is AI
 Infrastructure: Gateway, registries, run persistence, cost estimation, and context
 building. It has not started. No AI provider calls exist.
 

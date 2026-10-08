@@ -1,14 +1,33 @@
 import Link from "next/link";
 import { thoughtCursor, type Thought } from "@/domain/thought/thought";
+import { DeleteForm } from "@/features/data-control/delete-form";
 
-export function ThoughtTime({ value }: { value: string }) {
+export function ThoughtTime({
+  value,
+  compact = false,
+}: {
+  value: string;
+  compact?: boolean;
+}) {
   return (
     <time dateTime={value}>
-      {new Intl.DateTimeFormat("id-ID", {
-        dateStyle: "long",
-        timeStyle: "short",
-        timeZone: "Asia/Jakarta",
-      }).format(new Date(value))}{" "}
+      {new Intl.DateTimeFormat(
+        "id-ID",
+        compact
+          ? {
+              day: "numeric",
+              month: "short",
+              year: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+              timeZone: "Asia/Jakarta",
+            }
+          : {
+              dateStyle: "long",
+              timeStyle: "short",
+              timeZone: "Asia/Jakarta",
+            },
+      ).format(new Date(value))}{" "}
       WIB
     </time>
   );
@@ -62,18 +81,27 @@ export function ThoughtHistory({
           >
             <div className="thought-meta">
               <span className="section-label">ASLI</span>
-              <ThoughtTime value={thought.created_at} />
+              <ThoughtTime value={thought.created_at} compact />
             </div>
-            <details open={thought.id === (saved ?? focus) || index === 0}>
-              <summary>
-                <span>
-                  {thought.raw_content.slice(0, 160)}
-                  {thought.raw_content.length > 160 ? "…" : ""}
-                </span>
-                <span className="text-link">Baca pemikiran lengkap</span>
-              </summary>
-              <div className="thought-original">{thought.raw_content}</div>
-            </details>
+            <div className="thought-body">
+              {thought.raw_content.length <= 420 &&
+              thought.raw_content.split("\n").length <= 7 ? (
+                <div className="thought-original">{thought.raw_content}</div>
+              ) : (
+                <details
+                  className="long-thought"
+                  open={thought.id === (saved ?? focus) || index === 0}
+                >
+                  <summary>
+                    Baca pemikiran lengkap ·{" "}
+                    {thought.raw_content.length.toLocaleString("id-ID")}{" "}
+                    karakter
+                  </summary>
+                  <div className="thought-original">{thought.raw_content}</div>
+                </details>
+              )}
+              <DeleteForm companyId={companyId} thoughtId={thought.id} />
+            </div>
           </li>
         ))}
       </ol>
