@@ -76,6 +76,8 @@ function databaseFailure(error: unknown): AIError {
     AI_DISABLED: "AI_DISABLED",
     AI_RESOURCE_UNAVAILABLE: "UNAUTHORIZED",
     AI_RESERVATION_EXPIRED: "RATE_LIMIT",
+    REFINEMENT_UNAVAILABLE: "UNAUTHORIZED",
+    REFINEMENT_ARCHIVED: "UNAUTHORIZED",
   };
   const code = message.success ? mapped[message.data.message] : undefined;
   return new AIError(code ?? "DATABASE_LOGGING_FAILED");

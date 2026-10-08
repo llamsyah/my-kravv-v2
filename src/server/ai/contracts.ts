@@ -39,6 +39,8 @@ export type AIContract = {
   output: z.ZodType;
   instructions: string;
   allowStoredContext: boolean;
+  contextMode?: "REFINE_THOUGHT";
+  validateRequest?: (request: AIRequest) => boolean;
   outputTokenLimit?: number;
   repair: boolean;
   validateReferences?: (

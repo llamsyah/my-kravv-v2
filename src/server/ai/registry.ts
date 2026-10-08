@@ -1,15 +1,16 @@
 import "server-only";
 import { z } from "zod";
 import { identifier, roleSchema, type AIContract } from "./contracts.ts";
+import { refineContract } from "./prompts/refine-v1.ts";
 export const roleRegistry = {
-  REFINE: { tier: "LIGHT", implemented: false },
+  REFINE: { tier: "LIGHT", implemented: true },
   STRUCTURE: { tier: "LIGHT", implemented: false },
   GUIDE: { tier: "STANDARD", implemented: false },
   CHALLENGE: { tier: "DEEP", implemented: false },
   COMPARE: { tier: "STANDARD", implemented: false },
   REFLECT: { tier: "DEEP", implemented: false },
 } as const;
-export const productContracts: readonly AIContract[] = [];
+export const productContracts: readonly AIContract[] = [refineContract];
 export function createContractRegistry(contracts: readonly AIContract[]) {
   const registry = new Map<string, AIContract>();
   for (const contract of contracts) {

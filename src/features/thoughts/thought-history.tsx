@@ -100,7 +100,15 @@ export function ThoughtHistory({
                   <div className="thought-original">{thought.raw_content}</div>
                 </details>
               )}
-              <DeleteForm companyId={companyId} thoughtId={thought.id} />
+              <div className="thought-context-actions">
+                <Link
+                  className="quiet-link"
+                  href={`/companies/${companyId}/thoughts/${thought.id}/refine`}
+                >
+                  Tinjau & rapikan pemikiran →
+                </Link>
+                <DeleteForm companyId={companyId} thoughtId={thought.id} />
+              </div>
             </div>
           </li>
         ))}

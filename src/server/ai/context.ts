@@ -18,7 +18,7 @@ const companySchema = z.object({
   id: z.uuid(),
   user_id: z.uuid(),
   name: z.string().max(200),
-  short_note: z.string().max(2000).nullable(),
+  short_note: z.string().max(2000).nullable().default(null),
 });
 const thoughtSchema = z.object({
   id: z.uuid(),
@@ -37,13 +37,18 @@ export async function buildAuthorizedContext(
   client: SupabaseClient,
   userId: string,
   request: AIRequest,
+  mode?: "REFINE_THOUGHT",
 ) {
   let company: { id: string; name: string; short_note: string | null } | null =
     null;
   if (request.companyId) {
     const result = await client
       .from("companies")
-      .select("id,user_id,name,short_note")
+      .select(
+        mode === "REFINE_THOUGHT"
+          ? "id,user_id,name"
+          : "id,user_id,name,short_note",
+      )
       .eq("user_id", userId)
       .eq("id", request.companyId)
       .maybeSingle();
@@ -58,7 +63,7 @@ export async function buildAuthorizedContext(
     company = {
       id: parsed.data.id,
       name: parsed.data.name,
-      short_note: parsed.data.short_note,
+      short_note: mode === "REFINE_THOUGHT" ? null : parsed.data.short_note,
     };
   }
   let thoughts: { id: string; company_id: string; raw_content: string }[] = [];
@@ -91,6 +96,12 @@ export async function buildAuthorizedContext(
         company_id: t.company_id,
         raw_content: t.raw_content,
       }));
+    if (
+      mode === "REFINE_THOUGHT" &&
+      (thoughts.length !== 1 ||
+        Buffer.byteLength(thoughts[0].raw_content, "utf8") > 2000)
+    )
+      throw new AIError("INVALID_REQUEST");
   }
   const settings = await client
     .from("user_settings")

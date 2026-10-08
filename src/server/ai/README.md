@@ -1,7 +1,8 @@
 # Internal AI boundary
 
-Milestone 4 supplies infrastructure only. No product contracts are registered and
-no page, feature action, startup hook or capture invokes AI. Missing configuration
+Milestone 4 supplies the infrastructure; Milestone 5 registers only `refine-v1`.
+Only the explicit Refine Server Action invokes AI. Page reads, startup and capture
+perform no generation. Missing configuration
 cannot stop ordinary authentication, Company or Thought operations.
 
 Future approved features call `runAIRequest(userClient, request)` with a server

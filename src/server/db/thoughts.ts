@@ -12,6 +12,27 @@ import { getCompanyById, CompanyUnavailableError } from "./companies.ts";
 
 const columns =
   "id,user_id,company_id,raw_content,intent,created_at,capture_operation_id";
+export async function getThoughtById(
+  client: SupabaseClient,
+  userId: string,
+  companyId: string,
+  thoughtId: string,
+) {
+  if (
+    !z.uuid().safeParse(companyId).success ||
+    !z.uuid().safeParse(thoughtId).success
+  )
+    return null;
+  const { data, error } = await client
+    .from("thoughts")
+    .select(columns)
+    .eq("user_id", userId)
+    .eq("company_id", companyId)
+    .eq("id", thoughtId)
+    .maybeSingle();
+  if (error) throw new ThoughtDataError();
+  return data ? ownedRow(data, userId, companyId) : null;
+}
 export class ThoughtDataError extends Error {
   constructor() {
     super("Pemikiran belum bisa dimuat atau disimpan. Silakan coba lagi.");

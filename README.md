@@ -218,14 +218,21 @@ Drafts are scoped to user/context in local storage, without encryption, and clea
 only after matching confirmed saves, discard, or reaching the signed-out screen.
 Do not leave sensitive drafts on a shared browser profile.
 
-Milestone 4 implements the server-only gateway, inactive role registries, run
+Milestone 4 implements the server-only gateway, configurable role registries, run
 persistence, cost estimates and explicit context boundaries. The AI migration is
 confirmed applied to the configured development project. Read the
 [implementation and verification report](docs/13-milestone-4-implementation-notes.md).
-Verified model pricing and USD/IDR conversion still need local configuration before
-a real operation. The optional single Groq smoke test requires separate explicit
-authorization; no real provider request has occurred. Phase 5 is the Refine Slice;
-it has not started. Stop after Milestone 4.
+The separately authorized single Groq infrastructure smoke test is complete;
+its authorization has been consumed. Pricing/FX remain explicit local configuration.
+
+Milestone 5 adds explicit Refine from a saved Thought, using the existing gateway,
+durable duplicate protection, owner-scoped proposals and accept/edit/reject history.
+Original text is immutable; AI proposals and user edits are separate. The additive
+`20261008000500_refinements_and_request_identity.sql` migration is confirmed applied
+and verified in the configured development project. Validation uses mocked providers;
+no real Refine request is authorized. Read the
+[Refine implementation and QA report](docs/14-milestone-5-implementation-notes.md).
+Stop after Milestone 5. Structure and later roles remain inactive.
 
 Implementation references: [installed Next.js guidance](node_modules/next/dist/docs/)
 and [Supabase SSR authentication](https://supabase.com/docs/guides/auth/server-side/creating-a-client).

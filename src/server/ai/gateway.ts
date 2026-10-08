@@ -35,6 +35,10 @@ export type GatewayDependencies = {
   configuration?: (role: AIRole) => AIConfig;
   accounting?: () => AIAccounting;
   provider?: (config: AIConfig) => AIProvider;
+  /** Trusted feature claim identity; never accepted from the generic request. */
+  runId?: () => string;
+  /** Trusted server-only ceiling for a single-call evaluation; cannot add attempts. */
+  maxAttempts?: 1;
   diagnostics?: (event: {
     runId?: string;
     code: string;
@@ -105,12 +109,22 @@ export function createAIGateway(dependencies: GatewayDependencies) {
       const task = contract.input.safeParse(request.taskInput);
       if (!task.success) throw new AIError("INVALID_REQUEST");
       if (
+        contract.validateRequest &&
+        !contract.validateRequest({ ...request, taskInput: task.data })
+      )
+        throw new AIError("INVALID_REQUEST");
+      if (
         !contract.allowStoredContext &&
         (request.companyId || request.thoughtIds.length)
       )
         throw new AIError("INVALID_REQUEST");
       stage = "authorization";
-      const context = await buildAuthorizedContext(client, userId, request);
+      const context = await buildAuthorizedContext(
+        client,
+        userId,
+        request,
+        contract.contextMode,
+      );
       stage = "configuration";
       const config = (dependencies.configuration ?? getAIConfig)(request.role);
       const outputTokenLimit = Math.min(
@@ -151,13 +165,14 @@ export function createAIGateway(dependencies: GatewayDependencies) {
         ],
       };
       assertInputBound(config, first);
-      if (contract.repair) assertInputBound(config, repair);
+      const maxAttempts =
+        dependencies.maxAttempts === 1 ? 1 : contract.repair ? 2 : 1;
+      if (maxAttempts === 2) assertInputBound(config, repair);
       // Validate/configure the adapter before reserving. Initialization is offline.
       const provider = (dependencies.provider ?? createAIProvider)(config);
       const accounting = (dependencies.accounting ?? getServerAIAccounting)();
-      runId = randomUUID();
+      runId = z.uuid().parse((dependencies.runId ?? randomUUID)());
       stage = "reservation";
-      const maxAttempts = contract.repair ? 2 : 1;
       await accounting.reserve({
         userId,
         runId,
@@ -283,7 +298,7 @@ export function createAIGateway(dependencies: GatewayDependencies) {
     }
   };
 }
-/** No role prompts registered until their approved feature milestone. */
+/** Only approved feature contracts are registered; imports perform no AI calls. */
 export const runAIRequest = createAIGateway({
   contracts: productContracts,
   diagnostics: (event) => console.warn("MY_KRAVV_AI", event),

@@ -117,10 +117,18 @@ test("AI configuration stays server-only and is lazy; selected-provider credenti
     (e) => code(e, "API_KEY_MISSING"),
   );
 });
-test("six inert roles route only to explicitly configured models, with no hardcoded provider prices", () => {
+test("only Refine is active; six roles route to configured models without hardcoded prices", () => {
   assert.equal(Object.keys(roleRegistry).length, 6);
-  assert.ok(Object.values(roleRegistry).every((r) => !r.implemented));
-  assert.equal(productContracts.length, 0);
+  assert.equal(roleRegistry.REFINE.implemented, true);
+  assert.ok(
+    Object.entries(roleRegistry)
+      .filter(([name]) => name !== "REFINE")
+      .every(([, r]) => !r.implemented),
+  );
+  assert.deepEqual(
+    productContracts.map((c) => c.id),
+    ["refine-v1"],
+  );
   const env = environment();
   const entries = JSON.parse(env.AI_MODEL_CONFIG_JSON);
   entries.push({ ...entries[0], model: "configured-deeper-model" });
@@ -682,7 +690,7 @@ test("accounting rejects untrusted ownership receipts and never sends credential
     "p_user_id",
   ]);
 });
-test("normal page/action/capture import graphs never reach the AI gateway or provider", () => {
+test("capture and existing pages/actions never reach AI; only the explicit Refine action graph may", () => {
   const walk = (dir: string): string[] =>
     readdirSync(dir, { withFileTypes: true }).flatMap((e) =>
       e.isDirectory() ? walk(resolve(dir, e.name)) : [resolve(dir, e.name)],
@@ -707,7 +715,12 @@ test("normal page/action/capture import graphs never reach the AI gateway or pro
     ...walk("src/app"),
     ...walk("src/features"),
     resolve("src/server/db/thoughts.ts"),
-  ].filter((p) => /\.(ts|tsx)$/.test(p)))
+  ].filter(
+    (p) =>
+      /\.(ts|tsx)$/.test(p) &&
+      !p.replaceAll("\\", "/").includes("/features/refinements/") &&
+      !p.replaceAll("\\", "/").includes("/refine/"),
+  ))
     visit(path);
   assert.ok(visited.size > 20);
 });
