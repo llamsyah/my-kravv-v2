@@ -1,0 +1,177 @@
+[
+  {
+    "page": "home",
+    "size": "desktop",
+    "cssZoom": "1",
+    "height": 1000,
+    "mainFont": "Inter, \"Segoe UI\", sans-serif",
+    "scripts": 0,
+    "scrollWidth": 1425,
+    "width": 1440
+  },
+  {
+    "page": "companies",
+    "size": "desktop",
+    "cssZoom": "1",
+    "height": 1000,
+    "mainFont": "Inter, \"Segoe UI\", sans-serif",
+    "scripts": 0,
+    "scrollWidth": 1425,
+    "width": 1440
+  },
+  {
+    "page": "overview",
+    "size": "desktop",
+    "cssZoom": "1",
+    "height": 1000,
+    "mainFont": "Inter, \"Segoe UI\", sans-serif",
+    "scripts": 0,
+    "scrollWidth": 1425,
+    "width": 1440
+  },
+  {
+    "page": "thoughts",
+    "size": "desktop",
+    "cssZoom": "1",
+    "height": 1000,
+    "mainFont": "Inter, \"Segoe UI\", sans-serif",
+    "scripts": 0,
+    "scrollWidth": 1425,
+    "width": 1440
+  },
+  {
+    "page": "refine",
+    "size": "desktop",
+    "cssZoom": "1",
+    "height": 1000,
+    "mainFont": "Inter, \"Segoe UI\", sans-serif",
+    "scripts": 0,
+    "scrollWidth": 1425,
+    "width": 1440
+  },
+  {
+    "page": "home",
+    "size": "mobile",
+    "cssZoom": "1",
+    "height": 844,
+    "scripts": 0,
+    "scrollWidth": 375,
+    "width": 390
+  },
+  {
+    "page": "companies",
+    "size": "mobile",
+    "cssZoom": "1",
+    "height": 844,
+    "scripts": 0,
+    "scrollWidth": 375,
+    "width": 390
+  },
+  {
+    "page": "overview",
+    "size": "mobile",
+    "cssZoom": "1",
+    "height": 844,
+    "scripts": 0,
+    "scrollWidth": 375,
+    "width": 390
+  },
+  {
+    "page": "thoughts",
+    "size": "mobile",
+    "cssZoom": "1",
+    "height": 844,
+    "scripts": 0,
+    "scrollWidth": 375,
+    "width": 390
+  },
+  {
+    "page": "refine",
+    "size": "mobile",
+    "cssZoom": "1",
+    "height": 844,
+    "scripts": 0,
+    "scrollWidth": 375,
+    "width": 390
+  },
+  {
+    "page": "home",
+    "size": "narrow",
+    "cssZoom": "1",
+    "height": 844,
+    "scrollWidth": 305,
+    "width": 320
+  },
+  {
+    "page": "companies",
+    "size": "narrow",
+    "cssZoom": "1",
+    "height": 844,
+    "scrollWidth": 305,
+    "width": 320
+  },
+  {
+    "page": "overview",
+    "size": "narrow",
+    "cssZoom": "1",
+    "height": 844,
+    "scrollWidth": 305,
+    "width": 320
+  },
+  {
+    "page": "thoughts",
+    "size": "narrow",
+    "cssZoom": "1",
+    "height": 844,
+    "scrollWidth": 305,
+    "width": 320
+  },
+  {
+    "page": "refine",
+    "size": "narrow",
+    "cssZoom": "1",
+    "height": 844,
+    "scrollWidth": 305,
+    "width": 320
+  },
+  {
+    "page": "home",
+    "size": "tablet",
+    "cssZoom": "1",
+    "height": 1024,
+    "scrollWidth": 753,
+    "width": 768
+  },
+  {
+    "page": "companies",
+    "size": "tablet",
+    "cssZoom": "1",
+    "height": 1024,
+    "scrollWidth": 753,
+    "width": 768
+  },
+  {
+    "page": "overview",
+    "size": "tablet",
+    "cssZoom": "1",
+    "height": 1024,
+    "scrollWidth": 753,
+    "width": 768
+  },
+  {
+    "page": "thoughts",
+    "size": "tablet",
+    "cssZoom": "1",
+    "height": 1024,
+    "scrollWidth": 753,
+    "width": 768
+  },
+  {
+    "page": "refine",
+    "size": "tablet",
+    "cssZoom": "1",
+    "height": 1024,
+    "scrollWidth": 753,
+    "width": 768
+  }
+]

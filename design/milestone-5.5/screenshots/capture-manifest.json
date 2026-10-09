@@ -1,0 +1,94 @@
+{
+  "companies-desktop-full.jpg": {
+    "width": 1424,
+    "height": 1161
+  },
+  "companies-desktop.jpg": {
+    "width": 1425,
+    "height": 990
+  },
+  "companies-mobile-full.jpg": {
+    "width": 375,
+    "height": 1614
+  },
+  "companies-mobile.jpg": {
+    "width": 375,
+    "height": 811
+  },
+  "desktop-board.jpg": {
+    "width": 1440,
+    "height": 1000
+  },
+  "home-desktop-full.jpg": {
+    "width": 1424,
+    "height": 1238
+  },
+  "home-desktop.jpg": {
+    "width": 1425,
+    "height": 990
+  },
+  "home-mobile-full.jpg": {
+    "width": 375,
+    "height": 2024
+  },
+  "home-mobile.jpg": {
+    "width": 375,
+    "height": 811
+  },
+  "mobile-board.jpg": {
+    "width": 1440,
+    "height": 1000
+  },
+  "overview-desktop-full.jpg": {
+    "width": 1424,
+    "height": 1094
+  },
+  "overview-desktop.jpg": {
+    "width": 1425,
+    "height": 990
+  },
+  "overview-mobile-full.jpg": {
+    "width": 375,
+    "height": 1988
+  },
+  "overview-mobile.jpg": {
+    "width": 375,
+    "height": 811
+  },
+  "refine-desktop-full.jpg": {
+    "width": 1424,
+    "height": 1212
+  },
+  "refine-desktop.jpg": {
+    "width": 1425,
+    "height": 990
+  },
+  "refine-mobile-comparison.jpg": {
+    "width": 375,
+    "height": 1549
+  },
+  "refine-mobile-full.jpg": {
+    "width": 375,
+    "height": 1361
+  },
+  "refine-mobile.jpg": {
+    "width": 375,
+    "height": 811
+  },
+  "thoughts-desktop-full.jpg": {
+    "width": 1424,
+    "height": 1513
+  },
+  "thoughts-desktop.jpg": {
+    "width": 1425,
+    "height": 990
+  },
+  "thoughts-mobile-full.jpg": {
+    "width": 375,
+    "height": 1797
+  },
+  "thoughts-mobile.jpg": {
+    "width": 375,
+    "height": 811
+  }
+}

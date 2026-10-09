@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <title>Perusahaan — MY KRAVV · Prototipe visual</title>
+    <link rel="stylesheet" href="prototype.css" />
+  </head>
+  <body class="full-sheet">
+    <header class="global-header">
+      <div class="global-inner">
+        <a class="brand" href="home.html"
+          ><span class="brand-mark">K<span></span></span
+          ><span>MY KRAVV<small>ruang untuk berpikir</small></span></a
+        >
+        <nav class="global-nav" aria-label="Navigasi utama">
+          <a class="" href="home.html"
+            ><svg
+              class="icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"
+              /></svg
+            >Beranda</a
+          ><a class="selected" href="companies.html" aria-current="page"
+            ><svg
+              class="icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="4" y="3" width="16" height="18" rx="2" />
+              <path d="M9 21v-4h6v4M8 7h1m6 0h1M8 11h1m6 0h1" /></svg
+            >Perusahaan</a
+          >
+        </nav>
+        <div class="account">
+          <span class="edition">Catatan pribadi</span
+          ><button
+            class="account-button"
+            type="button"
+            aria-label="Menu akun (prototipe statis)"
+          >
+            <svg
+              class="icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="8" r="3" />
+              <path d="M5 21v-2a7 7 0 0 1 14 0v2" /></svg
+            ><svg
+              class="icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main class="shell library-shell">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">RUANG PENELITIAN</p>
+          <h1>Perusahaan</h1>
+          <p>Satu ruang untuk setiap perusahaan yang ingin kamu pahami.</p>
+        </div>
+        <button
+          type="button"
+          class="button primary"
+          title="Kontrol visual saja; tidak menyimpan data"
+        >
+          <svg
+            class="icon"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 5v14M5 12h14" /></svg
+          >Tambah perusahaan
+        </button>
+      </div>
+      <div class="library-toolbar">
+        <label class="search"
+          ><span class="sr-only">Cari perusahaan</span
+          ><svg
+            class="icon"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="10.5" cy="10.5" r="6.5" />
+            <path d="m16 16 5 5" /></svg
+          ><input placeholder="Cari nama, ticker, atau sektor" readonly
+        /></label>
+        <div class="segmented">
+          <button class="active" type="button">Aktif <span>3</span></button
+          ><button type="button">Diarsipkan</button>
+        </div>
+      </div>
+      <div class="library-heading">
+        <span>3 perusahaan aktif</span
+        ><span class="meta">Konteks dan catatan dari kamu</span>
+      </div>
+      <section class="company-list">
+        <article class="company-row">
+          <span class="monogram green">RN</span>
+          <div class="company-row-identity">
+            <a href="overview.html" class="company-name">Rimba Nusa Pangan</a
+            ><span class="meta">RNP · Pangan & minuman</span>
+          </div>
+          <span class="badge state">Menjelajah</span>
+          <p class="company-note">
+            Mencari tahu daya tahan distribusi dan rencana ekspansinya.
+          </p>
+          <div class="row-date">
+            <span class="meta">Identitas diperbarui</span
+            ><span>8 Okt 2026</span>
+          </div>
+          <a class="open-company" href="overview.html"
+            >Buka
+            <svg
+              class="icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M4 12h16m-6-6 6 6-6 6" /></svg></a
+          ><button
+            class="icon-button more-company"
+            type="button"
+            aria-label="Pilihan Rimba Nusa Pangan"
+          >
+            <svg
+              class="icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="5" cy="12" r="1" />
+              <circle cx="12" cy="12" r="1" />
+              <circle cx="19" cy="12" r="1" />
+            </svg>
+          </button>
+        </article>
+        <article class="company-row">
+          <span class="monogram blue">AL</span>
+          <div class="company-row-identity">
+            <a href="overview.html" class="company-name">Arunika Logistik</a
+            ><span class="meta">Transportasi & logistik</span>
+          </div>
+          <span class="badge state">Menjelajah</span>
+          <p class="company-note">
+            Ingin memahami jaringan pelanggan dan kebutuhan modalnya.
+          </p>
+          <div class="row-date">
+            <span class="meta">Identitas diperbarui</span
+            ><span>7 Okt 2026</span>
+          </div>
+          <a class="open-company" href="overview.html"
+            >Buka
+            <svg
+              class="icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M4 12h16m-6-6 6 6-6 6" /></svg></a
+          ><button
+            class="icon-button more-company"
+            type="button"
+            aria-label="Pilihan Arunika Logistik"
+          >
+            <svg
+              class="icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="5" cy="12" r="1" />
+              <circle cx="12" cy="12" r="1" />
+              <circle cx="19" cy="12" r="1" />
+            </svg>
+          </button>
+        </article>
+        <article class="company-row">
+          <span class="monogram ochre">SK</span>
+          <div class="company-row-identity">
+            <a href="overview.html" class="company-name">Sagara Karya Energi</a
+            ><span class="meta">SKE · Energi</span>
+          </div>
+          <span class="badge state">Menjelajah</span>
+          <p class="company-note">
+            Belum cukup membaca. Mulai dari model bisnisnya dulu.
+          </p>
+          <div class="row-date">
+            <span class="meta">Identitas diperbarui</span
+            ><span>5 Okt 2026</span>
+          </div>
+          <a class="open-company" href="overview.html"
+            >Buka
+            <svg
+              class="icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M4 12h16m-6-6 6 6-6 6" /></svg></a
+          ><button
+            class="icon-button more-company"
+            type="button"
+            aria-label="Pilihan Sagara Karya Energi"
+          >
+            <svg
+              class="icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="5" cy="12" r="1" />
+              <circle cx="12" cy="12" r="1" />
+              <circle cx="19" cy="12" r="1" />
+            </svg>
+          </button>
+        </article>
+      </section>
+      <div class="library-footnote">
+        <svg
+          class="icon"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.75"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path
+            d="M8 3h11a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2ZM3 6h5M3 12h5M3 18h5M11 8h6m-6 4h6"
+          /></svg
+        >Belum perlu kesimpulan. Mulai dari rasa ingin tahu.
+      </div>
+      <section class="library-empty-sample">
+        <span class="tool-icon"
+          ><svg
+            class="icon"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 5v14M5 12h14" /></svg
+        ></span>
+        <div>
+          <h2>Ada perusahaan lain yang ingin dipahami?</h2>
+          <p>Buat ruang baru dan mulai dengan pemikiran pertama.</p>
+        </div>
+        <button
+          type="button"
+          class="button secondary"
+          title="Kontrol visual saja; tidak menyimpan data"
+        >
+          <svg
+            class="icon"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 5v14M5 12h14" /></svg
+          >Tambah ruang
+        </button>
+      </section>
+    </main>
+    <footer class="design-footer">
+      <a href="index.html">Prototipe visual · data fiktif</a
+      ><span>Tidak menyimpan atau menjalankan AI</span>
+    </footer>
+    <nav class="mobile-global" aria-label="Navigasi utama seluler">
+      <a href="home.html" class=""
+        ><svg
+          class="icon"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.75"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path
+            d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"
+          /></svg
+        >Beranda</a
+      ><a href="companies.html" class="selected"
+        ><svg
+          class="icon"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.75"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <rect x="4" y="3" width="16" height="18" rx="2" />
+          <path d="M9 21v-4h6v4M8 7h1m6 0h1M8 11h1m6 0h1" /></svg
+        >Perusahaan</a
+      >
+    </nav>
+  </body>
+</html>

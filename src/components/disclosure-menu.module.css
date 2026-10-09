@@ -1,0 +1,68 @@
+.disclosure {
+  position: relative;
+  flex-shrink: 0;
+}
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--target);
+  min-width: var(--target);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--control-border);
+  border-radius: var(--radius-control);
+  background: var(--surface-interactive);
+  color: var(--text-primary);
+  font-size: var(--type-control);
+  font-weight: 500;
+  cursor: pointer;
+  list-style: none;
+}
+.trigger::-webkit-details-marker {
+  display: none;
+}
+.trigger:hover,
+.disclosure[open] > .trigger {
+  background: var(--surface-selected);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.disclosure[open] .chevron {
+  transform: rotate(180deg);
+}
+.panel {
+  position: absolute;
+  top: calc(100% + var(--space-2));
+  right: 0;
+  z-index: 30;
+  width: min(240px, calc(100vw - var(--gutter) * 2));
+  padding: var(--space-2);
+  border: 1px solid var(--control-border);
+  border-radius: var(--radius-surface);
+  background: var(--surface-working);
+  box-shadow: 0 12px 32px #0005;
+}
+.panel :is(a, button) {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-2);
+  min-height: var(--target);
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  color: var(--text-primary);
+  font-size: var(--type-control);
+  border: 1px solid transparent;
+  border-radius: var(--radius-control);
+  text-decoration: none;
+}
+.panel :is(a, button):hover {
+  background: var(--surface-selected);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.panel :global(.form-feedback) {
+  margin: var(--space-2) var(--space-3);
+  color: var(--text-error);
+}

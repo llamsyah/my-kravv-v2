@@ -1,0 +1,67 @@
+body {
+  margin: 0;
+  background: var(--canvas);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--type-input);
+  line-height: 1.65;
+}
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+h1 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: var(--type-display);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+  margin-bottom: var(--space-6);
+}
+h2,
+h3 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--type-section);
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+  margin-bottom: var(--space-4);
+}
+h3 {
+  font-size: 1.0625rem;
+}
+.eyebrow,
+.section-label,
+.refine-content-label {
+  font-family: var(--font-sans);
+  font-size: var(--type-badge);
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.06em;
+}
+.thought-original {
+  max-width: var(--width-reading);
+  font-size: var(--type-reading);
+  line-height: 1.75;
+  color: var(--text-primary);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+time {
+  font-variant-numeric: tabular-nums;
+}
+button,
+input,
+select,
+textarea {
+  font-family: var(--font-sans);
+}
+input,
+select,
+textarea {
+  font-size: var(--type-input);
+}

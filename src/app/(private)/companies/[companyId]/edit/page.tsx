@@ -1,28 +1,18 @@
-import Link from "next/link";
-import { notFound } from "next/navigation";
 import { CompanyForm } from "@/features/companies/company-form";
-import { getCompanyContext } from "@/server/companies/context";
-import { getCompanyById } from "@/server/db/companies";
+import { getCompanyWorkspaceContext } from "@/server/companies/workspace";
+import { CompanyWorkspaceShell } from "@/features/companies/company-workspace-shell";
+import styles from "@/features/companies/company-workspace.module.css";
 export default async function EditCompanyPage({
   params,
 }: {
   params: Promise<{ companyId: string }>;
 }) {
   const { companyId } = await params;
-  const { supabase, user } = await getCompanyContext();
-  const company = await getCompanyById(supabase, user.id, companyId);
-  if (!company) notFound();
+  const { company } = await getCompanyWorkspaceContext(companyId);
   return (
-    <>
-      <Link
-        className="company-back quiet-link"
-        href={`/companies/${company.id}`}
-      >
-        ← Ruang perusahaan
-      </Link>
-      <section className="company-intro">
-        <p className="eyebrow">IDENTITAS PERUSAHAAN</p>
-        <h1>Ubah {company.name}</h1>
+    <CompanyWorkspaceShell companyId={company.id} context="manage">
+      <section className={styles.taskIntro}>
+        <h2>Ubah identitas</h2>
         <p className="intro-copy">
           Perbarui identitas dan konteks seperlunya.
           {company.state === "ARCHIVED"
@@ -31,6 +21,6 @@ export default async function EditCompanyPage({
         </p>
       </section>
       <CompanyForm company={company} />
-    </>
+    </CompanyWorkspaceShell>
   );
 }

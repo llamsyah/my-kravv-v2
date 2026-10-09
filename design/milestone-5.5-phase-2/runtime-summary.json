@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-09",
+  "cases": 30,
+  "accountKeyboard": "Enter/Space open; Tab reaches logout; Escape closes and returns focus; Shift+Tab and outside click close",
+  "management": "Edit route and same-page data-control anchor work; link selection closes disclosure",
+  "mutations": "Actual edit, capture, archive, disposable empty Company delete and logout forms verified",
+  "drafts": "Navigation restored draft; confirmed capture cleared matching draft; logout and subsequent login cleared unsaved private draft",
+  "runtimeWarnings": [],
+  "cssZoom": "1",
+  "observedDevicePixelRatio": 0.800000011920929,
+  "observedVisualViewportScale": 1,
+  "native100PercentZoomVerified": false,
+  "realPhoneKeyboardVerified": false,
+  "screenReaderVerified": false,
+  "forcedFontFailureVerified": false,
+  "realProviderRequests": 0
+}

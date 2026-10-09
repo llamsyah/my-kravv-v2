@@ -1,47 +1,29 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LogoutForm } from "@/features/auth/logout-form";
+import { Icon } from "@/components/ui/icon";
+import { globalNavigationSection } from "./navigation";
 export function PrivateNavigation() {
   const path = usePathname();
+  const active = globalNavigationSection(path);
   return (
     <nav className="private-navigation" aria-label="Navigasi utama">
       <Link
         className="nav-link"
         href="/"
-        aria-current={path === "/" ? "page" : undefined}
+        aria-current={active === "home" ? "page" : undefined}
       >
-        <svg
-          className="nav-icon"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          aria-hidden="true"
-        >
-          <path d="m3 10 9-7 9 7v10H3Z" />
-          <path d="M9 20v-7h6v7" />
-        </svg>
+        <Icon name="home" />
         Beranda
       </Link>
       <Link
         className="nav-link"
         href="/companies"
-        aria-current={path.startsWith("/companies") ? "page" : undefined}
+        aria-current={active === "companies" ? "page" : undefined}
       >
-        <svg
-          className="nav-icon"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          aria-hidden="true"
-        >
-          <path d="M3 21h18M5 21V5h8v16M13 10h6v11M8 8h2m-2 4h2m-2 4h2m6-3h1m-1 4h1" />
-        </svg>
+        <Icon name="building" />
         Perusahaan
       </Link>
-      <LogoutForm />
     </nav>
   );
 }

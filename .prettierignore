@@ -7,3 +7,6 @@ next-env.d.ts
 docs/
 public/visual-references/
 .env*
+# Preserve redistributed upstream font license notices verbatim.
+design/milestone-5.5/assets/SourceSerif-LICENSE.md
+src/styles/fonts/SourceSerif-LICENSE.md

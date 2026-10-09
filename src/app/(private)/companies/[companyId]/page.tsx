@@ -1,8 +1,6 @@
-import Link from "next/link";
 import { randomUUID } from "node:crypto";
-import { notFound } from "next/navigation";
-import { getCompanyContext } from "@/server/companies/context";
-import { getCompanyById } from "@/server/db/companies";
+import { getCompanyWorkspaceContext } from "@/server/companies/workspace";
+import { CompanyWorkspaceShell } from "@/features/companies/company-workspace-shell";
 import { companyStateLabels } from "@/domain/company/company";
 import { ArchiveForm } from "@/features/companies/archive-form";
 import { DeleteForm } from "@/features/data-control/delete-form";
@@ -32,9 +30,8 @@ export default async function CompanyPage({
   }>;
 }) {
   const { companyId } = await params;
-  const { supabase, user } = await getCompanyContext();
-  const company = await getCompanyById(supabase, user.id, companyId);
-  if (!company) notFound();
+  const { supabase, user, company } =
+    await getCompanyWorkspaceContext(companyId);
   const search = await searchParams;
   const cursor = readThoughtCursor(search.before);
   const [history, total] = await Promise.all([
@@ -45,7 +42,7 @@ export default async function CompanyPage({
     (thought) => thought.id === search.saved && thought.capture_operation_id,
   );
   return (
-    <>
+    <CompanyWorkspaceShell companyId={company.id} context="workspace">
       {receipt?.capture_operation_id && (
         <DraftReceipt
           userId={user.id}
@@ -54,43 +51,6 @@ export default async function CompanyPage({
           original={receipt.raw_content}
         />
       )}
-      <Link
-        className="company-back quiet-link"
-        href={
-          company.state === "ARCHIVED"
-            ? "/companies?view=archived"
-            : "/companies"
-        }
-      >
-        ← Perusahaan
-      </Link>
-      <section className="company-intro workspace-hero atmospheric-hero">
-        <div className="workspace-identity">
-          <div className="company-identity-meta">
-            <p className="eyebrow">
-              RUANG PERUSAHAAN{company.ticker ? ` · ${company.ticker}` : ""}
-            </p>
-            <span className="company-state">
-              {companyStateLabels[company.state]}
-            </span>
-          </div>
-          <h1>{company.name}</h1>
-          <p className="intro-copy">
-            {[company.exchange, company.sector].filter(Boolean).join(" · ") ||
-              "Ruang penelitian pribadi"}
-          </p>
-        </div>
-        <Link
-          className="quiet-link workspace-edit"
-          href={`/companies/${company.id}/edit`}
-          aria-label="Ubah identitas perusahaan"
-        >
-          <span className="workspace-edit-label">
-            Ubah identitas perusahaan
-          </span>{" "}
-          <span aria-hidden="true">↗</span>
-        </Link>
-      </section>
       {company.state === "ARCHIVED" && (
         <p className="archive-notice">
           Perusahaan ini diarsipkan. Identitas dan konteksnya tetap tersimpan di
@@ -190,6 +150,6 @@ export default async function CompanyPage({
           </section>
         </aside>
       </div>
-    </>
+    </CompanyWorkspaceShell>
   );
 }

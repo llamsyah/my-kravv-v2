@@ -3,24 +3,17 @@
 import { useActionState } from "react";
 import { logout } from "./actions";
 import { initialAuthState } from "./schema";
+import { Icon } from "@/components/ui/icon";
+import { Button } from "@/components/ui/button";
 
 export function LogoutForm() {
   const [state, action, pending] = useActionState(logout, initialAuthState);
   return (
     <form action={action} className="logout-form" aria-busy={pending}>
-      <button className="quiet-button" disabled={pending} type="submit">
-        <svg
-          className="nav-icon"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          aria-hidden="true"
-        >
-          <path d="M10 4H4v16h6m5-13 5 5-5 5m-7-5h12" />
-        </svg>
+      <Button variant="tertiary" disabled={pending} type="submit">
+        <Icon name="logout" />
         {pending ? "Sedang keluar…" : "Keluar"}
-      </button>
+      </Button>
       {state.error && (
         <p role="alert" className="form-feedback">
           {state.error}

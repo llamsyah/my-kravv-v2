@@ -2,6 +2,8 @@ import Link from "next/link";
 import { getCompanyContext } from "@/server/companies/context";
 import { getCompanies } from "@/server/db/companies";
 import { companyStateLabels } from "@/domain/company/company";
+import { StatusBadge } from "@/components/ui/status-badge";
+import { Icon } from "@/components/ui/icon";
 export default async function CompaniesPage({
   searchParams,
 }: {
@@ -114,9 +116,12 @@ export default async function CompaniesPage({
                       .join(" · ") || "Identitas dapat dilengkapi nanti"}
                   </p>
                 </div>
-                <span className="company-state">
+                <StatusBadge
+                  className="company-state"
+                  tone={archived ? "neutral" : "accent"}
+                >
                   {companyStateLabels[company.state]}
-                </span>
+                </StatusBadge>
                 <p className="company-row-note">
                   {company.short_note || "Belum ada catatan singkat."}
                 </p>
@@ -138,7 +143,9 @@ export default async function CompaniesPage({
                     Buka ruang <span aria-hidden="true">→</span>
                   </Link>
                   <details className="company-row-more">
-                    <summary aria-label={`Kelola ${company.name}`}>⋯</summary>
+                    <summary aria-label={`Kelola ${company.name}`}>
+                      <Icon name="more" />
+                    </summary>
                     <div>
                       <Link href={`/companies/${company.id}/edit`}>
                         Ubah identitas

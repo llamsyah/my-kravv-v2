@@ -1,0 +1,1216 @@
+[
+  {
+    "view": "home",
+    "companySections": 0,
+    "cssZoom": "1",
+    "disclosures": [
+      {
+        "height": 44,
+        "label": "Akun",
+        "width": 114.953125
+      }
+    ],
+    "fontStatus": "loaded",
+    "globalLinks": [
+      {
+        "current": "page",
+        "height": 44,
+        "href": "/",
+        "label": "Beranda",
+        "position": "static"
+      },
+      {
+        "current": null,
+        "height": 44,
+        "href": "/companies",
+        "label": "Perusahaan",
+        "position": "static"
+      }
+    ],
+    "headings": ["Sampai di mana pemikiranmu?"],
+    "height": 1000,
+    "inputs": ["16px", "16px"],
+    "interAvailable": true,
+    "scrollWidth": 1421,
+    "serifAvailable": true,
+    "width": 1440
+  },
+  {
+    "view": "workspace",
+    "companySections": 0,
+    "cssZoom": "1",
+    "disclosures": [
+      {
+        "height": 44,
+        "label": "Akun",
+        "width": 114.953125
+      },
+      {
+        "height": 44,
+        "label": "Kelola",
+        "width": 121.484375
+      }
+    ],
+    "fontStatus": "loaded",
+    "globalLinks": [
+      {
+        "current": null,
+        "height": 44,
+        "href": "/",
+        "label": "Beranda",
+        "position": "static"
+      },
+      {
+        "current": "page",
+        "height": 44,
+        "href": "/companies",
+        "label": "Perusahaan",
+        "position": "static"
+      }
+    ],
+    "headings": [
+      "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas Operasional, dan Pertanyaan yang Belum Terjawab"
+    ],
+    "height": 1000,
+    "inputs": ["16px", "16px", "16px", "16px", "16px", "16px"],
+    "interAvailable": true,
+    "scrollWidth": 1421,
+    "serifAvailable": true,
+    "width": 1440
+  },
+  {
+    "view": "workspace",
+    "companySections": 0,
+    "cssZoom": "1",
+    "disclosures": [
+      {
+        "height": 44,
+        "label": "Akun",
+        "width": 114.953125
+      },
+      {
+        "height": 44,
+        "label": "Kelola",
+        "width": 121.484375
+      }
+    ],
+    "fontStatus": "loaded",
+    "globalLinks": [
+      {
+        "current": null,
+        "height": 44,
+        "href": "/",
+        "label": "Beranda",
+        "position": "static"
+      },
+      {
+        "current": "page",
+        "height": 44,
+        "href": "/companies",
+        "label": "Perusahaan",
+        "position": "static"
+      }
+    ],
+    "headings": [
+      "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas Operasional, dan Pertanyaan yang Belum Terjawab"
+    ],
+    "height": 1000,
+    "inputs": ["16px", "16px", "16px", "16px", "16px", "16px"],
+    "interAvailable": true,
+    "scrollWidth": 749,
+    "serifAvailable": true,
+    "width": 768
+  },
+  {
+    "view": "workspace",
+    "companySections": 0,
+    "cssZoom": "1",
+    "disclosures": [
+      {
+        "height": 44,
+        "label": "Akun",
+        "width": 114.953125
+      },
+      {
+        "height": 44,
+        "label": "Kelola",
+        "width": 121.484375
+      }
+    ],
+    "fontStatus": "loaded",
+    "globalLinks": [
+      {
+        "current": null,
+        "height": 55.4375,
+        "href": "/",
+        "label": "Beranda",
+        "position": "fixed"
+      },
+      {
+        "current": "page",
+        "height": 55.4375,
+        "href": "/companies",
+        "label": "Perusahaan",
+        "position": "fixed"
+      }
+    ],
+    "headings": [
+      "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas Operasional, dan Pertanyaan yang Belum Terjawab"
+    ],
+    "height": 844,
+    "inputs": ["16px", "16px", "16px", "16px", "16px", "16px"],
+    "interAvailable": true,
+    "scrollWidth": 371,
+    "serifAvailable": true,
+    "width": 390
+  },
+  {
+    "view": "workspace",
+    "companySections": 0,
+    "cssZoom": "1",
+    "disclosures": [
+      {
+        "height": 44,
+        "label": "Akun",
+        "width": 114.953125
+      },
+      {
+        "height": 44,
+        "label": "Kelola",
+        "width": 121.484375
+      }
+    ],
+    "fontStatus": "loaded",
+    "globalLinks": [
+      {
+        "current": null,
+        "height": 55.4375,
+        "href": "/",
+        "label": "Beranda",
+        "position": "fixed"
+      },
+      {
+        "current": "page",
+        "height": 55.4375,
+        "href": "/companies",
+        "label": "Perusahaan",
+        "position": "fixed"
+      }
+    ],
+    "headings": [
+      "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas Operasional, dan Pertanyaan yang Belum Terjawab"
+    ],
+    "height": 844,
+    "inputs": ["16px", "16px", "16px", "16px", "16px", "16px"],
+    "interAvailable": true,
+    "scrollWidth": 301,
+    "serifAvailable": true,
+    "width": 320
+  },
+  {
+    "view": "companies",
+    "companySections": 0,
+    "cssZoom": "1",
+    "disclosures": [
+      {
+        "height": 44,
+        "label": "Akun",
+        "width": 114.953125
+      }
+    ],
+    "fontStatus": "loaded",
+    "globalLinks": [
+      {
+        "current": null,
+        "height": 44,
+        "href": "/",
+        "label": "Beranda",
+        "position": "static"
+      },
+      {
+        "current": "page",
+        "height": 44,
+        "href": "/companies",
+        "label": "Perusahaan",
+        "position": "static"
+      }
+    ],
+    "headings": ["Perusahaan"],
+    "height": 1000,
+    "inputs": ["16px"],
+    "interAvailable": true,
+    "scrollWidth": 1440,
+    "serifAvailable": true,
+    "width": 1440
+  },
+  {
+    "view": "companies",
+    "companySections": 0,
+    "cssZoom": "1",
+    "disclosures": [
+      {
+        "height": 44,
+        "label": "Akun",
+        "width": 114.953125
+      }
+    ],
+    "fontStatus": "loaded",
+    "globalLinks": [
+      {
+        "current": null,
+        "height": 44,
+        "href": "/",
+        "label": "Beranda",
+        "position": "static"
+      },
+      {
+        "current": "page",
+        "height": 44,
+        "href": "/companies",
+        "label": "Perusahaan",
+        "position": "static"
+      }
+    ],
+    "headings": ["Perusahaan"],
+    "height": 1000,
+    "inputs": ["16px"],
+    "interAvailable": true,
+    "scrollWidth": 753,
+    "serifAvailable": true,
+    "width": 768
+  },
+  {
+    "view": "companies",
+    "companySections": 0,
+    "cssZoom": "1",
+    "disclosures": [
+      {
+        "height": 44,
+        "label": "Akun",
+        "width": 114.953125
+      }
+    ],
+    "fontStatus": "loaded",
+    "globalLinks": [
+      {
+        "current": null,
+        "height": 55.4375,
+        "href": "/",
+        "label": "Beranda",
+        "position": "fixed"
+      },
+      {
+        "current": "page",
+        "height": 55.4375,
+        "href": "/companies",
+        "label": "Perusahaan",
+        "position": "fixed"
+      }
+    ],
+    "headings": ["Perusahaan"],
+    "height": 844,
+    "inputs": ["16px"],
+    "interAvailable": true,
+    "scrollWidth": 375,
+    "serifAvailable": true,
+    "width": 390
+  },
+  {
+    "view": "companies",
+    "companySections": 0,
+    "cssZoom": "1",
+    "disclosures": [
+      {
+        "height": 44,
+        "label": "Akun",
+        "width": 114.953125
+      }
+    ],
+    "fontStatus": "loaded",
+    "globalLinks": [
+      {
+        "current": null,
+        "height": 55.4375,
+        "href": "/",
+        "label": "Beranda",
+        "position": "fixed"
+      },
+      {
+        "current": "page",
+        "height": 55.4375,
+        "href": "/companies",
+        "label": "Perusahaan",
+        "position": "fixed"
+      }
+    ],
+    "headings": ["Perusahaan"],
+    "height": 844,
+    "inputs": ["16px"],
+    "interAvailable": true,
+    "scrollWidth": 305,
+    "serifAvailable": true,
+    "width": 320
+  },
+  {
+    "view": "edit",
+    "companySections": 0,
+    "cssZoom": "1",
+    "disclosures": [
+      {
+        "height": 44,
+        "label": "Akun",
+        "width": 114.953125
+      },
+      {
+        "height": 44,
+        "label": "Kelola",
+        "width": 121.484375
+      }
+    ],
+    "fontStatus": "loaded",
+    "globalLinks": [
+      {
+        "current": null,
+        "height": 44,
+        "href": "/",
+        "label": "Beranda",
+        "position": "static"
+      },
+      {
+        "current": "page",
+        "height": 44,
+        "href": "/companies",
+        "label": "Perusahaan",
+        "position": "static"
+      }
+    ],
+    "headings": [
+      "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas Operasional, dan Pertanyaan yang Belum Terjawab"
+    ],
+    "height": 1000,
+    "inputs": ["16px", "16px", "16px", "16px", "16px", "16px"],
+    "interAvailable": true,
+    "scrollWidth": 1421,
+    "serifAvailable": true,
+    "width": 1440
+  },
+  {
+    "view": "edit",
+    "companySections": 0,
+    "cssZoom": "1",
+    "disclosures": [
+      {
+        "height": 44,
+        "label": "Akun",
+        "width": 114.953125
+      },
+      {
+        "height": 44,
+        "label": "Kelola",
+        "width": 121.484375
+      }
+    ],
+    "fontStatus": "loaded",
+    "globalLinks": [
+      {
+        "current": null,
+        "height": 44,
+        "href": "/",
+        "label": "Beranda",
+        "position": "static"
+      },
+      {
+        "current": "page",
+        "height": 44,
+        "href": "/companies",
+        "label": "Perusahaan",
+        "position": "static"
+      }
+    ],
+    "headings": [
+      "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas Operasional, dan Pertanyaan yang Belum Terjawab"
+    ],
+    "height": 1000,
+    "inputs": ["16px", "16px", "16px", "16px", "16px", "16px"],
+    "interAvailable": true,
+    "scrollWidth": 749,
+    "serifAvailable": true,
+    "width": 768
+  },
+  {
+    "view": "edit",
+    "companySections": 0,
+    "cssZoom": "1",
+    "disclosures": [
+      {
+        "height": 44,
+        "label": "Akun",
+        "width": 114.953125
+      },
+      {
+        "height": 44,
+        "label": "Kelola",
+        "width": 121.484375
+      }
+    ],
+    "fontStatus": "loaded",
+    "globalLinks": [
+      {
+        "current": null,
+        "height": 55.4375,
+        "href": "/",
+        "label": "Beranda",
+        "position": "fixed"
+      },
+      {
+        "current": "page",
+        "height": 55.4375,
+        "href": "/companies",
+        "label": "Perusahaan",
+        "position": "fixed"
+      }
+    ],
+    "headings": [
+      "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas Operasional, dan Pertanyaan yang Belum Terjawab"
+    ],
+    "height": 844,
+    "inputs": ["16px", "16px", "16px", "16px", "16px", "16px"],
+    "interAvailable": true,
+    "scrollWidth": 371,
+    "serifAvailable": true,
+    "width": 390
+  },
+  {
+    "view": "edit",
+    "companySections": 0,
+    "cssZoom": "1",
+    "disclosures": [
+      {
+        "height": 44,
+        "label": "Akun",
+        "width": 114.953125
+      },
+      {
+        "height": 44,
+        "label": "Kelola",
+        "width": 121.484375
+      }
+    ],
+    "fontStatus": "loaded",
+    "globalLinks": [
+      {
+        "current": null,
+        "height": 55.4375,
+        "href": "/",
+        "label": "Beranda",
+        "position": "fixed"
+      },
+      {
+        "current": "page",
+        "height": 55.4375,
+        "href": "/companies",
+        "label": "Perusahaan",
+        "position": "fixed"
+      }
+    ],
+    "headings": [
+      "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas Operasional, dan Pertanyaan yang Belum Terjawab"
+    ],
+    "height": 844,
+    "inputs": ["16px", "16px", "16px", "16px", "16px", "16px"],
+    "interAvailable": true,
+    "scrollWidth": 301,
+    "serifAvailable": true,
+    "width": 320
+  },
+  {
+    "view": "refine",
+    "companySections": 0,
+    "cssZoom": "1",
+    "disclosures": [
+      {
+        "height": 44,
+        "label": "Akun",
+        "width": 114.953125
+      },
+      {
+        "height": 44,
+        "label": "Kelola",
+        "width": 121.484375
+      }
+    ],
+    "fontStatus": "loaded",
+    "globalLinks": [
+      {
+        "current": null,
+        "height": 44,
+        "href": "/",
+        "label": "Beranda",
+        "position": "static"
+      },
+      {
+        "current": "page",
+        "height": 44,
+        "href": "/companies",
+        "label": "Perusahaan",
+        "position": "static"
+      }
+    ],
+    "headings": [
+      "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas Operasional, dan Pertanyaan yang Belum Terjawab"
+    ],
+    "height": 1000,
+    "inputs": ["16px"],
+    "interAvailable": true,
+    "scrollWidth": 1421,
+    "serifAvailable": true,
+    "width": 1440
+  },
+  {
+    "view": "refine",
+    "companySections": 0,
+    "cssZoom": "1",
+    "disclosures": [
+      {
+        "height": 44,
+        "label": "Akun",
+        "width": 114.953125
+      },
+      {
+        "height": 44,
+        "label": "Kelola",
+        "width": 121.484375
+      }
+    ],
+    "fontStatus": "loaded",
+    "globalLinks": [
+      {
+        "current": null,
+        "height": 44,
+        "href": "/",
+        "label": "Beranda",
+        "position": "static"
+      },
+      {
+        "current": "page",
+        "height": 44,
+        "href": "/companies",
+        "label": "Perusahaan",
+        "position": "static"
+      }
+    ],
+    "headings": [
+      "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas Operasional, dan Pertanyaan yang Belum Terjawab"
+    ],
+    "height": 1000,
+    "inputs": ["16px"],
+    "interAvailable": true,
+    "scrollWidth": 749,
+    "serifAvailable": true,
+    "width": 768
+  },
+  {
+    "view": "refine",
+    "companySections": 0,
+    "cssZoom": "1",
+    "disclosures": [
+      {
+        "height": 44,
+        "label": "Akun",
+        "width": 114.953125
+      },
+      {
+        "height": 44,
+        "label": "Kelola",
+        "width": 121.484375
+      }
+    ],
+    "fontStatus": "loaded",
+    "globalLinks": [
+      {
+        "current": null,
+        "height": 55.4375,
+        "href": "/",
+        "label": "Beranda",
+        "position": "fixed"
+      },
+      {
+        "current": "page",
+        "height": 55.4375,
+        "href": "/companies",
+        "label": "Perusahaan",
+        "position": "fixed"
+      }
+    ],
+    "headings": [
+      "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas Operasional, dan Pertanyaan yang Belum Terjawab"
+    ],
+    "height": 844,
+    "inputs": ["16px"],
+    "interAvailable": true,
+    "scrollWidth": 371,
+    "serifAvailable": true,
+    "width": 390
+  },
+  {
+    "view": "refine",
+    "companySections": 0,
+    "cssZoom": "1",
+    "disclosures": [
+      {
+        "height": 44,
+        "label": "Akun",
+        "width": 114.953125
+      },
+      {
+        "height": 44,
+        "label": "Kelola",
+        "width": 121.484375
+      }
+    ],
+    "fontStatus": "loaded",
+    "globalLinks": [
+      {
+        "current": null,
+        "height": 55.4375,
+        "href": "/",
+        "label": "Beranda",
+        "position": "fixed"
+      },
+      {
+        "current": "page",
+        "height": 55.4375,
+        "href": "/companies",
+        "label": "Perusahaan",
+        "position": "fixed"
+      }
+    ],
+    "headings": [
+      "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas Operasional, dan Pertanyaan yang Belum Terjawab"
+    ],
+    "height": 844,
+    "inputs": ["16px"],
+    "interAvailable": true,
+    "scrollWidth": 301,
+    "serifAvailable": true,
+    "width": 320
+  },
+  {
+    "view": "missing-metadata",
+    "companySections": 0,
+    "cssZoom": "1",
+    "disclosures": [
+      {
+        "height": 44,
+        "label": "Akun",
+        "width": 114.953125
+      },
+      {
+        "height": 44,
+        "label": "Kelola",
+        "width": 121.484375
+      }
+    ],
+    "fontStatus": "loaded",
+    "globalLinks": [
+      {
+        "current": null,
+        "height": 44,
+        "href": "/",
+        "label": "Beranda",
+        "position": "static"
+      },
+      {
+        "current": "page",
+        "height": 44,
+        "href": "/companies",
+        "label": "Perusahaan",
+        "position": "static"
+      }
+    ],
+    "headings": ["Arunika Logistik — Fiktif"],
+    "height": 1000,
+    "inputs": ["16px", "16px", "16px"],
+    "interAvailable": true,
+    "scrollWidth": 1421,
+    "serifAvailable": true,
+    "width": 1440
+  },
+  {
+    "view": "missing-metadata",
+    "companySections": 0,
+    "cssZoom": "1",
+    "disclosures": [
+      {
+        "height": 44,
+        "label": "Akun",
+        "width": 114.953125
+      },
+      {
+        "height": 44,
+        "label": "Kelola",
+        "width": 121.484375
+      }
+    ],
+    "fontStatus": "loaded",
+    "globalLinks": [
+      {
+        "current": null,
+        "height": 44,
+        "href": "/",
+        "label": "Beranda",
+        "position": "static"
+      },
+      {
+        "current": "page",
+        "height": 44,
+        "href": "/companies",
+        "label": "Perusahaan",
+        "position": "static"
+      }
+    ],
+    "headings": ["Arunika Logistik — Fiktif"],
+    "height": 1000,
+    "inputs": ["16px", "16px", "16px"],
+    "interAvailable": true,
+    "scrollWidth": 749,
+    "serifAvailable": true,
+    "width": 768
+  },
+  {
+    "view": "missing-metadata",
+    "companySections": 0,
+    "cssZoom": "1",
+    "disclosures": [
+      {
+        "height": 44,
+        "label": "Akun",
+        "width": 114.953125
+      },
+      {
+        "height": 44,
+        "label": "Kelola",
+        "width": 121.484375
+      }
+    ],
+    "fontStatus": "loaded",
+    "globalLinks": [
+      {
+        "current": null,
+        "height": 55.4375,
+        "href": "/",
+        "label": "Beranda",
+        "position": "fixed"
+      },
+      {
+        "current": "page",
+        "height": 55.4375,
+        "href": "/companies",
+        "label": "Perusahaan",
+        "position": "fixed"
+      }
+    ],
+    "headings": ["Arunika Logistik — Fiktif"],
+    "height": 844,
+    "inputs": ["16px", "16px", "16px"],
+    "interAvailable": true,
+    "scrollWidth": 371,
+    "serifAvailable": true,
+    "width": 390
+  },
+  {
+    "view": "missing-metadata",
+    "companySections": 0,
+    "cssZoom": "1",
+    "disclosures": [
+      {
+        "height": 44,
+        "label": "Akun",
+        "width": 114.953125
+      },
+      {
+        "height": 44,
+        "label": "Kelola",
+        "width": 121.484375
+      }
+    ],
+    "fontStatus": "loaded",
+    "globalLinks": [
+      {
+        "current": null,
+        "height": 55.4375,
+        "href": "/",
+        "label": "Beranda",
+        "position": "fixed"
+      },
+      {
+        "current": "page",
+        "height": 55.4375,
+        "href": "/companies",
+        "label": "Perusahaan",
+        "position": "fixed"
+      }
+    ],
+    "headings": ["Arunika Logistik — Fiktif"],
+    "height": 844,
+    "inputs": ["16px", "16px", "16px"],
+    "interAvailable": true,
+    "scrollWidth": 301,
+    "serifAvailable": true,
+    "width": 320
+  },
+  {
+    "view": "archived",
+    "companySections": 0,
+    "cssZoom": "1",
+    "disclosures": [
+      {
+        "height": 44,
+        "label": "Akun",
+        "width": 114.953125
+      },
+      {
+        "height": 44,
+        "label": "Kelola",
+        "width": 121.484375
+      }
+    ],
+    "fontStatus": "loaded",
+    "globalLinks": [
+      {
+        "current": null,
+        "height": 44,
+        "href": "/",
+        "label": "Beranda",
+        "position": "static"
+      },
+      {
+        "current": "page",
+        "height": 44,
+        "href": "/companies",
+        "label": "Perusahaan",
+        "position": "static"
+      }
+    ],
+    "headings": ["Sagara Karya — Arsip Fiktif"],
+    "height": 1000,
+    "inputs": ["16px", "16px", "16px"],
+    "interAvailable": true,
+    "scrollWidth": 1421,
+    "serifAvailable": true,
+    "width": 1440
+  },
+  {
+    "view": "archived",
+    "companySections": 0,
+    "cssZoom": "1",
+    "disclosures": [
+      {
+        "height": 44,
+        "label": "Akun",
+        "width": 114.953125
+      },
+      {
+        "height": 44,
+        "label": "Kelola",
+        "width": 121.484375
+      }
+    ],
+    "fontStatus": "loaded",
+    "globalLinks": [
+      {
+        "current": null,
+        "height": 44,
+        "href": "/",
+        "label": "Beranda",
+        "position": "static"
+      },
+      {
+        "current": "page",
+        "height": 44,
+        "href": "/companies",
+        "label": "Perusahaan",
+        "position": "static"
+      }
+    ],
+    "headings": ["Sagara Karya — Arsip Fiktif"],
+    "height": 1000,
+    "inputs": ["16px", "16px", "16px"],
+    "interAvailable": true,
+    "scrollWidth": 749,
+    "serifAvailable": true,
+    "width": 768
+  },
+  {
+    "view": "archived",
+    "companySections": 0,
+    "cssZoom": "1",
+    "disclosures": [
+      {
+        "height": 44,
+        "label": "Akun",
+        "width": 114.953125
+      },
+      {
+        "height": 44,
+        "label": "Kelola",
+        "width": 121.484375
+      }
+    ],
+    "fontStatus": "loaded",
+    "globalLinks": [
+      {
+        "current": null,
+        "height": 55.4375,
+        "href": "/",
+        "label": "Beranda",
+        "position": "fixed"
+      },
+      {
+        "current": "page",
+        "height": 55.4375,
+        "href": "/companies",
+        "label": "Perusahaan",
+        "position": "fixed"
+      }
+    ],
+    "headings": ["Sagara Karya — Arsip Fiktif"],
+    "height": 844,
+    "inputs": ["16px", "16px", "16px"],
+    "interAvailable": true,
+    "scrollWidth": 371,
+    "serifAvailable": true,
+    "width": 390
+  },
+  {
+    "view": "archived",
+    "companySections": 0,
+    "cssZoom": "1",
+    "disclosures": [
+      {
+        "height": 44,
+        "label": "Akun",
+        "width": 114.953125
+      },
+      {
+        "height": 44,
+        "label": "Kelola",
+        "width": 121.484375
+      }
+    ],
+    "fontStatus": "loaded",
+    "globalLinks": [
+      {
+        "current": null,
+        "height": 55.4375,
+        "href": "/",
+        "label": "Beranda",
+        "position": "fixed"
+      },
+      {
+        "current": "page",
+        "height": 55.4375,
+        "href": "/companies",
+        "label": "Perusahaan",
+        "position": "fixed"
+      }
+    ],
+    "headings": ["Sagara Karya — Arsip Fiktif"],
+    "height": 844,
+    "inputs": ["16px", "16px", "16px"],
+    "interAvailable": true,
+    "scrollWidth": 301,
+    "serifAvailable": true,
+    "width": 320
+  },
+  {
+    "view": "home",
+    "companySections": 0,
+    "cssZoom": "1",
+    "disclosures": [
+      {
+        "height": 44,
+        "label": "Akun",
+        "width": 114.953125
+      }
+    ],
+    "fontStatus": "loaded",
+    "globalLinks": [
+      {
+        "current": "page",
+        "height": 44,
+        "href": "/",
+        "label": "Beranda",
+        "position": "static"
+      },
+      {
+        "current": null,
+        "height": 44,
+        "href": "/companies",
+        "label": "Perusahaan",
+        "position": "static"
+      }
+    ],
+    "headings": ["Sampai di mana pemikiranmu?"],
+    "height": 1000,
+    "inputs": ["16px", "16px"],
+    "interAvailable": true,
+    "scrollWidth": 753,
+    "serifAvailable": true,
+    "width": 768
+  },
+  {
+    "view": "home",
+    "companySections": 0,
+    "cssZoom": "1",
+    "disclosures": [
+      {
+        "height": 44,
+        "label": "Akun",
+        "width": 114.953125
+      }
+    ],
+    "fontStatus": "loaded",
+    "globalLinks": [
+      {
+        "current": "page",
+        "height": 55.4375,
+        "href": "/",
+        "label": "Beranda",
+        "position": "fixed"
+      },
+      {
+        "current": null,
+        "height": 55.4375,
+        "href": "/companies",
+        "label": "Perusahaan",
+        "position": "fixed"
+      }
+    ],
+    "headings": ["Sampai di mana pemikiranmu?"],
+    "height": 844,
+    "inputs": ["16px", "16px"],
+    "interAvailable": true,
+    "scrollWidth": 375,
+    "serifAvailable": true,
+    "width": 390
+  },
+  {
+    "view": "home",
+    "companySections": 0,
+    "cssZoom": "1",
+    "disclosures": [
+      {
+        "height": 44,
+        "label": "Akun",
+        "width": 114.953125
+      }
+    ],
+    "fontStatus": "loaded",
+    "globalLinks": [
+      {
+        "current": "page",
+        "height": 55.4375,
+        "href": "/",
+        "label": "Beranda",
+        "position": "fixed"
+      },
+      {
+        "current": null,
+        "height": 55.4375,
+        "href": "/companies",
+        "label": "Perusahaan",
+        "position": "fixed"
+      }
+    ],
+    "headings": ["Sampai di mana pemikiranmu?"],
+    "height": 844,
+    "inputs": ["16px", "16px"],
+    "interAvailable": true,
+    "scrollWidth": 305,
+    "serifAvailable": true,
+    "width": 320
+  },
+  {
+    "view": "updated-workspace",
+    "companySections": 0,
+    "cssZoom": "1",
+    "disclosures": [
+      {
+        "height": 44,
+        "label": "Akun",
+        "width": 114.953125
+      },
+      {
+        "height": 44,
+        "label": "Kelola",
+        "width": 121.484375
+      }
+    ],
+    "fontStatus": "loaded",
+    "globalLinks": [
+      {
+        "current": null,
+        "height": 44,
+        "href": "/",
+        "label": "Beranda",
+        "position": "static"
+      },
+      {
+        "current": "page",
+        "height": 44,
+        "href": "/companies",
+        "label": "Perusahaan",
+        "position": "static"
+      }
+    ],
+    "headings": ["Rimba Nusa Pangan — Identitas Diperbarui (Fiktif)"],
+    "height": 1000,
+    "inputs": ["16px", "16px", "16px", "16px", "16px", "16px"],
+    "interAvailable": true,
+    "scrollWidth": 1421,
+    "serifAvailable": true,
+    "width": 1440
+  },
+  {
+    "view": "archived-refine",
+    "companySections": 0,
+    "cssZoom": "1",
+    "disclosures": [
+      {
+        "height": 44,
+        "label": "Akun",
+        "width": 114.953125
+      },
+      {
+        "height": 44,
+        "label": "Kelola",
+        "width": 121.484375
+      }
+    ],
+    "fontStatus": "loaded",
+    "globalLinks": [
+      {
+        "current": null,
+        "height": 55.4375,
+        "href": "/",
+        "label": "Beranda",
+        "position": "fixed"
+      },
+      {
+        "current": "page",
+        "height": 55.4375,
+        "href": "/companies",
+        "label": "Perusahaan",
+        "position": "fixed"
+      }
+    ],
+    "headings": ["Rimba Nusa Pangan — Identitas Diperbarui (Fiktif)"],
+    "height": 844,
+    "inputs": ["16px"],
+    "interAvailable": true,
+    "scrollWidth": 371,
+    "serifAvailable": true,
+    "width": 390
+  }
+]

@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { randomUUID } from "node:crypto";
 import { notFound } from "next/navigation";
-import { getCompanyContext } from "@/server/companies/context";
-import { getCompanyById } from "@/server/db/companies";
+import { getCompanyWorkspaceContext } from "@/server/companies/workspace";
+import { CompanyWorkspaceShell } from "@/features/companies/company-workspace-shell";
+import styles from "@/features/companies/company-workspace.module.css";
 import { getThoughtById } from "@/server/db/thoughts";
 import { getRefinements, getPendingRefinement } from "@/server/db/refinements";
 import { readThoughtCursor } from "@/domain/thought/thought";
@@ -22,11 +23,15 @@ export default async function RefinePage({
   searchParams: Promise<{ before?: string; resolved?: string }>;
 }) {
   const { companyId, thoughtId } = await params;
-  const { supabase, user } = await getCompanyContext();
-  const company = await getCompanyById(supabase, user.id, companyId);
-  const thought =
-    company && (await getThoughtById(supabase, user.id, company.id, thoughtId));
-  if (!company || !thought) notFound();
+  const { supabase, user, company } =
+    await getCompanyWorkspaceContext(companyId);
+  const thought = await getThoughtById(
+    supabase,
+    user.id,
+    company.id,
+    thoughtId,
+  );
+  if (!thought) notFound();
   const search = await searchParams;
   const cursor = readThoughtCursor(search.before);
   const [history, pending] = await Promise.all([
@@ -43,16 +48,16 @@ export default async function RefinePage({
         ? "Refine awal mendukung teks sampai 2.000 byte. Asli tetap tersimpan lengkap; pilih pemikiran yang lebih pendek."
         : undefined;
   return (
-    <>
+    <CompanyWorkspaceShell companyId={company.id} context="refine">
       <Link
-        className="company-back quiet-link"
+        className={`company-back quiet-link ${styles.back}`}
         href={`/companies/${company.id}?focus=${thought.id}#thought-${thought.id}`}
       >
-        ← {company.name}
+        <span aria-hidden="true">←</span> Kembali ke pemikiran
       </Link>
       <section className="refine-intro">
-        <p className="eyebrow">RUANG PEMIKIRAN · {company.name}</p>
-        <h1>Lebih jelas, tetap pemikiranmu.</h1>
+        <p className="eyebrow">REFINE</p>
+        <h2>Lebih jelas, tetap pemikiranmu.</h2>
         <p className="intro-copy">
           Asli selalu tersimpan. Kamu yang menentukan versi mana yang ingin
           digunakan.
@@ -175,6 +180,6 @@ export default async function RefinePage({
           )}
         </nav>
       </section>
-    </>
+    </CompanyWorkspaceShell>
   );
 }

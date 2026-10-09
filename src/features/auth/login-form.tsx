@@ -3,6 +3,7 @@
 import { useActionState } from "react";
 import { login } from "./actions";
 import { initialAuthState } from "./schema";
+import { Button } from "@/components/ui/button";
 
 export function LoginForm() {
   const [state, action, pending] = useActionState(login, initialAuthState);
@@ -38,9 +39,9 @@ export function LoginForm() {
         >
           {state.error}
         </p>
-        <button className="primary-button" type="submit">
+        <Button type="submit">
           {pending ? "Sedang masuk…" : "Masuk ke ruang pribadi"}
-        </button>
+        </Button>
       </fieldset>
       <p className="auth-help">Gunakan akun MY KRAVV yang sudah terdaftar.</p>
     </form>
