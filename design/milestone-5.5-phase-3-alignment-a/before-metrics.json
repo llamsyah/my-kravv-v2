@@ -1,0 +1,2310 @@
+[
+  {
+    "stage": "before",
+    "route": "overview",
+    "breadcrumb": "Perusahaan/Overview",
+    "breadcrumbBounds": {
+      "bottom": 145,
+      "height": 44,
+      "right": 263.828125,
+      "width": 193.328125,
+      "x": 70.5,
+      "y": 101
+    },
+    "capture": null,
+    "company": "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas Operasional, dan Pertanyaan yang Belum Terjawab",
+    "content": {
+      "bottom": 1078.234375,
+      "height": 660.421875,
+      "right": 1350.5,
+      "width": 1280,
+      "x": 70.5,
+      "y": 417.8125
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 86.375,
+        "text": "Tambahkan pemikiran"
+      },
+      {
+        "height": 86.375,
+        "text": "Semua pemikiran 2 tersimpan"
+      },
+      {
+        "height": 44.390625,
+        "text": "Kelola ruang · Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Hapus perusahaan permanen"
+      },
+      {
+        "height": 44,
+        "text": "Hapus permanen"
+      }
+    ],
+    "divider": {
+      "bottom": 385.8125,
+      "height": 284.8125,
+      "right": 1350.5,
+      "width": 1280,
+      "x": 70.5,
+      "y": 101
+    },
+    "firstNavigationLink": {
+      "bottom": 356.8125,
+      "height": 44,
+      "right": 205.328125,
+      "width": 130.828125,
+      "x": 74.5,
+      "y": 312.8125
+    },
+    "fonts": "loaded",
+    "history": null,
+    "identity": {
+      "bottom": 284.8125,
+      "height": 115.8125,
+      "right": 1350.5,
+      "width": 1280,
+      "x": 70.5,
+      "y": 169
+    },
+    "main": {
+      "bottom": 1235.625,
+      "height": 1158.625,
+      "right": 1350.5,
+      "width": 1280,
+      "x": 70.5,
+      "y": 77
+    },
+    "navOverflow": false,
+    "navigation": {
+      "bottom": 360.8125,
+      "height": 52,
+      "right": 1350.5,
+      "width": 1280,
+      "x": 70.5,
+      "y": 308.8125
+    },
+    "overflow": false,
+    "reading": [
+      {
+        "font": "17px",
+        "lineHeight": "29.75px",
+        "maxWidth": "725.887px",
+        "rect": {
+          "bottom": 710.796875,
+          "height": 178.5,
+          "right": 822.375,
+          "width": 725.875,
+          "x": 96.5,
+          "y": 532.296875
+        }
+      }
+    ],
+    "refineIntro": null,
+    "refineOriginal": null,
+    "safeAreaRail": [
+      {
+        "bounds": {
+          "bottom": 60,
+          "height": 44,
+          "right": 497.5625,
+          "width": 261.203125,
+          "x": 236.359375,
+          "y": 16
+        },
+        "padding": "0px"
+      }
+    ],
+    "scroll": {
+      "x": 0,
+      "y": 0
+    },
+    "title": {
+      "bottom": 255.375,
+      "height": 86.375,
+      "right": 1254.3125,
+      "width": 1119.8125,
+      "x": 134.5,
+      "y": 169
+    },
+    "viewport": {
+      "height": 1000,
+      "width": 1440
+    },
+    "workspace": {
+      "bottom": 1187.625,
+      "height": 1086.625,
+      "right": 1350.5,
+      "width": 1280,
+      "x": 70.5,
+      "y": 101
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged between captures",
+      "visual": 1
+    }
+  },
+  {
+    "stage": "before",
+    "route": "pemikiran",
+    "breadcrumb": "Perusahaan/Ruang/Pemikiran",
+    "breadcrumbBounds": {
+      "bottom": 145,
+      "height": 44,
+      "right": 343.9375,
+      "width": 273.4375,
+      "x": 70.5,
+      "y": 101
+    },
+    "capture": {
+      "bottom": 771.328125,
+      "height": 353.515625,
+      "right": 1230.5,
+      "width": 1040,
+      "x": 190.5,
+      "y": 417.8125
+    },
+    "company": "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas Operasional, dan Pertanyaan yang Belum Terjawab",
+    "content": {
+      "bottom": 2680.15625,
+      "height": 2262.34375,
+      "right": 1230.5,
+      "width": 1040,
+      "x": 190.5,
+      "y": 417.8125
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 44,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      },
+      {
+        "height": 44.390625,
+        "text": "Baca pemikiran lengkap · 2.944 karakter"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      }
+    ],
+    "divider": {
+      "bottom": 385.8125,
+      "height": 284.8125,
+      "right": 1350.5,
+      "width": 1280,
+      "x": 70.5,
+      "y": 101
+    },
+    "firstNavigationLink": {
+      "bottom": 356.8125,
+      "height": 44,
+      "right": 203.234375,
+      "width": 128.734375,
+      "x": 74.5,
+      "y": 312.8125
+    },
+    "fonts": "loaded",
+    "history": {
+      "bottom": 2680.15625,
+      "height": 1876.828125,
+      "right": 1230.5,
+      "width": 1040,
+      "x": 190.5,
+      "y": 803.328125
+    },
+    "identity": {
+      "bottom": 284.8125,
+      "height": 115.8125,
+      "right": 1350.5,
+      "width": 1280,
+      "x": 70.5,
+      "y": 169
+    },
+    "main": {
+      "bottom": 2752.15625,
+      "height": 2675.15625,
+      "right": 1350.5,
+      "width": 1280,
+      "x": 70.5,
+      "y": 77
+    },
+    "navOverflow": false,
+    "navigation": {
+      "bottom": 360.8125,
+      "height": 52,
+      "right": 1350.5,
+      "width": 1280,
+      "x": 70.5,
+      "y": 308.8125
+    },
+    "overflow": false,
+    "reading": [
+      {
+        "font": "17px",
+        "lineHeight": "29.75px",
+        "maxWidth": "725.887px",
+        "rect": {
+          "bottom": 2362.40625,
+          "height": 1428,
+          "right": 1101.375,
+          "width": 725.875,
+          "x": 375.5,
+          "y": 934.40625
+        }
+      },
+      {
+        "font": "17px",
+        "lineHeight": "29.75px",
+        "maxWidth": "725.887px",
+        "rect": {
+          "bottom": 2566.40625,
+          "height": 89.25,
+          "right": 1101.375,
+          "width": 725.875,
+          "x": 375.5,
+          "y": 2477.15625
+        }
+      }
+    ],
+    "refineIntro": null,
+    "refineOriginal": null,
+    "safeAreaRail": [
+      {
+        "bounds": {
+          "bottom": 60,
+          "height": 44,
+          "right": 497.5625,
+          "width": 261.203125,
+          "x": 236.359375,
+          "y": 16
+        },
+        "padding": "0px"
+      }
+    ],
+    "scroll": {
+      "x": 0,
+      "y": 0
+    },
+    "title": {
+      "bottom": 255.375,
+      "height": 86.375,
+      "right": 1254.3125,
+      "width": 1119.8125,
+      "x": 134.5,
+      "y": 169
+    },
+    "viewport": {
+      "height": 1000,
+      "width": 1440
+    },
+    "workspace": {
+      "bottom": 2680.15625,
+      "height": 2579.15625,
+      "right": 1350.5,
+      "width": 1280,
+      "x": 70.5,
+      "y": 101
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged between captures",
+      "visual": 1
+    }
+  },
+  {
+    "stage": "before",
+    "route": "refine",
+    "breadcrumb": "Perusahaan/Ruang/Refine",
+    "breadcrumbBounds": {
+      "bottom": 145,
+      "height": 44,
+      "right": 322.40625,
+      "width": 251.90625,
+      "x": 70.5,
+      "y": 101
+    },
+    "capture": null,
+    "company": "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas Operasional, dan Pertanyaan yang Belum Terjawab",
+    "content": {
+      "bottom": 461.8125,
+      "height": 44,
+      "right": 261.375,
+      "width": 190.875,
+      "x": 70.5,
+      "y": 417.8125
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Rapikan dengan AI"
+      },
+      {
+        "height": 44,
+        "text": "Ubah versi pilihan sebelum menerima"
+      },
+      {
+        "height": 44,
+        "text": "Terima versi pilihan"
+      },
+      {
+        "height": 44,
+        "text": "Tolak usulan"
+      },
+      {
+        "height": 44,
+        "text": "Asal versi & waktu keputusan"
+      }
+    ],
+    "divider": {
+      "bottom": 385.8125,
+      "height": 284.8125,
+      "right": 1350.5,
+      "width": 1280,
+      "x": 70.5,
+      "y": 101
+    },
+    "firstNavigationLink": {
+      "bottom": 356.8125,
+      "height": 44,
+      "right": 203.234375,
+      "width": 128.734375,
+      "x": 74.5,
+      "y": 312.8125
+    },
+    "fonts": "loaded",
+    "history": null,
+    "identity": {
+      "bottom": 284.8125,
+      "height": 115.8125,
+      "right": 1350.5,
+      "width": 1280,
+      "x": 70.5,
+      "y": 169
+    },
+    "main": {
+      "bottom": 1481.109375,
+      "height": 1404.109375,
+      "right": 1350.5,
+      "width": 1280,
+      "x": 70.5,
+      "y": 77
+    },
+    "navOverflow": false,
+    "navigation": {
+      "bottom": 360.8125,
+      "height": 52,
+      "right": 1350.5,
+      "width": 1280,
+      "x": 70.5,
+      "y": 308.8125
+    },
+    "overflow": false,
+    "reading": [
+      {
+        "font": "17px",
+        "lineHeight": "29.75px",
+        "maxWidth": "725.887px",
+        "rect": {
+          "bottom": 766.71875,
+          "height": 89.25,
+          "right": 796.375,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 677.46875
+        }
+      },
+      {
+        "font": "17px",
+        "lineHeight": "29.75px",
+        "maxWidth": "725.887px",
+        "rect": {
+          "bottom": 1209.109375,
+          "height": 89.25,
+          "right": 796.375,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 1119.859375
+        }
+      }
+    ],
+    "refineIntro": {
+      "bottom": 567.75,
+      "height": 105.9375,
+      "right": 998.5,
+      "width": 928,
+      "x": 70.5,
+      "y": 461.8125
+    },
+    "refineOriginal": {
+      "bottom": 791.71875,
+      "height": 191.96875,
+      "right": 998.5,
+      "width": 928,
+      "x": 70.5,
+      "y": 599.75
+    },
+    "safeAreaRail": [
+      {
+        "bounds": {
+          "bottom": 60,
+          "height": 44,
+          "right": 497.5625,
+          "width": 261.203125,
+          "x": 236.359375,
+          "y": 16
+        },
+        "padding": "0px"
+      }
+    ],
+    "scroll": {
+      "x": 0,
+      "y": 0
+    },
+    "title": {
+      "bottom": 255.375,
+      "height": 86.375,
+      "right": 1254.3125,
+      "width": 1119.8125,
+      "x": 134.5,
+      "y": 169
+    },
+    "viewport": {
+      "height": 1000,
+      "width": 1440
+    },
+    "workspace": {
+      "bottom": 1433.109375,
+      "height": 1332.109375,
+      "right": 1350.5,
+      "width": 1280,
+      "x": 70.5,
+      "y": 101
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged between captures",
+      "visual": 1
+    }
+  },
+  {
+    "stage": "before",
+    "route": "overview",
+    "breadcrumb": "Perusahaan/Overview",
+    "breadcrumbBounds": {
+      "bottom": 145,
+      "height": 44,
+      "right": 217.328125,
+      "width": 193.328125,
+      "x": 24,
+      "y": 101
+    },
+    "capture": null,
+    "company": "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas Operasional, dan Pertanyaan yang Belum Terjawab",
+    "content": {
+      "bottom": 1525.25,
+      "height": 977.875,
+      "right": 725,
+      "width": 701,
+      "x": 24,
+      "y": 547.375
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 86.375,
+        "text": "Tambahkan pemikiran"
+      },
+      {
+        "height": 86.375,
+        "text": "Semua pemikiran 2 tersimpan"
+      },
+      {
+        "height": 44.390625,
+        "text": "Kelola ruang · Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Hapus perusahaan permanen"
+      },
+      {
+        "height": 44,
+        "text": "Hapus permanen"
+      }
+    ],
+    "divider": {
+      "bottom": 515.375,
+      "height": 414.375,
+      "right": 725,
+      "width": 701,
+      "x": 24,
+      "y": 101
+    },
+    "firstNavigationLink": {
+      "bottom": 486.375,
+      "height": 44,
+      "right": 158.828125,
+      "width": 130.828125,
+      "x": 28,
+      "y": 442.375
+    },
+    "fonts": "loaded",
+    "history": null,
+    "identity": {
+      "bottom": 414.375,
+      "height": 245.375,
+      "right": 725,
+      "width": 701,
+      "x": 24,
+      "y": 169
+    },
+    "main": {
+      "bottom": 1682.640625,
+      "height": 1605.640625,
+      "right": 725,
+      "width": 701,
+      "x": 24,
+      "y": 77
+    },
+    "navOverflow": false,
+    "navigation": {
+      "bottom": 490.375,
+      "height": 52,
+      "right": 725,
+      "width": 701,
+      "x": 24,
+      "y": 438.375
+    },
+    "overflow": false,
+    "reading": [
+      {
+        "font": "17px",
+        "lineHeight": "29.75px",
+        "maxWidth": "725.887px",
+        "rect": {
+          "bottom": 840.359375,
+          "height": 178.5,
+          "right": 701,
+          "width": 651,
+          "x": 50,
+          "y": 661.859375
+        }
+      }
+    ],
+    "refineIntro": null,
+    "refineOriginal": null,
+    "safeAreaRail": [
+      {
+        "bounds": {
+          "bottom": 60,
+          "height": 44,
+          "right": 443.0625,
+          "width": 261.203125,
+          "x": 181.859375,
+          "y": 16
+        },
+        "padding": "0px"
+      }
+    ],
+    "scroll": {
+      "x": 0,
+      "y": 0
+    },
+    "title": {
+      "bottom": 384.9375,
+      "height": 215.9375,
+      "right": 628.8125,
+      "width": 540.8125,
+      "x": 88,
+      "y": 169
+    },
+    "viewport": {
+      "height": 1000,
+      "width": 768
+    },
+    "workspace": {
+      "bottom": 1634.640625,
+      "height": 1533.640625,
+      "right": 725,
+      "width": 701,
+      "x": 24,
+      "y": 101
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged between captures",
+      "visual": 1
+    }
+  },
+  {
+    "stage": "before",
+    "route": "pemikiran",
+    "breadcrumb": "Perusahaan/Ruang/Pemikiran",
+    "breadcrumbBounds": {
+      "bottom": 145,
+      "height": 44,
+      "right": 297.4375,
+      "width": 273.4375,
+      "x": 24,
+      "y": 101
+    },
+    "capture": {
+      "bottom": 900.890625,
+      "height": 353.515625,
+      "right": 725,
+      "width": 701,
+      "x": 24,
+      "y": 547.375
+    },
+    "company": "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas Operasional, dan Pertanyaan yang Belum Terjawab",
+    "content": {
+      "bottom": 3345.21875,
+      "height": 2797.84375,
+      "right": 725,
+      "width": 701,
+      "x": 24,
+      "y": 547.375
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 44,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      },
+      {
+        "height": 44.390625,
+        "text": "Baca pemikiran lengkap · 2.944 karakter"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      }
+    ],
+    "divider": {
+      "bottom": 515.375,
+      "height": 414.375,
+      "right": 725,
+      "width": 701,
+      "x": 24,
+      "y": 101
+    },
+    "firstNavigationLink": {
+      "bottom": 486.375,
+      "height": 44,
+      "right": 156.734375,
+      "width": 128.734375,
+      "x": 28,
+      "y": 442.375
+    },
+    "fonts": "loaded",
+    "history": {
+      "bottom": 3345.21875,
+      "height": 2412.328125,
+      "right": 725,
+      "width": 701,
+      "x": 24,
+      "y": 932.890625
+    },
+    "identity": {
+      "bottom": 414.375,
+      "height": 245.375,
+      "right": 725,
+      "width": 701,
+      "x": 24,
+      "y": 169
+    },
+    "main": {
+      "bottom": 3417.21875,
+      "height": 3340.21875,
+      "right": 725,
+      "width": 701,
+      "x": 24,
+      "y": 77
+    },
+    "navOverflow": false,
+    "navigation": {
+      "bottom": 490.375,
+      "height": 52,
+      "right": 725,
+      "width": 701,
+      "x": 24,
+      "y": 438.375
+    },
+    "overflow": false,
+    "reading": [
+      {
+        "font": "17px",
+        "lineHeight": "29.75px",
+        "maxWidth": "725.887px",
+        "rect": {
+          "bottom": 2997.71875,
+          "height": 1933.75,
+          "right": 709,
+          "width": 500,
+          "x": 209,
+          "y": 1063.96875
+        }
+      },
+      {
+        "font": "17px",
+        "lineHeight": "29.75px",
+        "maxWidth": "725.887px",
+        "rect": {
+          "bottom": 3231.46875,
+          "height": 119,
+          "right": 709,
+          "width": 500,
+          "x": 209,
+          "y": 3112.46875
+        }
+      }
+    ],
+    "refineIntro": null,
+    "refineOriginal": null,
+    "safeAreaRail": [
+      {
+        "bounds": {
+          "bottom": 60,
+          "height": 44,
+          "right": 443.0625,
+          "width": 261.203125,
+          "x": 181.859375,
+          "y": 16
+        },
+        "padding": "0px"
+      }
+    ],
+    "scroll": {
+      "x": 0,
+      "y": 0
+    },
+    "title": {
+      "bottom": 384.9375,
+      "height": 215.9375,
+      "right": 628.8125,
+      "width": 540.8125,
+      "x": 88,
+      "y": 169
+    },
+    "viewport": {
+      "height": 1000,
+      "width": 768
+    },
+    "workspace": {
+      "bottom": 3345.21875,
+      "height": 3244.21875,
+      "right": 725,
+      "width": 701,
+      "x": 24,
+      "y": 101
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged between captures",
+      "visual": 1
+    }
+  },
+  {
+    "stage": "before",
+    "route": "refine",
+    "breadcrumb": "Perusahaan/Ruang/Refine",
+    "breadcrumbBounds": {
+      "bottom": 145,
+      "height": 44,
+      "right": 275.90625,
+      "width": 251.90625,
+      "x": 24,
+      "y": 101
+    },
+    "capture": null,
+    "company": "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas Operasional, dan Pertanyaan yang Belum Terjawab",
+    "content": {
+      "bottom": 591.375,
+      "height": 44,
+      "right": 214.875,
+      "width": 190.875,
+      "x": 24,
+      "y": 547.375
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Rapikan dengan AI"
+      },
+      {
+        "height": 44,
+        "text": "Ubah versi pilihan sebelum menerima"
+      },
+      {
+        "height": 44,
+        "text": "Terima versi pilihan"
+      },
+      {
+        "height": 44,
+        "text": "Tolak usulan"
+      },
+      {
+        "height": 44,
+        "text": "Asal versi & waktu keputusan"
+      }
+    ],
+    "divider": {
+      "bottom": 515.375,
+      "height": 414.375,
+      "right": 725,
+      "width": 701,
+      "x": 24,
+      "y": 101
+    },
+    "firstNavigationLink": {
+      "bottom": 486.375,
+      "height": 44,
+      "right": 156.734375,
+      "width": 128.734375,
+      "x": 28,
+      "y": 442.375
+    },
+    "fonts": "loaded",
+    "history": null,
+    "identity": {
+      "bottom": 414.375,
+      "height": 245.375,
+      "right": 725,
+      "width": 701,
+      "x": 24,
+      "y": 169
+    },
+    "main": {
+      "bottom": 1610.671875,
+      "height": 1533.671875,
+      "right": 725,
+      "width": 701,
+      "x": 24,
+      "y": 77
+    },
+    "navOverflow": false,
+    "navigation": {
+      "bottom": 490.375,
+      "height": 52,
+      "right": 725,
+      "width": 701,
+      "x": 24,
+      "y": 438.375
+    },
+    "overflow": false,
+    "reading": [
+      {
+        "font": "17px",
+        "lineHeight": "29.75px",
+        "maxWidth": "725.887px",
+        "rect": {
+          "bottom": 896.28125,
+          "height": 89.25,
+          "right": 725,
+          "width": 701,
+          "x": 24,
+          "y": 807.03125
+        }
+      },
+      {
+        "font": "17px",
+        "lineHeight": "29.75px",
+        "maxWidth": "725.887px",
+        "rect": {
+          "bottom": 1338.671875,
+          "height": 89.25,
+          "right": 725,
+          "width": 701,
+          "x": 24,
+          "y": 1249.421875
+        }
+      }
+    ],
+    "refineIntro": {
+      "bottom": 697.3125,
+      "height": 105.9375,
+      "right": 725,
+      "width": 701,
+      "x": 24,
+      "y": 591.375
+    },
+    "refineOriginal": {
+      "bottom": 921.28125,
+      "height": 191.96875,
+      "right": 725,
+      "width": 701,
+      "x": 24,
+      "y": 729.3125
+    },
+    "safeAreaRail": [
+      {
+        "bounds": {
+          "bottom": 60,
+          "height": 44,
+          "right": 443.0625,
+          "width": 261.203125,
+          "x": 181.859375,
+          "y": 16
+        },
+        "padding": "0px"
+      }
+    ],
+    "scroll": {
+      "x": 0,
+      "y": 0
+    },
+    "title": {
+      "bottom": 384.9375,
+      "height": 215.9375,
+      "right": 628.8125,
+      "width": 540.8125,
+      "x": 88,
+      "y": 169
+    },
+    "viewport": {
+      "height": 1000,
+      "width": 768
+    },
+    "workspace": {
+      "bottom": 1562.671875,
+      "height": 1461.671875,
+      "right": 725,
+      "width": 701,
+      "x": 24,
+      "y": 101
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged between captures",
+      "visual": 1
+    }
+  },
+  {
+    "stage": "before",
+    "route": "overview",
+    "breadcrumb": "Perusahaan/Overview",
+    "breadcrumbBounds": {
+      "bottom": 125,
+      "height": 44,
+      "right": 209.328125,
+      "width": 193.328125,
+      "x": 16,
+      "y": 81
+    },
+    "capture": null,
+    "company": "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas Operasional, dan Pertanyaan yang Belum Terjawab",
+    "content": {
+      "bottom": 1650.375,
+      "height": 1101.375,
+      "right": 355,
+      "width": 339,
+      "x": 16,
+      "y": 549
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 72,
+        "text": "Tambahkan pemikiran"
+      },
+      {
+        "height": 86.375,
+        "text": "Semua pemikiran 2 tersimpan"
+      },
+      {
+        "height": 44.390625,
+        "text": "Kelola ruang · Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Hapus perusahaan permanen"
+      },
+      {
+        "height": 44,
+        "text": "Hapus permanen"
+      }
+    ],
+    "divider": {
+      "bottom": 525,
+      "height": 444,
+      "right": 355,
+      "width": 339,
+      "x": 16,
+      "y": 81
+    },
+    "firstNavigationLink": {
+      "bottom": 496,
+      "height": 44,
+      "right": 130.828125,
+      "width": 110.828125,
+      "x": 20,
+      "y": 452
+    },
+    "fonts": "loaded",
+    "history": null,
+    "identity": {
+      "bottom": 424,
+      "height": 283,
+      "right": 355,
+      "width": 339,
+      "x": 16,
+      "y": 141
+    },
+    "main": {
+      "bottom": 1807.765625,
+      "height": 1742.765625,
+      "right": 355,
+      "width": 339,
+      "x": 16,
+      "y": 65
+    },
+    "navOverflow": false,
+    "navigation": {
+      "bottom": 500,
+      "height": 52,
+      "right": 355,
+      "width": 339,
+      "x": 16,
+      "y": 448
+    },
+    "overflow": false,
+    "reading": [
+      {
+        "font": "16px",
+        "lineHeight": "28px",
+        "maxWidth": "684.25px",
+        "rect": {
+          "bottom": 850.234375,
+          "height": 168,
+          "right": 339,
+          "width": 305,
+          "x": 34,
+          "y": 682.234375
+        }
+      }
+    ],
+    "refineIntro": null,
+    "refineOriginal": null,
+    "safeAreaRail": [
+      {
+        "bounds": {
+          "bottom": 1000,
+          "height": 72.4375,
+          "right": 371,
+          "width": 371,
+          "x": 0,
+          "y": 927.5625
+        },
+        "padding": "8px 16px"
+      }
+    ],
+    "scroll": {
+      "x": 0,
+      "y": 0
+    },
+    "title": {
+      "bottom": 394.5625,
+      "height": 201.5625,
+      "right": 355,
+      "width": 339,
+      "x": 16,
+      "y": 193
+    },
+    "viewport": {
+      "height": 1000,
+      "width": 390
+    },
+    "workspace": {
+      "bottom": 1759.765625,
+      "height": 1678.765625,
+      "right": 355,
+      "width": 339,
+      "x": 16,
+      "y": 81
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged between captures",
+      "visual": 1
+    }
+  },
+  {
+    "stage": "before",
+    "route": "pemikiran",
+    "breadcrumb": "Perusahaan/Ruang/Pemikiran",
+    "breadcrumbBounds": {
+      "bottom": 154.4375,
+      "height": 73.4375,
+      "right": 225.515625,
+      "width": 209.515625,
+      "x": 16,
+      "y": 81
+    },
+    "capture": {
+      "bottom": 956.765625,
+      "height": 378.328125,
+      "right": 355,
+      "width": 339,
+      "x": 16,
+      "y": 578.4375
+    },
+    "company": "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas Operasional, dan Pertanyaan yang Belum Terjawab",
+    "content": {
+      "bottom": 4491.578125,
+      "height": 3913.140625,
+      "right": 355,
+      "width": 339,
+      "x": 16,
+      "y": 578.4375
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 60,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      },
+      {
+        "height": 70.78125,
+        "text": "Baca pemikiran lengkap · 2.944 karakter"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      }
+    ],
+    "divider": {
+      "bottom": 554.4375,
+      "height": 473.4375,
+      "right": 355,
+      "width": 339,
+      "x": 16,
+      "y": 81
+    },
+    "firstNavigationLink": {
+      "bottom": 525.4375,
+      "height": 44,
+      "right": 128.734375,
+      "width": 108.734375,
+      "x": 20,
+      "y": 481.4375
+    },
+    "fonts": "loaded",
+    "history": {
+      "bottom": 4491.578125,
+      "height": 3502.8125,
+      "right": 355,
+      "width": 339,
+      "x": 16,
+      "y": 988.765625
+    },
+    "identity": {
+      "bottom": 453.4375,
+      "height": 283,
+      "right": 355,
+      "width": 339,
+      "x": 16,
+      "y": 170.4375
+    },
+    "main": {
+      "bottom": 4563.578125,
+      "height": 4498.578125,
+      "right": 355,
+      "width": 339,
+      "x": 16,
+      "y": 65
+    },
+    "navOverflow": false,
+    "navigation": {
+      "bottom": 529.4375,
+      "height": 52,
+      "right": 355,
+      "width": 339,
+      "x": 16,
+      "y": 477.4375
+    },
+    "overflow": false,
+    "reading": [
+      {
+        "font": "16px",
+        "lineHeight": "28px",
+        "maxWidth": "684.25px",
+        "rect": {
+          "bottom": 3931.78125,
+          "height": 2716,
+          "right": 347,
+          "width": 323,
+          "x": 24,
+          "y": 1215.78125
+        }
+      },
+      {
+        "font": "16px",
+        "lineHeight": "28px",
+        "maxWidth": "684.25px",
+        "rect": {
+          "bottom": 4331.578125,
+          "height": 196,
+          "right": 347,
+          "width": 323,
+          "x": 24,
+          "y": 4135.578125
+        }
+      }
+    ],
+    "refineIntro": null,
+    "refineOriginal": null,
+    "safeAreaRail": [
+      {
+        "bounds": {
+          "bottom": 1000,
+          "height": 72.4375,
+          "right": 371,
+          "width": 371,
+          "x": 0,
+          "y": 927.5625
+        },
+        "padding": "8px 16px"
+      }
+    ],
+    "scroll": {
+      "x": 0,
+      "y": 0
+    },
+    "title": {
+      "bottom": 424,
+      "height": 201.5625,
+      "right": 355,
+      "width": 339,
+      "x": 16,
+      "y": 222.4375
+    },
+    "viewport": {
+      "height": 1000,
+      "width": 390
+    },
+    "workspace": {
+      "bottom": 4491.578125,
+      "height": 4410.578125,
+      "right": 355,
+      "width": 339,
+      "x": 16,
+      "y": 81
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged between captures",
+      "visual": 1
+    }
+  },
+  {
+    "stage": "before",
+    "route": "refine",
+    "breadcrumb": "Perusahaan/Ruang/Refine",
+    "breadcrumbBounds": {
+      "bottom": 154.4375,
+      "height": 73.4375,
+      "right": 225.515625,
+      "width": 209.515625,
+      "x": 16,
+      "y": 81
+    },
+    "capture": null,
+    "company": "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas Operasional, dan Pertanyaan yang Belum Terjawab",
+    "content": {
+      "bottom": 622.4375,
+      "height": 44,
+      "right": 206.875,
+      "width": 190.875,
+      "x": 16,
+      "y": 578.4375
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Rapikan dengan AI"
+      },
+      {
+        "height": 44,
+        "text": "Ubah versi pilihan sebelum menerima"
+      },
+      {
+        "height": 44,
+        "text": "Terima versi pilihan"
+      },
+      {
+        "height": 44,
+        "text": "Tolak usulan"
+      },
+      {
+        "height": 44,
+        "text": "Asal versi & waktu keputusan"
+      }
+    ],
+    "divider": {
+      "bottom": 554.4375,
+      "height": 473.4375,
+      "right": 355,
+      "width": 339,
+      "x": 16,
+      "y": 81
+    },
+    "firstNavigationLink": {
+      "bottom": 525.4375,
+      "height": 44,
+      "right": 128.734375,
+      "width": 108.734375,
+      "x": 20,
+      "y": 481.4375
+    },
+    "fonts": "loaded",
+    "history": null,
+    "identity": {
+      "bottom": 453.4375,
+      "height": 283,
+      "right": 355,
+      "width": 339,
+      "x": 16,
+      "y": 170.4375
+    },
+    "main": {
+      "bottom": 1963.59375,
+      "height": 1898.59375,
+      "right": 355,
+      "width": 339,
+      "x": 16,
+      "y": 65
+    },
+    "navOverflow": false,
+    "navigation": {
+      "bottom": 529.4375,
+      "height": 52,
+      "right": 355,
+      "width": 339,
+      "x": 16,
+      "y": 477.4375
+    },
+    "overflow": false,
+    "reading": [
+      {
+        "font": "16px",
+        "lineHeight": "28px",
+        "maxWidth": "684.25px",
+        "rect": {
+          "bottom": 1028.15625,
+          "height": 168,
+          "right": 355,
+          "width": 339,
+          "x": 16,
+          "y": 860.15625
+        }
+      },
+      {
+        "font": "16px",
+        "lineHeight": "28px",
+        "maxWidth": "684.25px",
+        "rect": {
+          "bottom": 1639.59375,
+          "height": 168,
+          "right": 355,
+          "width": 339,
+          "x": 16,
+          "y": 1471.59375
+        }
+      }
+    ],
+    "refineIntro": {
+      "bottom": 748.4375,
+      "height": 126,
+      "right": 355,
+      "width": 339,
+      "x": 16,
+      "y": 622.4375
+    },
+    "refineOriginal": {
+      "bottom": 1053.15625,
+      "height": 272.71875,
+      "right": 355,
+      "width": 339,
+      "x": 16,
+      "y": 780.4375
+    },
+    "safeAreaRail": [
+      {
+        "bounds": {
+          "bottom": 1000,
+          "height": 72.4375,
+          "right": 371,
+          "width": 371,
+          "x": 0,
+          "y": 927.5625
+        },
+        "padding": "8px 16px"
+      }
+    ],
+    "scroll": {
+      "x": 0,
+      "y": 0
+    },
+    "title": {
+      "bottom": 424,
+      "height": 201.5625,
+      "right": 355,
+      "width": 339,
+      "x": 16,
+      "y": 222.4375
+    },
+    "viewport": {
+      "height": 1000,
+      "width": 390
+    },
+    "workspace": {
+      "bottom": 1915.59375,
+      "height": 1834.59375,
+      "right": 355,
+      "width": 339,
+      "x": 16,
+      "y": 81
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged between captures",
+      "visual": 1
+    }
+  },
+  {
+    "stage": "before",
+    "route": "overview",
+    "breadcrumb": "Perusahaan/Overview",
+    "breadcrumbBounds": {
+      "bottom": 154.4375,
+      "height": 73.4375,
+      "right": 155.515625,
+      "width": 139.515625,
+      "x": 16,
+      "y": 81
+    },
+    "capture": null,
+    "company": "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas Operasional, dan Pertanyaan yang Belum Terjawab",
+    "content": {
+      "bottom": 1782.5625,
+      "height": 1170.53125,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 612.03125
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 86.78125,
+        "text": "Tambahkan pemikiran"
+      },
+      {
+        "height": 86.375,
+        "text": "Semua pemikiran 2 tersimpan"
+      },
+      {
+        "height": 44.390625,
+        "text": "Kelola ruang · Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Hapus perusahaan permanen"
+      },
+      {
+        "height": 44,
+        "text": "Hapus permanen"
+      }
+    ],
+    "divider": {
+      "bottom": 588.03125,
+      "height": 507.03125,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 81
+    },
+    "firstNavigationLink": {
+      "bottom": 559.03125,
+      "height": 44,
+      "right": 130.828125,
+      "width": 110.828125,
+      "x": 20,
+      "y": 515.03125
+    },
+    "fonts": "loaded",
+    "history": null,
+    "identity": {
+      "bottom": 487.03125,
+      "height": 316.59375,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 170.4375
+    },
+    "main": {
+      "bottom": 1939.953125,
+      "height": 1874.953125,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 65
+    },
+    "navOverflow": false,
+    "navigation": {
+      "bottom": 563.03125,
+      "height": 52,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 511.03125
+    },
+    "overflow": false,
+    "reading": [
+      {
+        "font": "16px",
+        "lineHeight": "28px",
+        "maxWidth": "684.25px",
+        "rect": {
+          "bottom": 913.265625,
+          "height": 168,
+          "right": 269,
+          "width": 235,
+          "x": 34,
+          "y": 745.265625
+        }
+      }
+    ],
+    "refineIntro": null,
+    "refineOriginal": null,
+    "safeAreaRail": [
+      {
+        "bounds": {
+          "bottom": 1000,
+          "height": 72.4375,
+          "right": 301,
+          "width": 301,
+          "x": 0,
+          "y": 927.5625
+        },
+        "padding": "8px 16px"
+      }
+    ],
+    "scroll": {
+      "x": 0,
+      "y": 0
+    },
+    "title": {
+      "bottom": 457.59375,
+      "height": 235.15625,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 222.4375
+    },
+    "viewport": {
+      "height": 1000,
+      "width": 320
+    },
+    "workspace": {
+      "bottom": 1891.953125,
+      "height": 1810.953125,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 81
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged between captures",
+      "visual": 1
+    }
+  },
+  {
+    "stage": "before",
+    "route": "pemikiran",
+    "breadcrumb": "Perusahaan/Ruang/Pemikiran",
+    "breadcrumbBounds": {
+      "bottom": 177,
+      "height": 96,
+      "right": 155.515625,
+      "width": 139.515625,
+      "x": 16,
+      "y": 81
+    },
+    "capture": {
+      "bottom": 1068.421875,
+      "height": 433.828125,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 634.59375
+    },
+    "company": "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas Operasional, dan Pertanyaan yang Belum Terjawab",
+    "content": {
+      "bottom": 5135.234375,
+      "height": 4500.640625,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 634.59375
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 44,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      },
+      {
+        "height": 70.78125,
+        "text": "Baca pemikiran lengkap · 2.944 karakter"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      }
+    ],
+    "divider": {
+      "bottom": 610.59375,
+      "height": 529.59375,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 81
+    },
+    "firstNavigationLink": {
+      "bottom": 581.59375,
+      "height": 44,
+      "right": 128.734375,
+      "width": 108.734375,
+      "x": 20,
+      "y": 537.59375
+    },
+    "fonts": "loaded",
+    "history": {
+      "bottom": 5135.234375,
+      "height": 4034.8125,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 1100.421875
+    },
+    "identity": {
+      "bottom": 509.59375,
+      "height": 316.59375,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 193
+    },
+    "main": {
+      "bottom": 5207.234375,
+      "height": 5142.234375,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 65
+    },
+    "navOverflow": false,
+    "navigation": {
+      "bottom": 585.59375,
+      "height": 52,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 533.59375
+    },
+    "overflow": false,
+    "reading": [
+      {
+        "font": "16px",
+        "lineHeight": "28px",
+        "maxWidth": "684.25px",
+        "rect": {
+          "bottom": 4547.4375,
+          "height": 3220,
+          "right": 277,
+          "width": 253,
+          "x": 24,
+          "y": 1327.4375
+        }
+      },
+      {
+        "font": "16px",
+        "lineHeight": "28px",
+        "maxWidth": "684.25px",
+        "rect": {
+          "bottom": 4975.234375,
+          "height": 224,
+          "right": 277,
+          "width": 253,
+          "x": 24,
+          "y": 4751.234375
+        }
+      }
+    ],
+    "refineIntro": null,
+    "refineOriginal": null,
+    "safeAreaRail": [
+      {
+        "bounds": {
+          "bottom": 1000,
+          "height": 72.4375,
+          "right": 301,
+          "width": 301,
+          "x": 0,
+          "y": 927.5625
+        },
+        "padding": "8px 16px"
+      }
+    ],
+    "scroll": {
+      "x": 0,
+      "y": 0
+    },
+    "title": {
+      "bottom": 480.15625,
+      "height": 235.15625,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 245
+    },
+    "viewport": {
+      "height": 1000,
+      "width": 320
+    },
+    "workspace": {
+      "bottom": 5135.234375,
+      "height": 5054.234375,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 81
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged between captures",
+      "visual": 1
+    }
+  },
+  {
+    "stage": "before",
+    "route": "refine",
+    "breadcrumb": "Perusahaan/Ruang/Refine",
+    "breadcrumbBounds": {
+      "bottom": 177,
+      "height": 96,
+      "right": 155.515625,
+      "width": 139.515625,
+      "x": 16,
+      "y": 81
+    },
+    "capture": null,
+    "company": "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas Operasional, dan Pertanyaan yang Belum Terjawab",
+    "content": {
+      "bottom": 678.59375,
+      "height": 44,
+      "right": 206.875,
+      "width": 190.875,
+      "x": 16,
+      "y": 634.59375
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Rapikan dengan AI"
+      },
+      {
+        "height": 44,
+        "text": "Ubah versi pilihan sebelum menerima"
+      },
+      {
+        "height": 44,
+        "text": "Terima versi pilihan"
+      },
+      {
+        "height": 44,
+        "text": "Tolak usulan"
+      },
+      {
+        "height": 44,
+        "text": "Asal versi & waktu keputusan"
+      }
+    ],
+    "divider": {
+      "bottom": 610.59375,
+      "height": 529.59375,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 81
+    },
+    "firstNavigationLink": {
+      "bottom": 581.59375,
+      "height": 44,
+      "right": 128.734375,
+      "width": 108.734375,
+      "x": 20,
+      "y": 537.59375
+    },
+    "fonts": "loaded",
+    "history": null,
+    "identity": {
+      "bottom": 509.59375,
+      "height": 316.59375,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 193
+    },
+    "main": {
+      "bottom": 2173.59375,
+      "height": 2108.59375,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 65
+    },
+    "navOverflow": false,
+    "navigation": {
+      "bottom": 585.59375,
+      "height": 52,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 533.59375
+    },
+    "overflow": false,
+    "reading": [
+      {
+        "font": "16px",
+        "lineHeight": "28px",
+        "maxWidth": "684.25px",
+        "rect": {
+          "bottom": 1163.8125,
+          "height": 196,
+          "right": 285,
+          "width": 269,
+          "x": 16,
+          "y": 967.8125
+        }
+      },
+      {
+        "font": "16px",
+        "lineHeight": "28px",
+        "maxWidth": "684.25px",
+        "rect": {
+          "bottom": 1849.59375,
+          "height": 196,
+          "right": 285,
+          "width": 269,
+          "x": 16,
+          "y": 1653.59375
+        }
+      }
+    ],
+    "refineIntro": {
+      "bottom": 856.09375,
+      "height": 177.5,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 678.59375
+    },
+    "refineOriginal": {
+      "bottom": 1188.8125,
+      "height": 300.71875,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 888.09375
+    },
+    "safeAreaRail": [
+      {
+        "bounds": {
+          "bottom": 1000,
+          "height": 72.4375,
+          "right": 301,
+          "width": 301,
+          "x": 0,
+          "y": 927.5625
+        },
+        "padding": "8px 16px"
+      }
+    ],
+    "scroll": {
+      "x": 0,
+      "y": 0
+    },
+    "title": {
+      "bottom": 480.15625,
+      "height": 235.15625,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 245
+    },
+    "viewport": {
+      "height": 1000,
+      "width": 320
+    },
+    "workspace": {
+      "bottom": 2125.59375,
+      "height": 2044.59375,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 81
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged between captures",
+      "visual": 1
+    }
+  }
+]

@@ -1,22 +1,25 @@
 "use client";
 import { useActionState } from "react";
 import { deleteRecordAction } from "./actions";
+import { Icon } from "@/components/ui/icon";
 
 export function DeleteForm({
   companyId,
   thoughtId,
   companyName,
   hasThoughts = false,
+  disclosureLabel,
 }: {
   companyId: string;
   thoughtId?: string;
   companyName?: string;
   hasThoughts?: boolean;
+  disclosureLabel?: string;
 }) {
   const [state, action, pending] = useActionState(
     deleteRecordAction,
     { error: null },
-    `/companies/${companyId}`,
+    `/companies/${companyId}${thoughtId ? "/thoughts" : ""}`,
   );
   const kind = thoughtId ? "thought" : "company";
   return (
@@ -25,7 +28,9 @@ export function DeleteForm({
       open={state.error ? true : undefined}
     >
       <summary>
-        {thoughtId ? "Hapus pemikiran" : "Hapus perusahaan permanen"}
+        {disclosureLabel && <Icon name="more" size="small" />}
+        {disclosureLabel ??
+          (thoughtId ? "Hapus pemikiran" : "Hapus perusahaan permanen")}
       </summary>
       <form
         id={thoughtId ? `delete-${thoughtId}` : "delete-company-form"}

@@ -217,6 +217,8 @@ test(
             "/companies/new",
             `/companies/${a.id}`,
             `/companies/${a.id}/edit`,
+            `/companies/${a.id}/thoughts`,
+            `/companies/${a.id}/thoughts`,
           ])
             assert.equal((await http.request(path)).status, 307);
           const loginForm = serverActionForm(
@@ -229,7 +231,7 @@ test(
           assert.ok(empty.includes("Mulai dari satu perusahaan."));
           assert.ok(!empty.includes(b.name));
           for (const id of [b.id, randomUUID(), "invalid-id"]) {
-            for (const suffix of ["", "/edit"]) {
+            for (const suffix of ["", "/edit", "/thoughts"]) {
               const missing = await (
                 await http.request(`/companies/${id}${suffix}`)
               ).text();
@@ -323,7 +325,25 @@ test(
           archiveForm.set("confirm_archive", "yes");
           assert.equal((await http.request(path, archiveForm)).status, 303);
           const archivedPage = await (await http.request(path)).text();
-          assert.ok(archivedPage.includes("Perusahaan ini diarsipkan."));
+          assert.ok(
+            archivedPage.includes(
+              "Capture dan generasi AI baru tidak tersedia.",
+            ),
+          );
+          assert.ok(
+            archivedPage.includes(
+              "Tidak ada pemikiran tersimpan di ruang arsip ini.",
+            ),
+          );
+          const archivedThoughts = await (
+            await http.request(`${path}/thoughts`)
+          ).text();
+          assert.ok(
+            archivedThoughts.includes(
+              "Tidak ada pemikiran tersimpan di ruang arsip ini.",
+            ),
+          );
+          assert.ok(!archivedThoughts.includes('id="thought-form"'));
           assert.ok(
             !(await (await http.request("/companies")).text()).includes(
               "HTTP corrected company",

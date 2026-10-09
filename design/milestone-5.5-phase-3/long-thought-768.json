@@ -1,0 +1,129 @@
+{
+  "label": "long-thought",
+  "targetWidth": 768,
+  "active": ["Pemikiran"],
+  "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+  "controls": [
+    {
+      "height": 44,
+      "text": "Perusahaan"
+    },
+    {
+      "height": 44,
+      "text": "Ruang"
+    },
+    {
+      "height": 44,
+      "text": "Kelola"
+    },
+    {
+      "height": 44,
+      "text": "Ubah identitas"
+    },
+    {
+      "height": 44,
+      "text": "Arsip & hapus"
+    },
+    {
+      "height": 44,
+      "text": "Overview"
+    },
+    {
+      "height": 44,
+      "text": "Pemikiran"
+    },
+    {
+      "height": 44,
+      "text": "Buang draf"
+    },
+    {
+      "height": 44,
+      "text": "Simpan pemikiran ↗"
+    },
+    {
+      "height": 44,
+      "text": "Tentang draf di browser ini"
+    },
+    {
+      "height": 44,
+      "text": "Tinjau di Refine"
+    },
+    {
+      "height": 44,
+      "text": "Hapus pemikiran"
+    },
+    {
+      "height": 81,
+      "text": "Hapus permanen"
+    },
+    {
+      "height": 44.390625,
+      "text": "Baca pemikiran lengkap · 2.944 karakter"
+    },
+    {
+      "height": 44,
+      "text": "Tinjau di Refine"
+    },
+    {
+      "height": 44,
+      "text": "Hapus pemikiran"
+    },
+    {
+      "height": 81,
+      "text": "Hapus permanen"
+    },
+    {
+      "height": 44,
+      "text": "Tinjau di Refine"
+    },
+    {
+      "height": 44,
+      "text": "Hapus pemikiran"
+    },
+    {
+      "height": 81,
+      "text": "Hapus permanen"
+    }
+  ],
+  "dpr": 0.800000011920929,
+  "fonts": "loaded",
+  "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+  "height": 1000,
+  "inputs": [
+    {
+      "fontSize": "16px",
+      "name": "raw_content"
+    },
+    {
+      "fontSize": "16px",
+      "name": "confirm_delete"
+    },
+    {
+      "fontSize": "16px",
+      "name": "confirm_delete"
+    },
+    {
+      "fontSize": "16px",
+      "name": "confirm_delete"
+    }
+  ],
+  "localNavigation": [
+    {
+      "height": 44,
+      "right": 156.734375,
+      "text": "Overview",
+      "x": 28
+    },
+    {
+      "height": 44,
+      "right": 298.40625,
+      "text": "Pemikiran",
+      "x": 164.734375
+    }
+  ],
+  "scrollWidth": 749,
+  "sidebars": 0,
+  "url": "/companies/47b74c9a-b790-4cc4-82f2-39a246f871c3/thoughts?focus=20a4b696-7c4c-492b-bd65-51234a603e02#thought-20a4b696-7c4c-492b-bd65-51234a603e02",
+  "width": 768,
+  "zoom": "1"
+}

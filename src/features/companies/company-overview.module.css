@@ -1,0 +1,206 @@
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: var(--space-8);
+  align-items: start;
+}
+.single {
+  min-width: 0;
+}
+.primary {
+  min-width: 0;
+}
+.heading {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  margin-bottom: var(--space-4);
+}
+.heading h2 {
+  flex: 1;
+  margin: 0;
+  font-size: var(--type-section);
+}
+.heading time {
+  color: var(--text-secondary);
+  font-size: var(--type-meta);
+}
+.latest {
+  padding: var(--space-6);
+  background: var(--surface-working);
+  border-left: 2px solid var(--accent);
+  border-radius: var(--radius-control);
+}
+.original {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.latestExcerpt {
+  font-size: var(--type-reading);
+  line-height: 1.75;
+  max-width: var(--width-reading);
+  margin-block: var(--space-4) var(--space-6);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  overflow: hidden;
+}
+.entrances {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-block: var(--space-6) var(--space-8);
+  scroll-margin-top: var(--space-8);
+}
+.entrance {
+  display: flex;
+  flex: 1 1 260px;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: 72px;
+  padding: var(--space-4);
+  border: 1px solid var(--control-border);
+  border-radius: var(--radius-control);
+  background: var(--surface-context);
+  text-decoration: none;
+}
+.entrance > span {
+  flex: 1;
+  font-weight: 500;
+}
+.entrance small {
+  display: block;
+  color: var(--text-secondary);
+  font-weight: 400;
+  margin-top: var(--space-1);
+}
+.entrance:hover,
+.recent a:hover {
+  background: var(--surface-interactive);
+  color: var(--accent);
+}
+.recent {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.recent li {
+  border-top: 1px solid var(--divider);
+  scroll-margin-top: var(--space-8);
+}
+.recent a {
+  display: grid;
+  grid-template-columns: 135px minmax(0, 1fr) 20px;
+  gap: var(--space-4);
+  align-items: center;
+  padding: var(--space-4);
+  min-height: 72px;
+  text-decoration: none;
+  border-radius: var(--radius-control);
+}
+.recent time {
+  color: var(--text-secondary);
+  font-size: var(--type-meta);
+}
+.recentExcerpt {
+  line-height: 1.7;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.context {
+  padding: var(--space-6);
+  background: var(--surface-context);
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-control);
+  min-width: 0;
+}
+.context h2 {
+  font-size: var(--type-section);
+  margin-bottom: var(--space-4);
+}
+.note {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.7;
+}
+.count {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0;
+  color: var(--text-secondary);
+}
+.context section + .count {
+  padding-top: var(--space-6);
+  margin-top: var(--space-6);
+  border-top: 1px solid var(--divider);
+}
+.count strong {
+  color: var(--text-primary);
+}
+.empty {
+  padding: var(--space-6);
+  border: 1px dashed var(--control-border);
+  border-radius: var(--radius-control);
+}
+.empty > svg {
+  color: var(--accent);
+  margin-bottom: var(--space-4);
+}
+.empty h3 {
+  margin-bottom: var(--space-2);
+}
+.empty p {
+  margin: 0;
+  color: var(--text-secondary);
+}
+.management {
+  border-top: 1px solid var(--divider);
+  margin-top: var(--space-8);
+  padding-block: var(--space-4);
+  scroll-margin-top: var(--space-8);
+}
+.management > summary {
+  width: fit-content;
+  min-height: var(--target);
+  border: 1px solid var(--control-border);
+  border-radius: var(--radius-control);
+  background: var(--surface-context);
+  padding: var(--space-2) var(--space-4);
+}
+.managementBody {
+  padding-block: var(--space-4);
+  max-width: 680px;
+}
+.managementBody :global(.archive-disclosure) {
+  margin: 0;
+}
+@media (max-width: 950px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 700px) {
+  .latest,
+  .context,
+  .empty {
+    padding: var(--space-4);
+  }
+  .recent a {
+    grid-template-columns: minmax(0, 1fr) 20px;
+    padding-inline: var(--space-2);
+  }
+  .recent time {
+    grid-column: 1 / -1;
+  }
+  .heading time {
+    flex-basis: 100%;
+  }
+  .entrances {
+    gap: var(--space-2);
+  }
+}

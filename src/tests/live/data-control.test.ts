@@ -332,7 +332,8 @@ test(
             owner,
             metadata("HTTP confirmation"),
           );
-          const path = `/companies/${httpCompany.id}`;
+          const root = `/companies/${httpCompany.id}`;
+          const path = `${root}/thoughts`;
           const form = serverActionForm(
             await (await web.request(path)).text(),
             "thought-form",
@@ -379,7 +380,7 @@ test(
           assert.ok(
             [303, 307].includes((await web.request(path, deletion)).status),
           );
-          const emptyPage = await (await web.request(path)).text();
+          const emptyPage = await (await web.request(root)).text();
           const companyDelete = serverActionForm(
             emptyPage,
             "delete-company-form",
@@ -387,7 +388,7 @@ test(
           companyDelete.set("confirm_delete", "yes");
           assert.ok(
             [303, 307].includes(
-              (await web.request(path, companyDelete)).status,
+              (await web.request(root, companyDelete)).status,
             ),
           );
         },

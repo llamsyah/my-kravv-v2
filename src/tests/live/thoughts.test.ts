@@ -9,6 +9,7 @@ import {
   createThought,
   getCompanyThoughts,
   getRecentThoughts,
+  getCompanyOverviewThoughts,
 } from "../../server/db/thoughts.ts";
 import {
   readThoughtCursor,
@@ -296,6 +297,7 @@ test(
                 user_id: aId,
                 company_id: second.id,
                 raw_content: `Intentional thought ${i}`,
+                capture_operation_id: randomUUID(),
               })),
             )
             .select("id,created_at");
@@ -323,6 +325,112 @@ test(
         },
       );
       await t.test(
+        "Overview and Pemikiran preserve legacy dispatch, independent targets, and owned boundaries",
+        async () => {
+          const http = createLocalHttpSession();
+          const login = serverActionForm(
+            await (await http.request("/auth")).text(),
+          );
+          login.set("email", accounts[0].email);
+          login.set("password", accounts[0].password);
+          assert.equal((await http.request("/auth", login)).status, 303);
+          const root = `/companies/${second.id}`;
+          const path = `${root}/thoughts`;
+          const first = await getCompanyThoughts(clients[0], aId, second.id);
+          const cursor = thoughtCursor(first.thoughts.at(-1)!);
+          const target = first.thoughts[0];
+          const overview = await (await http.request(root)).text();
+          assert.ok(overview.includes("Pemikiran terakhir"));
+          assert.ok(!overview.includes('id="thought-form"'));
+          assert.ok(overview.includes('id="data-control"'));
+          const previews = await getCompanyOverviewThoughts(
+            clients[0],
+            aId,
+            second.id,
+          );
+          assert.deepEqual(
+            previews.map((row) => row.id),
+            first.thoughts.slice(0, 4).map((row) => row.id),
+          );
+          await assert.rejects(
+            getCompanyOverviewThoughts(clients[0], aId, b.id),
+          );
+          for (const [query, expected] of [
+            [
+              `before=${encodeURIComponent(cursor)}&focus=${target.id}&saved=${target.id}`,
+              `${path}?before=${encodeURIComponent(cursor)}&focus=${target.id}&saved=${target.id}#thought-${target.id}`,
+            ],
+            ["before=invalid", `${path}#thought-history-title`],
+            [
+              "before=bad&before=bad&focus=invalid",
+              `${path}#thought-history-title`,
+            ],
+            [
+              "deleted=thought",
+              `${path}?deleted=thought#thought-history-title`,
+            ],
+          ]) {
+            const response = await http.request(`${root}?${query}`);
+            assert.notEqual(response.status, 308);
+            const actual = response.headers.get("location");
+            if (actual) {
+              assert.equal(response.status, 307);
+              assert.equal(
+                new URL(actual, "http://localhost").href,
+                new URL(expected, "http://localhost").href,
+              );
+            } else {
+              // Parent loading boundary may stream Next's temporary redirect.
+              assert.equal(response.status, 200);
+              const body = await response.text();
+              assert.ok(body.includes('id="__next-page-redirect"'));
+              assert.ok(body.includes(expected.replaceAll("&", "&amp;")));
+            }
+          }
+          const older = await (
+            await http.request(
+              `${path}?before=${encodeURIComponent(cursor)}&focus=${target.id}&saved=${target.id}`,
+            )
+          ).text();
+          assert.ok(older.includes('id="linked-thought-title"'));
+          assert.ok(older.includes(`id="thought-${target.id}"`));
+          assert.ok(older.includes("Pemikiran asli tersimpan."));
+          assert.ok(target.capture_operation_id);
+          assert.ok(
+            older.includes(target.capture_operation_id),
+            "Off-page receipt did not carry the persisted operation identity.",
+          );
+          assert.ok(!older.includes('id="thought-form"'));
+          const inside = await (
+            await http.request(`${path}?focus=${target.id}`)
+          ).text();
+          assert.ok(!inside.includes('id="linked-thought-title"'));
+          assert.equal(
+            inside.match(new RegExp(`id="thought-${target.id}"`, "g"))?.length,
+            1,
+          );
+          for (const id of [foreign.id, captured.id, randomUUID()]) {
+            const body = await (
+              await http.request(`${path}?focus=${id}&saved=${id}`)
+            ).text();
+            assert.ok(body.includes("Pemikiran yang dituju tidak tersedia"));
+            assert.ok(!body.includes(`id="thought-${id}"`));
+            assert.ok(!body.includes(foreign.raw_content));
+            assert.ok(!body.includes("Pemikiran asli tersimpan."));
+          }
+          const detail = await (
+            await http.request(
+              `/companies/${a.id}/thoughts/${captured.id}/refine`,
+            )
+          ).text();
+          assert.ok(
+            detail.includes(
+              `/companies/${a.id}/thoughts?focus=${captured.id}#thought-${captured.id}`,
+            ),
+          );
+        },
+      );
+      await t.test(
         "HTTP capture rejects anonymous/forged inputs, preserves failed drafts, escapes markup, and persists on reload",
         async () => {
           const http = createLocalHttpSession();
@@ -332,7 +440,7 @@ test(
           login.set("email", accounts[0].email);
           login.set("password", accounts[0].password);
           assert.equal((await http.request("/auth", login)).status, 303);
-          const path = `/companies/${a.id}`;
+          const path = `/companies/${a.id}/thoughts`;
           const page = await (await http.request(path)).text();
           const form = serverActionForm(page, "thought-form");
           form.set("raw_content", original);
@@ -369,6 +477,7 @@ test(
           assert.equal(saved.status, 303);
           const location = saved.headers.get("location")!;
           assert.ok(location.includes("?saved="));
+          assert.ok(location.startsWith(`${path}?saved=`));
           const redirected = await (await http.request(location)).text();
           assert.ok(redirected.includes("Pemikiran asli tersimpan."));
           assert.ok(redirected.includes("&lt;script&gt;"));
@@ -399,7 +508,7 @@ test(
             second.id,
           );
           const olderHistory = await http.request(
-            `/companies/${second.id}?before=${encodeURIComponent(thoughtCursor(firstHistory.thoughts.at(-1)!))}`,
+            `/companies/${second.id}/thoughts?before=${encodeURIComponent(thoughtCursor(firstHistory.thoughts.at(-1)!))}`,
           );
           const olderBody = await olderHistory.text();
           assert.ok(olderBody.includes("Kembali ke yang terbaru"));
@@ -411,9 +520,7 @@ test(
             `${path}?before=invalid&before=invalid`,
           );
           assert.ok(
-            (await repeatedQuery.text()).includes(
-              "Pemikiranmu, tetap seperti saat ditulis.",
-            ),
+            (await repeatedQuery.text()).includes("Pemikiran tersimpan"),
           );
           assert.ok(reload.includes("Aku belum yakin"));
           assert.ok(!reload.includes(foreign.raw_content));

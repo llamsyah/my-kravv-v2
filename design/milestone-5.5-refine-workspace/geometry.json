@@ -1,0 +1,1506 @@
+[
+  {
+    "name": "hub",
+    "activeNav": "Refine",
+    "clientWidth": 1421,
+    "comparison": null,
+    "cssZoom": "1",
+    "documentWidth": 1421,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": null,
+    "heading": {
+      "height": 86.375,
+      "width": 1119.8125,
+      "x": 134.5,
+      "y": 161
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 1280,
+      "x": 70.5,
+      "y": 300.8125
+    },
+    "navOverflow": false,
+    "reviewForms": 0,
+    "scrollY": 0,
+    "url": "/companies/b7e78fea-308b-42c4-8e38-4aa6d9ed18d3/refinements",
+    "visualScale": 1,
+    "width": 1440
+  },
+  {
+    "name": "suggested",
+    "activeNav": "Refine",
+    "clientWidth": 1421,
+    "comparison": [
+      {
+        "box": {
+          "height": 164.640625,
+          "width": 628,
+          "x": 70.5,
+          "y": 675.71875
+        },
+        "visible": true
+      },
+      {
+        "box": {
+          "height": 164.640625,
+          "width": 628,
+          "x": 722.5,
+          "y": 675.71875
+        },
+        "visible": true
+      }
+    ],
+    "cssZoom": "1",
+    "documentWidth": 1421,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": false,
+    "heading": {
+      "height": 86.375,
+      "width": 1119.8125,
+      "x": 134.5,
+      "y": 161
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 1280,
+      "x": 70.5,
+      "y": 300.8125
+    },
+    "navOverflow": false,
+    "reviewForms": 1,
+    "scrollY": 0,
+    "url": "/companies/b7e78fea-308b-42c4-8e38-4aa6d9ed18d3/thoughts/8c9eeb2a-f010-4d12-b284-5243bbfce20f/refine",
+    "visualScale": 1,
+    "width": 1440
+  },
+  {
+    "name": "accepted",
+    "activeNav": "Refine",
+    "clientWidth": 1421,
+    "comparison": [
+      {
+        "box": {
+          "height": 193.4375,
+          "width": 628,
+          "x": 70.5,
+          "y": 675.71875
+        },
+        "visible": true
+      },
+      {
+        "box": {
+          "height": 193.4375,
+          "width": 628,
+          "x": 722.5,
+          "y": 675.71875
+        },
+        "visible": true
+      }
+    ],
+    "cssZoom": "1",
+    "documentWidth": 1421,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": false,
+    "heading": {
+      "height": 86.375,
+      "width": 1119.8125,
+      "x": 134.5,
+      "y": 161
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 1280,
+      "x": 70.5,
+      "y": 300.8125
+    },
+    "navOverflow": false,
+    "reviewForms": 0,
+    "scrollY": 0,
+    "url": "/companies/b7e78fea-308b-42c4-8e38-4aa6d9ed18d3/thoughts/751e4800-9921-428c-bb19-f78378d288f1/refine",
+    "visualScale": 1,
+    "width": 1440
+  },
+  {
+    "name": "multiple",
+    "activeNav": "Refine",
+    "clientWidth": 1421,
+    "comparison": [
+      {
+        "box": {
+          "height": 193.4375,
+          "width": 628,
+          "x": 70.5,
+          "y": 675.71875
+        },
+        "visible": true
+      },
+      {
+        "box": {
+          "height": 193.4375,
+          "width": 628,
+          "x": 722.5,
+          "y": 675.71875
+        },
+        "visible": true
+      }
+    ],
+    "cssZoom": "1",
+    "documentWidth": 1421,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": false,
+    "heading": {
+      "height": 86.375,
+      "width": 1119.8125,
+      "x": 134.5,
+      "y": 161
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 1280,
+      "x": 70.5,
+      "y": 300.8125
+    },
+    "navOverflow": false,
+    "reviewForms": 0,
+    "scrollY": 0,
+    "url": "/companies/b7e78fea-308b-42c4-8e38-4aa6d9ed18d3/thoughts/dbcaf9dc-ec20-4790-b9e6-c2fd161bfc08/refine",
+    "visualScale": 1,
+    "width": 1440
+  },
+  {
+    "name": "pending",
+    "activeNav": "Refine",
+    "clientWidth": 1421,
+    "comparison": null,
+    "cssZoom": "1",
+    "documentWidth": 1421,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": true,
+    "heading": {
+      "height": 86.375,
+      "width": 1119.8125,
+      "x": 134.5,
+      "y": 161
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 1280,
+      "x": 70.5,
+      "y": 300.8125
+    },
+    "navOverflow": false,
+    "reviewForms": 0,
+    "scrollY": 0,
+    "url": "/companies/b7e78fea-308b-42c4-8e38-4aa6d9ed18d3/thoughts/11cf93ea-4f23-46bd-a7d4-f43ba560c988/refine",
+    "visualScale": 1,
+    "width": 1440
+  },
+  {
+    "name": "long",
+    "activeNav": "Refine",
+    "clientWidth": 1421,
+    "comparison": [
+      {
+        "box": {
+          "height": 567.796875,
+          "width": 628,
+          "x": 70.5,
+          "y": 675.71875
+        },
+        "visible": true
+      },
+      {
+        "box": {
+          "height": 567.796875,
+          "width": 628,
+          "x": 722.5,
+          "y": 675.71875
+        },
+        "visible": true
+      }
+    ],
+    "cssZoom": "1",
+    "documentWidth": 1421,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": false,
+    "heading": {
+      "height": 86.375,
+      "width": 1119.8125,
+      "x": 134.5,
+      "y": 161
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 1280,
+      "x": 70.5,
+      "y": 300.8125
+    },
+    "navOverflow": false,
+    "reviewForms": 1,
+    "scrollY": 0,
+    "url": "/companies/b7e78fea-308b-42c4-8e38-4aa6d9ed18d3/thoughts/d5eb0d21-7f5d-4efb-8549-3457f728dcb7/refine",
+    "visualScale": 1,
+    "width": 1440
+  },
+  {
+    "name": "original",
+    "activeNav": "Refine",
+    "clientWidth": 1421,
+    "comparison": null,
+    "cssZoom": "1",
+    "documentWidth": 1421,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": true,
+    "heading": {
+      "height": 86.375,
+      "width": 1119.8125,
+      "x": 134.5,
+      "y": 161
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 1280,
+      "x": 70.5,
+      "y": 300.8125
+    },
+    "navOverflow": false,
+    "reviewForms": 0,
+    "scrollY": 0,
+    "url": "/companies/b7e78fea-308b-42c4-8e38-4aa6d9ed18d3/thoughts/97d2f1fb-cf8e-4dd2-b7a5-46891edc8f0c/refine",
+    "visualScale": 1,
+    "width": 1440
+  },
+  {
+    "name": "empty",
+    "activeNav": "Refine",
+    "clientWidth": 1440,
+    "comparison": null,
+    "cssZoom": "1",
+    "documentWidth": 1440,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": null,
+    "heading": {
+      "height": 43.1875,
+      "width": 1119.8125,
+      "x": 144,
+      "y": 161
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 1280,
+      "x": 80,
+      "y": 233
+    },
+    "navOverflow": false,
+    "reviewForms": 0,
+    "scrollY": 0,
+    "url": "/companies/c532e21d-9806-41a0-b39c-8beb9f0e3f18/refinements",
+    "visualScale": 1,
+    "width": 1440
+  },
+  {
+    "name": "archived",
+    "activeNav": "Refine",
+    "clientWidth": 1440,
+    "comparison": null,
+    "cssZoom": "1",
+    "documentWidth": 1440,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": null,
+    "heading": {
+      "height": 43.1875,
+      "width": 1121.203125,
+      "x": 144,
+      "y": 161
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 1280,
+      "x": 80,
+      "y": 233
+    },
+    "navOverflow": false,
+    "reviewForms": 0,
+    "scrollY": 0,
+    "url": "/companies/ac784728-f78d-434a-8a55-ac306550a76c/refinements",
+    "visualScale": 1,
+    "width": 1440
+  },
+  {
+    "name": "hub",
+    "activeNav": "Refine",
+    "clientWidth": 749,
+    "comparison": null,
+    "cssZoom": "1",
+    "documentWidth": 749,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": null,
+    "heading": {
+      "height": 215.9375,
+      "width": 540.8125,
+      "x": 88,
+      "y": 161
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 701,
+      "x": 24,
+      "y": 430.375
+    },
+    "navOverflow": false,
+    "reviewForms": 0,
+    "scrollY": 0,
+    "url": "/companies/b7e78fea-308b-42c4-8e38-4aa6d9ed18d3/refinements",
+    "visualScale": 1,
+    "width": 768
+  },
+  {
+    "name": "suggested",
+    "activeNav": "Refine",
+    "clientWidth": 749,
+    "comparison": [
+      {
+        "box": {
+          "height": 279.828125,
+          "width": 338.5,
+          "x": 24,
+          "y": 805.28125
+        },
+        "visible": true
+      },
+      {
+        "box": {
+          "height": 279.828125,
+          "width": 338.5,
+          "x": 386.5,
+          "y": 805.28125
+        },
+        "visible": true
+      }
+    ],
+    "cssZoom": "1",
+    "documentWidth": 749,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": false,
+    "heading": {
+      "height": 215.9375,
+      "width": 540.8125,
+      "x": 88,
+      "y": 161
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 701,
+      "x": 24,
+      "y": 430.375
+    },
+    "navOverflow": false,
+    "reviewForms": 1,
+    "scrollY": 0,
+    "url": "/companies/b7e78fea-308b-42c4-8e38-4aa6d9ed18d3/thoughts/8c9eeb2a-f010-4d12-b284-5243bbfce20f/refine",
+    "visualScale": 1,
+    "width": 768
+  },
+  {
+    "name": "accepted",
+    "activeNav": "Refine",
+    "clientWidth": 749,
+    "comparison": [
+      {
+        "box": {
+          "height": 251.03125,
+          "width": 338.5,
+          "x": 24,
+          "y": 805.28125
+        },
+        "visible": true
+      },
+      {
+        "box": {
+          "height": 251.03125,
+          "width": 338.5,
+          "x": 386.5,
+          "y": 805.28125
+        },
+        "visible": true
+      }
+    ],
+    "cssZoom": "1",
+    "documentWidth": 749,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": false,
+    "heading": {
+      "height": 215.9375,
+      "width": 540.8125,
+      "x": 88,
+      "y": 161
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 701,
+      "x": 24,
+      "y": 430.375
+    },
+    "navOverflow": false,
+    "reviewForms": 0,
+    "scrollY": 0,
+    "url": "/companies/b7e78fea-308b-42c4-8e38-4aa6d9ed18d3/thoughts/751e4800-9921-428c-bb19-f78378d288f1/refine",
+    "visualScale": 1,
+    "width": 768
+  },
+  {
+    "name": "multiple",
+    "activeNav": "Refine",
+    "clientWidth": 749,
+    "comparison": [
+      {
+        "box": {
+          "height": 251.03125,
+          "width": 338.5,
+          "x": 24,
+          "y": 805.28125
+        },
+        "visible": true
+      },
+      {
+        "box": {
+          "height": 251.03125,
+          "width": 338.5,
+          "x": 386.5,
+          "y": 805.28125
+        },
+        "visible": true
+      }
+    ],
+    "cssZoom": "1",
+    "documentWidth": 749,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": false,
+    "heading": {
+      "height": 215.9375,
+      "width": 540.8125,
+      "x": 88,
+      "y": 161
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 701,
+      "x": 24,
+      "y": 430.375
+    },
+    "navOverflow": false,
+    "reviewForms": 0,
+    "scrollY": 0,
+    "url": "/companies/b7e78fea-308b-42c4-8e38-4aa6d9ed18d3/thoughts/dbcaf9dc-ec20-4790-b9e6-c2fd161bfc08/refine",
+    "visualScale": 1,
+    "width": 768
+  },
+  {
+    "name": "pending",
+    "activeNav": "Refine",
+    "clientWidth": 749,
+    "comparison": null,
+    "cssZoom": "1",
+    "documentWidth": 749,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": true,
+    "heading": {
+      "height": 215.9375,
+      "width": 540.8125,
+      "x": 88,
+      "y": 161
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 701,
+      "x": 24,
+      "y": 430.375
+    },
+    "navOverflow": false,
+    "reviewForms": 0,
+    "scrollY": 0,
+    "url": "/companies/b7e78fea-308b-42c4-8e38-4aa6d9ed18d3/thoughts/11cf93ea-4f23-46bd-a7d4-f43ba560c988/refine",
+    "visualScale": 1,
+    "width": 768
+  },
+  {
+    "name": "long",
+    "activeNav": "Refine",
+    "clientWidth": 749,
+    "comparison": [
+      {
+        "box": {
+          "height": 913.359375,
+          "width": 338.5,
+          "x": 24,
+          "y": 805.28125
+        },
+        "visible": true
+      },
+      {
+        "box": {
+          "height": 913.359375,
+          "width": 338.5,
+          "x": 386.5,
+          "y": 805.28125
+        },
+        "visible": true
+      }
+    ],
+    "cssZoom": "1",
+    "documentWidth": 749,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": false,
+    "heading": {
+      "height": 215.9375,
+      "width": 540.8125,
+      "x": 88,
+      "y": 161
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 701,
+      "x": 24,
+      "y": 430.375
+    },
+    "navOverflow": false,
+    "reviewForms": 1,
+    "scrollY": 0,
+    "url": "/companies/b7e78fea-308b-42c4-8e38-4aa6d9ed18d3/thoughts/d5eb0d21-7f5d-4efb-8549-3457f728dcb7/refine",
+    "visualScale": 1,
+    "width": 768
+  },
+  {
+    "name": "original",
+    "activeNav": "Refine",
+    "clientWidth": 749,
+    "comparison": null,
+    "cssZoom": "1",
+    "documentWidth": 749,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": true,
+    "heading": {
+      "height": 215.9375,
+      "width": 540.8125,
+      "x": 88,
+      "y": 161
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 701,
+      "x": 24,
+      "y": 430.375
+    },
+    "navOverflow": false,
+    "reviewForms": 0,
+    "scrollY": 0,
+    "url": "/companies/b7e78fea-308b-42c4-8e38-4aa6d9ed18d3/thoughts/97d2f1fb-cf8e-4dd2-b7a5-46891edc8f0c/refine",
+    "visualScale": 1,
+    "width": 768
+  },
+  {
+    "name": "empty",
+    "activeNav": "Refine",
+    "clientWidth": 768,
+    "comparison": null,
+    "cssZoom": "1",
+    "documentWidth": 768,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": null,
+    "heading": {
+      "height": 43.1875,
+      "width": 559.8125,
+      "x": 88,
+      "y": 161
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 720,
+      "x": 24,
+      "y": 233
+    },
+    "navOverflow": false,
+    "reviewForms": 0,
+    "scrollY": 0,
+    "url": "/companies/c532e21d-9806-41a0-b39c-8beb9f0e3f18/refinements",
+    "visualScale": 1,
+    "width": 768
+  },
+  {
+    "name": "archived",
+    "activeNav": "Refine",
+    "clientWidth": 768,
+    "comparison": null,
+    "cssZoom": "1",
+    "documentWidth": 768,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": null,
+    "heading": {
+      "height": 43.1875,
+      "width": 561.203125,
+      "x": 88,
+      "y": 161
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 720,
+      "x": 24,
+      "y": 233
+    },
+    "navOverflow": false,
+    "reviewForms": 0,
+    "scrollY": 0,
+    "url": "/companies/ac784728-f78d-434a-8a55-ac306550a76c/refinements",
+    "visualScale": 1,
+    "width": 768
+  },
+  {
+    "name": "hub",
+    "activeNav": "Refine",
+    "clientWidth": 371,
+    "comparison": null,
+    "cssZoom": "1",
+    "documentWidth": 371,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": null,
+    "heading": {
+      "height": 201.5625,
+      "width": 339,
+      "x": 16,
+      "y": 245
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 339,
+      "x": 16,
+      "y": 500
+    },
+    "navOverflow": false,
+    "reviewForms": 0,
+    "scrollY": 0,
+    "url": "/companies/b7e78fea-308b-42c4-8e38-4aa6d9ed18d3/refinements",
+    "visualScale": 1,
+    "width": 390
+  },
+  {
+    "name": "suggested",
+    "activeNav": "Refine",
+    "clientWidth": 371,
+    "comparison": [
+      {
+        "box": {
+          "height": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "visible": false
+      },
+      {
+        "box": {
+          "height": 271.828125,
+          "width": 339,
+          "x": 16,
+          "y": 992.609375
+        },
+        "visible": true
+      }
+    ],
+    "cssZoom": "1",
+    "documentWidth": 371,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": false,
+    "heading": {
+      "height": 201.5625,
+      "width": 339,
+      "x": 16,
+      "y": 245
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 339,
+      "x": 16,
+      "y": 500
+    },
+    "navOverflow": false,
+    "reviewForms": 1,
+    "scrollY": 0,
+    "url": "/companies/b7e78fea-308b-42c4-8e38-4aa6d9ed18d3/thoughts/8c9eeb2a-f010-4d12-b284-5243bbfce20f/refine",
+    "visualScale": 1,
+    "width": 390
+  },
+  {
+    "name": "accepted",
+    "activeNav": "Refine",
+    "clientWidth": 371,
+    "comparison": [
+      {
+        "box": {
+          "height": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "visible": false
+      },
+      {
+        "box": {
+          "height": 214.234375,
+          "width": 339,
+          "x": 16,
+          "y": 992.609375
+        },
+        "visible": true
+      }
+    ],
+    "cssZoom": "1",
+    "documentWidth": 371,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": false,
+    "heading": {
+      "height": 201.5625,
+      "width": 339,
+      "x": 16,
+      "y": 245
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 339,
+      "x": 16,
+      "y": 500
+    },
+    "navOverflow": false,
+    "reviewForms": 0,
+    "scrollY": 0,
+    "url": "/companies/b7e78fea-308b-42c4-8e38-4aa6d9ed18d3/thoughts/751e4800-9921-428c-bb19-f78378d288f1/refine",
+    "visualScale": 1,
+    "width": 390
+  },
+  {
+    "name": "multiple",
+    "activeNav": "Refine",
+    "clientWidth": 371,
+    "comparison": [
+      {
+        "box": {
+          "height": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "visible": false
+      },
+      {
+        "box": {
+          "height": 127.84375,
+          "width": 339,
+          "x": 16,
+          "y": 992.609375
+        },
+        "visible": true
+      }
+    ],
+    "cssZoom": "1",
+    "documentWidth": 371,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": false,
+    "heading": {
+      "height": 201.5625,
+      "width": 339,
+      "x": 16,
+      "y": 245
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 339,
+      "x": 16,
+      "y": 500
+    },
+    "navOverflow": false,
+    "reviewForms": 0,
+    "scrollY": 0,
+    "url": "/companies/b7e78fea-308b-42c4-8e38-4aa6d9ed18d3/thoughts/dbcaf9dc-ec20-4790-b9e6-c2fd161bfc08/refine",
+    "visualScale": 1,
+    "width": 390
+  },
+  {
+    "name": "pending",
+    "activeNav": "Refine",
+    "clientWidth": 371,
+    "comparison": null,
+    "cssZoom": "1",
+    "documentWidth": 371,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": true,
+    "heading": {
+      "height": 201.5625,
+      "width": 339,
+      "x": 16,
+      "y": 245
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 339,
+      "x": 16,
+      "y": 500
+    },
+    "navOverflow": false,
+    "reviewForms": 0,
+    "scrollY": 0,
+    "url": "/companies/b7e78fea-308b-42c4-8e38-4aa6d9ed18d3/thoughts/11cf93ea-4f23-46bd-a7d4-f43ba560c988/refine",
+    "visualScale": 1,
+    "width": 390
+  },
+  {
+    "name": "long",
+    "activeNav": "Refine",
+    "clientWidth": 371,
+    "comparison": [
+      {
+        "box": {
+          "height": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "visible": false
+      },
+      {
+        "box": {
+          "height": 214.234375,
+          "width": 339,
+          "x": 16,
+          "y": 992.609375
+        },
+        "visible": true
+      }
+    ],
+    "cssZoom": "1",
+    "documentWidth": 371,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": false,
+    "heading": {
+      "height": 201.5625,
+      "width": 339,
+      "x": 16,
+      "y": 245
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 339,
+      "x": 16,
+      "y": 500
+    },
+    "navOverflow": false,
+    "reviewForms": 1,
+    "scrollY": 0,
+    "url": "/companies/b7e78fea-308b-42c4-8e38-4aa6d9ed18d3/thoughts/d5eb0d21-7f5d-4efb-8549-3457f728dcb7/refine",
+    "visualScale": 1,
+    "width": 390
+  },
+  {
+    "name": "original",
+    "activeNav": "Refine",
+    "clientWidth": 371,
+    "comparison": null,
+    "cssZoom": "1",
+    "documentWidth": 371,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": true,
+    "heading": {
+      "height": 201.5625,
+      "width": 339,
+      "x": 16,
+      "y": 245
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 339,
+      "x": 16,
+      "y": 500
+    },
+    "navOverflow": false,
+    "reviewForms": 0,
+    "scrollY": 0,
+    "url": "/companies/b7e78fea-308b-42c4-8e38-4aa6d9ed18d3/thoughts/97d2f1fb-cf8e-4dd2-b7a5-46891edc8f0c/refine",
+    "visualScale": 1,
+    "width": 390
+  },
+  {
+    "name": "empty",
+    "activeNav": "Refine",
+    "clientWidth": 371,
+    "comparison": null,
+    "cssZoom": "1",
+    "documentWidth": 371,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": null,
+    "heading": {
+      "height": 33.59375,
+      "width": 339,
+      "x": 16,
+      "y": 245
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 339,
+      "x": 16,
+      "y": 302.59375
+    },
+    "navOverflow": false,
+    "reviewForms": 0,
+    "scrollY": 0,
+    "url": "/companies/c532e21d-9806-41a0-b39c-8beb9f0e3f18/refinements",
+    "visualScale": 1,
+    "width": 390
+  },
+  {
+    "name": "archived",
+    "activeNav": "Refine",
+    "clientWidth": 371,
+    "comparison": null,
+    "cssZoom": "1",
+    "documentWidth": 371,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": null,
+    "heading": {
+      "height": 33.59375,
+      "width": 339,
+      "x": 16,
+      "y": 245
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 339,
+      "x": 16,
+      "y": 302.59375
+    },
+    "navOverflow": false,
+    "reviewForms": 0,
+    "scrollY": 0,
+    "url": "/companies/ac784728-f78d-434a-8a55-ac306550a76c/refinements",
+    "visualScale": 1,
+    "width": 390
+  },
+  {
+    "name": "hub",
+    "activeNav": "Refine",
+    "clientWidth": 301,
+    "comparison": null,
+    "cssZoom": "1",
+    "documentWidth": 301,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": null,
+    "heading": {
+      "height": 235.15625,
+      "width": 269,
+      "x": 16,
+      "y": 245
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 269,
+      "x": 16,
+      "y": 533.59375
+    },
+    "navOverflow": false,
+    "reviewForms": 0,
+    "scrollY": 0,
+    "url": "/companies/b7e78fea-308b-42c4-8e38-4aa6d9ed18d3/refinements",
+    "visualScale": 1,
+    "width": 320
+  },
+  {
+    "name": "suggested",
+    "activeNav": "Refine",
+    "clientWidth": 301,
+    "comparison": [
+      {
+        "box": {
+          "height": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "visible": false
+      },
+      {
+        "box": {
+          "height": 300.625,
+          "width": 269,
+          "x": 16,
+          "y": 1096.03125
+        },
+        "visible": true
+      }
+    ],
+    "cssZoom": "1",
+    "documentWidth": 301,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": false,
+    "heading": {
+      "height": 235.15625,
+      "width": 269,
+      "x": 16,
+      "y": 245
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 269,
+      "x": 16,
+      "y": 533.59375
+    },
+    "navOverflow": false,
+    "reviewForms": 1,
+    "scrollY": 0,
+    "url": "/companies/b7e78fea-308b-42c4-8e38-4aa6d9ed18d3/thoughts/8c9eeb2a-f010-4d12-b284-5243bbfce20f/refine",
+    "visualScale": 1,
+    "width": 320
+  },
+  {
+    "name": "accepted",
+    "activeNav": "Refine",
+    "clientWidth": 301,
+    "comparison": [
+      {
+        "box": {
+          "height": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "visible": false
+      },
+      {
+        "box": {
+          "height": 243.03125,
+          "width": 269,
+          "x": 16,
+          "y": 1074.59375
+        },
+        "visible": true
+      }
+    ],
+    "cssZoom": "1",
+    "documentWidth": 301,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": false,
+    "heading": {
+      "height": 235.15625,
+      "width": 269,
+      "x": 16,
+      "y": 245
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 269,
+      "x": 16,
+      "y": 533.59375
+    },
+    "navOverflow": false,
+    "reviewForms": 0,
+    "scrollY": 0,
+    "url": "/companies/b7e78fea-308b-42c4-8e38-4aa6d9ed18d3/thoughts/751e4800-9921-428c-bb19-f78378d288f1/refine",
+    "visualScale": 1,
+    "width": 320
+  },
+  {
+    "name": "multiple",
+    "activeNav": "Refine",
+    "clientWidth": 301,
+    "comparison": [
+      {
+        "box": {
+          "height": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "visible": false
+      },
+      {
+        "box": {
+          "height": 156.640625,
+          "width": 269,
+          "x": 16,
+          "y": 1074.59375
+        },
+        "visible": true
+      }
+    ],
+    "cssZoom": "1",
+    "documentWidth": 301,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": false,
+    "heading": {
+      "height": 235.15625,
+      "width": 269,
+      "x": 16,
+      "y": 245
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 269,
+      "x": 16,
+      "y": 533.59375
+    },
+    "navOverflow": false,
+    "reviewForms": 0,
+    "scrollY": 0,
+    "url": "/companies/b7e78fea-308b-42c4-8e38-4aa6d9ed18d3/thoughts/dbcaf9dc-ec20-4790-b9e6-c2fd161bfc08/refine",
+    "visualScale": 1,
+    "width": 320
+  },
+  {
+    "name": "pending",
+    "activeNav": "Refine",
+    "clientWidth": 301,
+    "comparison": null,
+    "cssZoom": "1",
+    "documentWidth": 301,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": true,
+    "heading": {
+      "height": 235.15625,
+      "width": 269,
+      "x": 16,
+      "y": 245
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 269,
+      "x": 16,
+      "y": 533.59375
+    },
+    "navOverflow": false,
+    "reviewForms": 0,
+    "scrollY": 0,
+    "url": "/companies/b7e78fea-308b-42c4-8e38-4aa6d9ed18d3/thoughts/11cf93ea-4f23-46bd-a7d4-f43ba560c988/refine",
+    "visualScale": 1,
+    "width": 320
+  },
+  {
+    "name": "long",
+    "activeNav": "Refine",
+    "clientWidth": 301,
+    "comparison": [
+      {
+        "box": {
+          "height": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "visible": false
+      },
+      {
+        "box": {
+          "height": 243.03125,
+          "width": 269,
+          "x": 16,
+          "y": 1096.03125
+        },
+        "visible": true
+      }
+    ],
+    "cssZoom": "1",
+    "documentWidth": 301,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": false,
+    "heading": {
+      "height": 235.15625,
+      "width": 269,
+      "x": 16,
+      "y": 245
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 269,
+      "x": 16,
+      "y": 533.59375
+    },
+    "navOverflow": false,
+    "reviewForms": 1,
+    "scrollY": 0,
+    "url": "/companies/b7e78fea-308b-42c4-8e38-4aa6d9ed18d3/thoughts/d5eb0d21-7f5d-4efb-8549-3457f728dcb7/refine",
+    "visualScale": 1,
+    "width": 320
+  },
+  {
+    "name": "original",
+    "activeNav": "Refine",
+    "clientWidth": 301,
+    "comparison": null,
+    "cssZoom": "1",
+    "documentWidth": 301,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": true,
+    "heading": {
+      "height": 235.15625,
+      "width": 269,
+      "x": 16,
+      "y": 245
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 269,
+      "x": 16,
+      "y": 533.59375
+    },
+    "navOverflow": false,
+    "reviewForms": 0,
+    "scrollY": 0,
+    "url": "/companies/b7e78fea-308b-42c4-8e38-4aa6d9ed18d3/thoughts/97d2f1fb-cf8e-4dd2-b7a5-46891edc8f0c/refine",
+    "visualScale": 1,
+    "width": 320
+  },
+  {
+    "name": "empty",
+    "activeNav": "Refine",
+    "clientWidth": 301,
+    "comparison": null,
+    "cssZoom": "1",
+    "documentWidth": 301,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": null,
+    "heading": {
+      "height": 67.1875,
+      "width": 269,
+      "x": 16,
+      "y": 245
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 269,
+      "x": 16,
+      "y": 336.1875
+    },
+    "navOverflow": false,
+    "reviewForms": 0,
+    "scrollY": 0,
+    "url": "/companies/c532e21d-9806-41a0-b39c-8beb9f0e3f18/refinements",
+    "visualScale": 1,
+    "width": 320
+  },
+  {
+    "name": "archived",
+    "activeNav": "Refine",
+    "clientWidth": 301,
+    "comparison": null,
+    "cssZoom": "1",
+    "documentWidth": 301,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": null,
+    "heading": {
+      "height": 67.1875,
+      "width": 269,
+      "x": 16,
+      "y": 245
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 269,
+      "x": 16,
+      "y": 336.1875
+    },
+    "navOverflow": false,
+    "reviewForms": 0,
+    "scrollY": 0,
+    "url": "/companies/ac784728-f78d-434a-8a55-ac306550a76c/refinements",
+    "visualScale": 1,
+    "width": 320
+  },
+  {
+    "name": "rejected",
+    "activeNav": "Refine",
+    "clientWidth": 1421,
+    "comparison": null,
+    "cssZoom": "1",
+    "documentWidth": 1421,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": false,
+    "heading": {
+      "height": 86.375,
+      "width": 1119.8125,
+      "x": 134.5,
+      "y": 161
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 1280,
+      "x": 70.5,
+      "y": 300.8125
+    },
+    "navOverflow": false,
+    "reviewForms": 0,
+    "scrollY": 0,
+    "url": "/companies/b7e78fea-308b-42c4-8e38-4aa6d9ed18d3/thoughts/61d676d6-41ae-4324-bbdf-bef84393d984/refine",
+    "visualScale": 1,
+    "width": 1440
+  },
+  {
+    "name": "rejected",
+    "activeNav": "Refine",
+    "clientWidth": 749,
+    "comparison": null,
+    "cssZoom": "1",
+    "documentWidth": 749,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": false,
+    "heading": {
+      "height": 215.9375,
+      "width": 540.8125,
+      "x": 88,
+      "y": 161
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 701,
+      "x": 24,
+      "y": 430.375
+    },
+    "navOverflow": false,
+    "reviewForms": 0,
+    "scrollY": 0,
+    "url": "/companies/b7e78fea-308b-42c4-8e38-4aa6d9ed18d3/thoughts/61d676d6-41ae-4324-bbdf-bef84393d984/refine",
+    "visualScale": 1,
+    "width": 768
+  },
+  {
+    "name": "rejected",
+    "activeNav": "Refine",
+    "clientWidth": 371,
+    "comparison": null,
+    "cssZoom": "1",
+    "documentWidth": 371,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": false,
+    "heading": {
+      "height": 201.5625,
+      "width": 339,
+      "x": 16,
+      "y": 245
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 339,
+      "x": 16,
+      "y": 500
+    },
+    "navOverflow": false,
+    "reviewForms": 0,
+    "scrollY": 0,
+    "url": "/companies/b7e78fea-308b-42c4-8e38-4aa6d9ed18d3/thoughts/61d676d6-41ae-4324-bbdf-bef84393d984/refine",
+    "visualScale": 1,
+    "width": 390
+  },
+  {
+    "name": "rejected",
+    "activeNav": "Refine",
+    "clientWidth": 301,
+    "comparison": null,
+    "cssZoom": "1",
+    "documentWidth": 301,
+    "dpr": 0.800000011920929,
+    "fontStatus": "loaded",
+    "generateDisabled": false,
+    "heading": {
+      "height": 235.15625,
+      "width": 269,
+      "x": 16,
+      "y": 245
+    },
+    "height": 1000,
+    "nav": {
+      "height": 52,
+      "width": 269,
+      "x": 16,
+      "y": 533.59375
+    },
+    "navOverflow": false,
+    "reviewForms": 0,
+    "scrollY": 0,
+    "url": "/companies/b7e78fea-308b-42c4-8e38-4aa6d9ed18d3/thoughts/61d676d6-41ae-4324-bbdf-bef84393d984/refine",
+    "visualScale": 1,
+    "width": 320
+  }
+]

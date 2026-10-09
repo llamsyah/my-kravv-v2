@@ -24,7 +24,9 @@ export async function createThoughtAction(
   }
   revalidatePath("/");
   revalidatePath(`/companies/${saved.company_id}`);
+  revalidatePath(`/companies/${saved.company_id}/thoughts`);
+  revalidatePath(`/companies/${saved.company_id}/refinements`);
   // Validate the returned reference before building a navigation destination.
   const id = z.uuid().parse(saved.id);
-  redirect(`/companies/${saved.company_id}?saved=${id}#thought-${id}`);
+  redirect(`/companies/${saved.company_id}/thoughts?saved=${id}#thought-${id}`);
 }

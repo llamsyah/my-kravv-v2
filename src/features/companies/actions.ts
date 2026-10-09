@@ -64,6 +64,8 @@ export async function updateCompanyAction(
   }
   revalidatePath("/companies");
   revalidatePath(`/companies/${id}`);
+  revalidatePath(`/companies/${id}/thoughts`);
+  revalidatePath(`/companies/${id}/refinements`);
   redirect(`/companies/${id}`);
 }
 export async function archiveCompanyAction(
@@ -82,5 +84,7 @@ export async function archiveCompanyAction(
   }
   revalidatePath("/companies");
   revalidatePath(`/companies/${id}`);
+  revalidatePath(`/companies/${id}/thoughts`);
+  revalidatePath(`/companies/${id}/refinements`);
   redirect(`/companies/${id}`);
 }

@@ -11,6 +11,7 @@ import {
   createThought,
   getCompanyThoughts,
   getRecentThoughts,
+  getCompanyOverviewThoughts,
 } from "../server/db/thoughts.ts";
 import { thoughtFailure } from "../features/thoughts/failure.ts";
 import {
@@ -232,6 +233,27 @@ test("retrieval rejects inconsistent owners/parents and preserves archived histo
   assert.equal(
     db.requests[0].url.searchParams.get("user_id"),
     `eq.${fixtureUserId}`,
+  );
+});
+test("Overview query is bounded, owner-scoped and uses the unchanged creation ordering", async () => {
+  const db = database();
+  const rows = await getCompanyOverviewThoughts(
+    db.client,
+    fixtureUserId,
+    companyId,
+  );
+  assert.equal(rows[0].raw_content, original);
+  const query = db.requests.at(-1)!.url.searchParams;
+  assert.equal(query.get("limit"), "4");
+  assert.equal(query.get("user_id"), `eq.${fixtureUserId}`);
+  assert.equal(query.get("company_id"), `eq.${companyId}`);
+  assert.equal(query.get("order"), "created_at.desc,id.asc");
+  const foreign = database();
+  await assert.rejects(
+    getCompanyOverviewThoughts(foreign.client, fixtureUserId, foreignId),
+  );
+  assert.ok(
+    foreign.requests.every(({ url }) => !url.pathname.endsWith("/thoughts")),
   );
 });
 test("failed save retains the unmodified draft and never exposes database error details", async () => {

@@ -1,0 +1,85 @@
+{
+  "label": "archived-overview",
+  "targetWidth": 320,
+  "active": ["Overview"],
+  "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+  "controls": [
+    {
+      "height": 44,
+      "text": "Perusahaan"
+    },
+    {
+      "height": 44,
+      "text": "Kelola"
+    },
+    {
+      "height": 44,
+      "text": "Ubah identitas"
+    },
+    {
+      "height": 44,
+      "text": "Arsip & hapus"
+    },
+    {
+      "height": 44,
+      "text": "Overview"
+    },
+    {
+      "height": 44,
+      "text": "Pemikiran"
+    },
+    {
+      "height": 44,
+      "text": "Baca pemikiran"
+    },
+    {
+      "height": 86.375,
+      "text": "Semua pemikiran 1 tersimpan"
+    },
+    {
+      "height": 44.390625,
+      "text": "Kelola ruang · Arsip & hapus"
+    },
+    {
+      "height": 44,
+      "text": "Hapus perusahaan permanen"
+    },
+    {
+      "height": 44,
+      "text": "Hapus permanen"
+    }
+  ],
+  "dpr": 0.800000011920929,
+  "fonts": "loaded",
+  "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+  "height": 844,
+  "inputs": [
+    {
+      "fontSize": "16px",
+      "name": "company_name"
+    },
+    {
+      "fontSize": "16px",
+      "name": "confirm_delete"
+    }
+  ],
+  "localNavigation": [
+    {
+      "height": 44,
+      "right": 130.828125,
+      "text": "Overview",
+      "x": 20
+    },
+    {
+      "height": 44,
+      "right": 250.3125,
+      "text": "Pemikiran",
+      "x": 138.828125
+    }
+  ],
+  "scrollWidth": 301,
+  "sidebars": 1,
+  "url": "/companies/0b4ca153-835b-442e-bedb-14d76c115183",
+  "width": 320,
+  "zoom": "1"
+}

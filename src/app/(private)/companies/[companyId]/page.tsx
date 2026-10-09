@@ -1,155 +1,167 @@
-import { randomUUID } from "node:crypto";
+import Link from "next/link";
+import { redirect } from "next/navigation";
 import { getCompanyWorkspaceContext } from "@/server/companies/workspace";
 import { CompanyWorkspaceShell } from "@/features/companies/company-workspace-shell";
-import { companyStateLabels } from "@/domain/company/company";
 import { ArchiveForm } from "@/features/companies/archive-form";
 import { DeleteForm } from "@/features/data-control/delete-form";
-import { DraftReceipt } from "@/features/thoughts/draft-receipt";
-import { ThoughtComposer } from "@/features/thoughts/thought-composer";
+import { CompanyDataControl } from "@/features/companies/company-data-control";
+import { LegacyCompanyHashNavigation } from "@/features/companies/legacy-company-hash-navigation";
 import {
-  ThoughtHistory,
-  ThoughtTime,
-} from "@/features/thoughts/thought-history";
+  legacyThoughtDestination,
+  type ThoughtSearch,
+} from "@/features/companies/legacy-navigation";
+import { ThoughtTime } from "@/features/thoughts/thought-history";
 import {
-  getCompanyThoughts,
+  getCompanyOverviewThoughts,
   getCompanyThoughtCount,
 } from "@/server/db/thoughts";
-import { readThoughtCursor } from "@/domain/thought/thought";
-import { ResponsiveDetails } from "@/components/responsive-details";
+import { Icon } from "@/components/ui/icon";
+import { StatusBadge } from "@/components/ui/status-badge";
+import styles from "@/features/companies/company-overview.module.css";
 
 export default async function CompanyPage({
   params,
   searchParams,
 }: {
   params: Promise<{ companyId: string }>;
-  searchParams: Promise<{
-    before?: string;
-    saved?: string;
-    focus?: string;
-    deleted?: string;
-  }>;
+  searchParams: Promise<ThoughtSearch>;
 }) {
   const { companyId } = await params;
   const { supabase, user, company } =
     await getCompanyWorkspaceContext(companyId);
-  const search = await searchParams;
-  const cursor = readThoughtCursor(search.before);
-  const [history, total] = await Promise.all([
-    getCompanyThoughts(supabase, user.id, company.id, cursor),
+  const destination = legacyThoughtDestination(company.id, await searchParams);
+  if (destination) redirect(destination);
+  const [thoughts, total] = await Promise.all([
+    getCompanyOverviewThoughts(supabase, user.id, company.id),
     getCompanyThoughtCount(supabase, user.id, company.id),
   ]);
-  const receipt = history.thoughts.find(
-    (thought) => thought.id === search.saved && thought.capture_operation_id,
-  );
+  const [latest, ...earlier] = thoughts;
+  const path = `/companies/${company.id}/thoughts`;
+  const hasContext = !!company.short_note || total > 0;
+  const read = (id: string) => `${path}?focus=${id}#thought-${id}`;
   return (
     <CompanyWorkspaceShell companyId={company.id} context="workspace">
-      {receipt?.capture_operation_id && (
-        <DraftReceipt
-          userId={user.id}
-          companyId={company.id}
-          operationId={receipt.capture_operation_id}
-          original={receipt.raw_content}
-        />
-      )}
+      <LegacyCompanyHashNavigation companyId={company.id} />
       {company.state === "ARCHIVED" && (
         <p className="archive-notice">
-          Perusahaan ini diarsipkan. Identitas dan konteksnya tetap tersimpan di
-          ruang pribadimu.
+          Diarsipkan · Pemikiran tetap dapat dibaca. Capture dan generasi AI
+          baru tidak tersedia.
         </p>
       )}
-      {search.deleted === "thought" && (
-        <p className="thought-success" role="status">
-          Pemikiran dan riwayatnya telah dihapus permanen.
-        </p>
-      )}
-      <section
-        className="company-context workspace-context"
-        aria-labelledby="context-title"
-      >
-        <ResponsiveDetails
-          className="context-disclosure"
-          title="Konteks dari kamu"
-          titleId="context-title"
-        >
-          <p className="company-note">
-            {company.short_note ||
-              "Belum ada catatan singkat. Kamu bisa melengkapi konteks perusahaan lewat ubah identitas."}
-          </p>
-        </ResponsiveDetails>
-      </section>
-      <div className="workspace-grid">
-        <div className="thinking-column">
-          <section
-            className="thought-capture"
-            aria-labelledby="thought-capture-title"
-          >
-            <div className="section-heading">
-              <h2 id="thought-capture-title">Tambahkan pemikiran</h2>
-              <span className="section-label">KATA-KATAMU SENDIRI</span>
+      <div className={hasContext ? styles.grid : styles.single}>
+        <div className={styles.primary}>
+          <section aria-labelledby="latest-thought-title">
+            <div className={styles.heading}>
+              <h2 id="latest-thought-title">Pemikiran terakhir</h2>
+              {latest && <ThoughtTime value={latest.created_at} compact />}
             </div>
-            <ThoughtComposer
-              key={`${company.id}:${search.saved ?? "capture"}`}
-              userId={user.id}
-              initialOperationId={randomUUID()}
-              companyId={company.id}
-              archived={company.state === "ARCHIVED"}
-            />
+            {latest ? (
+              <article className={styles.latest} id={`thought-${latest.id}`}>
+                <StatusBadge tone="neutral">Asli</StatusBadge>
+                <div className={`${styles.original} ${styles.latestExcerpt}`}>
+                  {latest.raw_content}
+                </div>
+                <Link className="secondary-button" href={read(latest.id)}>
+                  <Icon name="read" />
+                  Baca pemikiran
+                  <Icon name="arrowRight" />
+                </Link>
+              </article>
+            ) : (
+              <div className={styles.empty}>
+                <Icon name="pencil" size="large" />
+                <h3>Belum ada pemikiran</h3>
+                <p>
+                  {company.state === "ARCHIVED"
+                    ? "Tidak ada pemikiran tersimpan di ruang arsip ini."
+                    : "Mulai dari pengamatan atau pertanyaan pertamamu."}
+                </p>
+              </div>
+            )}
           </section>
-          <ThoughtHistory
-            {...history}
-            companyId={company.id}
-            older={!!cursor}
-            saved={search.saved}
-            focus={search.focus}
-          />
+          <nav
+            id="thought-history-title"
+            className={styles.entrances}
+            aria-label="Lanjutkan di ruang ini"
+          >
+            {company.state !== "ARCHIVED" && (
+              <Link
+                className={styles.entrance}
+                href={`${path}#thought-capture-title`}
+              >
+                <Icon name="pencil" />
+                <span>Tambahkan pemikiran</span>
+                <Icon name="arrowRight" />
+              </Link>
+            )}
+            <Link
+              className={styles.entrance}
+              href={`${path}#thought-history-title`}
+            >
+              <Icon name="read" />
+              <span>
+                Semua pemikiran{" "}
+                <small>{total.toLocaleString("id-ID")} tersimpan</small>
+              </span>
+              <Icon name="arrowRight" />
+            </Link>
+          </nav>
+          {!!earlier.length && (
+            <section aria-labelledby="earlier-title">
+              <div className={styles.heading}>
+                <h2 id="earlier-title">Sebelumnya di ruang ini</h2>
+              </div>
+              <ol className={styles.recent}>
+                {earlier.map((thought) => (
+                  <li key={thought.id} id={`thought-${thought.id}`}>
+                    <Link href={read(thought.id)}>
+                      <ThoughtTime value={thought.created_at} compact />
+                      <span
+                        className={`${styles.original} ${styles.recentExcerpt}`}
+                      >
+                        {thought.raw_content}
+                      </span>
+                      <Icon name="arrowRight" />
+                    </Link>
+                  </li>
+                ))}
+              </ol>
+            </section>
+          )}
         </div>
-        <aside className="workspace-sidebar">
-          <ResponsiveDetails
-            className="workspace-facts"
-            title="Tentang ruang ini"
-          >
-            <dl>
-              <div>
-                <dt>Pemikiran tersimpan</dt>
-                <dd>{total}</dd>
-              </div>
-              <div>
-                <dt>Status</dt>
-                <dd>{companyStateLabels[company.state]}</dd>
-              </div>
-              <div>
-                <dt>Dibuat</dt>
-                <dd>
-                  <ThoughtTime value={company.created_at} />
-                </dd>
-              </div>
-              <div>
-                <dt>Identitas diperbarui</dt>
-                <dd>
-                  <ThoughtTime value={company.updated_at} />
-                </dd>
-              </div>
-            </dl>
-            <p className="auth-help">
-              Identitas dan catatan perusahaan berasal dari informasi yang kamu
-              masukkan sendiri.
-            </p>
-          </ResponsiveDetails>
-          <section
-            id="data-control"
-            className="workspace-data-control"
-            aria-labelledby="data-control-title"
-          >
-            <h2 id="data-control-title">Kelola ruang</h2>
-            {company.state !== "ARCHIVED" && <ArchiveForm id={company.id} />}
-            <DeleteForm
-              companyId={company.id}
-              companyName={company.name}
-              hasThoughts={total > 0}
-            />
-          </section>
-        </aside>
+        {hasContext && (
+          <aside className={styles.context} aria-label="Konteks perusahaan">
+            {company.short_note && (
+              <section>
+                <h2>Konteks dari kamu</h2>
+                <p className={styles.note}>{company.short_note}</p>
+                <Link
+                  className="quiet-link"
+                  href={`/companies/${company.id}/edit`}
+                >
+                  <Icon name="pencil" />
+                  Ubah konteks
+                </Link>
+              </section>
+            )}
+            {total > 0 && (
+              <p className={styles.count}>
+                <Icon name="read" />
+                <strong>{total.toLocaleString("id-ID")} pemikiran</strong>{" "}
+                tersimpan
+              </p>
+            )}
+          </aside>
+        )}
       </div>
+      <CompanyDataControl>
+        {company.state !== "ARCHIVED" && <ArchiveForm id={company.id} />}
+        <DeleteForm
+          companyId={company.id}
+          companyName={company.name}
+          hasThoughts={total > 0}
+        />
+      </CompanyDataControl>
     </CompanyWorkspaceShell>
   );
 }

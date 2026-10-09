@@ -1,0 +1,157 @@
+[
+  {
+    "file": "archived-1440.jpg",
+    "width": 1800,
+    "height": 1250
+  },
+  {
+    "file": "archived-320.jpg",
+    "width": 376,
+    "height": 1250
+  },
+  {
+    "file": "archived-390.jpg",
+    "width": 464,
+    "height": 1250
+  },
+  {
+    "file": "archived-768.jpg",
+    "width": 960,
+    "height": 1250
+  },
+  {
+    "file": "before-desktop.jpg",
+    "width": 1776,
+    "height": 1250
+  },
+  {
+    "file": "composer-1440.jpg",
+    "width": 1776,
+    "height": 1250
+  },
+  {
+    "file": "composer-320.jpg",
+    "width": 376,
+    "height": 1250
+  },
+  {
+    "file": "composer-390.jpg",
+    "width": 464,
+    "height": 1250
+  },
+  {
+    "file": "composer-768.jpg",
+    "width": 936,
+    "height": 1250
+  },
+  {
+    "file": "empty-1440.jpg",
+    "width": 1800,
+    "height": 1250
+  },
+  {
+    "file": "empty-320.jpg",
+    "width": 376,
+    "height": 1250
+  },
+  {
+    "file": "empty-390.jpg",
+    "width": 464,
+    "height": 1250
+  },
+  {
+    "file": "empty-768.jpg",
+    "width": 960,
+    "height": 1250
+  },
+  {
+    "file": "focused-1440.jpg",
+    "width": 1776,
+    "height": 1250
+  },
+  {
+    "file": "focused-320.jpg",
+    "width": 376,
+    "height": 1250
+  },
+  {
+    "file": "focused-390.jpg",
+    "width": 464,
+    "height": 1250
+  },
+  {
+    "file": "focused-768.jpg",
+    "width": 936,
+    "height": 1250
+  },
+  {
+    "file": "many-1440.jpg",
+    "width": 1776,
+    "height": 1250
+  },
+  {
+    "file": "many-320.jpg",
+    "width": 376,
+    "height": 1250
+  },
+  {
+    "file": "many-390.jpg",
+    "width": 464,
+    "height": 1250
+  },
+  {
+    "file": "many-768.jpg",
+    "width": 936,
+    "height": 1250
+  },
+  {
+    "file": "mixed-full-1440.jpg",
+    "width": 1776,
+    "height": 3535
+  },
+  {
+    "file": "mixed-full-320.jpg",
+    "width": 376,
+    "height": 4754
+  },
+  {
+    "file": "mixed-full-390.jpg",
+    "width": 464,
+    "height": 4086
+  },
+  {
+    "file": "mixed-full-768.jpg",
+    "width": 936,
+    "height": 3696
+  },
+  {
+    "file": "mobile-options-320.jpg",
+    "width": 376,
+    "height": 1250
+  },
+  {
+    "file": "older-1440.jpg",
+    "width": 1776,
+    "height": 1250
+  },
+  {
+    "file": "older-320.jpg",
+    "width": 376,
+    "height": 1250
+  },
+  {
+    "file": "older-390.jpg",
+    "width": 464,
+    "height": 1250
+  },
+  {
+    "file": "older-768.jpg",
+    "width": 936,
+    "height": 1250
+  },
+  {
+    "file": "reading-options-desktop.jpg",
+    "width": 1776,
+    "height": 1250
+  }
+]

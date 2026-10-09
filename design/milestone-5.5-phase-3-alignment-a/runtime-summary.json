@@ -1,0 +1,24 @@
+{
+  "warningErrors": [],
+  "navigationFocus": {
+    "outline": "rgb(159, 198, 181) solid 2px",
+    "outlineOffset": "-3px",
+    "rect": {
+      "width": 113.671875,
+      "x": 132.734375
+    },
+    "text": "Pemikiran"
+  },
+  "checks": [
+    "Overview and Pemikiran links navigate with selected states",
+    "Kelola opens existing controls and Escape closes",
+    "Long Company name remains complete in h1 and accessible breadcrumb name",
+    "Long originals retain 68ch maximum and wrap unbroken words",
+    "No provider request made",
+    "Native zoom not independently verified; same unchanged setting"
+  ],
+  "limitations": [
+    "Native 100% and 80% browser zoom need manual verification",
+    "Real device keyboard and nonzero safe-area inset not exercised"
+  ]
+}

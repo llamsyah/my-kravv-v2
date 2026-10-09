@@ -9,7 +9,11 @@ import { createCompany, archiveCompany } from "../src/server/db/companies.ts";
 import { createThought } from "../src/server/db/thoughts.ts";
 import { ensureUserSettings } from "../src/server/db/user-settings.ts";
 import { createAIAccounting } from "../src/server/db/ai-runs.ts";
-import { createRefinementWriter } from "../src/server/db/refinements.ts";
+import {
+  createRefinementWriter,
+  claimRefinement,
+  resolveRefinement,
+} from "../src/server/db/refinements.ts";
 import { createRefineService } from "../src/server/refinements/service.ts";
 import {
   aiResponse,
@@ -33,6 +37,15 @@ type Fixture = {
   archivedCompany?: string;
   refinePath?: string;
   longRefinePath?: string;
+  manyCompany?: string;
+  oldestThought?: string;
+  newestThought?: string;
+  readingThoughts?: { id: string; raw_content: string }[];
+  refineStates?: Record<string, string>;
+  refineCheckpoint?: {
+    runs: number;
+    originals: { id: string; raw_content: string }[];
+  };
 };
 const mode = process.argv[2];
 if (mode === "setup") {
@@ -87,6 +100,226 @@ if (mode === "setup") {
     unlinkSync(file);
     console.log(
       "Disposable fixture and credential file removed; cascade cleanup verified.",
+    );
+  } else if (mode === "refine-checkpoint" || mode === "refine-verify") {
+    assert.ok(f.refineStates);
+    assert.ok(
+      !(
+        await client.auth.signInWithPassword({
+          email: f.email,
+          password: f.password,
+        })
+      ).error,
+    );
+    const runs = await client.from("ai_runs").select("id").eq("user_id", f.id);
+    const originals = await client
+      .from("thoughts")
+      .select("id,raw_content")
+      .eq("user_id", f.id)
+      .order("id");
+    assert.ok(!runs.error && !originals.error && runs.data && originals.data);
+    if (mode === "refine-checkpoint") {
+      assert.ok(!f.refineCheckpoint);
+      assert.equal(runs.data.length, 27);
+      f.refineCheckpoint = {
+        runs: runs.data.length,
+        originals: originals.data,
+      };
+      writeFileSync(file, JSON.stringify(f));
+    } else {
+      assert.ok(f.refineCheckpoint);
+      assert.equal(runs.data.length, f.refineCheckpoint.runs);
+      assert.deepEqual(originals.data, f.refineCheckpoint.originals);
+    }
+    console.log(
+      "Disposable Refine run count and exact original content checkpoint verified; no provider requests.",
+    );
+  } else if (mode === "refine-workspace") {
+    assert.ok(
+      f.company && !f.refineStates,
+      "Prepare the base disposable fixture once first.",
+    );
+    assert.ok(
+      !(
+        await client.auth.signInWithPassword({
+          email: f.email,
+          password: f.password,
+        })
+      ).error,
+    );
+    const service = createRefineService({
+      configuration: () => ({
+        ...fixtureAIConfig,
+        outputTokenLimit: 512,
+        dailyCallLimit: 60,
+        pricingVersion: "synthetic-refine-workspace-qa",
+      }),
+      accounting: () => createAIAccounting(admin),
+      writer: () => createRefinementWriter(admin),
+      provider: () => ({
+        async generate() {
+          return aiResponse(
+            JSON.stringify(
+              refineResponseText(
+                "aku tertarik sama ekspansinya. aku belum memeriksa laporan arus kasnya, jadi belum tahu apakah mereka siap.\n\nAku mau lihat laporannya dulu.",
+              ),
+            ),
+          );
+        },
+      }),
+    });
+    const states: Record<string, string> = {};
+    for (const name of [
+      "accepted",
+      "rejected",
+      "multiple",
+      "pending",
+      "long",
+    ]) {
+      const thought = await createThought(client, f.id, {
+        company_id: f.company,
+        capture_operation_id: randomUUID(),
+        raw_content:
+          name === "long"
+            ? Array.from(
+                { length: 6 },
+                (_, i) =>
+                  `${i + 1}. aku belum cek laporan arus kasnya. ekspansinya menarik, tapi aku belum tahu apakah mereka siap. aku ingin memeriksa dokumennya dulu.`,
+              ).join("\n\n")
+            : `aku tertarik sama ekspansinya (${name}, fiktif). aku belum memeriksa laporan arus kasnya, jadi belum tahu apakah mereka siap.\n\nAku mau lihat laporannya dulu.`,
+      });
+      states[name] = `/companies/${f.company}/thoughts/${thought.id}/refine`;
+      if (name === "pending") {
+        await claimRefinement(
+          client,
+          f.id,
+          f.company,
+          thought.id,
+          randomUUID(),
+        );
+        continue;
+      }
+      const proposal = await service(client, {
+        company_id: f.company,
+        thought_id: thought.id,
+        operation_id: randomUUID(),
+      });
+      if (name === "accepted" || name === "multiple")
+        await resolveRefinement(
+          client,
+          f.id,
+          proposal,
+          "ACCEPTED",
+          "aku masih tertarik. aku belum memeriksa laporannya; itu yang ingin aku lakukan dulu.\n\nIni versi pilihan yang kusunting sendiri.",
+        );
+      if (name === "rejected")
+        await resolveRefinement(client, f.id, proposal, "REJECTED", null);
+      if (name === "multiple") {
+        const newer = await service(client, {
+          company_id: f.company,
+          thought_id: thought.id,
+          operation_id: randomUUID(),
+        });
+        await resolveRefinement(
+          client,
+          f.id,
+          newer,
+          "ACCEPTED",
+          "Versi pilihan terbaru milikku. aku belum baca laporannya, jadi belum tahu.",
+        );
+        for (let i = 0; i < 21; i++)
+          await service(client, {
+            company_id: f.company,
+            thought_id: thought.id,
+            operation_id: randomUUID(),
+          });
+        states.outOfWindow = `${states[name]}?proposal=${proposal.id}#refinement-${proposal.id}`;
+      }
+    }
+    f.refineStates = states;
+    writeFileSync(file, JSON.stringify(f));
+    console.log(
+      "Disposable accepted/edited/rejected/superseded/pending/long and off-page states prepared. All provider responses injected locally.",
+    );
+  } else if (mode === "phase-3-history") {
+    assert.ok(
+      f.company && !f.manyCompany,
+      "Populate the base fixture once before expanding history.",
+    );
+    assert.ok(
+      !(
+        await client.auth.signInWithPassword({
+          email: f.email,
+          password: f.password,
+        })
+      ).error,
+    );
+    const company = await createCompany(client, f.id, {
+      name: "Loka Distribusi — Riwayat Fiktif",
+      ticker: "",
+      exchange: "",
+      sector: "",
+      short_note: "",
+    });
+    const rows = await client
+      .from("thoughts")
+      .insert(
+        Array.from({ length: 25 }, (_, i) => ({
+          user_id: f.id,
+          company_id: company.id,
+          raw_content: `Catatan fiktif ${i + 1}: aku belum memeriksa laporan arus kasnya. Aku tertarik dengan ekspansinya, tapi masih perlu membaca sumbernya dulu.`,
+          capture_operation_id: randomUUID(),
+        })),
+      )
+      .select("id,created_at")
+      .order("created_at", { ascending: false })
+      .order("id", { ascending: true });
+    assert.ok(
+      !rows.error && rows.data?.length === 25,
+      "History fixture failed.",
+    );
+    Object.assign(f, {
+      manyCompany: company.id,
+      newestThought: rows.data[0].id,
+      oldestThought: rows.data.at(-1)!.id,
+    });
+    writeFileSync(file, JSON.stringify(f));
+    console.log("25 disposable original Thoughts prepared; no AI request.");
+  } else if (mode === "phase-3-reading") {
+    assert.ok(
+      f.company && !f.readingThoughts,
+      "Prepare the base fixture once first.",
+    );
+    assert.ok(
+      !(
+        await client.auth.signInWithPassword({
+          email: f.email,
+          password: f.password,
+        })
+      ).error,
+    );
+    const texts = [
+      "aku tertarik sama ekspansinya, tapi belum baca laporan terakhir. jangan buru-buru menyimpulkan.",
+      "Yang perlu aku cek:\n\n- arus kas operasional\n- kebutuhan modal untuk ekspansi\n- catatan utang yang jatuh tempo\n\naku belum punya jawaban untuk ketiganya.",
+      Array.from(
+        { length: 5 },
+        (_, i) =>
+          `${i + 1}. aku mau bedakan rencana ekspansi dari hasil yang sudah terlihat. Belum membaca laporannya bukan berarti aku meragukan semua rencana mereka; aku masih perlu melihat informasinya dulu.`,
+      ).join("\n\n"),
+      "hari ini aku cuma ingin menyimpan pertanyaan: ekspansinya dibiayai dari mana? belum ada kesimpulan.",
+    ];
+    f.readingThoughts = [];
+    for (const raw_content of texts) {
+      const thought = await createThought(client, f.id, {
+        company_id: f.company,
+        raw_content,
+        capture_operation_id: randomUUID(),
+      });
+      f.readingThoughts.push({ id: thought.id, raw_content });
+    }
+    writeFileSync(file, JSON.stringify(f));
+    console.log(
+      "Four disposable short/multiline/long reading fixtures prepared; no AI request.",
     );
   } else {
     assert.equal(mode, "populate");

@@ -110,7 +110,7 @@ export default async function HomePage() {
                 </div>
                 <Link
                   className="recent-content"
-                  href={`/companies/${thought.company_id}?focus=${thought.id}#thought-${thought.id}`}
+                  href={`/companies/${thought.company_id}/thoughts?focus=${thought.id}#thought-${thought.id}`}
                 >
                   <span>
                     {thought.raw_content.slice(0, 200)}

@@ -11,6 +11,8 @@ import {
   claimRefinement,
   getRefinement,
   getRefinements,
+  getActiveRefinement,
+  getRefinementQueue,
   createRefinementWriter,
 } from "../../server/db/refinements.ts";
 import {
@@ -47,6 +49,7 @@ test(
     const config = {
       ...fixtureAIConfig,
       outputTokenLimit: 512,
+      dailyCallLimit: 60,
       pricingVersion: "synthetic-m5-verification",
     };
     const service = createRefineService({
@@ -303,12 +306,15 @@ test(
           assert.equal((await app.request("/auth", form)).status, 303);
           const path = `/companies/${company.id}/thoughts/${thought.id}/refine`;
           const before = calls;
-          const page = await app.request(path);
+          const hub = await app.request(`/companies/${company.id}/refinements`);
+          assert.equal(hub.status, 200);
+          assert.ok((await hub.text()).includes("Ada usulan"));
+          const current = await app.request(path);
+          assert.ok((await current.text()).includes("Versi pilihan"));
+          const page = await app.request(`${path}?proposal=${fourth.id}`);
           assert.equal(page.status, 200);
           const html = await page.text();
-          assert.ok(
-            html.includes("Pemikiran asli") && html.includes("USULAN AI"),
-          );
+          assert.ok(html.includes(">Asli</h3>") && html.includes("Usulan AI"));
           const target = html.match(
             new RegExp(`<form[^>]*id="review-${fourth.id}"[\\s\\S]*?</form>`),
           )?.[0];
@@ -318,11 +324,29 @@ test(
           review.set("thought_id", thought.id);
           review.set("refinement_id", fourth.id);
           review.set("status", "ACCEPTED");
+          review.set("user_final_content", "");
+          const invalid = await app.request(
+            `${path}?proposal=${fourth.id}`,
+            review,
+          );
+          const invalidHtml = await invalid.text();
+          assert.ok(
+            invalidHtml.includes(
+              "Permintaan atau teks versi pilihan tidak valid",
+            ),
+          );
+          assert.ok(
+            invalidHtml.includes(`id="review-${fourth.id}"`),
+            "The selected proposal form must survive a no-JS validation error even when another accepted version exists.",
+          );
           review.set(
             "user_final_content",
             "Versi pilihan dari tindakan server; aku belum yakin.",
           );
-          assert.equal((await app.request(path, review)).status, 303);
+          assert.equal(
+            (await app.request(`${path}?proposal=${fourth.id}`, review)).status,
+            303,
+          );
           assert.equal(
             (await getRefinement(
               clients[0],
@@ -333,6 +357,112 @@ test(
             ))!.status,
             "ACCEPTED",
           );
+          assert.equal(calls, before);
+          const active = await getActiveRefinement(
+            clients[0],
+            owner,
+            company.id,
+            thought.id,
+            "ACCEPTED",
+          );
+          assert.equal(active?.id, fourth.id);
+          assert.equal(
+            active?.user_final_content,
+            "Versi pilihan dari tindakan server; aku belum yakin.",
+          );
+          const queue = await getRefinementQueue(
+            clients[0],
+            owner,
+            company.id,
+            [thought.id],
+          );
+          assert.ok(queue.get(thought.id)?.statuses?.includes("ACCEPTED"));
+          const acceptedPage = await app.request(
+            `${path}?resolved=${fourth.id}`,
+          );
+          const acceptedHtml = await acceptedPage.text();
+          assert.ok(acceptedHtml.includes(active!.user_final_content!));
+          assert.ok(!acceptedHtml.includes(`id="review-${fourth.id}"`));
+          const unavailable = await app.request(
+            `/companies/${randomUUID()}/refinements`,
+          );
+          const unavailableHtml = await unavailable.text();
+          assert.ok(unavailableHtml.includes("Perusahaan tidak tersedia"));
+          assert.ok(!unavailableHtml.includes(company.name));
+          const foreignApp = createLocalHttpSession();
+          const foreignLogin = serverActionForm(
+            await (await foreignApp.request("/auth")).text(),
+          );
+          foreignLogin.set("email", users[1].email);
+          foreignLogin.set("password", users[1].password);
+          assert.equal(
+            (await foreignApp.request("/auth", foreignLogin)).status,
+            303,
+          );
+          const foreignHub = await (
+            await foreignApp.request(`/companies/${company.id}/refinements`)
+          ).text();
+          assert.ok(foreignHub.includes("Perusahaan tidak tersedia"));
+          assert.ok(!foreignHub.includes(company.name));
+          assert.ok(!foreignHub.includes(thought.raw_content));
+        },
+      );
+      await t.test(
+        "accepted read stays authoritative beyond a full history window; pending queue reads never generate",
+        async () => {
+          for (let i = 0; i < 21; i++)
+            await service(clients[0], { ...input, operation_id: randomUUID() });
+          const before = calls;
+          const history = await getRefinements(
+            clients[0],
+            owner,
+            company.id,
+            thought.id,
+          );
+          assert.equal(history.refinements.length, 20);
+          assert.ok(history.hasMore);
+          assert.ok(!history.refinements.some((r) => r.status === "ACCEPTED"));
+          assert.equal(
+            (
+              await getActiveRefinement(
+                clients[0],
+                owner,
+                company.id,
+                thought.id,
+                "ACCEPTED",
+              )
+            )?.id,
+            fourth.id,
+          );
+          assert.equal(
+            (
+              await getRefinement(
+                clients[0],
+                owner,
+                company.id,
+                thought.id,
+                first.id,
+              )
+            )?.status,
+            "SUPERSEDED",
+          );
+          assert.equal(
+            await getActiveRefinement(
+              clients[1],
+              users[1].id,
+              company.id,
+              thought.id,
+              "ACCEPTED",
+            ),
+            null,
+          );
+          const queue = await getRefinementQueue(
+            clients[0],
+            owner,
+            company.id,
+            [thought.id],
+          );
+          assert.ok(queue.get(thought.id)?.statuses?.includes("ACCEPTED"));
           assert.equal(calls, before);
         },
       );
@@ -360,6 +490,14 @@ test(
           await archiveCompany(clients[0], owner, company.id);
           const before = calls;
           await assert.rejects(accounting.start(owner, op, 1));
+          assert.equal(
+            (
+              await getRefinementQueue(clients[0], owner, company.id, [
+                thought.id,
+              ])
+            ).get(thought.id)?.pending,
+            true,
+          );
           await assert.rejects(
             service(clients[0], { ...input, operation_id: randomUUID() }),
           );

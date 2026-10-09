@@ -127,6 +127,123 @@ export async function getPendingRefinement(
     ? owned(refinementRequestRow.parse(data), owner, company, thought)
     : null;
 }
+/** Independent of chronological pagination; the database enforces one ACCEPTED. */
+export async function getActiveRefinement(
+  client: SupabaseClient,
+  owner: string,
+  company: string,
+  thought: string,
+  status: "ACCEPTED" | "SUGGESTED" | "REJECTED",
+) {
+  const { data, error } = await client
+    .from("refinements")
+    .select("*")
+    .eq("user_id", owner)
+    .eq("company_id", z.uuid().parse(company))
+    .eq("thought_id", z.uuid().parse(thought))
+    .eq("status", status)
+    .order("created_at", { ascending: false })
+    .order("id", { ascending: true })
+    .limit(status === "ACCEPTED" ? 2 : 1);
+  if (error || !data || (status === "ACCEPTED" && data.length > 1))
+    throw new RefinementError("FAILED");
+  const row = data[0]
+    ? owned(refinementRow.parse(data[0]), owner, company, thought)
+    : null;
+  if (row && row.status !== status) throw new RefinementError("FAILED");
+  return row;
+}
+
+/** Three bounded batch reads. Truncated history never proves absence. */
+export async function getRefinementQueue(
+  client: SupabaseClient,
+  owner: string,
+  company: string,
+  thoughts: string[],
+) {
+  const ids = thoughts.map((id) => z.uuid().parse(id));
+  z.uuid().parse(company);
+  const result = new Map<
+    string,
+    { statuses: string[] | null; pending: boolean | null }
+  >();
+  if (!ids.length) return result;
+  if (ids.length > 20) throw new RefinementError("FAILED");
+  const [history, accepted, pending] = await Promise.all([
+    client
+      .from("refinements")
+      .select("thought_id,status,user_id,company_id")
+      .eq("user_id", owner)
+      .eq("company_id", company)
+      .in("thought_id", ids)
+      .order("created_at", { ascending: false })
+      .limit(101),
+    client
+      .from("refinements")
+      .select("thought_id,status,user_id,company_id")
+      .eq("user_id", owner)
+      .eq("company_id", company)
+      .in("thought_id", ids)
+      .eq("status", "ACCEPTED")
+      .limit(21),
+    client
+      .from("refinement_requests")
+      .select("thought_id,status,user_id,company_id")
+      .eq("user_id", owner)
+      .eq("company_id", company)
+      .in("thought_id", ids)
+      .eq("status", "PENDING")
+      .limit(21),
+  ]);
+  const summary = z.array(
+    z.object({
+      thought_id: z.uuid(),
+      user_id: z.uuid(),
+      company_id: z.uuid(),
+      status: z.enum([
+        "ACCEPTED",
+        "SUGGESTED",
+        "REJECTED",
+        "SUPERSEDED",
+        "PENDING",
+      ]),
+    }),
+  );
+  function rows(value: typeof history, expected?: "ACCEPTED" | "PENDING") {
+    if (value.error || !value.data) return null;
+    const parsed = summary.safeParse(value.data);
+    if (
+      !parsed.success ||
+      parsed.data.some(
+        (r) =>
+          r.user_id !== owner ||
+          r.company_id !== company ||
+          !ids.includes(r.thought_id) ||
+          (expected ? r.status !== expected : r.status === "PENDING"),
+      )
+    )
+      return null;
+    return parsed.data;
+  }
+  const h = rows(history),
+    a = rows(accepted, "ACCEPTED"),
+    p = rows(pending, "PENDING");
+  for (const id of ids) {
+    const known = [...(h ?? []), ...(a ?? [])]
+      .filter((r) => r.thought_id === id)
+      .map((r) => r.status);
+    result.set(id, {
+      statuses:
+        h && h.length <= 100
+          ? known
+          : known.some((s) => s === "SUGGESTED" || s === "ACCEPTED")
+            ? known
+            : null,
+      pending: p && p.length <= 20 ? p.some((r) => r.thought_id === id) : null,
+    });
+  }
+  return result;
+}
 export async function claimRefinement(
   client: SupabaseClient,
   owner: string,

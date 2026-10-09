@@ -9,11 +9,13 @@ export function GenerateRefinementForm({
   thoughtId,
   operationId,
   disabledReason,
+  secondary = false,
 }: {
   companyId: string;
   thoughtId: string;
   operationId: string;
   disabledReason?: string;
+  secondary?: boolean;
 }) {
   const path = `/companies/${companyId}/thoughts/${thoughtId}/refine`;
   const [state, action, pending] = useActionState(
@@ -21,14 +23,13 @@ export function GenerateRefinementForm({
     initialRefineFormState,
     path,
   );
-  return (
+  const form = (
     <form action={action} className="refine-generate" aria-busy={pending}>
       <input type="hidden" name="company_id" value={companyId} />
       <input type="hidden" name="thought_id" value={thoughtId} />
       <input type="hidden" name="operation_id" value={operationId} />
       <p className="auth-help">
-        AI hanya merapikan kata-katamu. Tinjau makna dan keraguannya sebelum
-        menerima; klaim belum diverifikasi.
+        AI merapikan kata-katamu; keputusan tetap milikmu.
       </p>
       <div className="company-form-actions">
         <button
@@ -39,9 +40,9 @@ export function GenerateRefinementForm({
         </button>
         <Link
           className="quiet-link"
-          href={`/companies/${companyId}?focus=${thoughtId}#thought-${thoughtId}`}
+          href={`/companies/${companyId}/thoughts?focus=${thoughtId}#thought-${thoughtId}`}
         >
-          Tetap gunakan asli
+          Lihat pemikiran
         </Link>
       </div>
       <p className="form-feedback" role="status" aria-live="polite">
@@ -53,6 +54,17 @@ export function GenerateRefinementForm({
         <ReloadRefinementStatus label="Muat ulang untuk melihat status" />
       )}
     </form>
+  );
+  return secondary ? (
+    <details
+      className="refine-new-proposal"
+      open={state.error ? true : undefined}
+    >
+      <summary>Buat usulan baru</summary>
+      {form}
+    </details>
+  ) : (
+    form
   );
 }
 /** A normal page reload is deliberate: same-URL navigation can retain action state. */
@@ -85,7 +97,7 @@ export function ReviewRefinementForm({
   const [state, action, pending] = useActionState(
     reviewRefinementAction,
     initialRefineFormState,
-    `/companies/${companyId}/thoughts/${thoughtId}/refine`,
+    `/companies/${companyId}/thoughts/${thoughtId}/refine?proposal=${refinementId}#refinement-${refinementId}`,
   );
   return (
     <form

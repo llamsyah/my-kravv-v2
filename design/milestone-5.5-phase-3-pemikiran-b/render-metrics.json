@@ -1,0 +1,6742 @@
+[
+  {
+    "view": "mixed",
+    "composer": {
+      "height": 366.015625,
+      "width": 1280,
+      "x": 80,
+      "y": 393.8125
+    },
+    "content": {
+      "height": 2315.53125,
+      "width": 1280,
+      "x": 80,
+      "y": 393.8125
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas O"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 44,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 204.75,
+        "text": "Baca pemikiran lengkap"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 204.75,
+        "text": "Baca pemikiran lengkap"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      }
+    ],
+    "entries": [
+      {
+        "bounds": {
+          "height": 219.046875,
+          "width": 1280,
+          "x": 80,
+          "y": 837.515625
+        },
+        "deleteOpen": false,
+        "id": "thought-112e77bf-1d22-4593-aa4d-6a5a69b5044e",
+        "longOpen": null,
+        "textBounds": {
+          "height": 89.25,
+          "width": 725.875,
+          "x": 80,
+          "y": 862.515625
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 1280,
+          "x": 80,
+          "y": 1056.5625
+        },
+        "deleteOpen": false,
+        "id": "thought-02bb9616-0486-4061-ba67-f4869ad29bf5",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 725.875,
+          "x": 80,
+          "y": 1081.5625
+        }
+      },
+      {
+        "bounds": {
+          "height": 334.546875,
+          "width": 1280,
+          "x": 80,
+          "y": 1245.859375
+        },
+        "deleteOpen": false,
+        "id": "thought-49ae97d0-ec12-4673-bb43-1a5aa44ea0e7",
+        "longOpen": false,
+        "textBounds": {
+          "height": 565.25,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 1475.609375
+        }
+      },
+      {
+        "bounds": {
+          "height": 338.046875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 1580.40625
+        },
+        "deleteOpen": false,
+        "id": "thought-40616cb1-d68f-4fef-91d8-8a52c3a966d1",
+        "longOpen": null,
+        "textBounds": {
+          "height": 208.25,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 1605.40625
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 1918.453125
+        },
+        "deleteOpen": false,
+        "id": "thought-97834387-81dc-4969-8b65-a64d47a515e2",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 1943.453125
+        }
+      },
+      {
+        "bounds": {
+          "height": 334.546875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 2107.75
+        },
+        "deleteOpen": false,
+        "id": "thought-7dc022cb-9be1-47ba-b33f-0ae6e821a0cb",
+        "longOpen": false,
+        "textBounds": {
+          "height": 1428,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 2337.5
+        }
+      },
+      {
+        "bounds": {
+          "height": 219.046875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 2442.296875
+        },
+        "deleteOpen": false,
+        "id": "thought-73684f52-3e81-4010-83bd-8dade668b80e",
+        "longOpen": null,
+        "textBounds": {
+          "height": 89.25,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 2467.296875
+        }
+      }
+    ],
+    "fonts": "loaded",
+    "header": {
+      "height": 268.8125,
+      "width": 1280,
+      "x": 80,
+      "y": 101
+    },
+    "history": {
+      "height": 1893.515625,
+      "width": 1280,
+      "x": 80,
+      "y": 791.828125
+    },
+    "inlineAIGeneration": 0,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "width": 684.25
+      }
+    ],
+    "navOverflow": false,
+    "navigation": {
+      "height": 52,
+      "width": 1280,
+      "x": 80,
+      "y": 300.8125
+    },
+    "overflow": false,
+    "scroll": 0,
+    "viewport": {
+      "height": 1000,
+      "width": 1440
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged",
+      "visual": 1
+    },
+    "geometryContext": "Immediately after full-page export; capture temporarily removes the scrollbar"
+  },
+  {
+    "view": "many",
+    "composer": {
+      "height": 366.015625,
+      "width": 1280,
+      "x": 70.5,
+      "y": 326
+    },
+    "content": {
+      "height": 4321.640625,
+      "width": 1280,
+      "x": 70.5,
+      "y": 326
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Loka Distribusi — Riwayat Fiktif"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 44,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran lebih lama"
+      }
+    ],
+    "entries": [
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 769.703125
+        },
+        "deleteOpen": false,
+        "id": "thought-11dcac0b-d363-4b52-97e0-d9ea270da4de",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 794.703125
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 959
+        },
+        "deleteOpen": false,
+        "id": "thought-20f57111-3550-4137-b904-de125c08ca5f",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 984
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 1148.296875
+        },
+        "deleteOpen": false,
+        "id": "thought-29fd0739-5e14-4a46-b0f6-c2545c2015f2",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 1173.296875
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 1337.59375
+        },
+        "deleteOpen": false,
+        "id": "thought-30e6dfff-5855-4b6a-ab1d-8f196e8bab98",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 1362.59375
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 1526.890625
+        },
+        "deleteOpen": false,
+        "id": "thought-367e44c9-0623-4e51-a580-2b2df90149ff",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 1551.890625
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 1716.1875
+        },
+        "deleteOpen": false,
+        "id": "thought-3f73b3c1-58ef-4bf9-9c3c-141f1850e10e",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 1741.1875
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 1905.484375
+        },
+        "deleteOpen": false,
+        "id": "thought-4a8a23f5-e6fb-45a4-ae7e-28e5ff82e74a",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 1930.484375
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 2094.78125
+        },
+        "deleteOpen": false,
+        "id": "thought-4da0d92a-8213-48f7-862b-e1792f1d4dde",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 2119.78125
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 2284.078125
+        },
+        "deleteOpen": false,
+        "id": "thought-4fb84dfd-17e4-46b0-b4b8-95535af9d8dd",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 2309.078125
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 2473.375
+        },
+        "deleteOpen": false,
+        "id": "thought-75db143c-2c63-4513-8923-1f0c2f6f767e",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 2498.375
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 2662.671875
+        },
+        "deleteOpen": false,
+        "id": "thought-7635fdc3-95a7-4eba-9443-509bda811947",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 2687.671875
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 2851.96875
+        },
+        "deleteOpen": false,
+        "id": "thought-85a0e95c-fffa-42fd-a537-eb1fbc355076",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 2876.96875
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 3041.265625
+        },
+        "deleteOpen": false,
+        "id": "thought-8de66aa6-f5cb-481a-a546-ef34b3a0b3e3",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 3066.265625
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 3230.5625
+        },
+        "deleteOpen": false,
+        "id": "thought-8e101f56-ff9d-45a7-b8db-5e1dc09528d8",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 3255.5625
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 3419.859375
+        },
+        "deleteOpen": false,
+        "id": "thought-95f803dd-7222-4aa6-9edd-239cf61f326a",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 3444.859375
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 3609.15625
+        },
+        "deleteOpen": false,
+        "id": "thought-9d2db85a-9460-4287-a855-3772d892d68a",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 3634.15625
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 3798.453125
+        },
+        "deleteOpen": false,
+        "id": "thought-ae52b009-4a52-45da-b8aa-5a6a2e1b62b9",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 3823.453125
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 3987.75
+        },
+        "deleteOpen": false,
+        "id": "thought-b0f7faae-3898-444f-b59b-3bdd28fdcc31",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 4012.75
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 4177.046875
+        },
+        "deleteOpen": false,
+        "id": "thought-b343a5b1-0606-4c33-9439-212b1ee5b6d0",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 4202.046875
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 4366.34375
+        },
+        "deleteOpen": false,
+        "id": "thought-b6b5f8d3-411d-476b-8e78-d3ee818857ae",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 4391.34375
+        }
+      }
+    ],
+    "fonts": "loaded",
+    "header": {
+      "height": 201,
+      "width": 1280,
+      "x": 70.5,
+      "y": 101
+    },
+    "history": {
+      "height": 3899.625,
+      "width": 1280,
+      "x": 70.5,
+      "y": 724.015625
+    },
+    "inlineAIGeneration": 0,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "width": 684.25
+      }
+    ],
+    "navOverflow": false,
+    "navigation": {
+      "height": 52,
+      "width": 1280,
+      "x": 70.5,
+      "y": 233
+    },
+    "overflow": false,
+    "scroll": 0,
+    "viewport": {
+      "height": 1000,
+      "width": 1440
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged",
+      "visual": 1
+    },
+    "geometryContext": "Normal page viewport before screenshot"
+  },
+  {
+    "view": "older",
+    "composer": null,
+    "content": {
+      "height": 1210.171875,
+      "width": 1280,
+      "x": 70.5,
+      "y": 326
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Loka Distribusi — Riwayat Fiktif"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Kembali ke yang terbaru"
+      }
+    ],
+    "entries": [
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 497.6875
+        },
+        "deleteOpen": false,
+        "id": "thought-cbbc29d9-74f0-4d93-af17-a6cfee6238d1",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 522.6875
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 686.984375
+        },
+        "deleteOpen": false,
+        "id": "thought-d8b4cbd8-af56-434b-9549-62385c604ead",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 711.984375
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 876.28125
+        },
+        "deleteOpen": false,
+        "id": "thought-dc617c72-fa59-4919-a3a4-b6a09d1e2937",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 901.28125
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 1065.578125
+        },
+        "deleteOpen": false,
+        "id": "thought-ebfa8adb-3501-46d8-9c56-1882fd8870be",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 1090.578125
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 1254.875
+        },
+        "deleteOpen": false,
+        "id": "thought-ed806196-e874-41b5-b241-ac79e7d51448",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 1279.875
+        }
+      }
+    ],
+    "fonts": "loaded",
+    "header": {
+      "height": 201,
+      "width": 1280,
+      "x": 70.5,
+      "y": 101
+    },
+    "history": {
+      "height": 1060.171875,
+      "width": 1280,
+      "x": 70.5,
+      "y": 452
+    },
+    "inlineAIGeneration": 0,
+    "inputs": [],
+    "navOverflow": false,
+    "navigation": {
+      "height": 52,
+      "width": 1280,
+      "x": 70.5,
+      "y": 233
+    },
+    "overflow": false,
+    "scroll": 0,
+    "viewport": {
+      "height": 1000,
+      "width": 1440
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged",
+      "visual": 1
+    },
+    "geometryContext": "Normal page viewport before screenshot"
+  },
+  {
+    "view": "focused",
+    "composer": {
+      "height": 366.015625,
+      "width": 1280,
+      "x": 70.5,
+      "y": 393.8125
+    },
+    "content": {
+      "height": 2736.03125,
+      "width": 1280,
+      "x": 70.5,
+      "y": 393.8125
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas O"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 44,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Baca pemikiran lengkap"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 204.75,
+        "text": "Baca pemikiran lengkap"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      }
+    ],
+    "entries": [
+      {
+        "bounds": {
+          "height": 219.046875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 837.515625
+        },
+        "deleteOpen": false,
+        "id": "thought-112e77bf-1d22-4593-aa4d-6a5a69b5044e",
+        "longOpen": null,
+        "textBounds": {
+          "height": 89.25,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 862.515625
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 1056.5625
+        },
+        "deleteOpen": false,
+        "id": "thought-02bb9616-0486-4061-ba67-f4869ad29bf5",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 1081.5625
+        }
+      },
+      {
+        "bounds": {
+          "height": 755.046875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 1245.859375
+        },
+        "deleteOpen": false,
+        "id": "thought-49ae97d0-ec12-4673-bb43-1a5aa44ea0e7",
+        "longOpen": true,
+        "textBounds": {
+          "height": 565.25,
+          "width": 713.875,
+          "x": 82.5,
+          "y": 1330.859375
+        }
+      },
+      {
+        "bounds": {
+          "height": 338.046875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 2000.90625
+        },
+        "deleteOpen": false,
+        "id": "thought-40616cb1-d68f-4fef-91d8-8a52c3a966d1",
+        "longOpen": null,
+        "textBounds": {
+          "height": 208.25,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 2025.90625
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 2338.953125
+        },
+        "deleteOpen": false,
+        "id": "thought-97834387-81dc-4969-8b65-a64d47a515e2",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 2363.953125
+        }
+      },
+      {
+        "bounds": {
+          "height": 334.546875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 2528.25
+        },
+        "deleteOpen": false,
+        "id": "thought-7dc022cb-9be1-47ba-b33f-0ae6e821a0cb",
+        "longOpen": false,
+        "textBounds": {
+          "height": 1428,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 2758
+        }
+      },
+      {
+        "bounds": {
+          "height": 219.046875,
+          "width": 1280,
+          "x": 70.5,
+          "y": 2862.796875
+        },
+        "deleteOpen": false,
+        "id": "thought-73684f52-3e81-4010-83bd-8dade668b80e",
+        "longOpen": null,
+        "textBounds": {
+          "height": 89.25,
+          "width": 725.875,
+          "x": 70.5,
+          "y": 2887.796875
+        }
+      }
+    ],
+    "fonts": "loaded",
+    "header": {
+      "height": 268.8125,
+      "width": 1280,
+      "x": 70.5,
+      "y": 101
+    },
+    "history": {
+      "height": 2314.015625,
+      "width": 1280,
+      "x": 70.5,
+      "y": 791.828125
+    },
+    "inlineAIGeneration": 0,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "width": 684.25
+      }
+    ],
+    "navOverflow": false,
+    "navigation": {
+      "height": 52,
+      "width": 1280,
+      "x": 70.5,
+      "y": 300.8125
+    },
+    "overflow": false,
+    "scroll": 0,
+    "viewport": {
+      "height": 1000,
+      "width": 1440
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged",
+      "visual": 1
+    },
+    "geometryContext": "Normal page viewport before screenshot"
+  },
+  {
+    "view": "archived",
+    "composer": null,
+    "content": {
+      "height": 298.671875,
+      "width": 1280,
+      "x": 80,
+      "y": 326
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Sagara Karya — Arsip Fiktif"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      }
+    ],
+    "entries": [
+      {
+        "bounds": {
+          "height": 159.546875,
+          "width": 1280,
+          "x": 80,
+          "y": 417.125
+        },
+        "deleteOpen": false,
+        "id": "thought-9b4404ce-a670-4130-b3f1-b7dc6ac0f89e",
+        "longOpen": null,
+        "textBounds": {
+          "height": 29.75,
+          "width": 725.875,
+          "x": 80,
+          "y": 442.125
+        }
+      }
+    ],
+    "fonts": "loaded",
+    "header": {
+      "height": 201,
+      "width": 1280,
+      "x": 80,
+      "y": 101
+    },
+    "history": {
+      "height": 229.234375,
+      "width": 1280,
+      "x": 80,
+      "y": 371.4375
+    },
+    "inlineAIGeneration": 0,
+    "inputs": [],
+    "navOverflow": false,
+    "navigation": {
+      "height": 52,
+      "width": 1280,
+      "x": 80,
+      "y": 233
+    },
+    "overflow": false,
+    "scroll": 0,
+    "viewport": {
+      "height": 1000,
+      "width": 1440
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged",
+      "visual": 1
+    },
+    "geometryContext": "Normal page viewport before screenshot"
+  },
+  {
+    "view": "empty",
+    "composer": {
+      "height": 366.015625,
+      "width": 1280,
+      "x": 80,
+      "y": 326
+    },
+    "content": {
+      "height": 550.09375,
+      "width": 1280,
+      "x": 80,
+      "y": 326
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Arunika Logistik — Fiktif"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 44,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      }
+    ],
+    "entries": [],
+    "fonts": "loaded",
+    "header": {
+      "height": 201,
+      "width": 1280,
+      "x": 80,
+      "y": 101
+    },
+    "history": {
+      "height": 128.078125,
+      "width": 1280,
+      "x": 80,
+      "y": 724.015625
+    },
+    "inlineAIGeneration": 0,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "width": 684.25
+      }
+    ],
+    "navOverflow": false,
+    "navigation": {
+      "height": 52,
+      "width": 1280,
+      "x": 80,
+      "y": 233
+    },
+    "overflow": false,
+    "scroll": 0,
+    "viewport": {
+      "height": 1000,
+      "width": 1440
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged",
+      "visual": 1
+    },
+    "geometryContext": "Normal page viewport before screenshot"
+  },
+  {
+    "view": "mixed",
+    "composer": {
+      "height": 366.015625,
+      "width": 720,
+      "x": 24,
+      "y": 523.375
+    },
+    "content": {
+      "height": 2315.53125,
+      "width": 720,
+      "x": 24,
+      "y": 523.375
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas O"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 44,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 204.75,
+        "text": "Baca pemikiran lengkap"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 204.75,
+        "text": "Baca pemikiran lengkap"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      }
+    ],
+    "entries": [
+      {
+        "bounds": {
+          "height": 219.046875,
+          "width": 720,
+          "x": 24,
+          "y": 967.078125
+        },
+        "deleteOpen": false,
+        "id": "thought-112e77bf-1d22-4593-aa4d-6a5a69b5044e",
+        "longOpen": null,
+        "textBounds": {
+          "height": 89.25,
+          "width": 720,
+          "x": 24,
+          "y": 992.078125
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 720,
+          "x": 24,
+          "y": 1186.125
+        },
+        "deleteOpen": false,
+        "id": "thought-02bb9616-0486-4061-ba67-f4869ad29bf5",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 720,
+          "x": 24,
+          "y": 1211.125
+        }
+      },
+      {
+        "bounds": {
+          "height": 334.546875,
+          "width": 720,
+          "x": 24,
+          "y": 1375.421875
+        },
+        "deleteOpen": false,
+        "id": "thought-49ae97d0-ec12-4673-bb43-1a5aa44ea0e7",
+        "longOpen": false,
+        "textBounds": {
+          "height": 565.25,
+          "width": 701,
+          "x": 24,
+          "y": 1605.171875
+        }
+      },
+      {
+        "bounds": {
+          "height": 338.046875,
+          "width": 701,
+          "x": 24,
+          "y": 1709.96875
+        },
+        "deleteOpen": false,
+        "id": "thought-40616cb1-d68f-4fef-91d8-8a52c3a966d1",
+        "longOpen": null,
+        "textBounds": {
+          "height": 208.25,
+          "width": 701,
+          "x": 24,
+          "y": 1734.96875
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 701,
+          "x": 24,
+          "y": 2048.015625
+        },
+        "deleteOpen": false,
+        "id": "thought-97834387-81dc-4969-8b65-a64d47a515e2",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 701,
+          "x": 24,
+          "y": 2073.015625
+        }
+      },
+      {
+        "bounds": {
+          "height": 334.546875,
+          "width": 701,
+          "x": 24,
+          "y": 2237.3125
+        },
+        "deleteOpen": false,
+        "id": "thought-7dc022cb-9be1-47ba-b33f-0ae6e821a0cb",
+        "longOpen": false,
+        "textBounds": {
+          "height": 1844.5,
+          "width": 701,
+          "x": 24,
+          "y": 2467.0625
+        }
+      },
+      {
+        "bounds": {
+          "height": 219.046875,
+          "width": 701,
+          "x": 24,
+          "y": 2571.859375
+        },
+        "deleteOpen": false,
+        "id": "thought-73684f52-3e81-4010-83bd-8dade668b80e",
+        "longOpen": null,
+        "textBounds": {
+          "height": 89.25,
+          "width": 701,
+          "x": 24,
+          "y": 2596.859375
+        }
+      }
+    ],
+    "fonts": "loaded",
+    "header": {
+      "height": 398.375,
+      "width": 720,
+      "x": 24,
+      "y": 101
+    },
+    "history": {
+      "height": 1893.515625,
+      "width": 720,
+      "x": 24,
+      "y": 921.390625
+    },
+    "inlineAIGeneration": 0,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "width": 651
+      }
+    ],
+    "navOverflow": false,
+    "navigation": {
+      "height": 52,
+      "width": 720,
+      "x": 24,
+      "y": 430.375
+    },
+    "overflow": false,
+    "scroll": 0,
+    "viewport": {
+      "height": 1000,
+      "width": 768
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged",
+      "visual": 1
+    },
+    "geometryContext": "Immediately after full-page export; capture temporarily removes the scrollbar"
+  },
+  {
+    "view": "many",
+    "composer": {
+      "height": 366.015625,
+      "width": 701,
+      "x": 24,
+      "y": 326
+    },
+    "content": {
+      "height": 4321.640625,
+      "width": 701,
+      "x": 24,
+      "y": 326
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Loka Distribusi — Riwayat Fiktif"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 44,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran lebih lama"
+      }
+    ],
+    "entries": [
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 701,
+          "x": 24,
+          "y": 769.703125
+        },
+        "deleteOpen": false,
+        "id": "thought-11dcac0b-d363-4b52-97e0-d9ea270da4de",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 701,
+          "x": 24,
+          "y": 794.703125
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 701,
+          "x": 24,
+          "y": 959
+        },
+        "deleteOpen": false,
+        "id": "thought-20f57111-3550-4137-b904-de125c08ca5f",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 701,
+          "x": 24,
+          "y": 984
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 701,
+          "x": 24,
+          "y": 1148.296875
+        },
+        "deleteOpen": false,
+        "id": "thought-29fd0739-5e14-4a46-b0f6-c2545c2015f2",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 701,
+          "x": 24,
+          "y": 1173.296875
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 701,
+          "x": 24,
+          "y": 1337.59375
+        },
+        "deleteOpen": false,
+        "id": "thought-30e6dfff-5855-4b6a-ab1d-8f196e8bab98",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 701,
+          "x": 24,
+          "y": 1362.59375
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 701,
+          "x": 24,
+          "y": 1526.890625
+        },
+        "deleteOpen": false,
+        "id": "thought-367e44c9-0623-4e51-a580-2b2df90149ff",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 701,
+          "x": 24,
+          "y": 1551.890625
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 701,
+          "x": 24,
+          "y": 1716.1875
+        },
+        "deleteOpen": false,
+        "id": "thought-3f73b3c1-58ef-4bf9-9c3c-141f1850e10e",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 701,
+          "x": 24,
+          "y": 1741.1875
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 701,
+          "x": 24,
+          "y": 1905.484375
+        },
+        "deleteOpen": false,
+        "id": "thought-4a8a23f5-e6fb-45a4-ae7e-28e5ff82e74a",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 701,
+          "x": 24,
+          "y": 1930.484375
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 701,
+          "x": 24,
+          "y": 2094.78125
+        },
+        "deleteOpen": false,
+        "id": "thought-4da0d92a-8213-48f7-862b-e1792f1d4dde",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 701,
+          "x": 24,
+          "y": 2119.78125
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 701,
+          "x": 24,
+          "y": 2284.078125
+        },
+        "deleteOpen": false,
+        "id": "thought-4fb84dfd-17e4-46b0-b4b8-95535af9d8dd",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 701,
+          "x": 24,
+          "y": 2309.078125
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 701,
+          "x": 24,
+          "y": 2473.375
+        },
+        "deleteOpen": false,
+        "id": "thought-75db143c-2c63-4513-8923-1f0c2f6f767e",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 701,
+          "x": 24,
+          "y": 2498.375
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 701,
+          "x": 24,
+          "y": 2662.671875
+        },
+        "deleteOpen": false,
+        "id": "thought-7635fdc3-95a7-4eba-9443-509bda811947",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 701,
+          "x": 24,
+          "y": 2687.671875
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 701,
+          "x": 24,
+          "y": 2851.96875
+        },
+        "deleteOpen": false,
+        "id": "thought-85a0e95c-fffa-42fd-a537-eb1fbc355076",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 701,
+          "x": 24,
+          "y": 2876.96875
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 701,
+          "x": 24,
+          "y": 3041.265625
+        },
+        "deleteOpen": false,
+        "id": "thought-8de66aa6-f5cb-481a-a546-ef34b3a0b3e3",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 701,
+          "x": 24,
+          "y": 3066.265625
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 701,
+          "x": 24,
+          "y": 3230.5625
+        },
+        "deleteOpen": false,
+        "id": "thought-8e101f56-ff9d-45a7-b8db-5e1dc09528d8",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 701,
+          "x": 24,
+          "y": 3255.5625
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 701,
+          "x": 24,
+          "y": 3419.859375
+        },
+        "deleteOpen": false,
+        "id": "thought-95f803dd-7222-4aa6-9edd-239cf61f326a",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 701,
+          "x": 24,
+          "y": 3444.859375
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 701,
+          "x": 24,
+          "y": 3609.15625
+        },
+        "deleteOpen": false,
+        "id": "thought-9d2db85a-9460-4287-a855-3772d892d68a",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 701,
+          "x": 24,
+          "y": 3634.15625
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 701,
+          "x": 24,
+          "y": 3798.453125
+        },
+        "deleteOpen": false,
+        "id": "thought-ae52b009-4a52-45da-b8aa-5a6a2e1b62b9",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 701,
+          "x": 24,
+          "y": 3823.453125
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 701,
+          "x": 24,
+          "y": 3987.75
+        },
+        "deleteOpen": false,
+        "id": "thought-b0f7faae-3898-444f-b59b-3bdd28fdcc31",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 701,
+          "x": 24,
+          "y": 4012.75
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 701,
+          "x": 24,
+          "y": 4177.046875
+        },
+        "deleteOpen": false,
+        "id": "thought-b343a5b1-0606-4c33-9439-212b1ee5b6d0",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 701,
+          "x": 24,
+          "y": 4202.046875
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 701,
+          "x": 24,
+          "y": 4366.34375
+        },
+        "deleteOpen": false,
+        "id": "thought-b6b5f8d3-411d-476b-8e78-d3ee818857ae",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 701,
+          "x": 24,
+          "y": 4391.34375
+        }
+      }
+    ],
+    "fonts": "loaded",
+    "header": {
+      "height": 201,
+      "width": 701,
+      "x": 24,
+      "y": 101
+    },
+    "history": {
+      "height": 3899.625,
+      "width": 701,
+      "x": 24,
+      "y": 724.015625
+    },
+    "inlineAIGeneration": 0,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "width": 651
+      }
+    ],
+    "navOverflow": false,
+    "navigation": {
+      "height": 52,
+      "width": 701,
+      "x": 24,
+      "y": 233
+    },
+    "overflow": false,
+    "scroll": 0,
+    "viewport": {
+      "height": 1000,
+      "width": 768
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged",
+      "visual": 1
+    },
+    "geometryContext": "Normal page viewport before screenshot"
+  },
+  {
+    "view": "older",
+    "composer": null,
+    "content": {
+      "height": 1210.171875,
+      "width": 701,
+      "x": 24,
+      "y": 326
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Loka Distribusi — Riwayat Fiktif"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Kembali ke yang terbaru"
+      }
+    ],
+    "entries": [
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 701,
+          "x": 24,
+          "y": 497.6875
+        },
+        "deleteOpen": false,
+        "id": "thought-cbbc29d9-74f0-4d93-af17-a6cfee6238d1",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 701,
+          "x": 24,
+          "y": 522.6875
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 701,
+          "x": 24,
+          "y": 686.984375
+        },
+        "deleteOpen": false,
+        "id": "thought-d8b4cbd8-af56-434b-9549-62385c604ead",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 701,
+          "x": 24,
+          "y": 711.984375
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 701,
+          "x": 24,
+          "y": 876.28125
+        },
+        "deleteOpen": false,
+        "id": "thought-dc617c72-fa59-4919-a3a4-b6a09d1e2937",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 701,
+          "x": 24,
+          "y": 901.28125
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 701,
+          "x": 24,
+          "y": 1065.578125
+        },
+        "deleteOpen": false,
+        "id": "thought-ebfa8adb-3501-46d8-9c56-1882fd8870be",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 701,
+          "x": 24,
+          "y": 1090.578125
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 701,
+          "x": 24,
+          "y": 1254.875
+        },
+        "deleteOpen": false,
+        "id": "thought-ed806196-e874-41b5-b241-ac79e7d51448",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 701,
+          "x": 24,
+          "y": 1279.875
+        }
+      }
+    ],
+    "fonts": "loaded",
+    "header": {
+      "height": 201,
+      "width": 701,
+      "x": 24,
+      "y": 101
+    },
+    "history": {
+      "height": 1060.171875,
+      "width": 701,
+      "x": 24,
+      "y": 452
+    },
+    "inlineAIGeneration": 0,
+    "inputs": [],
+    "navOverflow": false,
+    "navigation": {
+      "height": 52,
+      "width": 701,
+      "x": 24,
+      "y": 233
+    },
+    "overflow": false,
+    "scroll": 0,
+    "viewport": {
+      "height": 1000,
+      "width": 768
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged",
+      "visual": 1
+    },
+    "geometryContext": "Normal page viewport before screenshot"
+  },
+  {
+    "view": "focused",
+    "composer": {
+      "height": 366.015625,
+      "width": 701,
+      "x": 24,
+      "y": 523.375
+    },
+    "content": {
+      "height": 2736.03125,
+      "width": 701,
+      "x": 24,
+      "y": 523.375
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas O"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 44,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Baca pemikiran lengkap"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 204.75,
+        "text": "Baca pemikiran lengkap"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      }
+    ],
+    "entries": [
+      {
+        "bounds": {
+          "height": 219.046875,
+          "width": 701,
+          "x": 24,
+          "y": 967.078125
+        },
+        "deleteOpen": false,
+        "id": "thought-112e77bf-1d22-4593-aa4d-6a5a69b5044e",
+        "longOpen": null,
+        "textBounds": {
+          "height": 89.25,
+          "width": 701,
+          "x": 24,
+          "y": 992.078125
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 701,
+          "x": 24,
+          "y": 1186.125
+        },
+        "deleteOpen": false,
+        "id": "thought-02bb9616-0486-4061-ba67-f4869ad29bf5",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 701,
+          "x": 24,
+          "y": 1211.125
+        }
+      },
+      {
+        "bounds": {
+          "height": 755.046875,
+          "width": 701,
+          "x": 24,
+          "y": 1375.421875
+        },
+        "deleteOpen": false,
+        "id": "thought-49ae97d0-ec12-4673-bb43-1a5aa44ea0e7",
+        "longOpen": true,
+        "textBounds": {
+          "height": 565.25,
+          "width": 689,
+          "x": 36,
+          "y": 1460.421875
+        }
+      },
+      {
+        "bounds": {
+          "height": 338.046875,
+          "width": 701,
+          "x": 24,
+          "y": 2130.46875
+        },
+        "deleteOpen": false,
+        "id": "thought-40616cb1-d68f-4fef-91d8-8a52c3a966d1",
+        "longOpen": null,
+        "textBounds": {
+          "height": 208.25,
+          "width": 701,
+          "x": 24,
+          "y": 2155.46875
+        }
+      },
+      {
+        "bounds": {
+          "height": 189.296875,
+          "width": 701,
+          "x": 24,
+          "y": 2468.515625
+        },
+        "deleteOpen": false,
+        "id": "thought-97834387-81dc-4969-8b65-a64d47a515e2",
+        "longOpen": null,
+        "textBounds": {
+          "height": 59.5,
+          "width": 701,
+          "x": 24,
+          "y": 2493.515625
+        }
+      },
+      {
+        "bounds": {
+          "height": 334.546875,
+          "width": 701,
+          "x": 24,
+          "y": 2657.8125
+        },
+        "deleteOpen": false,
+        "id": "thought-7dc022cb-9be1-47ba-b33f-0ae6e821a0cb",
+        "longOpen": false,
+        "textBounds": {
+          "height": 1844.5,
+          "width": 701,
+          "x": 24,
+          "y": 2887.5625
+        }
+      },
+      {
+        "bounds": {
+          "height": 219.046875,
+          "width": 701,
+          "x": 24,
+          "y": 2992.359375
+        },
+        "deleteOpen": false,
+        "id": "thought-73684f52-3e81-4010-83bd-8dade668b80e",
+        "longOpen": null,
+        "textBounds": {
+          "height": 89.25,
+          "width": 701,
+          "x": 24,
+          "y": 3017.359375
+        }
+      }
+    ],
+    "fonts": "loaded",
+    "header": {
+      "height": 398.375,
+      "width": 701,
+      "x": 24,
+      "y": 101
+    },
+    "history": {
+      "height": 2314.015625,
+      "width": 701,
+      "x": 24,
+      "y": 921.390625
+    },
+    "inlineAIGeneration": 0,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "width": 651
+      }
+    ],
+    "navOverflow": false,
+    "navigation": {
+      "height": 52,
+      "width": 701,
+      "x": 24,
+      "y": 430.375
+    },
+    "overflow": false,
+    "scroll": 0,
+    "viewport": {
+      "height": 1000,
+      "width": 768
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged",
+      "visual": 1
+    },
+    "geometryContext": "Normal page viewport before screenshot"
+  },
+  {
+    "view": "archived",
+    "composer": null,
+    "content": {
+      "height": 298.671875,
+      "width": 720,
+      "x": 24,
+      "y": 326
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Sagara Karya — Arsip Fiktif"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      }
+    ],
+    "entries": [
+      {
+        "bounds": {
+          "height": 159.546875,
+          "width": 720,
+          "x": 24,
+          "y": 417.125
+        },
+        "deleteOpen": false,
+        "id": "thought-9b4404ce-a670-4130-b3f1-b7dc6ac0f89e",
+        "longOpen": null,
+        "textBounds": {
+          "height": 29.75,
+          "width": 720,
+          "x": 24,
+          "y": 442.125
+        }
+      }
+    ],
+    "fonts": "loaded",
+    "header": {
+      "height": 201,
+      "width": 720,
+      "x": 24,
+      "y": 101
+    },
+    "history": {
+      "height": 229.234375,
+      "width": 720,
+      "x": 24,
+      "y": 371.4375
+    },
+    "inlineAIGeneration": 0,
+    "inputs": [],
+    "navOverflow": false,
+    "navigation": {
+      "height": 52,
+      "width": 720,
+      "x": 24,
+      "y": 233
+    },
+    "overflow": false,
+    "scroll": 0,
+    "viewport": {
+      "height": 1000,
+      "width": 768
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged",
+      "visual": 1
+    },
+    "geometryContext": "Normal page viewport before screenshot"
+  },
+  {
+    "view": "empty",
+    "composer": {
+      "height": 366.015625,
+      "width": 720,
+      "x": 24,
+      "y": 326
+    },
+    "content": {
+      "height": 550.09375,
+      "width": 720,
+      "x": 24,
+      "y": 326
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Arunika Logistik — Fiktif"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 44,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      }
+    ],
+    "entries": [],
+    "fonts": "loaded",
+    "header": {
+      "height": 201,
+      "width": 720,
+      "x": 24,
+      "y": 101
+    },
+    "history": {
+      "height": 128.078125,
+      "width": 720,
+      "x": 24,
+      "y": 724.015625
+    },
+    "inlineAIGeneration": 0,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "width": 670
+      }
+    ],
+    "navOverflow": false,
+    "navigation": {
+      "height": 52,
+      "width": 720,
+      "x": 24,
+      "y": 233
+    },
+    "overflow": false,
+    "scroll": 0,
+    "viewport": {
+      "height": 1000,
+      "width": 768
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged",
+      "visual": 1
+    },
+    "geometryContext": "Normal page viewport before screenshot"
+  },
+  {
+    "view": "mixed",
+    "composer": {
+      "height": 347.328125,
+      "width": 358,
+      "x": 16,
+      "y": 593
+    },
+    "content": {
+      "height": 2416.34375,
+      "width": 358,
+      "x": 16,
+      "y": 593
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas O"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 44,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 196,
+        "text": "Baca pemikiran lengkap"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 196,
+        "text": "Baca pemikiran lengkap"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      }
+    ],
+    "entries": [
+      {
+        "bounds": {
+          "height": 213.796875,
+          "width": 358,
+          "x": 16,
+          "y": 1044.765625
+        },
+        "deleteOpen": false,
+        "id": "thought-112e77bf-1d22-4593-aa4d-6a5a69b5044e",
+        "longOpen": null,
+        "textBounds": {
+          "height": 84,
+          "width": 358,
+          "x": 16,
+          "y": 1069.765625
+        }
+      },
+      {
+        "bounds": {
+          "height": 213.796875,
+          "width": 358,
+          "x": 16,
+          "y": 1258.5625
+        },
+        "deleteOpen": false,
+        "id": "thought-02bb9616-0486-4061-ba67-f4869ad29bf5",
+        "longOpen": null,
+        "textBounds": {
+          "height": 84,
+          "width": 358,
+          "x": 16,
+          "y": 1283.5625
+        }
+      },
+      {
+        "bounds": {
+          "height": 325.796875,
+          "width": 358,
+          "x": 16,
+          "y": 1472.359375
+        },
+        "deleteOpen": false,
+        "id": "thought-49ae97d0-ec12-4673-bb43-1a5aa44ea0e7",
+        "longOpen": false,
+        "textBounds": {
+          "height": 812,
+          "width": 339,
+          "x": 16,
+          "y": 1721.359375
+        }
+      },
+      {
+        "bounds": {
+          "height": 325.796875,
+          "width": 339,
+          "x": 16,
+          "y": 1826.15625
+        },
+        "deleteOpen": false,
+        "id": "thought-40616cb1-d68f-4fef-91d8-8a52c3a966d1",
+        "longOpen": null,
+        "textBounds": {
+          "height": 196,
+          "width": 339,
+          "x": 16,
+          "y": 1851.15625
+        }
+      },
+      {
+        "bounds": {
+          "height": 213.796875,
+          "width": 339,
+          "x": 16,
+          "y": 2151.953125
+        },
+        "deleteOpen": false,
+        "id": "thought-97834387-81dc-4969-8b65-a64d47a515e2",
+        "longOpen": null,
+        "textBounds": {
+          "height": 84,
+          "width": 339,
+          "x": 16,
+          "y": 2176.953125
+        }
+      },
+      {
+        "bounds": {
+          "height": 325.796875,
+          "width": 339,
+          "x": 16,
+          "y": 2365.75
+        },
+        "deleteOpen": false,
+        "id": "thought-7dc022cb-9be1-47ba-b33f-0ae6e821a0cb",
+        "longOpen": false,
+        "textBounds": {
+          "height": 2716,
+          "width": 339,
+          "x": 16,
+          "y": 2586.75
+        }
+      },
+      {
+        "bounds": {
+          "height": 297.796875,
+          "width": 339,
+          "x": 16,
+          "y": 2691.546875
+        },
+        "deleteOpen": false,
+        "id": "thought-73684f52-3e81-4010-83bd-8dade668b80e",
+        "longOpen": null,
+        "textBounds": {
+          "height": 168,
+          "width": 339,
+          "x": 16,
+          "y": 2716.546875
+        }
+      }
+    ],
+    "fonts": "loaded",
+    "header": {
+      "height": 488,
+      "width": 358,
+      "x": 16,
+      "y": 81
+    },
+    "history": {
+      "height": 2013.015625,
+      "width": 358,
+      "x": 16,
+      "y": 972.328125
+    },
+    "inlineAIGeneration": 0,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "width": 305
+      }
+    ],
+    "navOverflow": false,
+    "navigation": {
+      "height": 52,
+      "width": 358,
+      "x": 16,
+      "y": 500
+    },
+    "overflow": false,
+    "scroll": 0,
+    "viewport": {
+      "height": 1000,
+      "width": 390
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged",
+      "visual": 1
+    },
+    "geometryContext": "Immediately after full-page export; capture temporarily removes the scrollbar"
+  },
+  {
+    "view": "many",
+    "composer": {
+      "height": 363.328125,
+      "width": 339,
+      "x": 16,
+      "y": 429.1875
+    },
+    "content": {
+      "height": 5395.703125,
+      "width": 339,
+      "x": 16,
+      "y": 429.1875
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Loka Distribusi — Riwayat Fiktif"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 60,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran lebih lama"
+      }
+    ],
+    "entries": [
+      {
+        "bounds": {
+          "height": 241.796875,
+          "width": 339,
+          "x": 16,
+          "y": 896.953125
+        },
+        "deleteOpen": false,
+        "id": "thought-11dcac0b-d363-4b52-97e0-d9ea270da4de",
+        "longOpen": null,
+        "textBounds": {
+          "height": 112,
+          "width": 339,
+          "x": 16,
+          "y": 921.953125
+        }
+      },
+      {
+        "bounds": {
+          "height": 241.796875,
+          "width": 339,
+          "x": 16,
+          "y": 1138.75
+        },
+        "deleteOpen": false,
+        "id": "thought-20f57111-3550-4137-b904-de125c08ca5f",
+        "longOpen": null,
+        "textBounds": {
+          "height": 112,
+          "width": 339,
+          "x": 16,
+          "y": 1163.75
+        }
+      },
+      {
+        "bounds": {
+          "height": 241.796875,
+          "width": 339,
+          "x": 16,
+          "y": 1380.546875
+        },
+        "deleteOpen": false,
+        "id": "thought-29fd0739-5e14-4a46-b0f6-c2545c2015f2",
+        "longOpen": null,
+        "textBounds": {
+          "height": 112,
+          "width": 339,
+          "x": 16,
+          "y": 1405.546875
+        }
+      },
+      {
+        "bounds": {
+          "height": 241.796875,
+          "width": 339,
+          "x": 16,
+          "y": 1622.34375
+        },
+        "deleteOpen": false,
+        "id": "thought-30e6dfff-5855-4b6a-ab1d-8f196e8bab98",
+        "longOpen": null,
+        "textBounds": {
+          "height": 112,
+          "width": 339,
+          "x": 16,
+          "y": 1647.34375
+        }
+      },
+      {
+        "bounds": {
+          "height": 241.796875,
+          "width": 339,
+          "x": 16,
+          "y": 1864.140625
+        },
+        "deleteOpen": false,
+        "id": "thought-367e44c9-0623-4e51-a580-2b2df90149ff",
+        "longOpen": null,
+        "textBounds": {
+          "height": 112,
+          "width": 339,
+          "x": 16,
+          "y": 1889.140625
+        }
+      },
+      {
+        "bounds": {
+          "height": 241.796875,
+          "width": 339,
+          "x": 16,
+          "y": 2105.9375
+        },
+        "deleteOpen": false,
+        "id": "thought-3f73b3c1-58ef-4bf9-9c3c-141f1850e10e",
+        "longOpen": null,
+        "textBounds": {
+          "height": 112,
+          "width": 339,
+          "x": 16,
+          "y": 2130.9375
+        }
+      },
+      {
+        "bounds": {
+          "height": 241.796875,
+          "width": 339,
+          "x": 16,
+          "y": 2347.734375
+        },
+        "deleteOpen": false,
+        "id": "thought-4a8a23f5-e6fb-45a4-ae7e-28e5ff82e74a",
+        "longOpen": null,
+        "textBounds": {
+          "height": 112,
+          "width": 339,
+          "x": 16,
+          "y": 2372.734375
+        }
+      },
+      {
+        "bounds": {
+          "height": 241.796875,
+          "width": 339,
+          "x": 16,
+          "y": 2589.53125
+        },
+        "deleteOpen": false,
+        "id": "thought-4da0d92a-8213-48f7-862b-e1792f1d4dde",
+        "longOpen": null,
+        "textBounds": {
+          "height": 112,
+          "width": 339,
+          "x": 16,
+          "y": 2614.53125
+        }
+      },
+      {
+        "bounds": {
+          "height": 241.796875,
+          "width": 339,
+          "x": 16,
+          "y": 2831.328125
+        },
+        "deleteOpen": false,
+        "id": "thought-4fb84dfd-17e4-46b0-b4b8-95535af9d8dd",
+        "longOpen": null,
+        "textBounds": {
+          "height": 112,
+          "width": 339,
+          "x": 16,
+          "y": 2856.328125
+        }
+      },
+      {
+        "bounds": {
+          "height": 241.796875,
+          "width": 339,
+          "x": 16,
+          "y": 3073.125
+        },
+        "deleteOpen": false,
+        "id": "thought-75db143c-2c63-4513-8923-1f0c2f6f767e",
+        "longOpen": null,
+        "textBounds": {
+          "height": 112,
+          "width": 339,
+          "x": 16,
+          "y": 3098.125
+        }
+      },
+      {
+        "bounds": {
+          "height": 241.796875,
+          "width": 339,
+          "x": 16,
+          "y": 3314.921875
+        },
+        "deleteOpen": false,
+        "id": "thought-7635fdc3-95a7-4eba-9443-509bda811947",
+        "longOpen": null,
+        "textBounds": {
+          "height": 112,
+          "width": 339,
+          "x": 16,
+          "y": 3339.921875
+        }
+      },
+      {
+        "bounds": {
+          "height": 241.796875,
+          "width": 339,
+          "x": 16,
+          "y": 3556.71875
+        },
+        "deleteOpen": false,
+        "id": "thought-85a0e95c-fffa-42fd-a537-eb1fbc355076",
+        "longOpen": null,
+        "textBounds": {
+          "height": 112,
+          "width": 339,
+          "x": 16,
+          "y": 3581.71875
+        }
+      },
+      {
+        "bounds": {
+          "height": 241.796875,
+          "width": 339,
+          "x": 16,
+          "y": 3798.515625
+        },
+        "deleteOpen": false,
+        "id": "thought-8de66aa6-f5cb-481a-a546-ef34b3a0b3e3",
+        "longOpen": null,
+        "textBounds": {
+          "height": 112,
+          "width": 339,
+          "x": 16,
+          "y": 3823.515625
+        }
+      },
+      {
+        "bounds": {
+          "height": 241.796875,
+          "width": 339,
+          "x": 16,
+          "y": 4040.3125
+        },
+        "deleteOpen": false,
+        "id": "thought-8e101f56-ff9d-45a7-b8db-5e1dc09528d8",
+        "longOpen": null,
+        "textBounds": {
+          "height": 112,
+          "width": 339,
+          "x": 16,
+          "y": 4065.3125
+        }
+      },
+      {
+        "bounds": {
+          "height": 241.796875,
+          "width": 339,
+          "x": 16,
+          "y": 4282.109375
+        },
+        "deleteOpen": false,
+        "id": "thought-95f803dd-7222-4aa6-9edd-239cf61f326a",
+        "longOpen": null,
+        "textBounds": {
+          "height": 112,
+          "width": 339,
+          "x": 16,
+          "y": 4307.109375
+        }
+      },
+      {
+        "bounds": {
+          "height": 241.796875,
+          "width": 339,
+          "x": 16,
+          "y": 4523.90625
+        },
+        "deleteOpen": false,
+        "id": "thought-9d2db85a-9460-4287-a855-3772d892d68a",
+        "longOpen": null,
+        "textBounds": {
+          "height": 112,
+          "width": 339,
+          "x": 16,
+          "y": 4548.90625
+        }
+      },
+      {
+        "bounds": {
+          "height": 241.796875,
+          "width": 339,
+          "x": 16,
+          "y": 4765.703125
+        },
+        "deleteOpen": false,
+        "id": "thought-ae52b009-4a52-45da-b8aa-5a6a2e1b62b9",
+        "longOpen": null,
+        "textBounds": {
+          "height": 112,
+          "width": 339,
+          "x": 16,
+          "y": 4790.703125
+        }
+      },
+      {
+        "bounds": {
+          "height": 241.796875,
+          "width": 339,
+          "x": 16,
+          "y": 5007.5
+        },
+        "deleteOpen": false,
+        "id": "thought-b0f7faae-3898-444f-b59b-3bdd28fdcc31",
+        "longOpen": null,
+        "textBounds": {
+          "height": 112,
+          "width": 339,
+          "x": 16,
+          "y": 5032.5
+        }
+      },
+      {
+        "bounds": {
+          "height": 241.796875,
+          "width": 339,
+          "x": 16,
+          "y": 5249.296875
+        },
+        "deleteOpen": false,
+        "id": "thought-b343a5b1-0606-4c33-9439-212b1ee5b6d0",
+        "longOpen": null,
+        "textBounds": {
+          "height": 112,
+          "width": 339,
+          "x": 16,
+          "y": 5274.296875
+        }
+      },
+      {
+        "bounds": {
+          "height": 241.796875,
+          "width": 339,
+          "x": 16,
+          "y": 5491.09375
+        },
+        "deleteOpen": false,
+        "id": "thought-b6b5f8d3-411d-476b-8e78-d3ee818857ae",
+        "longOpen": null,
+        "textBounds": {
+          "height": 112,
+          "width": 339,
+          "x": 16,
+          "y": 5516.09375
+        }
+      }
+    ],
+    "fonts": "loaded",
+    "header": {
+      "height": 324.1875,
+      "width": 339,
+      "x": 16,
+      "y": 81
+    },
+    "history": {
+      "height": 4976.375,
+      "width": 339,
+      "x": 16,
+      "y": 824.515625
+    },
+    "inlineAIGeneration": 0,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "width": 305
+      }
+    ],
+    "navOverflow": false,
+    "navigation": {
+      "height": 52,
+      "width": 339,
+      "x": 16,
+      "y": 336.1875
+    },
+    "overflow": false,
+    "scroll": 0,
+    "viewport": {
+      "height": 1000,
+      "width": 390
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged",
+      "visual": 1
+    },
+    "geometryContext": "Normal page viewport before screenshot"
+  },
+  {
+    "view": "older",
+    "composer": null,
+    "content": {
+      "height": 1541.8125,
+      "width": 339,
+      "x": 16,
+      "y": 429.1875
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Loka Distribusi — Riwayat Fiktif"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Kembali ke yang terbaru"
+      }
+    ],
+    "entries": [
+      {
+        "bounds": {
+          "height": 241.796875,
+          "width": 339,
+          "x": 16,
+          "y": 670.015625
+        },
+        "deleteOpen": false,
+        "id": "thought-cbbc29d9-74f0-4d93-af17-a6cfee6238d1",
+        "longOpen": null,
+        "textBounds": {
+          "height": 112,
+          "width": 339,
+          "x": 16,
+          "y": 695.015625
+        }
+      },
+      {
+        "bounds": {
+          "height": 241.796875,
+          "width": 339,
+          "x": 16,
+          "y": 911.8125
+        },
+        "deleteOpen": false,
+        "id": "thought-d8b4cbd8-af56-434b-9549-62385c604ead",
+        "longOpen": null,
+        "textBounds": {
+          "height": 112,
+          "width": 339,
+          "x": 16,
+          "y": 936.8125
+        }
+      },
+      {
+        "bounds": {
+          "height": 241.796875,
+          "width": 339,
+          "x": 16,
+          "y": 1153.609375
+        },
+        "deleteOpen": false,
+        "id": "thought-dc617c72-fa59-4919-a3a4-b6a09d1e2937",
+        "longOpen": null,
+        "textBounds": {
+          "height": 112,
+          "width": 339,
+          "x": 16,
+          "y": 1178.609375
+        }
+      },
+      {
+        "bounds": {
+          "height": 241.796875,
+          "width": 339,
+          "x": 16,
+          "y": 1395.40625
+        },
+        "deleteOpen": false,
+        "id": "thought-ebfa8adb-3501-46d8-9c56-1882fd8870be",
+        "longOpen": null,
+        "textBounds": {
+          "height": 112,
+          "width": 339,
+          "x": 16,
+          "y": 1420.40625
+        }
+      },
+      {
+        "bounds": {
+          "height": 241.796875,
+          "width": 339,
+          "x": 16,
+          "y": 1637.203125
+        },
+        "deleteOpen": false,
+        "id": "thought-ed806196-e874-41b5-b241-ac79e7d51448",
+        "longOpen": null,
+        "textBounds": {
+          "height": 112,
+          "width": 339,
+          "x": 16,
+          "y": 1662.203125
+        }
+      }
+    ],
+    "fonts": "loaded",
+    "header": {
+      "height": 324.1875,
+      "width": 339,
+      "x": 16,
+      "y": 81
+    },
+    "history": {
+      "height": 1349.421875,
+      "width": 339,
+      "x": 16,
+      "y": 597.578125
+    },
+    "inlineAIGeneration": 0,
+    "inputs": [],
+    "navOverflow": false,
+    "navigation": {
+      "height": 52,
+      "width": 339,
+      "x": 16,
+      "y": 336.1875
+    },
+    "overflow": false,
+    "scroll": 0,
+    "viewport": {
+      "height": 1000,
+      "width": 390
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged",
+      "visual": 1
+    },
+    "geometryContext": "Normal page viewport before screenshot"
+  },
+  {
+    "view": "focused",
+    "composer": {
+      "height": 347.328125,
+      "width": 339,
+      "x": 16,
+      "y": 593
+    },
+    "content": {
+      "height": 3120.34375,
+      "width": 339,
+      "x": 16,
+      "y": 593
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas O"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 44,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Baca pemikiran lengkap"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 196,
+        "text": "Baca pemikiran lengkap"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      }
+    ],
+    "entries": [
+      {
+        "bounds": {
+          "height": 241.796875,
+          "width": 339,
+          "x": 16,
+          "y": 1044.765625
+        },
+        "deleteOpen": false,
+        "id": "thought-112e77bf-1d22-4593-aa4d-6a5a69b5044e",
+        "longOpen": null,
+        "textBounds": {
+          "height": 112,
+          "width": 339,
+          "x": 16,
+          "y": 1069.765625
+        }
+      },
+      {
+        "bounds": {
+          "height": 213.796875,
+          "width": 339,
+          "x": 16,
+          "y": 1286.5625
+        },
+        "deleteOpen": false,
+        "id": "thought-02bb9616-0486-4061-ba67-f4869ad29bf5",
+        "longOpen": null,
+        "textBounds": {
+          "height": 84,
+          "width": 339,
+          "x": 16,
+          "y": 1311.5625
+        }
+      },
+      {
+        "bounds": {
+          "height": 1001.796875,
+          "width": 339,
+          "x": 16,
+          "y": 1500.359375
+        },
+        "deleteOpen": false,
+        "id": "thought-49ae97d0-ec12-4673-bb43-1a5aa44ea0e7",
+        "longOpen": true,
+        "textBounds": {
+          "height": 812,
+          "width": 327,
+          "x": 28,
+          "y": 1585.359375
+        }
+      },
+      {
+        "bounds": {
+          "height": 325.796875,
+          "width": 339,
+          "x": 16,
+          "y": 2502.15625
+        },
+        "deleteOpen": false,
+        "id": "thought-40616cb1-d68f-4fef-91d8-8a52c3a966d1",
+        "longOpen": null,
+        "textBounds": {
+          "height": 196,
+          "width": 339,
+          "x": 16,
+          "y": 2527.15625
+        }
+      },
+      {
+        "bounds": {
+          "height": 213.796875,
+          "width": 339,
+          "x": 16,
+          "y": 2827.953125
+        },
+        "deleteOpen": false,
+        "id": "thought-97834387-81dc-4969-8b65-a64d47a515e2",
+        "longOpen": null,
+        "textBounds": {
+          "height": 84,
+          "width": 339,
+          "x": 16,
+          "y": 2852.953125
+        }
+      },
+      {
+        "bounds": {
+          "height": 325.796875,
+          "width": 339,
+          "x": 16,
+          "y": 3041.75
+        },
+        "deleteOpen": false,
+        "id": "thought-7dc022cb-9be1-47ba-b33f-0ae6e821a0cb",
+        "longOpen": false,
+        "textBounds": {
+          "height": 2716,
+          "width": 339,
+          "x": 16,
+          "y": 3262.75
+        }
+      },
+      {
+        "bounds": {
+          "height": 297.796875,
+          "width": 339,
+          "x": 16,
+          "y": 3367.546875
+        },
+        "deleteOpen": false,
+        "id": "thought-73684f52-3e81-4010-83bd-8dade668b80e",
+        "longOpen": null,
+        "textBounds": {
+          "height": 168,
+          "width": 339,
+          "x": 16,
+          "y": 3392.546875
+        }
+      }
+    ],
+    "fonts": "loaded",
+    "header": {
+      "height": 488,
+      "width": 339,
+      "x": 16,
+      "y": 81
+    },
+    "history": {
+      "height": 2717.015625,
+      "width": 339,
+      "x": 16,
+      "y": 972.328125
+    },
+    "inlineAIGeneration": 0,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "width": 305
+      }
+    ],
+    "navOverflow": false,
+    "navigation": {
+      "height": 52,
+      "width": 339,
+      "x": 16,
+      "y": 500
+    },
+    "overflow": false,
+    "scroll": 0,
+    "viewport": {
+      "height": 1000,
+      "width": 390
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged",
+      "visual": 1
+    },
+    "geometryContext": "Normal page viewport before screenshot"
+  },
+  {
+    "view": "archived",
+    "composer": null,
+    "content": {
+      "height": 373.109375,
+      "width": 339,
+      "x": 16,
+      "y": 395.59375
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Sagara Karya — Arsip Fiktif"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      }
+    ],
+    "entries": [
+      {
+        "bounds": {
+          "height": 185.796875,
+          "width": 339,
+          "x": 16,
+          "y": 534.90625
+        },
+        "deleteOpen": false,
+        "id": "thought-9b4404ce-a670-4130-b3f1-b7dc6ac0f89e",
+        "longOpen": null,
+        "textBounds": {
+          "height": 56,
+          "width": 339,
+          "x": 16,
+          "y": 559.90625
+        }
+      }
+    ],
+    "fonts": "loaded",
+    "header": {
+      "height": 290.59375,
+      "width": 339,
+      "x": 16,
+      "y": 81
+    },
+    "history": {
+      "height": 282.234375,
+      "width": 339,
+      "x": 16,
+      "y": 462.46875
+    },
+    "inlineAIGeneration": 0,
+    "inputs": [],
+    "navOverflow": false,
+    "navigation": {
+      "height": 52,
+      "width": 339,
+      "x": 16,
+      "y": 302.59375
+    },
+    "overflow": false,
+    "scroll": 0,
+    "viewport": {
+      "height": 1000,
+      "width": 390
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged",
+      "visual": 1
+    },
+    "geometryContext": "Normal page viewport before screenshot"
+  },
+  {
+    "view": "empty",
+    "composer": {
+      "height": 347.328125,
+      "width": 339,
+      "x": 16,
+      "y": 395.59375
+    },
+    "content": {
+      "height": 584.546875,
+      "width": 339,
+      "x": 16,
+      "y": 395.59375
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Arunika Logistik — Fiktif"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 44,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      }
+    ],
+    "entries": [],
+    "fonts": "loaded",
+    "header": {
+      "height": 290.59375,
+      "width": 339,
+      "x": 16,
+      "y": 81
+    },
+    "history": {
+      "height": 181.21875,
+      "width": 339,
+      "x": 16,
+      "y": 774.921875
+    },
+    "inlineAIGeneration": 0,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "width": 305
+      }
+    ],
+    "navOverflow": false,
+    "navigation": {
+      "height": 52,
+      "width": 339,
+      "x": 16,
+      "y": 302.59375
+    },
+    "overflow": false,
+    "scroll": 0,
+    "viewport": {
+      "height": 1000,
+      "width": 390
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged",
+      "visual": 1
+    },
+    "geometryContext": "Normal page viewport before screenshot"
+  },
+  {
+    "view": "mixed",
+    "composer": {
+      "height": 399.328125,
+      "width": 288,
+      "x": 16,
+      "y": 626.59375
+    },
+    "content": {
+      "height": 2580.34375,
+      "width": 288,
+      "x": 16,
+      "y": 626.59375
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas O"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 44,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 196,
+        "text": "Baca pemikiran lengkap"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 196,
+        "text": "Baca pemikiran lengkap"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      }
+    ],
+    "entries": [
+      {
+        "bounds": {
+          "height": 269.796875,
+          "width": 288,
+          "x": 16,
+          "y": 1130.359375
+        },
+        "deleteOpen": false,
+        "id": "thought-112e77bf-1d22-4593-aa4d-6a5a69b5044e",
+        "longOpen": null,
+        "textBounds": {
+          "height": 140,
+          "width": 288,
+          "x": 16,
+          "y": 1155.359375
+        }
+      },
+      {
+        "bounds": {
+          "height": 213.796875,
+          "width": 288,
+          "x": 16,
+          "y": 1400.15625
+        },
+        "deleteOpen": false,
+        "id": "thought-02bb9616-0486-4061-ba67-f4869ad29bf5",
+        "longOpen": null,
+        "textBounds": {
+          "height": 84,
+          "width": 288,
+          "x": 16,
+          "y": 1425.15625
+        }
+      },
+      {
+        "bounds": {
+          "height": 325.796875,
+          "width": 288,
+          "x": 16,
+          "y": 1613.953125
+        },
+        "deleteOpen": false,
+        "id": "thought-49ae97d0-ec12-4673-bb43-1a5aa44ea0e7",
+        "longOpen": false,
+        "textBounds": {
+          "height": 1092,
+          "width": 269,
+          "x": 16,
+          "y": 1938.953125
+        }
+      },
+      {
+        "bounds": {
+          "height": 405.796875,
+          "width": 269,
+          "x": 16,
+          "y": 2095.75
+        },
+        "deleteOpen": false,
+        "id": "thought-40616cb1-d68f-4fef-91d8-8a52c3a966d1",
+        "longOpen": null,
+        "textBounds": {
+          "height": 224,
+          "width": 269,
+          "x": 16,
+          "y": 2120.75
+        }
+      },
+      {
+        "bounds": {
+          "height": 265.796875,
+          "width": 269,
+          "x": 16,
+          "y": 2501.546875
+        },
+        "deleteOpen": false,
+        "id": "thought-97834387-81dc-4969-8b65-a64d47a515e2",
+        "longOpen": null,
+        "textBounds": {
+          "height": 84,
+          "width": 269,
+          "x": 16,
+          "y": 2526.546875
+        }
+      },
+      {
+        "bounds": {
+          "height": 377.796875,
+          "width": 269,
+          "x": 16,
+          "y": 2767.34375
+        },
+        "deleteOpen": false,
+        "id": "thought-7dc022cb-9be1-47ba-b33f-0ae6e821a0cb",
+        "longOpen": false,
+        "textBounds": {
+          "height": 3192,
+          "width": 269,
+          "x": 16,
+          "y": 2988.34375
+        }
+      },
+      {
+        "bounds": {
+          "height": 377.796875,
+          "width": 269,
+          "x": 16,
+          "y": 3145.140625
+        },
+        "deleteOpen": false,
+        "id": "thought-73684f52-3e81-4010-83bd-8dade668b80e",
+        "longOpen": null,
+        "textBounds": {
+          "height": 196,
+          "width": 269,
+          "x": 16,
+          "y": 3170.140625
+        }
+      }
+    ],
+    "fonts": "loaded",
+    "header": {
+      "height": 521.59375,
+      "width": 288,
+      "x": 16,
+      "y": 81
+    },
+    "history": {
+      "height": 2125.015625,
+      "width": 288,
+      "x": 16,
+      "y": 1057.921875
+    },
+    "inlineAIGeneration": 0,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "width": 235
+      }
+    ],
+    "navOverflow": false,
+    "navigation": {
+      "height": 52,
+      "width": 288,
+      "x": 16,
+      "y": 533.59375
+    },
+    "overflow": false,
+    "scroll": 0,
+    "viewport": {
+      "height": 1000,
+      "width": 320
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged",
+      "visual": 1
+    },
+    "geometryContext": "Immediately after full-page export; capture temporarily removes the scrollbar"
+  },
+  {
+    "view": "many",
+    "composer": {
+      "height": 399.328125,
+      "width": 269,
+      "x": 16,
+      "y": 429.1875
+    },
+    "content": {
+      "height": 7031.703125,
+      "width": 269,
+      "x": 16,
+      "y": 429.1875
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Loka Distribusi — Riwayat Fiktif"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 44,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran lebih lama"
+      }
+    ],
+    "entries": [
+      {
+        "bounds": {
+          "height": 321.796875,
+          "width": 269,
+          "x": 16,
+          "y": 932.953125
+        },
+        "deleteOpen": false,
+        "id": "thought-11dcac0b-d363-4b52-97e0-d9ea270da4de",
+        "longOpen": null,
+        "textBounds": {
+          "height": 140,
+          "width": 269,
+          "x": 16,
+          "y": 957.953125
+        }
+      },
+      {
+        "bounds": {
+          "height": 321.796875,
+          "width": 269,
+          "x": 16,
+          "y": 1254.75
+        },
+        "deleteOpen": false,
+        "id": "thought-20f57111-3550-4137-b904-de125c08ca5f",
+        "longOpen": null,
+        "textBounds": {
+          "height": 140,
+          "width": 269,
+          "x": 16,
+          "y": 1279.75
+        }
+      },
+      {
+        "bounds": {
+          "height": 321.796875,
+          "width": 269,
+          "x": 16,
+          "y": 1576.546875
+        },
+        "deleteOpen": false,
+        "id": "thought-29fd0739-5e14-4a46-b0f6-c2545c2015f2",
+        "longOpen": null,
+        "textBounds": {
+          "height": 140,
+          "width": 269,
+          "x": 16,
+          "y": 1601.546875
+        }
+      },
+      {
+        "bounds": {
+          "height": 321.796875,
+          "width": 269,
+          "x": 16,
+          "y": 1898.34375
+        },
+        "deleteOpen": false,
+        "id": "thought-30e6dfff-5855-4b6a-ab1d-8f196e8bab98",
+        "longOpen": null,
+        "textBounds": {
+          "height": 140,
+          "width": 269,
+          "x": 16,
+          "y": 1923.34375
+        }
+      },
+      {
+        "bounds": {
+          "height": 321.796875,
+          "width": 269,
+          "x": 16,
+          "y": 2220.140625
+        },
+        "deleteOpen": false,
+        "id": "thought-367e44c9-0623-4e51-a580-2b2df90149ff",
+        "longOpen": null,
+        "textBounds": {
+          "height": 140,
+          "width": 269,
+          "x": 16,
+          "y": 2245.140625
+        }
+      },
+      {
+        "bounds": {
+          "height": 321.796875,
+          "width": 269,
+          "x": 16,
+          "y": 2541.9375
+        },
+        "deleteOpen": false,
+        "id": "thought-3f73b3c1-58ef-4bf9-9c3c-141f1850e10e",
+        "longOpen": null,
+        "textBounds": {
+          "height": 140,
+          "width": 269,
+          "x": 16,
+          "y": 2566.9375
+        }
+      },
+      {
+        "bounds": {
+          "height": 321.796875,
+          "width": 269,
+          "x": 16,
+          "y": 2863.734375
+        },
+        "deleteOpen": false,
+        "id": "thought-4a8a23f5-e6fb-45a4-ae7e-28e5ff82e74a",
+        "longOpen": null,
+        "textBounds": {
+          "height": 140,
+          "width": 269,
+          "x": 16,
+          "y": 2888.734375
+        }
+      },
+      {
+        "bounds": {
+          "height": 321.796875,
+          "width": 269,
+          "x": 16,
+          "y": 3185.53125
+        },
+        "deleteOpen": false,
+        "id": "thought-4da0d92a-8213-48f7-862b-e1792f1d4dde",
+        "longOpen": null,
+        "textBounds": {
+          "height": 140,
+          "width": 269,
+          "x": 16,
+          "y": 3210.53125
+        }
+      },
+      {
+        "bounds": {
+          "height": 321.796875,
+          "width": 269,
+          "x": 16,
+          "y": 3507.328125
+        },
+        "deleteOpen": false,
+        "id": "thought-4fb84dfd-17e4-46b0-b4b8-95535af9d8dd",
+        "longOpen": null,
+        "textBounds": {
+          "height": 140,
+          "width": 269,
+          "x": 16,
+          "y": 3532.328125
+        }
+      },
+      {
+        "bounds": {
+          "height": 321.796875,
+          "width": 269,
+          "x": 16,
+          "y": 3829.125
+        },
+        "deleteOpen": false,
+        "id": "thought-75db143c-2c63-4513-8923-1f0c2f6f767e",
+        "longOpen": null,
+        "textBounds": {
+          "height": 140,
+          "width": 269,
+          "x": 16,
+          "y": 3854.125
+        }
+      },
+      {
+        "bounds": {
+          "height": 321.796875,
+          "width": 269,
+          "x": 16,
+          "y": 4150.921875
+        },
+        "deleteOpen": false,
+        "id": "thought-7635fdc3-95a7-4eba-9443-509bda811947",
+        "longOpen": null,
+        "textBounds": {
+          "height": 140,
+          "width": 269,
+          "x": 16,
+          "y": 4175.921875
+        }
+      },
+      {
+        "bounds": {
+          "height": 321.796875,
+          "width": 269,
+          "x": 16,
+          "y": 4472.71875
+        },
+        "deleteOpen": false,
+        "id": "thought-85a0e95c-fffa-42fd-a537-eb1fbc355076",
+        "longOpen": null,
+        "textBounds": {
+          "height": 140,
+          "width": 269,
+          "x": 16,
+          "y": 4497.71875
+        }
+      },
+      {
+        "bounds": {
+          "height": 321.796875,
+          "width": 269,
+          "x": 16,
+          "y": 4794.515625
+        },
+        "deleteOpen": false,
+        "id": "thought-8de66aa6-f5cb-481a-a546-ef34b3a0b3e3",
+        "longOpen": null,
+        "textBounds": {
+          "height": 140,
+          "width": 269,
+          "x": 16,
+          "y": 4819.515625
+        }
+      },
+      {
+        "bounds": {
+          "height": 321.796875,
+          "width": 269,
+          "x": 16,
+          "y": 5116.3125
+        },
+        "deleteOpen": false,
+        "id": "thought-8e101f56-ff9d-45a7-b8db-5e1dc09528d8",
+        "longOpen": null,
+        "textBounds": {
+          "height": 140,
+          "width": 269,
+          "x": 16,
+          "y": 5141.3125
+        }
+      },
+      {
+        "bounds": {
+          "height": 321.796875,
+          "width": 269,
+          "x": 16,
+          "y": 5438.109375
+        },
+        "deleteOpen": false,
+        "id": "thought-95f803dd-7222-4aa6-9edd-239cf61f326a",
+        "longOpen": null,
+        "textBounds": {
+          "height": 140,
+          "width": 269,
+          "x": 16,
+          "y": 5463.109375
+        }
+      },
+      {
+        "bounds": {
+          "height": 321.796875,
+          "width": 269,
+          "x": 16,
+          "y": 5759.90625
+        },
+        "deleteOpen": false,
+        "id": "thought-9d2db85a-9460-4287-a855-3772d892d68a",
+        "longOpen": null,
+        "textBounds": {
+          "height": 140,
+          "width": 269,
+          "x": 16,
+          "y": 5784.90625
+        }
+      },
+      {
+        "bounds": {
+          "height": 321.796875,
+          "width": 269,
+          "x": 16,
+          "y": 6081.703125
+        },
+        "deleteOpen": false,
+        "id": "thought-ae52b009-4a52-45da-b8aa-5a6a2e1b62b9",
+        "longOpen": null,
+        "textBounds": {
+          "height": 140,
+          "width": 269,
+          "x": 16,
+          "y": 6106.703125
+        }
+      },
+      {
+        "bounds": {
+          "height": 321.796875,
+          "width": 269,
+          "x": 16,
+          "y": 6403.5
+        },
+        "deleteOpen": false,
+        "id": "thought-b0f7faae-3898-444f-b59b-3bdd28fdcc31",
+        "longOpen": null,
+        "textBounds": {
+          "height": 140,
+          "width": 269,
+          "x": 16,
+          "y": 6428.5
+        }
+      },
+      {
+        "bounds": {
+          "height": 321.796875,
+          "width": 269,
+          "x": 16,
+          "y": 6725.296875
+        },
+        "deleteOpen": false,
+        "id": "thought-b343a5b1-0606-4c33-9439-212b1ee5b6d0",
+        "longOpen": null,
+        "textBounds": {
+          "height": 140,
+          "width": 269,
+          "x": 16,
+          "y": 6750.296875
+        }
+      },
+      {
+        "bounds": {
+          "height": 321.796875,
+          "width": 269,
+          "x": 16,
+          "y": 7047.09375
+        },
+        "deleteOpen": false,
+        "id": "thought-b6b5f8d3-411d-476b-8e78-d3ee818857ae",
+        "longOpen": null,
+        "textBounds": {
+          "height": 140,
+          "width": 269,
+          "x": 16,
+          "y": 7072.09375
+        }
+      }
+    ],
+    "fonts": "loaded",
+    "header": {
+      "height": 324.1875,
+      "width": 269,
+      "x": 16,
+      "y": 81
+    },
+    "history": {
+      "height": 6576.375,
+      "width": 269,
+      "x": 16,
+      "y": 860.515625
+    },
+    "inlineAIGeneration": 0,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "width": 235
+      }
+    ],
+    "navOverflow": false,
+    "navigation": {
+      "height": 52,
+      "width": 269,
+      "x": 16,
+      "y": 336.1875
+    },
+    "overflow": false,
+    "scroll": 0,
+    "viewport": {
+      "height": 1000,
+      "width": 320
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged",
+      "visual": 1
+    },
+    "geometryContext": "Normal page viewport before screenshot"
+  },
+  {
+    "view": "older",
+    "composer": null,
+    "content": {
+      "height": 1941.8125,
+      "width": 269,
+      "x": 16,
+      "y": 429.1875
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Loka Distribusi — Riwayat Fiktif"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Kembali ke yang terbaru"
+      }
+    ],
+    "entries": [
+      {
+        "bounds": {
+          "height": 321.796875,
+          "width": 269,
+          "x": 16,
+          "y": 670.015625
+        },
+        "deleteOpen": false,
+        "id": "thought-cbbc29d9-74f0-4d93-af17-a6cfee6238d1",
+        "longOpen": null,
+        "textBounds": {
+          "height": 140,
+          "width": 269,
+          "x": 16,
+          "y": 695.015625
+        }
+      },
+      {
+        "bounds": {
+          "height": 321.796875,
+          "width": 269,
+          "x": 16,
+          "y": 991.8125
+        },
+        "deleteOpen": false,
+        "id": "thought-d8b4cbd8-af56-434b-9549-62385c604ead",
+        "longOpen": null,
+        "textBounds": {
+          "height": 140,
+          "width": 269,
+          "x": 16,
+          "y": 1016.8125
+        }
+      },
+      {
+        "bounds": {
+          "height": 321.796875,
+          "width": 269,
+          "x": 16,
+          "y": 1313.609375
+        },
+        "deleteOpen": false,
+        "id": "thought-dc617c72-fa59-4919-a3a4-b6a09d1e2937",
+        "longOpen": null,
+        "textBounds": {
+          "height": 140,
+          "width": 269,
+          "x": 16,
+          "y": 1338.609375
+        }
+      },
+      {
+        "bounds": {
+          "height": 321.796875,
+          "width": 269,
+          "x": 16,
+          "y": 1635.40625
+        },
+        "deleteOpen": false,
+        "id": "thought-ebfa8adb-3501-46d8-9c56-1882fd8870be",
+        "longOpen": null,
+        "textBounds": {
+          "height": 140,
+          "width": 269,
+          "x": 16,
+          "y": 1660.40625
+        }
+      },
+      {
+        "bounds": {
+          "height": 321.796875,
+          "width": 269,
+          "x": 16,
+          "y": 1957.203125
+        },
+        "deleteOpen": false,
+        "id": "thought-ed806196-e874-41b5-b241-ac79e7d51448",
+        "longOpen": null,
+        "textBounds": {
+          "height": 140,
+          "width": 269,
+          "x": 16,
+          "y": 1982.203125
+        }
+      }
+    ],
+    "fonts": "loaded",
+    "header": {
+      "height": 324.1875,
+      "width": 269,
+      "x": 16,
+      "y": 81
+    },
+    "history": {
+      "height": 1749.421875,
+      "width": 269,
+      "x": 16,
+      "y": 597.578125
+    },
+    "inlineAIGeneration": 0,
+    "inputs": [],
+    "navOverflow": false,
+    "navigation": {
+      "height": 52,
+      "width": 269,
+      "x": 16,
+      "y": 336.1875
+    },
+    "overflow": false,
+    "scroll": 0,
+    "viewport": {
+      "height": 1000,
+      "width": 320
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged",
+      "visual": 1
+    },
+    "geometryContext": "Normal page viewport before screenshot"
+  },
+  {
+    "view": "focused",
+    "composer": {
+      "height": 399.328125,
+      "width": 269,
+      "x": 16,
+      "y": 626.59375
+    },
+    "content": {
+      "height": 3900.34375,
+      "width": 269,
+      "x": 16,
+      "y": 626.59375
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas O"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 44,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Baca pemikiran lengkap"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 196,
+        "text": "Baca pemikiran lengkap"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      }
+    ],
+    "entries": [
+      {
+        "bounds": {
+          "height": 321.796875,
+          "width": 269,
+          "x": 16,
+          "y": 1130.359375
+        },
+        "deleteOpen": false,
+        "id": "thought-112e77bf-1d22-4593-aa4d-6a5a69b5044e",
+        "longOpen": null,
+        "textBounds": {
+          "height": 140,
+          "width": 269,
+          "x": 16,
+          "y": 1155.359375
+        }
+      },
+      {
+        "bounds": {
+          "height": 265.796875,
+          "width": 269,
+          "x": 16,
+          "y": 1452.15625
+        },
+        "deleteOpen": false,
+        "id": "thought-02bb9616-0486-4061-ba67-f4869ad29bf5",
+        "longOpen": null,
+        "textBounds": {
+          "height": 84,
+          "width": 269,
+          "x": 16,
+          "y": 1477.15625
+        }
+      },
+      {
+        "bounds": {
+          "height": 1333.796875,
+          "width": 269,
+          "x": 16,
+          "y": 1717.953125
+        },
+        "deleteOpen": false,
+        "id": "thought-49ae97d0-ec12-4673-bb43-1a5aa44ea0e7",
+        "longOpen": true,
+        "textBounds": {
+          "height": 1092,
+          "width": 257,
+          "x": 28,
+          "y": 1802.953125
+        }
+      },
+      {
+        "bounds": {
+          "height": 405.796875,
+          "width": 269,
+          "x": 16,
+          "y": 3051.75
+        },
+        "deleteOpen": false,
+        "id": "thought-40616cb1-d68f-4fef-91d8-8a52c3a966d1",
+        "longOpen": null,
+        "textBounds": {
+          "height": 224,
+          "width": 269,
+          "x": 16,
+          "y": 3076.75
+        }
+      },
+      {
+        "bounds": {
+          "height": 265.796875,
+          "width": 269,
+          "x": 16,
+          "y": 3457.546875
+        },
+        "deleteOpen": false,
+        "id": "thought-97834387-81dc-4969-8b65-a64d47a515e2",
+        "longOpen": null,
+        "textBounds": {
+          "height": 84,
+          "width": 269,
+          "x": 16,
+          "y": 3482.546875
+        }
+      },
+      {
+        "bounds": {
+          "height": 377.796875,
+          "width": 269,
+          "x": 16,
+          "y": 3723.34375
+        },
+        "deleteOpen": false,
+        "id": "thought-7dc022cb-9be1-47ba-b33f-0ae6e821a0cb",
+        "longOpen": false,
+        "textBounds": {
+          "height": 3192,
+          "width": 269,
+          "x": 16,
+          "y": 3944.34375
+        }
+      },
+      {
+        "bounds": {
+          "height": 377.796875,
+          "width": 269,
+          "x": 16,
+          "y": 4101.140625
+        },
+        "deleteOpen": false,
+        "id": "thought-73684f52-3e81-4010-83bd-8dade668b80e",
+        "longOpen": null,
+        "textBounds": {
+          "height": 196,
+          "width": 269,
+          "x": 16,
+          "y": 4126.140625
+        }
+      }
+    ],
+    "fonts": "loaded",
+    "header": {
+      "height": 521.59375,
+      "width": 269,
+      "x": 16,
+      "y": 81
+    },
+    "history": {
+      "height": 3445.015625,
+      "width": 269,
+      "x": 16,
+      "y": 1057.921875
+    },
+    "inlineAIGeneration": 0,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "width": 235
+      }
+    ],
+    "navOverflow": false,
+    "navigation": {
+      "height": 52,
+      "width": 269,
+      "x": 16,
+      "y": 533.59375
+    },
+    "overflow": false,
+    "scroll": 0,
+    "viewport": {
+      "height": 1000,
+      "width": 320
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged",
+      "visual": 1
+    },
+    "geometryContext": "Normal page viewport before screenshot"
+  },
+  {
+    "view": "archived",
+    "composer": null,
+    "content": {
+      "height": 446.546875,
+      "width": 269,
+      "x": 16,
+      "y": 429.1875
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Sagara Karya — Arsip Fiktif"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Opsi pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      }
+    ],
+    "entries": [
+      {
+        "bounds": {
+          "height": 237.796875,
+          "width": 269,
+          "x": 16,
+          "y": 589.9375
+        },
+        "deleteOpen": false,
+        "id": "thought-9b4404ce-a670-4130-b3f1-b7dc6ac0f89e",
+        "longOpen": null,
+        "textBounds": {
+          "height": 56,
+          "width": 269,
+          "x": 16,
+          "y": 614.9375
+        }
+      }
+    ],
+    "fonts": "loaded",
+    "header": {
+      "height": 324.1875,
+      "width": 269,
+      "x": 16,
+      "y": 81
+    },
+    "history": {
+      "height": 334.234375,
+      "width": 269,
+      "x": 16,
+      "y": 517.5
+    },
+    "inlineAIGeneration": 0,
+    "inputs": [],
+    "navOverflow": false,
+    "navigation": {
+      "height": 52,
+      "width": 269,
+      "x": 16,
+      "y": 336.1875
+    },
+    "overflow": false,
+    "scroll": 0,
+    "viewport": {
+      "height": 1000,
+      "width": 320
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged",
+      "visual": 1
+    },
+    "geometryContext": "Normal page viewport before screenshot"
+  },
+  {
+    "view": "empty",
+    "composer": {
+      "height": 399.328125,
+      "width": 269,
+      "x": 16,
+      "y": 429.1875
+    },
+    "content": {
+      "height": 662.9375,
+      "width": 269,
+      "x": 16,
+      "y": 429.1875
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Arunika Logistik — Fiktif"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 44,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      }
+    ],
+    "entries": [],
+    "fonts": "loaded",
+    "header": {
+      "height": 324.1875,
+      "width": 269,
+      "x": 16,
+      "y": 81
+    },
+    "history": {
+      "height": 207.609375,
+      "width": 269,
+      "x": 16,
+      "y": 860.515625
+    },
+    "inlineAIGeneration": 0,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "width": 235
+      }
+    ],
+    "navOverflow": false,
+    "navigation": {
+      "height": 52,
+      "width": 269,
+      "x": 16,
+      "y": 336.1875
+    },
+    "overflow": false,
+    "scroll": 0,
+    "viewport": {
+      "height": 1000,
+      "width": 320
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged",
+      "visual": 1
+    },
+    "geometryContext": "Normal page viewport before screenshot"
+  }
+]

@@ -7,6 +7,7 @@ import { Icon } from "@/components/ui/icon";
 import { StatusBadge } from "@/components/ui/status-badge";
 import { DisclosureMenu } from "@/components/disclosure-menu";
 import { companyMonogram } from "./navigation";
+import { CompanySectionNavigation } from "./company-section-navigation";
 import styles from "./company-workspace.module.css";
 
 /** Rendered inside owned leaf pages, so current identity follows page invalidation. */
@@ -16,7 +17,7 @@ export async function CompanyWorkspaceShell({
   children,
 }: {
   companyId: string;
-  context: "workspace" | "manage" | "refine";
+  context: "workspace" | "thoughts" | "manage" | "refine";
   children: ReactNode;
 }) {
   const { company } = await getCompanyWorkspaceContext(companyId);
@@ -36,19 +37,23 @@ export async function CompanyWorkspaceShell({
               Perusahaan
             </Link>
             <span aria-hidden="true">/</span>
-            {context === "workspace" ? (
-              <span aria-current="page">Ruang perusahaan</span>
-            ) : (
-              <>
-                <Link href={root} aria-label="Ruang perusahaan">
-                  Ruang
-                </Link>
-                <span aria-hidden="true">/</span>
-                <span aria-current="page">
-                  {context === "manage" ? "Kelola" : "Refine"}
-                </span>
-              </>
-            )}
+            <Link
+              href={root}
+              className={styles.companyCrumb}
+              title={company.name}
+            >
+              <span>{company.name}</span>
+            </Link>
+            <span aria-hidden="true">/</span>
+            <span className={styles.currentCrumb} aria-current="page">
+              {context === "workspace"
+                ? "Overview"
+                : context === "manage"
+                  ? "Kelola"
+                  : context === "thoughts"
+                    ? "Pemikiran"
+                    : "Refine"}
+            </span>
           </nav>
           <DisclosureMenu
             label={
@@ -88,9 +93,12 @@ export async function CompanyWorkspaceShell({
             {companyStateLabels[company.state]}
           </StatusBadge>
         </div>
-        {/* Future section navigation belongs here once its routes and workflows exist. */}
+        <CompanySectionNavigation
+          companyId={company.id}
+          enabledSections={["overview", "thoughts", "refine"]}
+        />
       </header>
-      {children}
+      <div className={styles.content}>{children}</div>
     </div>
   );
 }

@@ -143,6 +143,26 @@ export async function getRecentThoughts(
   });
 }
 
+/** Orientation only: immutable creation order, one latest + at most three earlier. */
+export async function getCompanyOverviewThoughts(
+  client: SupabaseClient,
+  userId: string,
+  companyId: string,
+) {
+  const company = await getCompanyById(client, userId, companyId);
+  if (!company) throw new CompanyUnavailableError();
+  const { data, error } = await client
+    .from("thoughts")
+    .select(columns)
+    .eq("user_id", userId)
+    .eq("company_id", companyId)
+    .order("created_at", { ascending: false })
+    .order("id", { ascending: true })
+    .limit(4);
+  if (error || !data) throw new ThoughtDataError();
+  return data.map((row) => ownedRow(row, userId, companyId));
+}
+
 export async function getCompanyThoughtCount(
   client: SupabaseClient,
   userId: string,

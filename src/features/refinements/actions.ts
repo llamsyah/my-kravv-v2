@@ -35,6 +35,7 @@ export async function generateRefinementAction(
   }
   const path = `/companies/${saved.company_id}/thoughts/${saved.thought_id}/refine`;
   revalidatePath(path);
+  revalidatePath(`/companies/${saved.company_id}/refinements`);
   redirect(`${path}?proposal=${saved.id}#refinement-${saved.id}`);
 }
 export async function reviewRefinementAction(
@@ -61,5 +62,6 @@ export async function reviewRefinementAction(
   const path = `/companies/${saved.company_id}/thoughts/${saved.thought_id}/refine`;
   revalidatePath(path);
   revalidatePath(`/companies/${saved.company_id}`);
+  revalidatePath(`/companies/${saved.company_id}/refinements`);
   redirect(`${path}?resolved=${saved.id}#refinement-${saved.id}`);
 }

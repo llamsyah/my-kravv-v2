@@ -1,0 +1,401 @@
+{
+  "label": "many-thoughts",
+  "targetWidth": 1440,
+  "active": ["Pemikiran"],
+  "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+  "controls": [
+    {
+      "height": 44,
+      "text": "Perusahaan"
+    },
+    {
+      "height": 44,
+      "text": "Ruang"
+    },
+    {
+      "height": 44,
+      "text": "Kelola"
+    },
+    {
+      "height": 44,
+      "text": "Ubah identitas"
+    },
+    {
+      "height": 44,
+      "text": "Arsip & hapus"
+    },
+    {
+      "height": 44,
+      "text": "Overview"
+    },
+    {
+      "height": 44,
+      "text": "Pemikiran"
+    },
+    {
+      "height": 44,
+      "text": "Buang draf"
+    },
+    {
+      "height": 44,
+      "text": "Simpan pemikiran ↗"
+    },
+    {
+      "height": 44,
+      "text": "Tentang draf di browser ini"
+    },
+    {
+      "height": 44,
+      "text": "Tinjau di Refine"
+    },
+    {
+      "height": 44,
+      "text": "Hapus pemikiran"
+    },
+    {
+      "height": 81,
+      "text": "Hapus permanen"
+    },
+    {
+      "height": 44,
+      "text": "Tinjau di Refine"
+    },
+    {
+      "height": 44,
+      "text": "Hapus pemikiran"
+    },
+    {
+      "height": 81,
+      "text": "Hapus permanen"
+    },
+    {
+      "height": 44,
+      "text": "Tinjau di Refine"
+    },
+    {
+      "height": 44,
+      "text": "Hapus pemikiran"
+    },
+    {
+      "height": 81,
+      "text": "Hapus permanen"
+    },
+    {
+      "height": 44,
+      "text": "Tinjau di Refine"
+    },
+    {
+      "height": 44,
+      "text": "Hapus pemikiran"
+    },
+    {
+      "height": 81,
+      "text": "Hapus permanen"
+    },
+    {
+      "height": 44,
+      "text": "Tinjau di Refine"
+    },
+    {
+      "height": 44,
+      "text": "Hapus pemikiran"
+    },
+    {
+      "height": 81,
+      "text": "Hapus permanen"
+    },
+    {
+      "height": 44,
+      "text": "Tinjau di Refine"
+    },
+    {
+      "height": 44,
+      "text": "Hapus pemikiran"
+    },
+    {
+      "height": 81,
+      "text": "Hapus permanen"
+    },
+    {
+      "height": 44,
+      "text": "Tinjau di Refine"
+    },
+    {
+      "height": 44,
+      "text": "Hapus pemikiran"
+    },
+    {
+      "height": 81,
+      "text": "Hapus permanen"
+    },
+    {
+      "height": 44,
+      "text": "Tinjau di Refine"
+    },
+    {
+      "height": 44,
+      "text": "Hapus pemikiran"
+    },
+    {
+      "height": 81,
+      "text": "Hapus permanen"
+    },
+    {
+      "height": 44,
+      "text": "Tinjau di Refine"
+    },
+    {
+      "height": 44,
+      "text": "Hapus pemikiran"
+    },
+    {
+      "height": 81,
+      "text": "Hapus permanen"
+    },
+    {
+      "height": 44,
+      "text": "Tinjau di Refine"
+    },
+    {
+      "height": 44,
+      "text": "Hapus pemikiran"
+    },
+    {
+      "height": 81,
+      "text": "Hapus permanen"
+    },
+    {
+      "height": 44,
+      "text": "Tinjau di Refine"
+    },
+    {
+      "height": 44,
+      "text": "Hapus pemikiran"
+    },
+    {
+      "height": 81,
+      "text": "Hapus permanen"
+    },
+    {
+      "height": 44,
+      "text": "Tinjau di Refine"
+    },
+    {
+      "height": 44,
+      "text": "Hapus pemikiran"
+    },
+    {
+      "height": 81,
+      "text": "Hapus permanen"
+    },
+    {
+      "height": 44,
+      "text": "Tinjau di Refine"
+    },
+    {
+      "height": 44,
+      "text": "Hapus pemikiran"
+    },
+    {
+      "height": 81,
+      "text": "Hapus permanen"
+    },
+    {
+      "height": 44,
+      "text": "Tinjau di Refine"
+    },
+    {
+      "height": 44,
+      "text": "Hapus pemikiran"
+    },
+    {
+      "height": 81,
+      "text": "Hapus permanen"
+    },
+    {
+      "height": 44,
+      "text": "Tinjau di Refine"
+    },
+    {
+      "height": 44,
+      "text": "Hapus pemikiran"
+    },
+    {
+      "height": 81,
+      "text": "Hapus permanen"
+    },
+    {
+      "height": 44,
+      "text": "Tinjau di Refine"
+    },
+    {
+      "height": 44,
+      "text": "Hapus pemikiran"
+    },
+    {
+      "height": 81,
+      "text": "Hapus permanen"
+    },
+    {
+      "height": 44,
+      "text": "Tinjau di Refine"
+    },
+    {
+      "height": 44,
+      "text": "Hapus pemikiran"
+    },
+    {
+      "height": 81,
+      "text": "Hapus permanen"
+    },
+    {
+      "height": 44,
+      "text": "Tinjau di Refine"
+    },
+    {
+      "height": 44,
+      "text": "Hapus pemikiran"
+    },
+    {
+      "height": 81,
+      "text": "Hapus permanen"
+    },
+    {
+      "height": 44,
+      "text": "Tinjau di Refine"
+    },
+    {
+      "height": 44,
+      "text": "Hapus pemikiran"
+    },
+    {
+      "height": 81,
+      "text": "Hapus permanen"
+    },
+    {
+      "height": 44,
+      "text": "Tinjau di Refine"
+    },
+    {
+      "height": 44,
+      "text": "Hapus pemikiran"
+    },
+    {
+      "height": 81,
+      "text": "Hapus permanen"
+    },
+    {
+      "height": 44,
+      "text": "Pemikiran lebih lama"
+    }
+  ],
+  "dpr": 0.800000011920929,
+  "fonts": "loaded",
+  "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+  "height": 1000,
+  "inputs": [
+    {
+      "fontSize": "16px",
+      "name": "raw_content"
+    },
+    {
+      "fontSize": "16px",
+      "name": "confirm_delete"
+    },
+    {
+      "fontSize": "16px",
+      "name": "confirm_delete"
+    },
+    {
+      "fontSize": "16px",
+      "name": "confirm_delete"
+    },
+    {
+      "fontSize": "16px",
+      "name": "confirm_delete"
+    },
+    {
+      "fontSize": "16px",
+      "name": "confirm_delete"
+    },
+    {
+      "fontSize": "16px",
+      "name": "confirm_delete"
+    },
+    {
+      "fontSize": "16px",
+      "name": "confirm_delete"
+    },
+    {
+      "fontSize": "16px",
+      "name": "confirm_delete"
+    },
+    {
+      "fontSize": "16px",
+      "name": "confirm_delete"
+    },
+    {
+      "fontSize": "16px",
+      "name": "confirm_delete"
+    },
+    {
+      "fontSize": "16px",
+      "name": "confirm_delete"
+    },
+    {
+      "fontSize": "16px",
+      "name": "confirm_delete"
+    },
+    {
+      "fontSize": "16px",
+      "name": "confirm_delete"
+    },
+    {
+      "fontSize": "16px",
+      "name": "confirm_delete"
+    },
+    {
+      "fontSize": "16px",
+      "name": "confirm_delete"
+    },
+    {
+      "fontSize": "16px",
+      "name": "confirm_delete"
+    },
+    {
+      "fontSize": "16px",
+      "name": "confirm_delete"
+    },
+    {
+      "fontSize": "16px",
+      "name": "confirm_delete"
+    },
+    {
+      "fontSize": "16px",
+      "name": "confirm_delete"
+    },
+    {
+      "fontSize": "16px",
+      "name": "confirm_delete"
+    }
+  ],
+  "localNavigation": [
+    {
+      "height": 44,
+      "right": 203.234375,
+      "text": "Overview",
+      "x": 74.5
+    },
+    {
+      "height": 44,
+      "right": 344.90625,
+      "text": "Pemikiran",
+      "x": 211.234375
+    }
+  ],
+  "scrollWidth": 1421,
+  "sidebars": 0,
+  "url": "/companies/a463692f-e0ab-4d95-baa7-0104d54c2271/thoughts",
+  "width": 1440,
+  "zoom": "1"
+}

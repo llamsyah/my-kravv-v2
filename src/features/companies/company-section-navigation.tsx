@@ -10,7 +10,7 @@ import {
 } from "./navigation";
 import styles from "./company-workspace.module.css";
 
-/** Unmounted in Phase 2. Enable each section only when its leaf workflow ships. */
+/** Enable each section only when its leaf workflow ships. */
 export function CompanySectionNavigation({
   companyId,
   enabledSections,

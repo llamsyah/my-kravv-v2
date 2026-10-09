@@ -39,7 +39,7 @@ export function ThoughtComposer({
       ? selected.text
       : (companies?.[0]?.id ?? ""));
   return (
-    <div className="composer-surface">
+    <div className={archived ? undefined : "composer-surface"}>
       {!companyId && (
         <div className="capture-company-select company-field">
           <label htmlFor="thought-company">Perusahaan</label>
@@ -87,7 +87,7 @@ function DraftEditor({
   const [state, action, pending] = useActionState(
     createThoughtAction,
     initialThoughtFormState,
-    context === "company" ? `/companies/${companyId}` : "/",
+    context === "company" ? `/companies/${companyId}/thoughts` : "/",
   );
   const [store] = useState(
     () =>
@@ -103,13 +103,10 @@ function DraftEditor({
     store.getServerSnapshot,
   );
   const fieldError = state.fieldErrors?.raw_content?.join(" ");
+  if (archived && !draft.text && !state.error) return null;
   if (archived)
     return (
       <div className="thought-composer">
-        <p className="auth-help">
-          Ruang ini hanya untuk membaca pemikiran yang sudah tersimpan.
-          Pemikiran baru tidak dapat ditambahkan ke perusahaan yang diarsipkan.
-        </p>
         <p className="form-feedback" role="status">
           {state.error}
         </p>
@@ -174,7 +171,9 @@ function DraftEditor({
         </div>
         <div className="company-form-actions">
           <p id="thought-help" className="auth-help">
-            Pemikiran asli · Disimpan persis seperti ditulis
+            {context === "company"
+              ? "Disimpan persis seperti ditulis"
+              : "Pemikiran asli · Disimpan persis seperti ditulis"}
           </p>
           <button
             className="quiet-button"

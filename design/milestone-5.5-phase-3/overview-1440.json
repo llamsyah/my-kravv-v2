@@ -1,0 +1,113 @@
+{
+  "label": "overview",
+  "targetWidth": 1440,
+  "active": ["Overview"],
+  "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+  "controls": [
+    {
+      "height": 44,
+      "text": "Perusahaan"
+    },
+    {
+      "height": 44,
+      "text": "Kelola"
+    },
+    {
+      "height": 44,
+      "text": "Ubah identitas"
+    },
+    {
+      "height": 44,
+      "text": "Arsip & hapus"
+    },
+    {
+      "height": 44,
+      "text": "Overview"
+    },
+    {
+      "height": 44,
+      "text": "Pemikiran"
+    },
+    {
+      "height": 44,
+      "text": "Baca pemikiran"
+    },
+    {
+      "height": 86.375,
+      "text": "Tambahkan pemikiran"
+    },
+    {
+      "height": 86.375,
+      "text": "Semua pemikiran 3 tersimpan"
+    },
+    {
+      "height": 86.375,
+      "text": "9 Okt 2026, 13.48 WIB1. aku belum cek laporan keuangannya. Expansion pace menarik, tapi aku belum ta"
+    },
+    {
+      "height": 86.375,
+      "text": "9 Okt 2026, 13.48 WIBmenurutku ekspansi perusahaan ini menarik sih, tapi agak terlalu cepet. aku bel"
+    },
+    {
+      "height": 44,
+      "text": "Ubah konteks"
+    },
+    {
+      "height": 44.390625,
+      "text": "Kelola ruang · Arsip & hapus"
+    },
+    {
+      "height": 44,
+      "text": "Arsipkan perusahaan"
+    },
+    {
+      "height": 44,
+      "text": "Arsipkan perusahaan"
+    },
+    {
+      "height": 44,
+      "text": "Hapus perusahaan permanen"
+    },
+    {
+      "height": 44,
+      "text": "Hapus permanen"
+    }
+  ],
+  "dpr": 0.800000011920929,
+  "fonts": "loaded",
+  "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+  "height": 1000,
+  "inputs": [
+    {
+      "fontSize": "16px",
+      "name": "confirm_archive"
+    },
+    {
+      "fontSize": "16px",
+      "name": "company_name"
+    },
+    {
+      "fontSize": "16px",
+      "name": "confirm_delete"
+    }
+  ],
+  "localNavigation": [
+    {
+      "height": 44,
+      "right": 205.328125,
+      "text": "Overview",
+      "x": 74.5
+    },
+    {
+      "height": 44,
+      "right": 344.8125,
+      "text": "Pemikiran",
+      "x": 213.328125
+    }
+  ],
+  "scrollWidth": 1421,
+  "sidebars": 1,
+  "url": "/companies/47b74c9a-b790-4cc4-82f2-39a246f871c3",
+  "width": 1440,
+  "zoom": "1"
+}

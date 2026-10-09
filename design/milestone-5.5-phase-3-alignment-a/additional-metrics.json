@@ -1,0 +1,495 @@
+[
+  {
+    "stage": "after",
+    "route": "empty-overview",
+    "breadcrumb": "Perusahaan/Arunika Logistik — Fiktif/Overview",
+    "breadcrumbBounds": {
+      "bottom": 145,
+      "height": 44,
+      "right": 621.34375,
+      "width": 541.34375,
+      "x": 80,
+      "y": 101
+    },
+    "capture": null,
+    "company": "Arunika Logistik — Fiktif",
+    "content": {
+      "bottom": 742.78125,
+      "height": 416.78125,
+      "right": 1360,
+      "width": 1280,
+      "x": 80,
+      "y": 326
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Arunika Logistik — Fiktif"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 86.375,
+        "text": "Tambahkan pemikiran"
+      },
+      {
+        "height": 86.375,
+        "text": "Semua pemikiran 0 tersimpan"
+      },
+      {
+        "height": 44.390625,
+        "text": "Kelola ruang · Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Hapus perusahaan permanen"
+      },
+      {
+        "height": 44,
+        "text": "Hapus permanen"
+      }
+    ],
+    "divider": {
+      "bottom": 302,
+      "height": 201,
+      "right": 1360,
+      "width": 1280,
+      "x": 80,
+      "y": 101
+    },
+    "firstNavigationLink": {
+      "bottom": 281,
+      "height": 44,
+      "right": 210.828125,
+      "width": 130.828125,
+      "x": 80,
+      "y": 237
+    },
+    "fonts": "loaded",
+    "history": null,
+    "identity": {
+      "bottom": 209,
+      "height": 48,
+      "right": 1360,
+      "width": 1280,
+      "x": 80,
+      "y": 161
+    },
+    "main": {
+      "bottom": 929.5625,
+      "height": 852.5625,
+      "right": 1360,
+      "width": 1280,
+      "x": 80,
+      "y": 77
+    },
+    "navOverflow": false,
+    "navigation": {
+      "bottom": 285,
+      "height": 52,
+      "right": 1360,
+      "width": 1280,
+      "x": 80,
+      "y": 233
+    },
+    "overflow": false,
+    "reading": [],
+    "refineIntro": null,
+    "refineOriginal": null,
+    "safeAreaRail": [
+      {
+        "bounds": {
+          "bottom": 60,
+          "height": 44,
+          "right": 507.0625,
+          "width": 261.203125,
+          "x": 245.859375,
+          "y": 16
+        },
+        "padding": "0px"
+      }
+    ],
+    "scroll": {
+      "x": 0,
+      "y": 0
+    },
+    "title": {
+      "bottom": 204.1875,
+      "height": 43.1875,
+      "right": 1263.8125,
+      "width": 1119.8125,
+      "x": 144,
+      "y": 161
+    },
+    "viewport": {
+      "height": 1000,
+      "width": 1440
+    },
+    "workspace": {
+      "bottom": 742.78125,
+      "height": 641.78125,
+      "right": 1360,
+      "width": 1280,
+      "x": 80,
+      "y": 101
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged between captures",
+      "visual": 1
+    }
+  },
+  {
+    "stage": "after",
+    "route": "empty-overview",
+    "breadcrumb": "Perusahaan/Arunika Logistik — Fiktif/Overview",
+    "breadcrumbBounds": {
+      "bottom": 177,
+      "height": 96,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 81
+    },
+    "capture": null,
+    "company": "Arunika Logistik — Fiktif",
+    "content": {
+      "bottom": 948.453125,
+      "height": 519.265625,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 429.1875
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Arunika Logistik — Fiktif"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 86.78125,
+        "text": "Tambahkan pemikiran"
+      },
+      {
+        "height": 86.375,
+        "text": "Semua pemikiran 0 tersimpan"
+      },
+      {
+        "height": 44.390625,
+        "text": "Kelola ruang · Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Hapus perusahaan permanen"
+      },
+      {
+        "height": 44,
+        "text": "Hapus permanen"
+      }
+    ],
+    "divider": {
+      "bottom": 405.1875,
+      "height": 324.1875,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 81
+    },
+    "firstNavigationLink": {
+      "bottom": 384.1875,
+      "height": 44,
+      "right": 126.828125,
+      "width": 110.828125,
+      "x": 16,
+      "y": 340.1875
+    },
+    "fonts": "loaded",
+    "history": null,
+    "identity": {
+      "bottom": 312.1875,
+      "height": 119.1875,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 193
+    },
+    "main": {
+      "bottom": 996.453125,
+      "height": 931.453125,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 65
+    },
+    "navOverflow": false,
+    "navigation": {
+      "bottom": 388.1875,
+      "height": 52,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 336.1875
+    },
+    "overflow": false,
+    "reading": [],
+    "refineIntro": null,
+    "refineOriginal": null,
+    "safeAreaRail": [
+      {
+        "bounds": {
+          "bottom": 1000,
+          "height": 72.4375,
+          "right": 301,
+          "width": 301,
+          "x": 0,
+          "y": 927.5625
+        },
+        "padding": "8px 16px"
+      }
+    ],
+    "scroll": {
+      "x": 0,
+      "y": 0
+    },
+    "title": {
+      "bottom": 312.1875,
+      "height": 67.1875,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 245
+    },
+    "viewport": {
+      "height": 1000,
+      "width": 320
+    },
+    "workspace": {
+      "bottom": 948.453125,
+      "height": 867.453125,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 81
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged between captures",
+      "visual": 1
+    }
+  },
+  {
+    "stage": "after",
+    "route": "long-refine",
+    "breadcrumb": "Perusahaan/Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas Operasional, dan Pertanyaan yang Belum Terjawab/Refine",
+    "breadcrumbBounds": {
+      "bottom": 177,
+      "height": 96,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 81
+    },
+    "capture": null,
+    "company": "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas Operasional, dan Pertanyaan yang Belum Terjawab",
+    "content": {
+      "bottom": 4668.484375,
+      "height": 4041.890625,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 626.59375
+    },
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Rimba Nusa Pangan — Ruang Penelitian Fiktif untuk Memeriksa Ekspansi, Arus Kas Operasional, dan Pertanyaan yang Belum Terjawab"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Rapikan dengan AI"
+      }
+    ],
+    "divider": {
+      "bottom": 602.59375,
+      "height": 521.59375,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 81
+    },
+    "firstNavigationLink": {
+      "bottom": 581.59375,
+      "height": 44,
+      "right": 124.734375,
+      "width": 108.734375,
+      "x": 16,
+      "y": 537.59375
+    },
+    "fonts": "loaded",
+    "history": null,
+    "identity": {
+      "bottom": 509.59375,
+      "height": 316.59375,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 193
+    },
+    "main": {
+      "bottom": 4716.484375,
+      "height": 4651.484375,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 65
+    },
+    "navOverflow": false,
+    "navigation": {
+      "bottom": 585.59375,
+      "height": 52,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 533.59375
+    },
+    "overflow": false,
+    "reading": [
+      {
+        "font": "16px",
+        "lineHeight": "28px",
+        "maxWidth": "684.25px",
+        "rect": {
+          "bottom": 4151.8125,
+          "height": 3192,
+          "right": 285,
+          "width": 269,
+          "x": 16,
+          "y": 959.8125
+        }
+      }
+    ],
+    "refineIntro": {
+      "bottom": 848.09375,
+      "height": 177.5,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 670.59375
+    },
+    "refineOriginal": {
+      "bottom": 4176.8125,
+      "height": 3296.71875,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 880.09375
+    },
+    "safeAreaRail": [
+      {
+        "bounds": {
+          "bottom": 1000,
+          "height": 72.4375,
+          "right": 301,
+          "width": 301,
+          "x": 0,
+          "y": 927.5625
+        },
+        "padding": "8px 16px"
+      }
+    ],
+    "scroll": {
+      "x": 0,
+      "y": 0
+    },
+    "title": {
+      "bottom": 480.15625,
+      "height": 235.15625,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 245
+    },
+    "viewport": {
+      "height": 1000,
+      "width": 320
+    },
+    "workspace": {
+      "bottom": 4668.484375,
+      "height": 4587.484375,
+      "right": 285,
+      "width": 269,
+      "x": 16,
+      "y": 81
+    },
+    "zoom": {
+      "css": "1",
+      "dpr": 0.800000011920929,
+      "native": "unverified; unchanged between captures",
+      "visual": 1
+    }
+  }
+]

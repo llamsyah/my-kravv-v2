@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { thoughtCursor, type Thought } from "@/domain/thought/thought";
 import { DeleteForm } from "@/features/data-control/delete-form";
+import { Icon } from "@/components/ui/icon";
+import styles from "./thought-workspace.module.css";
 
 export function ThoughtTime({
   value,
@@ -22,115 +24,171 @@ export function ThoughtTime({
               minute: "2-digit",
               timeZone: "Asia/Jakarta",
             }
-          : {
-              dateStyle: "long",
-              timeStyle: "short",
-              timeZone: "Asia/Jakarta",
-            },
+          : { dateStyle: "long", timeStyle: "short", timeZone: "Asia/Jakarta" },
       ).format(new Date(value))}{" "}
       WIB
     </time>
   );
 }
+/** Text-only reading seam; version selection and provenance belong to its caller. */
+function ThoughtReading({
+  text,
+  expanded,
+}: {
+  text: string;
+  expanded: boolean;
+}) {
+  if (text.length <= 420 && text.split("\n").length <= 7)
+    return <div className="thought-original">{text}</div>;
+  return (
+    <details className={styles.longThought} open={expanded}>
+      <summary aria-label="Baca pemikiran lengkap">
+        <span className={styles.excerpt} aria-hidden="true">
+          {text}
+        </span>
+        <span className={styles.readAction}>
+          <Icon name="read" size="small" />
+          <span className={styles.readClosed}>Baca lengkap</span>
+          <span className={styles.readOpen}>Tutup bacaan lengkap</span>
+          <Icon name="chevronDown" size="small" />
+        </span>
+      </summary>
+      <div className="thought-original">{text}</div>
+    </details>
+  );
+}
+/** Phase 3 supplies immutable originals; no acceptance is inferred here. */
+function ThoughtEntry({
+  thought,
+  companyId,
+  expanded,
+  selected,
+}: {
+  thought: Thought;
+  companyId: string;
+  expanded: boolean;
+  selected: boolean;
+}) {
+  return (
+    <li
+      id={`thought-${thought.id}`}
+      className={`${styles.entry} ${selected ? styles.selected : ""}`}
+    >
+      <div className={styles.body}>
+        <ThoughtReading text={thought.raw_content} expanded={expanded} />
+        <div className={styles.entryFooter}>
+          <div className={styles.metadata}>
+            <span className={styles.provenance}>
+              <Icon name="pencil" size="small" />
+              Asli
+            </span>
+            <ThoughtTime value={thought.created_at} compact />
+          </div>
+          <div className={styles.actions}>
+            <Link
+              className={styles.refineLink}
+              href={`/companies/${companyId}/thoughts/${thought.id}/refine`}
+            >
+              Tinjau di Refine
+              <Icon name="arrowRight" size="small" />
+            </Link>
+            <DeleteForm
+              companyId={companyId}
+              thoughtId={thought.id}
+              disclosureLabel="Opsi pemikiran"
+            />
+          </div>
+        </div>
+      </div>
+    </li>
+  );
+}
 export function ThoughtHistory({
   thoughts,
+  linkedThoughts = [],
   companyId,
   hasMore,
   older,
   saved,
   focus,
+  total,
+  archived = false,
 }: {
   thoughts: Thought[];
+  linkedThoughts?: Thought[];
   companyId: string;
   hasMore: boolean;
   older: boolean;
   saved?: string;
   focus?: string;
+  total: number;
+  archived?: boolean;
 }) {
   const last = thoughts.at(-1);
+  const entry = (thought: Thought) => (
+    <ThoughtEntry
+      key={thought.id}
+      thought={thought}
+      companyId={companyId}
+      expanded={thought.id === saved || thought.id === focus}
+      selected={thought.id === saved || thought.id === focus}
+    />
+  );
   return (
-    <section
-      className="thought-history"
-      aria-labelledby="thought-history-title"
-    >
-      <p className="section-label">RIWAYAT PEMIKIRAN</p>
-      <h2 id="thought-history-title">
-        Pemikiranmu, tetap seperti saat ditulis.
-      </h2>
-      <p className="auth-help">
-        Pemikiran asli · Terbaru terlebih dahulu · Waktu Indonesia Barat
-      </p>
+    <section className={styles.history} aria-labelledby="thought-history-title">
+      <div className={styles.heading}>
+        <h2 id="thought-history-title">
+          Pemikiran tersimpan{" "}
+          <span className={styles.count}>{total.toLocaleString("id-ID")}</span>
+        </h2>
+        <span>Terbaru terlebih dahulu · WIB</span>
+      </div>
+      {saved &&
+        [...thoughts, ...linkedThoughts].some(
+          (thought) => thought.id === saved,
+        ) && (
+          <p className="thought-success" role="status">
+            Pemikiran asli tersimpan.
+          </p>
+        )}
+      {!!linkedThoughts.length && (
+        <section aria-labelledby="linked-thought-title">
+          <h3 id="linked-thought-title" className={styles.linkedTitle}>
+            Pemikiran yang dituju <span>Di luar halaman riwayat ini</span>
+          </h3>
+          <ol className={styles.list}>{linkedThoughts.map(entry)}</ol>
+        </section>
+      )}
       {!thoughts.length && (
-        <p className="company-note">
+        <p className={styles.empty}>
           {older
             ? "Tidak ada pemikiran yang lebih lama."
-            : "Belum ada pemikiran. Mulai dari pengamatan, pertanyaan, atau kesan pertama."}
+            : archived
+              ? "Tidak ada pemikiran tersimpan di ruang arsip ini."
+              : "Belum ada pemikiran. Mulai dari pengamatan atau pertanyaan pertamamu."}
         </p>
       )}
-      {saved && thoughts.some((thought) => thought.id === saved) && (
-        <p className="thought-success" role="status">
-          Pemikiran asli tersimpan.
-        </p>
-      )}
-      <ol className="thought-list">
-        {thoughts.map((thought, index) => (
-          <li
-            key={thought.id}
-            id={`thought-${thought.id}`}
-            className="thought-entry"
-          >
-            <div className="thought-meta">
-              <span className="section-label">ASLI</span>
-              <ThoughtTime value={thought.created_at} compact />
-            </div>
-            <div className="thought-body">
-              {thought.raw_content.length <= 420 &&
-              thought.raw_content.split("\n").length <= 7 ? (
-                <div className="thought-original">{thought.raw_content}</div>
-              ) : (
-                <details
-                  className="long-thought"
-                  open={thought.id === (saved ?? focus) || index === 0}
-                >
-                  <summary>
-                    Baca pemikiran lengkap ·{" "}
-                    {thought.raw_content.length.toLocaleString("id-ID")}{" "}
-                    karakter
-                  </summary>
-                  <div className="thought-original">{thought.raw_content}</div>
-                </details>
-              )}
-              <div className="thought-context-actions">
-                <Link
-                  className="quiet-link"
-                  href={`/companies/${companyId}/thoughts/${thought.id}/refine`}
-                >
-                  Tinjau & rapikan pemikiran →
-                </Link>
-                <DeleteForm companyId={companyId} thoughtId={thought.id} />
-              </div>
-            </div>
-          </li>
-        ))}
-      </ol>
+      <ol className={styles.list}>{thoughts.map(entry)}</ol>
       <nav
-        className="thought-history-navigation"
+        className={styles.pagination}
         aria-label="Navigasi riwayat pemikiran"
       >
         {older && (
           <Link
             className="quiet-link"
-            href={`/companies/${companyId}#thought-history-title`}
+            href={`/companies/${companyId}/thoughts#thought-history-title`}
           >
+            <Icon name="arrowLeft" />
             Kembali ke yang terbaru
           </Link>
         )}
         {hasMore && last && (
           <Link
-            className="text-link"
-            href={`/companies/${companyId}?before=${encodeURIComponent(thoughtCursor(last))}#thought-history-title`}
+            className="secondary-button"
+            href={`/companies/${companyId}/thoughts?before=${encodeURIComponent(thoughtCursor(last))}#thought-history-title`}
           >
-            Pemikiran lebih lama →
+            Pemikiran lebih lama
+            <Icon name="arrowRight" />
           </Link>
         )}
       </nav>

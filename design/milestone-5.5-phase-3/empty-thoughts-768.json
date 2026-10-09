@@ -1,0 +1,77 @@
+{
+  "label": "empty-thoughts",
+  "targetWidth": 768,
+  "active": ["Pemikiran"],
+  "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+  "controls": [
+    {
+      "height": 44,
+      "text": "Perusahaan"
+    },
+    {
+      "height": 44,
+      "text": "Ruang"
+    },
+    {
+      "height": 44,
+      "text": "Kelola"
+    },
+    {
+      "height": 44,
+      "text": "Ubah identitas"
+    },
+    {
+      "height": 44,
+      "text": "Arsip & hapus"
+    },
+    {
+      "height": 44,
+      "text": "Overview"
+    },
+    {
+      "height": 44,
+      "text": "Pemikiran"
+    },
+    {
+      "height": 44,
+      "text": "Buang draf"
+    },
+    {
+      "height": 44,
+      "text": "Simpan pemikiran ↗"
+    },
+    {
+      "height": 44,
+      "text": "Tentang draf di browser ini"
+    }
+  ],
+  "dpr": 0.800000011920929,
+  "fonts": "loaded",
+  "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+  "height": 1000,
+  "inputs": [
+    {
+      "fontSize": "16px",
+      "name": "raw_content"
+    }
+  ],
+  "localNavigation": [
+    {
+      "height": 44,
+      "right": 156.734375,
+      "text": "Overview",
+      "x": 28
+    },
+    {
+      "height": 44,
+      "right": 298.40625,
+      "text": "Pemikiran",
+      "x": 164.734375
+    }
+  ],
+  "scrollWidth": 749,
+  "sidebars": 0,
+  "url": "/companies/3e75735b-79a8-4a13-9640-a26212a79846/thoughts",
+  "width": 768,
+  "zoom": "1"
+}

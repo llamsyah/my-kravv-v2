@@ -1,0 +1,6498 @@
+[
+  {
+    "label": "archived-overview",
+    "targetWidth": 1440,
+    "active": ["Overview"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Baca pemikiran"
+      },
+      {
+        "height": 86.375,
+        "text": "Semua pemikiran 1 tersimpan"
+      },
+      {
+        "height": 44.390625,
+        "text": "Kelola ruang · Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Hapus perusahaan permanen"
+      },
+      {
+        "height": 44,
+        "text": "Hapus permanen"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 1000,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "company_name"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 214.828125,
+        "text": "Overview",
+        "x": 84
+      },
+      {
+        "height": 44,
+        "right": 354.3125,
+        "text": "Pemikiran",
+        "x": 222.828125
+      }
+    ],
+    "scrollWidth": 1440,
+    "sidebars": 1,
+    "url": "/companies/0b4ca153-835b-442e-bedb-14d76c115183",
+    "width": 1440,
+    "zoom": "1"
+  },
+  {
+    "label": "archived-overview",
+    "targetWidth": 320,
+    "active": ["Overview"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Baca pemikiran"
+      },
+      {
+        "height": 86.375,
+        "text": "Semua pemikiran 1 tersimpan"
+      },
+      {
+        "height": 44.390625,
+        "text": "Kelola ruang · Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Hapus perusahaan permanen"
+      },
+      {
+        "height": 44,
+        "text": "Hapus permanen"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 844,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "company_name"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 130.828125,
+        "text": "Overview",
+        "x": 20
+      },
+      {
+        "height": 44,
+        "right": 250.3125,
+        "text": "Pemikiran",
+        "x": 138.828125
+      }
+    ],
+    "scrollWidth": 301,
+    "sidebars": 1,
+    "url": "/companies/0b4ca153-835b-442e-bedb-14d76c115183",
+    "width": 320,
+    "zoom": "1"
+  },
+  {
+    "label": "archived-overview",
+    "targetWidth": 390,
+    "active": ["Overview"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Baca pemikiran"
+      },
+      {
+        "height": 86.375,
+        "text": "Semua pemikiran 1 tersimpan"
+      },
+      {
+        "height": 44.390625,
+        "text": "Kelola ruang · Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Hapus perusahaan permanen"
+      },
+      {
+        "height": 44,
+        "text": "Hapus permanen"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 844,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "company_name"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 130.828125,
+        "text": "Overview",
+        "x": 20
+      },
+      {
+        "height": 44,
+        "right": 250.3125,
+        "text": "Pemikiran",
+        "x": 138.828125
+      }
+    ],
+    "scrollWidth": 371,
+    "sidebars": 1,
+    "url": "/companies/0b4ca153-835b-442e-bedb-14d76c115183",
+    "width": 390,
+    "zoom": "1"
+  },
+  {
+    "label": "archived-overview",
+    "targetWidth": 768,
+    "active": ["Overview"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Baca pemikiran"
+      },
+      {
+        "height": 86.375,
+        "text": "Semua pemikiran 1 tersimpan"
+      },
+      {
+        "height": 44.390625,
+        "text": "Kelola ruang · Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Hapus perusahaan permanen"
+      },
+      {
+        "height": 44,
+        "text": "Hapus permanen"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 1000,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "company_name"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 158.828125,
+        "text": "Overview",
+        "x": 28
+      },
+      {
+        "height": 44,
+        "right": 298.3125,
+        "text": "Pemikiran",
+        "x": 166.828125
+      }
+    ],
+    "scrollWidth": 749,
+    "sidebars": 1,
+    "url": "/companies/0b4ca153-835b-442e-bedb-14d76c115183",
+    "width": 768,
+    "zoom": "1"
+  },
+  {
+    "label": "archived-thoughts",
+    "targetWidth": 1440,
+    "active": ["Pemikiran"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 1000,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 212.734375,
+        "text": "Overview",
+        "x": 84
+      },
+      {
+        "height": 44,
+        "right": 354.40625,
+        "text": "Pemikiran",
+        "x": 220.734375
+      }
+    ],
+    "scrollWidth": 1440,
+    "sidebars": 0,
+    "url": "/companies/0b4ca153-835b-442e-bedb-14d76c115183/thoughts",
+    "width": 1440,
+    "zoom": "1"
+  },
+  {
+    "label": "archived-thoughts",
+    "targetWidth": 320,
+    "active": ["Pemikiran"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 844,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 128.734375,
+        "text": "Overview",
+        "x": 20
+      },
+      {
+        "height": 44,
+        "right": 250.40625,
+        "text": "Pemikiran",
+        "x": 136.734375
+      }
+    ],
+    "scrollWidth": 301,
+    "sidebars": 0,
+    "url": "/companies/0b4ca153-835b-442e-bedb-14d76c115183/thoughts",
+    "width": 320,
+    "zoom": "1"
+  },
+  {
+    "label": "archived-thoughts",
+    "targetWidth": 390,
+    "active": ["Pemikiran"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 844,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 128.734375,
+        "text": "Overview",
+        "x": 20
+      },
+      {
+        "height": 44,
+        "right": 250.40625,
+        "text": "Pemikiran",
+        "x": 136.734375
+      }
+    ],
+    "scrollWidth": 371,
+    "sidebars": 0,
+    "url": "/companies/0b4ca153-835b-442e-bedb-14d76c115183/thoughts",
+    "width": 390,
+    "zoom": "1"
+  },
+  {
+    "label": "archived-thoughts",
+    "targetWidth": 768,
+    "active": ["Pemikiran"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 1000,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 156.734375,
+        "text": "Overview",
+        "x": 28
+      },
+      {
+        "height": 44,
+        "right": 298.40625,
+        "text": "Pemikiran",
+        "x": 164.734375
+      }
+    ],
+    "scrollWidth": 768,
+    "sidebars": 0,
+    "url": "/companies/0b4ca153-835b-442e-bedb-14d76c115183/thoughts",
+    "width": 768,
+    "zoom": "1"
+  },
+  {
+    "label": "empty-overview",
+    "targetWidth": 1440,
+    "active": ["Overview"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 86.375,
+        "text": "Tambahkan pemikiran"
+      },
+      {
+        "height": 86.375,
+        "text": "Semua pemikiran 0 tersimpan"
+      },
+      {
+        "height": 44.390625,
+        "text": "Kelola ruang · Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Hapus perusahaan permanen"
+      },
+      {
+        "height": 44,
+        "text": "Hapus permanen"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 1000,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "confirm_archive"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 214.828125,
+        "text": "Overview",
+        "x": 84
+      },
+      {
+        "height": 44,
+        "right": 354.3125,
+        "text": "Pemikiran",
+        "x": 222.828125
+      }
+    ],
+    "scrollWidth": 1440,
+    "sidebars": 0,
+    "url": "/companies/3e75735b-79a8-4a13-9640-a26212a79846",
+    "width": 1440,
+    "zoom": "1"
+  },
+  {
+    "label": "empty-overview",
+    "targetWidth": 320,
+    "active": ["Overview"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 86.78125,
+        "text": "Tambahkan pemikiran"
+      },
+      {
+        "height": 86.375,
+        "text": "Semua pemikiran 0 tersimpan"
+      },
+      {
+        "height": 44.390625,
+        "text": "Kelola ruang · Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Hapus perusahaan permanen"
+      },
+      {
+        "height": 44,
+        "text": "Hapus permanen"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 844,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "confirm_archive"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 130.828125,
+        "text": "Overview",
+        "x": 20
+      },
+      {
+        "height": 44,
+        "right": 250.3125,
+        "text": "Pemikiran",
+        "x": 138.828125
+      }
+    ],
+    "scrollWidth": 301,
+    "sidebars": 0,
+    "url": "/companies/3e75735b-79a8-4a13-9640-a26212a79846",
+    "width": 320,
+    "zoom": "1"
+  },
+  {
+    "label": "empty-overview",
+    "targetWidth": 390,
+    "active": ["Overview"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 72,
+        "text": "Tambahkan pemikiran"
+      },
+      {
+        "height": 86.375,
+        "text": "Semua pemikiran 0 tersimpan"
+      },
+      {
+        "height": 44.390625,
+        "text": "Kelola ruang · Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Hapus perusahaan permanen"
+      },
+      {
+        "height": 44,
+        "text": "Hapus permanen"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 844,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "confirm_archive"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 130.828125,
+        "text": "Overview",
+        "x": 20
+      },
+      {
+        "height": 44,
+        "right": 250.3125,
+        "text": "Pemikiran",
+        "x": 138.828125
+      }
+    ],
+    "scrollWidth": 371,
+    "sidebars": 0,
+    "url": "/companies/3e75735b-79a8-4a13-9640-a26212a79846",
+    "width": 390,
+    "zoom": "1"
+  },
+  {
+    "label": "empty-overview",
+    "targetWidth": 768,
+    "active": ["Overview"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 86.375,
+        "text": "Tambahkan pemikiran"
+      },
+      {
+        "height": 86.375,
+        "text": "Semua pemikiran 0 tersimpan"
+      },
+      {
+        "height": 44.390625,
+        "text": "Kelola ruang · Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Hapus perusahaan permanen"
+      },
+      {
+        "height": 44,
+        "text": "Hapus permanen"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 1000,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "confirm_archive"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 158.828125,
+        "text": "Overview",
+        "x": 28
+      },
+      {
+        "height": 44,
+        "right": 298.3125,
+        "text": "Pemikiran",
+        "x": 166.828125
+      }
+    ],
+    "scrollWidth": 768,
+    "sidebars": 0,
+    "url": "/companies/3e75735b-79a8-4a13-9640-a26212a79846",
+    "width": 768,
+    "zoom": "1"
+  },
+  {
+    "label": "empty-thoughts",
+    "targetWidth": 1440,
+    "active": ["Pemikiran"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 44,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 1000,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "raw_content"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 203.234375,
+        "text": "Overview",
+        "x": 74.5
+      },
+      {
+        "height": 44,
+        "right": 344.90625,
+        "text": "Pemikiran",
+        "x": 211.234375
+      }
+    ],
+    "scrollWidth": 1421,
+    "sidebars": 0,
+    "url": "/companies/3e75735b-79a8-4a13-9640-a26212a79846/thoughts",
+    "width": 1440,
+    "zoom": "1"
+  },
+  {
+    "label": "empty-thoughts",
+    "targetWidth": 320,
+    "active": ["Pemikiran"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 44,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 844,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "raw_content"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 128.734375,
+        "text": "Overview",
+        "x": 20
+      },
+      {
+        "height": 44,
+        "right": 250.40625,
+        "text": "Pemikiran",
+        "x": 136.734375
+      }
+    ],
+    "scrollWidth": 301,
+    "sidebars": 0,
+    "url": "/companies/3e75735b-79a8-4a13-9640-a26212a79846/thoughts",
+    "width": 320,
+    "zoom": "1"
+  },
+  {
+    "label": "empty-thoughts",
+    "targetWidth": 390,
+    "active": ["Pemikiran"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 60,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 844,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "raw_content"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 128.734375,
+        "text": "Overview",
+        "x": 20
+      },
+      {
+        "height": 44,
+        "right": 250.40625,
+        "text": "Pemikiran",
+        "x": 136.734375
+      }
+    ],
+    "scrollWidth": 371,
+    "sidebars": 0,
+    "url": "/companies/3e75735b-79a8-4a13-9640-a26212a79846/thoughts",
+    "width": 390,
+    "zoom": "1"
+  },
+  {
+    "label": "empty-thoughts",
+    "targetWidth": 768,
+    "active": ["Pemikiran"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 44,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 1000,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "raw_content"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 156.734375,
+        "text": "Overview",
+        "x": 28
+      },
+      {
+        "height": 44,
+        "right": 298.40625,
+        "text": "Pemikiran",
+        "x": 164.734375
+      }
+    ],
+    "scrollWidth": 749,
+    "sidebars": 0,
+    "url": "/companies/3e75735b-79a8-4a13-9640-a26212a79846/thoughts",
+    "width": 768,
+    "zoom": "1"
+  },
+  {
+    "label": "long-thought",
+    "targetWidth": 1440,
+    "active": ["Pemikiran"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 44,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44.390625,
+        "text": "Baca pemikiran lengkap · 2.944 karakter"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 1000,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "raw_content"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 203.234375,
+        "text": "Overview",
+        "x": 74.5
+      },
+      {
+        "height": 44,
+        "right": 344.90625,
+        "text": "Pemikiran",
+        "x": 211.234375
+      }
+    ],
+    "scrollWidth": 1421,
+    "sidebars": 0,
+    "url": "/companies/47b74c9a-b790-4cc4-82f2-39a246f871c3/thoughts?focus=20a4b696-7c4c-492b-bd65-51234a603e02#thought-20a4b696-7c4c-492b-bd65-51234a603e02",
+    "width": 1440,
+    "zoom": "1"
+  },
+  {
+    "label": "long-thought",
+    "targetWidth": 320,
+    "active": ["Pemikiran"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 44,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 70.78125,
+        "text": "Baca pemikiran lengkap · 2.944 karakter"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 844,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "raw_content"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 128.734375,
+        "text": "Overview",
+        "x": 20
+      },
+      {
+        "height": 44,
+        "right": 250.40625,
+        "text": "Pemikiran",
+        "x": 136.734375
+      }
+    ],
+    "scrollWidth": 301,
+    "sidebars": 0,
+    "url": "/companies/47b74c9a-b790-4cc4-82f2-39a246f871c3/thoughts?focus=20a4b696-7c4c-492b-bd65-51234a603e02#thought-20a4b696-7c4c-492b-bd65-51234a603e02",
+    "width": 320,
+    "zoom": "1"
+  },
+  {
+    "label": "long-thought",
+    "targetWidth": 390,
+    "active": ["Pemikiran"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 60,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 70.78125,
+        "text": "Baca pemikiran lengkap · 2.944 karakter"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 844,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "raw_content"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 128.734375,
+        "text": "Overview",
+        "x": 20
+      },
+      {
+        "height": 44,
+        "right": 250.40625,
+        "text": "Pemikiran",
+        "x": 136.734375
+      }
+    ],
+    "scrollWidth": 371,
+    "sidebars": 0,
+    "url": "/companies/47b74c9a-b790-4cc4-82f2-39a246f871c3/thoughts?focus=20a4b696-7c4c-492b-bd65-51234a603e02#thought-20a4b696-7c4c-492b-bd65-51234a603e02",
+    "width": 390,
+    "zoom": "1"
+  },
+  {
+    "label": "long-thought",
+    "targetWidth": 768,
+    "active": ["Pemikiran"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 44,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44.390625,
+        "text": "Baca pemikiran lengkap · 2.944 karakter"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 1000,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "raw_content"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 156.734375,
+        "text": "Overview",
+        "x": 28
+      },
+      {
+        "height": 44,
+        "right": 298.40625,
+        "text": "Pemikiran",
+        "x": 164.734375
+      }
+    ],
+    "scrollWidth": 749,
+    "sidebars": 0,
+    "url": "/companies/47b74c9a-b790-4cc4-82f2-39a246f871c3/thoughts?focus=20a4b696-7c4c-492b-bd65-51234a603e02#thought-20a4b696-7c4c-492b-bd65-51234a603e02",
+    "width": 768,
+    "zoom": "1"
+  },
+  {
+    "label": "many-overview",
+    "targetWidth": 1440,
+    "active": ["Overview"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Baca pemikiran"
+      },
+      {
+        "height": 86.375,
+        "text": "Tambahkan pemikiran"
+      },
+      {
+        "height": 86.375,
+        "text": "Semua pemikiran 25 tersimpan"
+      },
+      {
+        "height": 86.375,
+        "text": "9 Okt 2026, 13.51 WIBCatatan fiktif 1: aku belum memeriksa laporan arus kasnya. Aku tertarik dengan "
+      },
+      {
+        "height": 86.375,
+        "text": "9 Okt 2026, 13.51 WIBCatatan fiktif 13: aku belum memeriksa laporan arus kasnya. Aku tertarik dengan"
+      },
+      {
+        "height": 86.375,
+        "text": "9 Okt 2026, 13.51 WIBCatatan fiktif 2: aku belum memeriksa laporan arus kasnya. Aku tertarik dengan "
+      },
+      {
+        "height": 44.390625,
+        "text": "Kelola ruang · Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Hapus perusahaan permanen"
+      },
+      {
+        "height": 44,
+        "text": "Hapus permanen"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 1000,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "confirm_archive"
+      },
+      {
+        "fontSize": "16px",
+        "name": "company_name"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 205.328125,
+        "text": "Overview",
+        "x": 74.5
+      },
+      {
+        "height": 44,
+        "right": 344.8125,
+        "text": "Pemikiran",
+        "x": 213.328125
+      }
+    ],
+    "scrollWidth": 1421,
+    "sidebars": 1,
+    "url": "/companies/a463692f-e0ab-4d95-baa7-0104d54c2271",
+    "width": 1440,
+    "zoom": "1"
+  },
+  {
+    "label": "many-overview",
+    "targetWidth": 320,
+    "active": ["Overview"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Baca pemikiran"
+      },
+      {
+        "height": 86.78125,
+        "text": "Tambahkan pemikiran"
+      },
+      {
+        "height": 86.375,
+        "text": "Semua pemikiran 25 tersimpan"
+      },
+      {
+        "height": 123.8125,
+        "text": "9 Okt 2026, 13.51 WIBCatatan fiktif 1: aku belum memeriksa laporan arus kasnya. Aku tertarik dengan "
+      },
+      {
+        "height": 123.8125,
+        "text": "9 Okt 2026, 13.51 WIBCatatan fiktif 13: aku belum memeriksa laporan arus kasnya. Aku tertarik dengan"
+      },
+      {
+        "height": 123.8125,
+        "text": "9 Okt 2026, 13.51 WIBCatatan fiktif 2: aku belum memeriksa laporan arus kasnya. Aku tertarik dengan "
+      },
+      {
+        "height": 44.390625,
+        "text": "Kelola ruang · Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Hapus perusahaan permanen"
+      },
+      {
+        "height": 44,
+        "text": "Hapus permanen"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 844,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "confirm_archive"
+      },
+      {
+        "fontSize": "16px",
+        "name": "company_name"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 130.828125,
+        "text": "Overview",
+        "x": 20
+      },
+      {
+        "height": 44,
+        "right": 250.3125,
+        "text": "Pemikiran",
+        "x": 138.828125
+      }
+    ],
+    "scrollWidth": 301,
+    "sidebars": 1,
+    "url": "/companies/a463692f-e0ab-4d95-baa7-0104d54c2271",
+    "width": 320,
+    "zoom": "1"
+  },
+  {
+    "label": "many-overview",
+    "targetWidth": 390,
+    "active": ["Overview"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Baca pemikiran"
+      },
+      {
+        "height": 72,
+        "text": "Tambahkan pemikiran"
+      },
+      {
+        "height": 86.375,
+        "text": "Semua pemikiran 25 tersimpan"
+      },
+      {
+        "height": 123.8125,
+        "text": "9 Okt 2026, 13.51 WIBCatatan fiktif 1: aku belum memeriksa laporan arus kasnya. Aku tertarik dengan "
+      },
+      {
+        "height": 123.8125,
+        "text": "9 Okt 2026, 13.51 WIBCatatan fiktif 13: aku belum memeriksa laporan arus kasnya. Aku tertarik dengan"
+      },
+      {
+        "height": 123.8125,
+        "text": "9 Okt 2026, 13.51 WIBCatatan fiktif 2: aku belum memeriksa laporan arus kasnya. Aku tertarik dengan "
+      },
+      {
+        "height": 44.390625,
+        "text": "Kelola ruang · Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Hapus perusahaan permanen"
+      },
+      {
+        "height": 44,
+        "text": "Hapus permanen"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 844,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "confirm_archive"
+      },
+      {
+        "fontSize": "16px",
+        "name": "company_name"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 130.828125,
+        "text": "Overview",
+        "x": 20
+      },
+      {
+        "height": 44,
+        "right": 250.3125,
+        "text": "Pemikiran",
+        "x": 138.828125
+      }
+    ],
+    "scrollWidth": 371,
+    "sidebars": 1,
+    "url": "/companies/a463692f-e0ab-4d95-baa7-0104d54c2271",
+    "width": 390,
+    "zoom": "1"
+  },
+  {
+    "label": "many-overview",
+    "targetWidth": 768,
+    "active": ["Overview"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Baca pemikiran"
+      },
+      {
+        "height": 86.375,
+        "text": "Tambahkan pemikiran"
+      },
+      {
+        "height": 86.375,
+        "text": "Semua pemikiran 25 tersimpan"
+      },
+      {
+        "height": 86.375,
+        "text": "9 Okt 2026, 13.51 WIBCatatan fiktif 1: aku belum memeriksa laporan arus kasnya. Aku tertarik dengan "
+      },
+      {
+        "height": 86.375,
+        "text": "9 Okt 2026, 13.51 WIBCatatan fiktif 13: aku belum memeriksa laporan arus kasnya. Aku tertarik dengan"
+      },
+      {
+        "height": 86.375,
+        "text": "9 Okt 2026, 13.51 WIBCatatan fiktif 2: aku belum memeriksa laporan arus kasnya. Aku tertarik dengan "
+      },
+      {
+        "height": 44.390625,
+        "text": "Kelola ruang · Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Hapus perusahaan permanen"
+      },
+      {
+        "height": 44,
+        "text": "Hapus permanen"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 1000,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "confirm_archive"
+      },
+      {
+        "fontSize": "16px",
+        "name": "company_name"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 158.828125,
+        "text": "Overview",
+        "x": 28
+      },
+      {
+        "height": 44,
+        "right": 298.3125,
+        "text": "Pemikiran",
+        "x": 166.828125
+      }
+    ],
+    "scrollWidth": 749,
+    "sidebars": 1,
+    "url": "/companies/a463692f-e0ab-4d95-baa7-0104d54c2271",
+    "width": 768,
+    "zoom": "1"
+  },
+  {
+    "label": "many-thoughts",
+    "targetWidth": 1440,
+    "active": ["Pemikiran"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 44,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran lebih lama"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 1000,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "raw_content"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 203.234375,
+        "text": "Overview",
+        "x": 74.5
+      },
+      {
+        "height": 44,
+        "right": 344.90625,
+        "text": "Pemikiran",
+        "x": 211.234375
+      }
+    ],
+    "scrollWidth": 1421,
+    "sidebars": 0,
+    "url": "/companies/a463692f-e0ab-4d95-baa7-0104d54c2271/thoughts",
+    "width": 1440,
+    "zoom": "1"
+  },
+  {
+    "label": "many-thoughts",
+    "targetWidth": 320,
+    "active": ["Pemikiran"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 44,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran lebih lama"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 844,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "raw_content"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 128.734375,
+        "text": "Overview",
+        "x": 20
+      },
+      {
+        "height": 44,
+        "right": 250.40625,
+        "text": "Pemikiran",
+        "x": 136.734375
+      }
+    ],
+    "scrollWidth": 301,
+    "sidebars": 0,
+    "url": "/companies/a463692f-e0ab-4d95-baa7-0104d54c2271/thoughts",
+    "width": 320,
+    "zoom": "1"
+  },
+  {
+    "label": "many-thoughts",
+    "targetWidth": 390,
+    "active": ["Pemikiran"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 60,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran lebih lama"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 844,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "raw_content"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 128.734375,
+        "text": "Overview",
+        "x": 20
+      },
+      {
+        "height": 44,
+        "right": 250.40625,
+        "text": "Pemikiran",
+        "x": 136.734375
+      }
+    ],
+    "scrollWidth": 371,
+    "sidebars": 0,
+    "url": "/companies/a463692f-e0ab-4d95-baa7-0104d54c2271/thoughts",
+    "width": 390,
+    "zoom": "1"
+  },
+  {
+    "label": "many-thoughts",
+    "targetWidth": 768,
+    "active": ["Pemikiran"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 44,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran lebih lama"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 1000,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "raw_content"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 156.734375,
+        "text": "Overview",
+        "x": 28
+      },
+      {
+        "height": 44,
+        "right": 298.40625,
+        "text": "Pemikiran",
+        "x": 164.734375
+      }
+    ],
+    "scrollWidth": 749,
+    "sidebars": 0,
+    "url": "/companies/a463692f-e0ab-4d95-baa7-0104d54c2271/thoughts",
+    "width": 768,
+    "zoom": "1"
+  },
+  {
+    "label": "off-page-thought",
+    "targetWidth": 1440,
+    "active": ["Pemikiran"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Tulis pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Kembali ke yang terbaru"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 1000,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 203.234375,
+        "text": "Overview",
+        "x": 74.5
+      },
+      {
+        "height": 44,
+        "right": 344.90625,
+        "text": "Pemikiran",
+        "x": 211.234375
+      }
+    ],
+    "scrollWidth": 1421,
+    "sidebars": 0,
+    "url": "/companies/a463692f-e0ab-4d95-baa7-0104d54c2271/thoughts?before=2026-10-09T06%3A51%3A19.28935%2B00%3A00%7Cd393a3cb-c390-457b-ae50-2d4d1ac2bdec&focus=00a9b165-53c3-4780-a6f7-11efa372e6a7&saved=00a9b165-53c3-4780-a6f7-11efa372e6a7#thought-00a9b165-53c3-4780-a6f7-11efa372e6a7",
+    "width": 1440,
+    "zoom": "1"
+  },
+  {
+    "label": "off-page-thought",
+    "targetWidth": 320,
+    "active": ["Pemikiran"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Tulis pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Kembali ke yang terbaru"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 844,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 128.734375,
+        "text": "Overview",
+        "x": 20
+      },
+      {
+        "height": 44,
+        "right": 250.40625,
+        "text": "Pemikiran",
+        "x": 136.734375
+      }
+    ],
+    "scrollWidth": 301,
+    "sidebars": 0,
+    "url": "/companies/a463692f-e0ab-4d95-baa7-0104d54c2271/thoughts?before=2026-10-09T06%3A51%3A19.28935%2B00%3A00%7Cd393a3cb-c390-457b-ae50-2d4d1ac2bdec&focus=00a9b165-53c3-4780-a6f7-11efa372e6a7&saved=00a9b165-53c3-4780-a6f7-11efa372e6a7#thought-00a9b165-53c3-4780-a6f7-11efa372e6a7",
+    "width": 320,
+    "zoom": "1"
+  },
+  {
+    "label": "off-page-thought",
+    "targetWidth": 390,
+    "active": ["Pemikiran"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Tulis pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Kembali ke yang terbaru"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 844,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 128.734375,
+        "text": "Overview",
+        "x": 20
+      },
+      {
+        "height": 44,
+        "right": 250.40625,
+        "text": "Pemikiran",
+        "x": 136.734375
+      }
+    ],
+    "scrollWidth": 371,
+    "sidebars": 0,
+    "url": "/companies/a463692f-e0ab-4d95-baa7-0104d54c2271/thoughts?before=2026-10-09T06%3A51%3A19.28935%2B00%3A00%7Cd393a3cb-c390-457b-ae50-2d4d1ac2bdec&focus=00a9b165-53c3-4780-a6f7-11efa372e6a7&saved=00a9b165-53c3-4780-a6f7-11efa372e6a7#thought-00a9b165-53c3-4780-a6f7-11efa372e6a7",
+    "width": 390,
+    "zoom": "1"
+  },
+  {
+    "label": "off-page-thought",
+    "targetWidth": 768,
+    "active": ["Pemikiran"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Tulis pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Kembali ke yang terbaru"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 1000,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 156.734375,
+        "text": "Overview",
+        "x": 28
+      },
+      {
+        "height": 44,
+        "right": 298.40625,
+        "text": "Pemikiran",
+        "x": 164.734375
+      }
+    ],
+    "scrollWidth": 749,
+    "sidebars": 0,
+    "url": "/companies/a463692f-e0ab-4d95-baa7-0104d54c2271/thoughts?before=2026-10-09T06%3A51%3A19.28935%2B00%3A00%7Cd393a3cb-c390-457b-ae50-2d4d1ac2bdec&focus=00a9b165-53c3-4780-a6f7-11efa372e6a7&saved=00a9b165-53c3-4780-a6f7-11efa372e6a7#thought-00a9b165-53c3-4780-a6f7-11efa372e6a7",
+    "width": 768,
+    "zoom": "1"
+  },
+  {
+    "label": "older-thoughts",
+    "targetWidth": 1440,
+    "active": ["Pemikiran"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Tulis pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Kembali ke yang terbaru"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 1000,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 203.234375,
+        "text": "Overview",
+        "x": 74.5
+      },
+      {
+        "height": 44,
+        "right": 344.90625,
+        "text": "Pemikiran",
+        "x": 211.234375
+      }
+    ],
+    "scrollWidth": 1421,
+    "sidebars": 0,
+    "url": "/companies/a463692f-e0ab-4d95-baa7-0104d54c2271/thoughts?before=2026-10-09T06%3A51%3A19.28935%2B00%3A00%7Cd393a3cb-c390-457b-ae50-2d4d1ac2bdec#thought-history-title",
+    "width": 1440,
+    "zoom": "1"
+  },
+  {
+    "label": "older-thoughts",
+    "targetWidth": 320,
+    "active": ["Pemikiran"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Tulis pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Kembali ke yang terbaru"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 844,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 128.734375,
+        "text": "Overview",
+        "x": 20
+      },
+      {
+        "height": 44,
+        "right": 250.40625,
+        "text": "Pemikiran",
+        "x": 136.734375
+      }
+    ],
+    "scrollWidth": 301,
+    "sidebars": 0,
+    "url": "/companies/a463692f-e0ab-4d95-baa7-0104d54c2271/thoughts?before=2026-10-09T06%3A51%3A19.28935%2B00%3A00%7Cd393a3cb-c390-457b-ae50-2d4d1ac2bdec#thought-history-title",
+    "width": 320,
+    "zoom": "1"
+  },
+  {
+    "label": "older-thoughts",
+    "targetWidth": 390,
+    "active": ["Pemikiran"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Tulis pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Kembali ke yang terbaru"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 844,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 128.734375,
+        "text": "Overview",
+        "x": 20
+      },
+      {
+        "height": 44,
+        "right": 250.40625,
+        "text": "Pemikiran",
+        "x": 136.734375
+      }
+    ],
+    "scrollWidth": 371,
+    "sidebars": 0,
+    "url": "/companies/a463692f-e0ab-4d95-baa7-0104d54c2271/thoughts?before=2026-10-09T06%3A51%3A19.28935%2B00%3A00%7Cd393a3cb-c390-457b-ae50-2d4d1ac2bdec#thought-history-title",
+    "width": 390,
+    "zoom": "1"
+  },
+  {
+    "label": "older-thoughts",
+    "targetWidth": 768,
+    "active": ["Pemikiran"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Tulis pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Kembali ke yang terbaru"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 1000,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 156.734375,
+        "text": "Overview",
+        "x": 28
+      },
+      {
+        "height": 44,
+        "right": 298.40625,
+        "text": "Pemikiran",
+        "x": 164.734375
+      }
+    ],
+    "scrollWidth": 749,
+    "sidebars": 0,
+    "url": "/companies/a463692f-e0ab-4d95-baa7-0104d54c2271/thoughts?before=2026-10-09T06%3A51%3A19.28935%2B00%3A00%7Cd393a3cb-c390-457b-ae50-2d4d1ac2bdec#thought-history-title",
+    "width": 768,
+    "zoom": "1"
+  },
+  {
+    "label": "overview",
+    "targetWidth": 1440,
+    "active": ["Overview"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Baca pemikiran"
+      },
+      {
+        "height": 86.375,
+        "text": "Tambahkan pemikiran"
+      },
+      {
+        "height": 86.375,
+        "text": "Semua pemikiran 3 tersimpan"
+      },
+      {
+        "height": 86.375,
+        "text": "9 Okt 2026, 13.48 WIB1. aku belum cek laporan keuangannya. Expansion pace menarik, tapi aku belum ta"
+      },
+      {
+        "height": 86.375,
+        "text": "9 Okt 2026, 13.48 WIBmenurutku ekspansi perusahaan ini menarik sih, tapi agak terlalu cepet. aku bel"
+      },
+      {
+        "height": 44,
+        "text": "Ubah konteks"
+      },
+      {
+        "height": 44.390625,
+        "text": "Kelola ruang · Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Hapus perusahaan permanen"
+      },
+      {
+        "height": 44,
+        "text": "Hapus permanen"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 1000,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "confirm_archive"
+      },
+      {
+        "fontSize": "16px",
+        "name": "company_name"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 205.328125,
+        "text": "Overview",
+        "x": 74.5
+      },
+      {
+        "height": 44,
+        "right": 344.8125,
+        "text": "Pemikiran",
+        "x": 213.328125
+      }
+    ],
+    "scrollWidth": 1421,
+    "sidebars": 1,
+    "url": "/companies/47b74c9a-b790-4cc4-82f2-39a246f871c3",
+    "width": 1440,
+    "zoom": "1"
+  },
+  {
+    "label": "overview",
+    "targetWidth": 320,
+    "active": ["Overview"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Baca pemikiran"
+      },
+      {
+        "height": 86.78125,
+        "text": "Tambahkan pemikiran"
+      },
+      {
+        "height": 86.375,
+        "text": "Semua pemikiran 3 tersimpan"
+      },
+      {
+        "height": 123.8125,
+        "text": "9 Okt 2026, 13.48 WIB1. aku belum cek laporan keuangannya. Expansion pace menarik, tapi aku belum ta"
+      },
+      {
+        "height": 123.8125,
+        "text": "9 Okt 2026, 13.48 WIBmenurutku ekspansi perusahaan ini menarik sih, tapi agak terlalu cepet. aku bel"
+      },
+      {
+        "height": 44,
+        "text": "Ubah konteks"
+      },
+      {
+        "height": 44.390625,
+        "text": "Kelola ruang · Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Hapus perusahaan permanen"
+      },
+      {
+        "height": 44,
+        "text": "Hapus permanen"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 844,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "confirm_archive"
+      },
+      {
+        "fontSize": "16px",
+        "name": "company_name"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 130.828125,
+        "text": "Overview",
+        "x": 20
+      },
+      {
+        "height": 44,
+        "right": 250.3125,
+        "text": "Pemikiran",
+        "x": 138.828125
+      }
+    ],
+    "scrollWidth": 301,
+    "sidebars": 1,
+    "url": "/companies/47b74c9a-b790-4cc4-82f2-39a246f871c3",
+    "width": 320,
+    "zoom": "1"
+  },
+  {
+    "label": "overview",
+    "targetWidth": 390,
+    "active": ["Overview"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Baca pemikiran"
+      },
+      {
+        "height": 72,
+        "text": "Tambahkan pemikiran"
+      },
+      {
+        "height": 86.375,
+        "text": "Semua pemikiran 3 tersimpan"
+      },
+      {
+        "height": 123.8125,
+        "text": "9 Okt 2026, 13.48 WIB1. aku belum cek laporan keuangannya. Expansion pace menarik, tapi aku belum ta"
+      },
+      {
+        "height": 123.8125,
+        "text": "9 Okt 2026, 13.48 WIBmenurutku ekspansi perusahaan ini menarik sih, tapi agak terlalu cepet. aku bel"
+      },
+      {
+        "height": 44,
+        "text": "Ubah konteks"
+      },
+      {
+        "height": 44.390625,
+        "text": "Kelola ruang · Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Hapus perusahaan permanen"
+      },
+      {
+        "height": 44,
+        "text": "Hapus permanen"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 844,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "confirm_archive"
+      },
+      {
+        "fontSize": "16px",
+        "name": "company_name"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 130.828125,
+        "text": "Overview",
+        "x": 20
+      },
+      {
+        "height": 44,
+        "right": 250.3125,
+        "text": "Pemikiran",
+        "x": 138.828125
+      }
+    ],
+    "scrollWidth": 371,
+    "sidebars": 1,
+    "url": "/companies/47b74c9a-b790-4cc4-82f2-39a246f871c3",
+    "width": 390,
+    "zoom": "1"
+  },
+  {
+    "label": "overview",
+    "targetWidth": 768,
+    "active": ["Overview"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Baca pemikiran"
+      },
+      {
+        "height": 86.375,
+        "text": "Tambahkan pemikiran"
+      },
+      {
+        "height": 86.375,
+        "text": "Semua pemikiran 3 tersimpan"
+      },
+      {
+        "height": 86.375,
+        "text": "9 Okt 2026, 13.48 WIB1. aku belum cek laporan keuangannya. Expansion pace menarik, tapi aku belum ta"
+      },
+      {
+        "height": 86.375,
+        "text": "9 Okt 2026, 13.48 WIBmenurutku ekspansi perusahaan ini menarik sih, tapi agak terlalu cepet. aku bel"
+      },
+      {
+        "height": 44,
+        "text": "Ubah konteks"
+      },
+      {
+        "height": 44.390625,
+        "text": "Kelola ruang · Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Arsipkan perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Hapus perusahaan permanen"
+      },
+      {
+        "height": 44,
+        "text": "Hapus permanen"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 1000,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "confirm_archive"
+      },
+      {
+        "fontSize": "16px",
+        "name": "company_name"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 158.828125,
+        "text": "Overview",
+        "x": 28
+      },
+      {
+        "height": 44,
+        "right": 298.3125,
+        "text": "Pemikiran",
+        "x": 166.828125
+      }
+    ],
+    "scrollWidth": 749,
+    "sidebars": 1,
+    "url": "/companies/47b74c9a-b790-4cc4-82f2-39a246f871c3",
+    "width": 768,
+    "zoom": "1"
+  },
+  {
+    "label": "refine",
+    "targetWidth": 1440,
+    "active": [],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "← Kembali ke pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Rapikan dengan AI"
+      },
+      {
+        "height": 44,
+        "text": "Tetap gunakan asli"
+      },
+      {
+        "height": 44,
+        "text": "Ubah versi pilihan sebelum menerima"
+      },
+      {
+        "height": 44,
+        "text": "Terima versi pilihan"
+      },
+      {
+        "height": 44,
+        "text": "Tolak usulan"
+      },
+      {
+        "height": 44,
+        "text": "Asal versi & waktu keputusan"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 1000,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "user_final_content"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 203.234375,
+        "text": "Overview",
+        "x": 74.5
+      },
+      {
+        "height": 44,
+        "right": 342.71875,
+        "text": "Pemikiran",
+        "x": 211.234375
+      }
+    ],
+    "scrollWidth": 1421,
+    "sidebars": 0,
+    "url": "/companies/47b74c9a-b790-4cc4-82f2-39a246f871c3/thoughts/4b34ba3e-7ae8-461f-9611-204ec32bc4e3/refine",
+    "width": 1440,
+    "zoom": "1"
+  },
+  {
+    "label": "refine",
+    "targetWidth": 320,
+    "active": [],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "← Kembali ke pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Rapikan dengan AI"
+      },
+      {
+        "height": 44,
+        "text": "Tetap gunakan asli"
+      },
+      {
+        "height": 44,
+        "text": "Ubah versi pilihan sebelum menerima"
+      },
+      {
+        "height": 44,
+        "text": "Terima versi pilihan"
+      },
+      {
+        "height": 44,
+        "text": "Tolak usulan"
+      },
+      {
+        "height": 44,
+        "text": "Asal versi & waktu keputusan"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 844,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "user_final_content"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 128.734375,
+        "text": "Overview",
+        "x": 20
+      },
+      {
+        "height": 44,
+        "right": 248.21875,
+        "text": "Pemikiran",
+        "x": 136.734375
+      }
+    ],
+    "scrollWidth": 301,
+    "sidebars": 0,
+    "url": "/companies/47b74c9a-b790-4cc4-82f2-39a246f871c3/thoughts/4b34ba3e-7ae8-461f-9611-204ec32bc4e3/refine",
+    "width": 320,
+    "zoom": "1"
+  },
+  {
+    "label": "refine",
+    "targetWidth": 390,
+    "active": [],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "← Kembali ke pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Rapikan dengan AI"
+      },
+      {
+        "height": 44,
+        "text": "Tetap gunakan asli"
+      },
+      {
+        "height": 44,
+        "text": "Ubah versi pilihan sebelum menerima"
+      },
+      {
+        "height": 44,
+        "text": "Terima versi pilihan"
+      },
+      {
+        "height": 44,
+        "text": "Tolak usulan"
+      },
+      {
+        "height": 44,
+        "text": "Asal versi & waktu keputusan"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 844,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "user_final_content"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 128.734375,
+        "text": "Overview",
+        "x": 20
+      },
+      {
+        "height": 44,
+        "right": 248.21875,
+        "text": "Pemikiran",
+        "x": 136.734375
+      }
+    ],
+    "scrollWidth": 371,
+    "sidebars": 0,
+    "url": "/companies/47b74c9a-b790-4cc4-82f2-39a246f871c3/thoughts/4b34ba3e-7ae8-461f-9611-204ec32bc4e3/refine",
+    "width": 390,
+    "zoom": "1"
+  },
+  {
+    "label": "refine",
+    "targetWidth": 768,
+    "active": [],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "← Kembali ke pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Rapikan dengan AI"
+      },
+      {
+        "height": 44,
+        "text": "Tetap gunakan asli"
+      },
+      {
+        "height": 44,
+        "text": "Ubah versi pilihan sebelum menerima"
+      },
+      {
+        "height": 44,
+        "text": "Terima versi pilihan"
+      },
+      {
+        "height": 44,
+        "text": "Tolak usulan"
+      },
+      {
+        "height": 44,
+        "text": "Asal versi & waktu keputusan"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 1000,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "user_final_content"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 156.734375,
+        "text": "Overview",
+        "x": 28
+      },
+      {
+        "height": 44,
+        "right": 296.21875,
+        "text": "Pemikiran",
+        "x": 164.734375
+      }
+    ],
+    "scrollWidth": 749,
+    "sidebars": 0,
+    "url": "/companies/47b74c9a-b790-4cc4-82f2-39a246f871c3/thoughts/4b34ba3e-7ae8-461f-9611-204ec32bc4e3/refine",
+    "width": 768,
+    "zoom": "1"
+  },
+  {
+    "label": "thoughts",
+    "targetWidth": 1440,
+    "active": ["Pemikiran"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 44,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44.390625,
+        "text": "Baca pemikiran lengkap · 2.944 karakter"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 1000,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "raw_content"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 203.234375,
+        "text": "Overview",
+        "x": 74.5
+      },
+      {
+        "height": 44,
+        "right": 344.90625,
+        "text": "Pemikiran",
+        "x": 211.234375
+      }
+    ],
+    "scrollWidth": 1421,
+    "sidebars": 0,
+    "url": "/companies/47b74c9a-b790-4cc4-82f2-39a246f871c3/thoughts",
+    "width": 1440,
+    "zoom": "1"
+  },
+  {
+    "label": "thoughts",
+    "targetWidth": 320,
+    "active": ["Pemikiran"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 44,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 70.78125,
+        "text": "Baca pemikiran lengkap · 2.944 karakter"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 844,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "raw_content"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 128.734375,
+        "text": "Overview",
+        "x": 20
+      },
+      {
+        "height": 44,
+        "right": 250.40625,
+        "text": "Pemikiran",
+        "x": 136.734375
+      }
+    ],
+    "scrollWidth": 301,
+    "sidebars": 0,
+    "url": "/companies/47b74c9a-b790-4cc4-82f2-39a246f871c3/thoughts",
+    "width": 320,
+    "zoom": "1"
+  },
+  {
+    "label": "thoughts",
+    "targetWidth": 390,
+    "active": ["Pemikiran"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 60,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 70.78125,
+        "text": "Baca pemikiran lengkap · 2.944 karakter"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 60,
+        "text": "Hapus permanen"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 844,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "raw_content"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 128.734375,
+        "text": "Overview",
+        "x": 20
+      },
+      {
+        "height": 44,
+        "right": 250.40625,
+        "text": "Pemikiran",
+        "x": 136.734375
+      }
+    ],
+    "scrollWidth": 371,
+    "sidebars": 0,
+    "url": "/companies/47b74c9a-b790-4cc4-82f2-39a246f871c3/thoughts",
+    "width": 390,
+    "zoom": "1"
+  },
+  {
+    "label": "thoughts",
+    "targetWidth": 768,
+    "active": ["Pemikiran"],
+    "bodyFont": "inter, \"inter Fallback\", \"Segoe UI\", Arial, sans-serif, \"Segoe UI\", \"Helvetica Neue\", Arial, sans-serif",
+    "controls": [
+      {
+        "height": 44,
+        "text": "Perusahaan"
+      },
+      {
+        "height": 44,
+        "text": "Ruang"
+      },
+      {
+        "height": 44,
+        "text": "Kelola"
+      },
+      {
+        "height": 44,
+        "text": "Ubah identitas"
+      },
+      {
+        "height": 44,
+        "text": "Arsip & hapus"
+      },
+      {
+        "height": 44,
+        "text": "Overview"
+      },
+      {
+        "height": 44,
+        "text": "Pemikiran"
+      },
+      {
+        "height": 44,
+        "text": "Buang draf"
+      },
+      {
+        "height": 44,
+        "text": "Simpan pemikiran ↗"
+      },
+      {
+        "height": 44,
+        "text": "Tentang draf di browser ini"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44.390625,
+        "text": "Baca pemikiran lengkap · 2.944 karakter"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      },
+      {
+        "height": 44,
+        "text": "Tinjau di Refine"
+      },
+      {
+        "height": 44,
+        "text": "Hapus pemikiran"
+      },
+      {
+        "height": 81,
+        "text": "Hapus permanen"
+      }
+    ],
+    "dpr": 0.800000011920929,
+    "fonts": "loaded",
+    "headingFont": "sourceSerif, \"sourceSerif Fallback\", Georgia, \"Times New Roman\", serif, Georgia, \"Times New Roman\", serif",
+    "height": 1000,
+    "inputs": [
+      {
+        "fontSize": "16px",
+        "name": "raw_content"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      },
+      {
+        "fontSize": "16px",
+        "name": "confirm_delete"
+      }
+    ],
+    "localNavigation": [
+      {
+        "height": 44,
+        "right": 156.734375,
+        "text": "Overview",
+        "x": 28
+      },
+      {
+        "height": 44,
+        "right": 298.40625,
+        "text": "Pemikiran",
+        "x": 164.734375
+      }
+    ],
+    "scrollWidth": 749,
+    "sidebars": 0,
+    "url": "/companies/47b74c9a-b790-4cc4-82f2-39a246f871c3/thoughts",
+    "width": 768,
+    "zoom": "1"
+  }
+]

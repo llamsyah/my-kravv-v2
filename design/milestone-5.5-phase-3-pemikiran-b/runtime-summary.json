@@ -1,0 +1,17 @@
+{
+  "checks": [
+    "Keyboard full-reading expansion preserves exact long original",
+    "Legacy focus dispatch retains exact anchor and expanded original",
+    "Specific existing Refine deep link opens owned original without generation",
+    "Validation visible; exact unsaved draft survives Overview/navigation/reload; privacy disclosure retained",
+    "Real synthetic capture keeps existing transport line endings, exact saved anchor/receipt, and acknowledged draft cleanup",
+    "20 + 5 original Thought pages remain ordered with no duplicate/missing IDs; older page has writing entrance",
+    "Exact four synthetic originals verified at each required width; focused marker has a protective text inset"
+  ],
+  "warningErrors": [],
+  "limitations": [
+    "Native 100%/80% browser zoom unverified; CSS zoom 1 recorded separately",
+    "Physical phone keyboard and nonzero safe-area insets not exercised",
+    "Full-page exports may position the fixed mobile rail within the image; export scaling/trim differs from CSS viewport"
+  ]
+}

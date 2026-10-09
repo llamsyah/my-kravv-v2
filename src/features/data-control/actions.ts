@@ -53,9 +53,11 @@ export async function deleteRecordAction(
   revalidatePath("/");
   revalidatePath("/companies");
   revalidatePath(`/companies/${companyId}`);
+  revalidatePath(`/companies/${companyId}/thoughts`);
+  revalidatePath(`/companies/${companyId}/refinements`);
   redirect(
     kind === "company"
       ? "/companies?deleted=company"
-      : `/companies/${companyId}?deleted=thought`,
+      : `/companies/${companyId}/thoughts?deleted=thought`,
   );
 }
