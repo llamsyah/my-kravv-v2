@@ -94,4 +94,4 @@ Existing non-AI operations keep their current RLS path.
 Reservations include both allowed attempts; unknown usage and interrupted logging
 retain conservative holds. Company deletion retains accounting with NULL Company;
 account deletion cascades it. See
-[the Milestone 4 report](../docs/13-milestone-4-implementation-notes.md).
+[the Milestone 4 report](../docs/archive-v2/implementation-notes/13-milestone-4-implementation-notes.md).

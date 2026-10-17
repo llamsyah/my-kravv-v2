@@ -5,8 +5,11 @@ coverage/
 package-lock.json
 next-env.d.ts
 docs/
-public/visual-references/
+design/archive-v2/original-references/
 .env*
 # Preserve redistributed upstream font license notices verbatim.
-design/milestone-5.5/assets/SourceSerif-LICENSE.md
+design/archive-v2/prototypes/milestone-5.5/assets/SourceSerif-LICENSE.md
 src/styles/fonts/SourceSerif-LICENSE.md
+
+# Disposable QA output is not source.
+.qa/

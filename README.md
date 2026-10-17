@@ -1,144 +1,29 @@
 # MY KRAVV
 
-> **Checkpoint V2 — 17 Oktober 2026:** pengembangan berhenti pada Milestone 5.5
-> Phase 4B untuk beralih ke V3; review visual akhir Phase 4B masih terbuka.
-> Baca [CHECKPOINT-V2.md](CHECKPOINT-V2.md) untuk kondisi lokal, perubahan yang
-> belum di-commit, hasil validasi terakhir, dan batas pekerjaan. Bagian historis
-> README di bawah tidak menggantikan checkpoint terbaru ini.
+V3 preparation is active on `v3`. Start with the [V3 documentation authority](docs/v3/00-V3-INDEX.md) and [V3 design workspace](design/v3/README.md). The running application remains the V2 checkpoint at Milestone 5.5 Phase 4B; final V2 Phase 4B visual approval is still pending. This reorganization implements no V3 features.
 
-Referensi visual telah dikurasi untuk transisi V3: lihat [indeks desain](design/README.md).
-Output QA sementara ditulis ke `.qa/` dan diabaikan Git; kode, migrasi, pengujian,
-aset desain asli serta catatan implementasi tetap dipertahankan.
+## Where to start
 
-A private AI-assisted investment reasoning workspace. Milestone 4 adds internal
-AI infrastructure to the existing Company, Thought and data-control foundation.
-The UI defaults to Bahasa Indonesia and preserves the Hybrid KRAVV design.
+- [Documentation gateway](docs/README.md): active V3 documents and historical V2 knowledge.
+- [V3 approved reference index](design/v3/references/README.md): Hybrid C direction; Home image is `AWAITING_OWNER_ASSET`.
+- [V3 explorations](design/v3/explorations/README.md): unapproved concepts only.
+- [V2 documentation archive](docs/archive-v2/README.md) and [V2 visual archive](design/archive-v2/README.md): historical evidence, without authority over approved V3 decisions.
+- [V2 checkpoint](CHECKPOINT-V2.md): dated implementation boundary and historical validation.
 
-## Run locally
+## Run the existing application
 
-Use Node.js 24 LTS and npm (version recorded in `.node-version`).
+Use Node.js 24 LTS (see [.node-version](.node-version)) and npm:
 
 ```sh
 npm ci
 npm run dev
 ```
 
-Open <http://localhost:3000>. Anonymous users reach `/auth`; authenticated users
-reach the minimal private shell at `/`. Companies live at `/companies`; Home
-supports Company-linked quick capture and recent original thoughts.
+Open <http://localhost:3000>. The current application uses the existing Supabase authentication and Company/Thought/Refine workflows. Keep existing local configuration intact. For a fresh checkout only, copy [.env.example](.env.example) to `.env.local` and configure the designated development project; never commit secrets.
 
-For a new checkout, copy `.env.example` to `.env.local` and fill the development
-project values. Do not overwrite an existing local configuration or commit it.
+Read [Supabase setup](supabase/README.md), the [server boundary](src/server/README.md), and [AI setup](src/server/ai/README.md) before environment or database work. Checked-in migrations do not prove remote state. This repository cleanup grants no authorization to apply migrations, modify live data, or make real AI requests.
 
-```powershell
-Copy-Item .env.example .env.local
-```
-
-Browser-safe variables are `NEXT_PUBLIC_SUPABASE_URL` and
-`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`. `SUPABASE_SECRET_KEY`, `GROQ_API_KEY` and
-`OPENAI_API_KEY` are protected by `server-only` imports and never used in client
-code. Internal AI calls require explicit invocation; no product AI roles or
-automatic calls are implemented. See [AI setup](src/server/ai/README.md) for
-required model capabilities, pricing/FX and optional smoke-test authorization.
-Validation reports missing configuration without echoing values.
-
-Apply [the settings migration](supabase/migrations/20261007000100_user_settings_and_rls.sql)
-to the configured development project. See [Supabase setup](supabase/README.md)
-for migration and dashboard prerequisites. Sign in with an existing email/password
-account; registration and password recovery are outside this milestone. Also apply
-[the Company migration](supabase/migrations/20261008000100_companies_and_rls.sql)
-once to the same development project before using Companies.
-Also apply [the Thought migration](supabase/migrations/20261008000200_thoughts_and_initial_history.sql)
-once to that project before using Raw Thoughts. Its application has been confirmed
-for the configured development project.
-
-## Company Slice
-
-`/companies` lists owned active companies by recent metadata update. The archived
-view is available through its quiet **Diarsipkan** link. `/companies/new` needs only
-a name; optional ticker, exchange, sector, and short context sit behind disclosure.
-No ticker lookup, external enrichment, or market data is used.
-
-`/companies/[companyId]` shows company identity and user-entered context.
-`/companies/[companyId]/edit` updates supported metadata and descriptive research
-state. Missing, malformed, and foreign company IDs return the same safe unavailable
-surface. No later reasoning features or fake data populate the workspace.
-
-Ownership is derived from the verified server session, never form data. Every
-query explicitly filters `user_id`, validates the returned owner, and runs under
-the user's RLS session. Separate SELECT/INSERT/UPDATE policies protect Companies;
-column grants prevent ordinary API changes to identity, ownership, or timestamps.
-
-Archiving requires explicit confirmation. It sets `state = ARCHIVED` without
-deletion; the database maintains `archived_at` and `updated_at`. Repeated archive
-operations preserve the original archive timestamp. Archived workspaces can be
-reopened and their metadata corrected; they remain archived. Restore and permanent
-deletion controls are outside this slice. There is no ordinary Company DELETE
-grant or policy. Deleting an Auth account cascades its private data.
-
-Input limits are 200 characters for name, 40 for ticker, 80 for exchange, 120 for
-sector, and 2,000 for context. The name is required; blanks in optional fields are
-stored as NULL. Descriptive states are user-selected labels, not workflow gates.
-
-## Raw Thought Slice
-
-Write freely inside `/companies/[companyId]`, or choose an active Company in the
-small Beranda composer. Only freeform text and Company are required; intent stays
-NULL. The canonical names `raw_content` and `intent` follow the database schema,
-rather than the conceptual `raw_text`/`intent_type` names in the domain document.
-No Thought status or update timestamp is invented.
-
-The server validates nonblank text without transforming it, verifies the parent,
-and derives ownership from the verified session. The original submitted string
-is stored exactly, including whitespace, tabs, and line breaks. Browser textarea
-and form encoding determine submitted line endings; the server does not normalize
-them. NUL characters are rejected because PostgreSQL TEXT cannot store them. A
-100,000-character application limit keeps long capture within the existing Server
-Action request budget. Content is never silently truncated.
-
-Company history lists 20 original Thoughts per request, newest first, with UUID
-ascending as a deterministic tie-breaker. Validated timestamp/UUID keyset links
-reach older entries without offset shifts. Entries open their full escaped text
-with original formatting, identity, and capture time (currently WIB). Beranda
-shows five recent original thoughts with Company links. This is initial history,
-not a full Timeline interface or a completed Home dashboard.
-
-An insert trigger creates one `THOUGHT_CREATED` event in the same transaction;
-failure rolls back both writes. Composite ownership foreign keys and separate
-SELECT/INSERT RLS policies protect Thoughts. Ordinary INSERT grants cover only
-owner/parent/content; UPDATE/DELETE permissions are absent. Originals, identity,
-ownership, and capture timestamps cannot be rewritten through the user API.
-Timeline events are owner-readable and writable only by a restricted database
-trigger. The app uses the ordinary authenticated client throughout.
-
-Archived Companies retain readable thoughts/history. New capture is rejected by
-the server and database, including concurrent archive/capture guarded by a Company
-row lock. Company metadata correction remains available. Failed saves retain the
-draft; a draft rejected after archive is shown read-only for copying. Submit
-controls are disabled while saving. Drafts are not persisted across browser
-reloads, and ambiguous network failures do not have retry idempotency; separate
-intentional identical Thoughts remain valid.
-
-## Authentication and authorization
-
-Request-scoped Supabase SSR clients use the publishable key and session cookies.
-Next.js Proxy verifies claims, refreshes sessions, and propagates cookies to the
-request and response. Server layouts and the private page verify identity with
-`getUser()` before private access. Private responses use `private, no-store`.
-
-The first private entry inserts settings if missing, then checks the returned
-owner. Concurrent or repeated visits preserve preferences. Four RLS policies
-restrict reading, inserting, updating, and deleting to `auth.uid() = user_id`.
-Ordinary content requests use user JWTs; narrowly scoped server AI accounting
-uses the privileged key after separate authentication/ownership checks. Logout revokes the current
-session and clears its cookies; private entry then redirects back to `/auth`.
-
-Future private pages should use the private route group and check identity near
-data access. Each new record requires explicit ownership checks and RLS tests.
-Supabase's provider rate limits protect login; production HTTPS, secure project
-configuration, and a separate production database remain deployment requirements.
-
-## Validation and production
+## Local validation
 
 ```sh
 npm run check
@@ -146,103 +31,10 @@ npm run build
 npm start
 ```
 
-`check` runs ESLint, strict TypeScript with generated route types, Prettier, and
-deterministic environment/authentication/bootstrap/Company/Thought/AI tests. Use `npm run format`
-to format application/setup files. Product documentation and visual references are
-excluded from formatting.
+The check runs lint, type generation/TypeScript, formatting and deterministic tests. Documentation is excluded from the root formatter and should be checked explicitly when edited. Live database tests and AI smoke tests require separate authorization; do not run them as routine checks.
 
-The opt-in live suite requires the designated development project, its applied
-migration, and the local app running. It verifies real login, session refresh,
-idempotent bootstrap, cross-user RLS, Company creation/list/edit/archive, and actual
-Server Actions through HTTP, plus exact raw preservation, immutable API permissions,
-Thought ownership/history, and archived capture denial. Random disposable users
-are removed in `finally`; their private data cascades away and cleanup is checked. No other
-user or record is modified. AI database tests additionally verify owner-only
-accounting, concurrent budget reservations and unknown-usage holds with a mocked
-provider. No AI provider quota is consumed by normal tests. The secret key is used
-for test administration and narrowly scoped AI accounting.
+Disposable screenshots, measurements, logs and generated QA reports belong in ignored `.qa/<task>/`. Promote only deliberately selected, documented evidence into design archives or explicitly approved references. Never write automated captures into `design/v3/references/`.
 
-```powershell
-$env:MY_KRAVV_LIVE_TESTS = 'development'
-npm run test:live
-Remove-Item Env:MY_KRAVV_LIVE_TESTS
-```
+## Implementation history
 
-The app URL defaults to `http://127.0.0.1:3000`; override it with
-`MY_KRAVV_TEST_APP_URL` for a different localhost port. Without the opt-in value,
-live tests are skipped. Browser visual verification is separate from HTTP tests.
-
-ESLint 9 is pinned because bundled lint plugins do not yet accept ESLint 10.
-Milestone 0 recorded five high development-only audit entries in the
-`fast-glob` → `micromatch` → `braces` chain; revisit compatible upstream fixes.
-Check production dependencies with `npm audit --omit=dev`.
-
-## Source layout
-
-```text
-src/app/auth/         Public login surface
-src/app/(private)/    Protected shell, placeholder, loading/error states
-src/components/       Shared shell
-src/features/auth/    Login/logout forms, validation, Server Actions
-src/features/companies/ Company forms, actions, and private navigation
-src/domain/company/   Validated Company fields, states, and runtime row types
-src/domain/thought/   Original-text validation, row types, and history cursors
-src/features/thoughts/ Composer, history, and authenticated capture action
-src/lib/env/          Browser-safe configuration
-src/lib/supabase/     Browser client boundary
-src/server/auth/      SSR client, verified session, refresh, auth operations
-src/server/db/        Owned content operations, settings and narrow AI accounting
-src/server/companies/ Verified session and settings context for Company requests
-src/server/ai/        Internal gateway, inert roles, providers, context and costs
-src/proxy.ts          Server-side route guard
-src/tests/            Deterministic tests; separate opt-in live suite
-supabase/migrations/  Settings, content, data control, AI accounting and RLS
-```
-
-No dependencies were added for Milestones 2 or 3. Milestone 1 introduced
-`@supabase/ssr` and `@supabase/supabase-js`.
-Milestone 4 adds the pinned official `openai` SDK for Groq/OpenAI compatibility.
-No component kit, external fonts, market data, or mock account is included.
-
-## Product documentation and references
-
-Read [the original overview](docs/README.md),
-[Product Foundation](docs/MY_KRAVV_Product_Foundation_v0.1.md),
-[MVP Scope](docs/05-mvp-scope.md), [Technical Architecture](docs/06-technical-architecture.md),
-[Design Direction](docs/08-design-direction.md), [Database Schema](docs/09-database-schema.md),
-and [Implementation Plan](docs/11-implementation-plan.md).
-[Visual guidance](public/visual-references/visual-references-README.md) describes
-the desktop/mobile images. Documentation takes priority; original documents and
-all ten images remain intact. Their actual filenames differ from the task brief;
-no originals were renamed. The task's current publishable/secret key model takes
-precedence over legacy names in the original implementation plan.
-
-## Next milestone
-
-Milestone 3.5 implements broader Home/Company/workspace layouts, permanent deletion
-with confirmation, local draft recovery and idempotent capture. Read the
-[implementation and QA report](docs/12-milestone-3.5-implementation-notes.md) for
-browser results and remaining visual-fidelity limits. The original landscape
-asset is still missing; temporary gradients do not constitute full visual sign-off.
-Drafts are scoped to user/context in local storage, without encryption, and clear
-only after matching confirmed saves, discard, or reaching the signed-out screen.
-Do not leave sensitive drafts on a shared browser profile.
-
-Milestone 4 implements the server-only gateway, configurable role registries, run
-persistence, cost estimates and explicit context boundaries. The AI migration is
-confirmed applied to the configured development project. Read the
-[implementation and verification report](docs/13-milestone-4-implementation-notes.md).
-The separately authorized single Groq infrastructure smoke test is complete;
-its authorization has been consumed. Pricing/FX remain explicit local configuration.
-
-Milestone 5 adds explicit Refine from a saved Thought, using the existing gateway,
-durable duplicate protection, owner-scoped proposals and accept/edit/reject history.
-Original text is immutable; AI proposals and user edits are separate. The additive
-`20261008000500_refinements_and_request_identity.sql` migration is confirmed applied
-and verified in the configured development project. Validation uses mocked providers;
-no real Refine request is authorized. Read the
-[Refine implementation and QA report](docs/14-milestone-5-implementation-notes.md).
-Stop after Milestone 5. Structure and later roles remain inactive.
-
-Implementation references: [installed Next.js guidance](node_modules/next/dist/docs/)
-and [Supabase SSR authentication](https://supabase.com/docs/guides/auth/server-side/creating-a-client).
+The complete prior root README is preserved as the [historical V2 developer guide](docs/archive-v2/developer-guide-v2.md), including its original milestone descriptions, limitations and instructions. Its next-milestone guidance is historical. For the implemented boundary use the checkpoint, dated reports, source and tests together. Follow [AGENTS.md](AGENTS.md) and installed Next.js guides for engineering work.

@@ -31,17 +31,5 @@ supabase/.branches/
 /design/milestone-5.5-refine-workspace/*.json
 /design/milestone-5.5/screenshots/*.json
 
-# Small, explicitly retained V2 visual evidence set (see design/README.md).
-!/design/milestone-5.5-phase-2/companies-1440.jpg
-!/design/milestone-5.5-phase-2/companies-390.jpg
-!/design/milestone-5.5-phase-4a/1440-home.jpg
-!/design/milestone-5.5-phase-4a/390-home.jpg
-!/design/milestone-5.5-phase-4a-final-polish/after-overview-1440.png
-!/design/milestone-5.5-phase-4a-final-polish/after-overview-390.png
-!/design/milestone-5.5-phase-4a-final-polish/after-thoughts-1440.png
-!/design/milestone-5.5-phase-4a-final-polish/after-thoughts-390.png
-!/design/milestone-5.5-phase-4b/after-suggested-1440-viewport.png
-!/design/milestone-5.5-phase-4b/after-suggested-390.png
-!/design/milestone-5.5-phase-4b/after-selected-superseded-1440.png
-!/design/milestone-5.5-phase-4b/version-trail-expanded-desktop.png
-!/design/milestone-5.5-phase-4b/editing-retained-mobile.png
+# Curated V2 evidence and V3 references are tracked at their archive/workspace paths.
+# Automated QA must continue to use /.qa/, never design/v3/references/.

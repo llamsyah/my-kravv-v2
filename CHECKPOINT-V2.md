@@ -2,6 +2,8 @@
 
 Date: **17 October 2026 (Asia/Jakarta)**.
 
+Repository organization note, 17 October 2026: the dated observations below retain their V2 meaning. Historical documents and manifests now live in [docs/archive-v2](docs/archive-v2/README.md); prototypes, selected evidence and original images live in [design/archive-v2](design/archive-v2/README.md). Original path names in historical tables describe the checkpoint-time structure. Start active V3 work at the [V3 authority index](docs/v3/00-V3-INDEX.md).
+
 V2 is left at the **Milestone 5.5 Phase 4B** implementation. Further development is directed toward V3 at the user's request. This checkpoint records the local state and references to retain; it does not create a commit, tag, database backup, deployment, or V3 implementation.
 
 ## Git state
@@ -11,28 +13,28 @@ V2 is left at the **Milestone 5.5 Phase 4B** implementation. Further development
 - Before checkpoint documentation: **370 changed files were staged**, comprising 351 new files and 19 modified files. There were no unstaged changes or untracked files at that initial inspection.
 - Those Phase 4A/4B changes are **not included in HEAD**. Checking out or cloning HEAD alone does not reproduce this V2 state.
 - Existing code staging was preserved. During the subsequent cleanup, only index entries for removed QA artifacts were removed; artifacts already present in HEAD are recorded as staged deletions. Documentation and runner/ignore changes remain unstaged/untracked for user review.
-- The [local-state manifest](docs/checkpoints/2026-10-17-v2-state.json) records the status, path, and SHA-256 of the original 370 changed files, together with HEAD identity and the index hash. It contains no file contents or credentials and is not a backup capable of restoring files by itself.
+- The [local-state manifest](docs/archive-v2/checkpoints/2026-10-17-v2-state.json) records the status, path, and SHA-256 of the original 370 changed files, together with HEAD identity and the index hash. It contains no file contents or credentials and is not a backup capable of restoring files by itself.
 
 Do not reset, overwrite, or delete V2 source files when preparing V3. The QA cleanup explicitly requested by the user is recorded below. The original manifest is a pre-cleanup inventory; QA paths listed there do not imply that those files are still retained. Source files and unrelated staging remain preserved.
 
 ## QA output cleanup and file classification
 
-| Category                                                            | Checkpoint decision                                                                                  |
-| ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| Essential `src/` code, package/build configuration, and lockfile    | Retained; application behavior unchanged                                                             |
-| Product documentation, blueprint, and implementation notes          | Retained; links to removed QA output replaced with retention notes                                   |
-| Eight Supabase migrations                                           | Retained intact; no remote database changes                                                          |
-| Deterministic/live tests, mock helpers, and fixtures                | Retained; only the output destinations of two screenshot runners moved to `.qa/`                     |
-| Original references in `public/visual-references/`                  | All assets and the reference guide retained intact                                                   |
-| Design prototypes in `design/milestone-5.5/`                        | HTML/CSS/generator/viewer, SVG/fonts/licenses, and 23 reference renders retained intact              |
-| Selected application visual evidence                                | 13 desktop/mobile and important version-state images, listed in the [visual index](design/README.md) |
-| Repetitive QA screenshots, browser logs, and temporary measurements | 621 artifacts removed, including 514 images, 106 JSON files, and one QA status snapshot              |
+| Category                                                            | Checkpoint decision                                                                                             |
+| ------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| Essential `src/` code, package/build configuration, and lockfile    | Retained; application behavior unchanged                                                                        |
+| Product documentation, blueprint, and implementation notes          | Retained; links to removed QA output replaced with retention notes                                              |
+| Eight Supabase migrations                                           | Retained intact; no remote database changes                                                                     |
+| Deterministic/live tests, mock helpers, and fixtures                | Retained; only the output destinations of two screenshot runners moved to `.qa/`                                |
+| Original references in `public/visual-references/`                  | All assets and the reference guide retained intact                                                              |
+| Design prototypes in `design/milestone-5.5/`                        | HTML/CSS/generator/viewer, SVG/fonts/licenses, and 23 reference renders retained intact                         |
+| Selected application visual evidence                                | 13 desktop/mobile and important version-state images, listed in the [visual index](design/archive-v2/README.md) |
+| Repetitive QA screenshots, browser logs, and temporary measurements | 621 artifacts removed, including 514 images, 106 JSON files, and one QA status snapshot                         |
 
-The removal freed **61,959,478 bytes, approximately 59.09 MiB**, from the working tree. The `design` directory decreased from approximately **63.89 MiB to 4.8 MiB**. Detailed final figures and SHA-256 hashes of selected images are recorded in the [cleanup manifest](docs/checkpoints/2026-10-17-v2-cleanup.json).
+The removal freed **61,959,478 bytes, approximately 59.09 MiB**, from the working tree. The `design` directory decreased from approximately **63.89 MiB to 4.8 MiB**. Detailed final figures and SHA-256 hashes of selected images are recorded in the [cleanup manifest](docs/archive-v2/checkpoints/2026-10-17-v2-cleanup.json).
 
 **302 previously committed artifacts** were removed from the index/working tree, and **319 newly staged artifacts** were removed from the index and deleted. Commit history was not changed; older images may still exist in `.git`. This reduces checkout/working-tree copy size, but does not guarantee a smaller clone that includes the full history. No history rewrite, garbage collection, commit, or push was performed.
 
-New QA output goes into `.qa/<task>/`, which Git ignores. Former milestone capture locations have specific ignore rules, with exceptions only for deliberately retained application evidence. There are no blanket ignore rules for source, migrations, tests, product JSON, or original references. See the [retention policy and compact gallery](design/README.md).
+New QA output goes into `.qa/<task>/`, which Git ignores. Former milestone capture locations have specific ignore rules, with exceptions only for deliberately retained application evidence. There are no blanket ignore rules for source, migrations, tests, product JSON, or original references. See the [retention policy and compact gallery](design/archive-v2/README.md).
 
 ## Implementation left in V2
 
@@ -50,14 +52,14 @@ Phase 4A and its visual polishing were approved. **Phase 4B was implemented and 
 
 ## Key references
 
-- [Approved UX blueprint](docs/15-milestone-5.5-ux-blueprint.md).
-- [Refine workspace notes](docs/19-milestone-5.5-refine-workspace-notes.md).
-- [Phase 4A: data and display contracts](docs/20-milestone-5.5-phase-4a-notes.md).
-- [Phase 4A: visual polish](docs/21-milestone-5.5-phase-4a-visual-polish.md).
-- [Phase 4B: implementation report, UI rules, and limitations](docs/22-milestone-5.5-phase-4b-notes.md).
-- [Selected visual evidence and retention policy](design/README.md), with the [Phase 4B index](design/milestone-5.5-phase-4b/README.md). The original report's 115 captures describe historical testing, not the number of images still retained.
-- [Refine foundation and semantic evaluation](docs/14-milestone-5-implementation-notes.md).
-- [AI infrastructure and accounting](docs/13-milestone-4-implementation-notes.md).
+- [Approved UX blueprint](docs/archive-v2/specifications/15-milestone-5.5-ux-blueprint.md).
+- [Refine workspace notes](docs/archive-v2/implementation-notes/19-milestone-5.5-refine-workspace-notes.md).
+- [Phase 4A: data and display contracts](docs/archive-v2/implementation-notes/20-milestone-5.5-phase-4a-notes.md).
+- [Phase 4A: visual polish](docs/archive-v2/implementation-notes/21-milestone-5.5-phase-4a-visual-polish.md).
+- [Phase 4B: implementation report, UI rules, and limitations](docs/archive-v2/implementation-notes/22-milestone-5.5-phase-4b-notes.md).
+- [Selected visual evidence and retention policy](design/archive-v2/README.md), with the [Phase 4B index](design/archive-v2/implementation-evidence/README.md#phase-4b--refine-comparison-and-version-flow). The original report's 115 captures describe historical testing, not the number of images still retained.
+- [Refine foundation and semantic evaluation](docs/archive-v2/implementation-notes/14-milestone-5-implementation-notes.md).
+- [AI infrastructure and accounting](docs/archive-v2/implementation-notes/13-milestone-4-implementation-notes.md).
 
 Status sections in older documents describe the stage when they were written. Use this checkpoint and the latest implementation reports to determine the V2 boundary, rather than older “next milestone” instructions.
 
