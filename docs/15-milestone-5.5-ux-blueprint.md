@@ -1,5 +1,7 @@
 # MY KRAVV — Milestone 5.5 UI/UX Architecture & Design Blueprint
 
+> V2 checkpoint, 17 October 2026: temporary browser captures and measurement dumps were retired. Historical results and limitations below remain; see the [curated visual index](../design/README.md) for retained evidence.
+
 Date: 2026-10-08. Status: **design direction and major compositions approved;
 final polishing requirements recorded; application implementation not authorized**.
 Local implementation inspected at `ea7a7ad`. Supplementary isolated visual prototypes
@@ -7,6 +9,11 @@ are referenced at the end of this document; they do not authorize implementation
 No application, migration, test, dependency,
 environment, provider configuration, or existing product document changes belong
 to this planning task. Phase 6 remains outside scope.
+
+**9 October Phase 4A update:** implementation was subsequently authorized in
+separate briefs. Section 7 now supersedes every earlier implication that review
+acceptance automatically selects reading content. Phase 4A adds explicit display
+persistence; it does not authorize timeline/CTA/navigation redesign or Phase 6.
 
 The proposed experience is a personal research notebook with recognizable places
 to continue, write, read, and review. Navigation identifies the place; surfaces
@@ -174,7 +181,7 @@ this future accommodation.
 | Overview              | “Apa yang terakhir kusimpan di ruang ini?” / continue reading or add Thought   | Latest Thought by immutable creation time, rendered through preferred projection; label `Pemikiran terakhir`, never aggregate `Pandangan Saat Ini` or thesis. Up to three other recent Thoughts and three meaningful stored events where available; concise authored context; entrances to Pemikiran/Refine. Full history and composer are on Pemikiran.                                                                                               |
 | Pemikiran             | “Apa yang kupikirkan, dan apa yang ingin kutambahkan?” / save original         | Existing capture behavior, latest-first 20-Thought page, preferred representation, exact-source disclosure, focus/read link, contextual review link, secondary deletion. First page contains compact composer; older pages prioritize reading and offer `Tulis pemikiran` to first-page composer instead of repeating a large form.                                                                                                                    |
 | Refine index          | “Pemikiran mana yang ingin kurapikan atau kutinjau?” / open selected Thought   | Paginated saved-Thought picker with preferred excerpt and actual status summaries; rows show pending/suggested/accepted state when fetched. Opening a row only navigates. Do not create a second generation form/service at index level or silently preselect and generate.                                                                                                                                                                            |
-| Thought Refine detail | “Apakah usulan ini tetap menyampaikan maksudku?” / explicit generate or review | One selected Thought, state-specific body, original/proposal comparison, edit and deliberate acceptance/rejection, current accepted representation, progressive history, optional provenance. Original source is always the gateway input, even during intentional re-refinement.                                                                                                                                                                      |
+| Thought Refine detail | “Apakah usulan ini tetap menyampaikan maksudku?” / explicit generate or review | One selected Thought, state-specific body, original/proposal comparison, edit and deliberate acceptance/rejection, persisted reading selection separate from the current accepted review comparison, progressive history, optional provenance. Original source is always the gateway input, even during intentional re-refinement.                                                                                                                     |
 | Thought focus         | “Bisa kubaca satu pemikiran tanpa gangguan?” / read, then optionally review    | Preferred full text, exact original disclosure, current provenance, link to existing Refine detail, secondary version history and delete disclosure. No generation on this reader.                                                                                                                                                                                                                                                                     |
 | Company create/edit   | “Bagaimana aku mengenali ruang ini?” / existing save action                    | Existing validated fields and error retention; light utilitarian styling within current routes. Company management does not interrupt the primary reasoning column.                                                                                                                                                                                                                                                                                    |
 
@@ -188,7 +195,7 @@ bookmarkability, Back behavior, and stable accessibility.
 
 Overview ordering is explicit: newest saved Thought, not whichever old Thought
 was most recently accepted. Acceptance can appear in recent meaningful activity
-and updates that Thought's display wherever it appears; it does not synthesize a
+and leaves that Thought's saved display choice unchanged; it does not synthesize a
 company-wide conclusion or rewrite its creation date.
 
 ## 5. Desktop wireframes
@@ -405,67 +412,63 @@ controls. Reserve its actual height plus `env(safe-area-inset-bottom)` in conten
 test software keyboard opening before choosing keyboard-visible behavior. Do
 not fake browser chrome or claim those pixel bands are browser-verified layouts.
 
-## 7. Thought preferred-version presentation rules
+## 7. Persistent Thought display selection — revised Phase 4A contract
 
-Preferred content is a **read projection**, never an UPDATE to Thought or a new
-source of truth. Compute it server-side from the owned Thought and valid accepted
-row using the same rule on Home, Overview, lists, picker, and focused reader:
+The explicit Phase 4A decision supersedes the earlier automatic preferred-version
+rule. Review and reading are independent: accepting/editing/rejecting a proposal
+changes its review state, never the persisted reading choice.
 
-```text
-valid current ACCEPTED refinement for this owner + Company + Thought?
-  yes → user_final_content !== null ? user_final_content : ai_content
-  no  → raw_content
-```
+| Stored choice                                      | Primary text / label                                                                          | Other wording                                                        |
+| -------------------------------------------------- | --------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| No preference, including existing accepted results | Exact original / `Asli`                                                                       | Accepted results available for explicit selection; no backfill.      |
+| ORIGINAL                                           | Exact immutable raw / `Asli`                                                                  | Approved results retained.                                           |
+| REFINEMENT                                         | Exact selected `user_final_content ?? ai_content` / `Hasil Refine`, optionally `Kamu sunting` | Original disclosed, not stacked by default on readers.               |
+| Selected result later SUPERSEDED                   | Same exact previously accepted wording                                                        | New acceptance is an option, never a replacement.                    |
+| Missing/invalid/unresolvable preference            | Explicit recovery / `Asli · pilihan belum tersedia`                                           | Raw shown for continuity, never claimed as a confirmed saved choice. |
 
-The current database partial unique index permits one ACCEPTED refinement per
-owned Thought. Acceptance transaction supersedes a previous acceptance. Do not
-choose the latest refinement of any status, search only the first history page,
-or use truthiness instead of the nullable user-final field. Validate the row and
-every owner/parent reference before producing a projection. Multiple ACCEPTED
-rows or invalid relationships are integrity errors, not an invitation to guess.
+Only owned ACCEPTED or SUPERSEDED rows with a review decision are eligible, linked
+to the exact owner/Company/Thought. SUGGESTED and REJECTED never qualify. A separate
+`thought_display_preferences` row stores ORIGINAL or an exact refinement ID,
+revision and timestamp. Composite foreign keys, restricted grants, RLS and an
+authenticated mutation RPC enforce these invariants. No source or lifecycle writes.
+The additive migration is `20261009000100_thought_display_preferences.sql`; the
+user confirmed application to the configured development project.
+Apply `20261009000200_display_conflict_response.sql` after it; also confirmed
+applied by the user. It returns a terminal `PT409` conflict rather than retryable
+SQLSTATE `40001`, which caused a PostgREST retry loop during live verification.
 
-| Data state             | Primary text / accessible label                                                                  | Original/history                                                                                 |
-| ---------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| No accepted version    | Exact original or explicit excerpt / `Asli`                                                      | Full original reachable; history optional if present.                                            |
-| Accepted, no user edit | Accepted `ai_content` / `Dirapikan dengan AI · Kamu terima`                                      | Original disclosure; immutable AI text and decision date in provenance.                          |
-| Accepted with edit     | Accepted `user_final_content` / `Versi pilihan · Kamu sunting`                                   | Original and immutable AI proposal remain separately inspectable.                                |
-| Newer SUGGESTED exists | Earlier accepted version remains primary, otherwise original                                     | Secondary `Usulan baru belum ditinjau` entrance; never substitute suggestion.                    |
-| REJECTED exists        | Earlier accepted version remains, otherwise original                                             | Rejection retained; not framed as an error or removed.                                           |
-| SUPERSEDED exists      | Only current ACCEPTED primary                                                                    | Old version remains historical and labeled, never used as current fallback.                      |
-| Query fails            | Reading error with recover/reload option; do not falsely label raw as the current chosen wording | If raw is offered for continuity, explicitly label it `Asli — versi pilihan belum dapat dimuat`. |
+One bounded owned server projection is shared by Home continuation/recent,
+Overview, Pemikiran/history/focus, Refine picker and detail. Resolve the saved ID
+independently of history pagination. Preserve exact text/line breaks and escape
+text; list excerpts may clamp without normalizing stored strings. Order and
+cursors remain based on immutable Thought creation, not review/preference dates.
+No per-Thought network reads or cross-user cache.
 
-Lists may clamp the **projection excerpt**, never mutate source text or imply it
-is the full Thought. Full readers preserve whitespace/line breaks and escape all
-user/AI text as text. Do not render content as HTML or interpret it as instructions.
-Show original capture time and accepted decision time separately; keep list order
-based on Thought creation so acceptance does not invalidate existing cursors.
+Refine detail owns a compact `Versi bacaan` selector. `Ditampilkan` is the confirmed
+stored text; dropdown changes and `display` links are local/read-only previews.
+Only `Gunakan versi ini` persists a selection. Confirmation follows a validated
+server receipt. Stale revision conflicts request reload; they never overwrite.
+Original-only Thoughts have no redundant selector. Approved choice pagination,
+the saved selection and explicit off-page preview remain separate from review
+history. `displayBefore` never changes the existing `before` review cursor.
 
-Lifecycle effects:
+Accept, reject, later generation and supersession never mutate display selection.
+Explicitly switching to ORIGINAL never reverses an acceptance. Selection creates
+no AI Run, proposal, timeline event or provider request. The gateway always receives
+immutable raw, regardless of the reading choice. Owned archived Companies allow
+reading and explicit display changes; existing generation restrictions remain.
+Thought/Company deletion cascades preferences with descendants; deleting a selected
+refinement alone fails rather than silently resetting the saved choice.
 
-- Accept/edit: after successful commit, update all presentation surfaces through
-  revalidation, show current chosen version, retain original. No change before a
-  confirmed receipt; failure retains review edits and previous projection.
-- Reject: record rejection; preferred version remains earlier accepted or raw.
-- Supersession: new acceptance atomically replaces current presentation; old text
-  stays available in history.
-- Refresh: recompute from current authenticated data. Stale client form state is
-  not a decision receipt; status recovery retains the deliberate full reload.
-- Delete Thought: remove it, its refinements/claims and associated domain events
-  through existing confirmed deletion; accounting retention follows existing rules.
-  No historical orphan shown as a live Thought.
-- Delete Company: existing cascade removes its surfaces; redirect to library.
-- Archived Company: same projection and read/review access; no new capture/generation.
-
-**Generation continues to use immutable raw text.** Displaying accepted text must
-not redirect the AI Gateway's authorized context to the projection. Re-refine is
-an intentional new proposal from the original, not an undisclosed chained rewrite.
-`Tetap gunakan asli` is navigation/dismissal, not an implicit reversal of an earlier
-acceptance. Restoring raw as the chosen version would require a separately designed
-domain action and is not added by this blueprint.
+After confirmed display save, invalidate Home, Overview, Pemikiran, Refine picker
+and the exact detail. Keep focus anchors, capture receipts, drafts and deep links.
+The Refine review comparison can still prioritize the current ACCEPTED row or an
+explicit proposal; **this comparison target is not the selected reading source**.
+Phase 4B timeline/CTA polishing remains separately scoped.
 
 ## 8. Refine interaction states and comparison behavior
 
-Use the durable claim and validated refinement rows to select the display state.
+Use the durable claim and validated refinement rows to select the review comparison state.
 Do not invent progress percentages, sequence animations, or semantic confidence.
 
 | State                          | Primary surface and action                                                                             | Secondary information / recovery                                                                                                                                                                               |
@@ -737,14 +740,15 @@ and navigation never changes the storage key just because the URL changed.
 
 Invalidation proposal after confirmed mutation:
 
-| Mutation               | Revalidate                                                                                                                                  |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| Capture                | `/`, Company Overview, `/thoughts`, `/refinements`; focused reader if needed.                                                               |
-| Generate proposal      | Existing Refine detail and `/refinements`; preferred text does not change.                                                                  |
-| Accept / reject        | Existing detail, Company Overview, `/thoughts`, `/refinements`, focused reader, `/`; accept changes projection, reject changes status only. |
-| Archive / Company edit | Library, Home, Company shared context/layout and all owned child surfaces using it.                                                         |
-| Thought delete         | Home, Company section pages, focus/detail paths affected; do not redirect to deleted detail.                                                |
-| Company delete         | Library/Home plus shared Company subtree invalidation.                                                                                      |
+| Mutation               | Revalidate                                                                                                                                                         |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Capture                | `/`, Company Overview, `/thoughts`, `/refinements`; focused reader if needed.                                                                                      |
+| Generate proposal      | Existing Refine detail and `/refinements`; preferred text does not change.                                                                                         |
+| Accept / reject        | Existing detail, Company Overview, `/thoughts`, `/refinements`, focused reader, `/`; review changes status/approved options only; saved display remains unchanged. |
+| Explicit display save  | `/`, exact Company Overview, `/thoughts` including focus, `/refinements`, exact Thought Refine detail.                                                             |
+| Archive / Company edit | Library, Home, Company shared context/layout and all owned child surfaces using it.                                                                                |
+| Thought delete         | Home, Company section pages, focus/detail paths affected; do not redirect to deleted detail.                                                                       |
+| Company delete         | Library/Home plus shared Company subtree invalidation.                                                                                                             |
 
 Verify installed Next.js invalidation semantics before implementation. Do not
 replace the known deliberate full-page Refine status recovery with same-URL
@@ -752,9 +756,9 @@ router navigation simply to make transitions look smoother.
 
 ## 13. Data and query implications
 
-**No schema migration is required by this design.** Existing Thoughts, refinements,
+**Revised in Phase 4A:** explicit persistent selection requires the additive preference migration described in section 7. Existing Thoughts, refinements,
 claims, events, ownership keys and statuses support the projections. No new
-`preferred_content`, `current_view`, `last_visited`, summary, or UI-state table.
+`preferred_content`, `current_view`, `last_visited`, or summary field; display choice is separate from immutable source.
 Do not edit applied migrations. If measured performance later justifies an index
 or a database projection, propose an additive migration with evidence and obtain
 user approval before execution; that is a separate checkpoint.
@@ -762,15 +766,16 @@ user approval before execution; that is a separate checkpoint.
 Proposed owner-scoped query helpers in existing `src/server/db/` boundaries:
 
 1. Fetch the bounded visible Thought set using existing pagination/recent rules.
-2. In **one batch**, read accepted refinements for those UUIDs with ordinary
-   authenticated Supabase client: explicit `user_id`, `status=ACCEPTED`,
+2. In **one batch**, read stored preferences and their exact selected refinements for those UUIDs with ordinary
+   authenticated Supabase client: JWT-derived owner, `status=ACCEPTED|SUPERSEDED` eligibility,
    `thought_id IN visibleIDs`, Company scope where the page has one Company.
    Across Home Companies, validate each returned parent against the owned Thought
    map. Select only IDs, parent/owner, text, status and provenance/time fields
    needed for the projection; limit cardinality to the requested set, skip empty set.
 3. Validate and build a map, then project. No per-Thought query and no unbounded
-   refinement history scan. Current accepted uniqueness bounds each batch to ≤20
-   rows on a Company list, ≤5 on Home. Duplicates/invalid rows fail safely.
+   refinement history scan. One preference per Thought bounds the batch: 20 on a
+   Company list plus at most two independent focus/receipt targets, five on Home,
+   four on Overview, one on detail. RPC ceiling 40. Duplicates/invalid rows fail safely.
 4. On Refine detail independently fetch current accepted, explicitly selected
    proposal/resolved/version, newest suggestion when needed, and pending claim.
    Current accepted and unreviewed suggestions must remain discoverable even after
@@ -802,7 +807,7 @@ bounded selection, otherwise first updated active Company; do not pretend this i
 true last-browsed work. When only archived Thoughts are recent, retain their read
 links and show a separate active Company entrance. Capture list remains active only.
 
-Query budget targets: page fetch + one accepted batch, independent of number of
+Query budget targets: page fetch + one stored-display batch, independent of number of
 displayed Thoughts; per-Thought Refine detail has constant bounded read count.
 Existing Company auth/owner lookups can remain until profiling motivates request
 deduplication. Do not weaken authorization to hit an arbitrary query count.
@@ -898,7 +903,7 @@ mock provider responses for routine QA; no real user's Thought screenshots.
 | One / twenty / >20 Thoughts                                     | Composer and pagination coherent; preferred map batched; current/targeted row not lost outside cursor window.         |
 | Long Company name, no ticker/sector, long word/link             | Identity readable, row grows, optional metadata truly omitted, no page overflow.                                      |
 | Maximum original, multiline colloquial Indonesian/mixed English | Full exact source readable, preserved line breaks, 68ch text width, no auto formalization or hidden truncation.       |
-| SUGGESTED with earlier ACCEPTED                                 | Proposal labeled unadopted; accepted primary elsewhere; comparison and independent history truthful.                  |
+| SUGGESTED with earlier ACCEPTED                                 | Proposal labeled unadopted; explicitly selected reading elsewhere; comparison and independent history truthful.       |
 | ACCEPTED AI / edited ACCEPTED                                   | Correct chosen content on all surfaces after refresh; provenance clear; no acceptance form dominating resolved state. |
 | REJECTED / SUPERSEDED / >20 historical versions                 | Rejection not an error; current accepted not inferred from history first page; all old versions reachable.            |
 | Pending / timeout / uncertain accounting                        | No duplicate enabled action or automatic retries; reload reveals durable state; edits/previous text retained.         |
@@ -966,7 +971,7 @@ implementation, a References feature, database changes or Phase 6.
 
 - [ ] Recognizable global and Company navigation; only functional destinations.
 - [ ] Overview orients; Pemikiran captures/reads; Refine selects/compares/reviews.
-- [ ] Valid accepted/edit wording is primary on every applicable reading surface.
+- [ ] Explicitly selected original/approved wording is primary on every applicable reader; acceptance alone never changes it.
 - [ ] Exact original, unadopted AI, accepted wording and all history are distinguishable.
 - [ ] Strong readable hierarchy, functional surfaces and consistent labeled SVG controls.
 - [ ] Repetitive explanatory copy removed across all five views; necessary safety/privacy/uncertainty and irreversible-action copy retained at the relevant action.
@@ -1148,14 +1153,14 @@ hidden from assistive technology. Mobile wraps/stacks the relationship without
 page overflow. Any actionable version node uses a real accessible control, not
 a tiny clickable dot. Reduced motion does not remove state information.
 
-| Persisted state                          | Truthful motif behavior                                                                                                                                                                    |
-| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| No refinement                            | Show original only. Do not draw completed AI/acceptance stages or imply a pending automatic call.                                                                                          |
-| SUGGESTED                                | Connect original to the actual proposal; identify the pending human choice. Do not show a completed accepted node. Acceptance and rejection remain deliberate actions.                     |
-| ACCEPTED, AI wording                     | Mark the actual accepted version as current with `Kamu terima`; source and immutable AI proposal remain traceable.                                                                         |
-| ACCEPTED, user-edited wording            | Mark `Versi pilihan · Kamu sunting & terima`; preserve distinct original and AI wording in history/comparison.                                                                             |
-| New SUGGESTED alongside earlier ACCEPTED | Keep earlier acceptance current; depict the new proposal as a separate unadopted branch from the original. Generation still uses raw source, not a chain from accepted wording.            |
-| REJECTED / SUPERSEDED                    | Label the historical state explicitly. Rejection ends that proposal branch; a superseded version is historical, not current. An earlier valid acceptance remains primary where applicable. |
+| Persisted state                          | Truthful motif behavior                                                                                                                                                                                                                |
+| ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| No refinement                            | Show original only. Do not draw completed AI/acceptance stages or imply a pending automatic call.                                                                                                                                      |
+| SUGGESTED                                | Connect original to the actual proposal; identify the pending human choice. Do not show a completed accepted node. Acceptance and rejection remain deliberate actions.                                                                 |
+| ACCEPTED, AI wording                     | Mark the actual review acceptance with `Kamu terima`; use `Ditampilkan` only for the independent saved reading choice; source and immutable AI proposal remain traceable.                                                              |
+| ACCEPTED, user-edited wording            | Mark `Versi pilihan · Kamu sunting & terima`; preserve distinct original and AI wording in history/comparison.                                                                                                                         |
+| New SUGGESTED alongside earlier ACCEPTED | Keep earlier review acceptance identifiable; retain the independently selected reading; depict the new proposal as a separate unadopted branch from the original. Generation still uses raw source, not a chain from accepted wording. |
+| REJECTED / SUPERSEDED                    | Label the historical state explicitly. Rejection ends that proposal branch; a superseded version is historical, not current. A previously accepted SUPERSEDED wording remains primary only when explicitly selected.                   |
 
 Acceptance: the motif follows confirmed stored status and owner/parent validation,
 not local form optimism or position in the newest history page. A rejected or

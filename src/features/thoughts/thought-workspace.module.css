@@ -2,6 +2,8 @@
   min-width: 0;
 }
 .capture {
+  font-size: var(--type-reading);
+  max-width: calc(var(--width-reading) + var(--space-6) * 2);
   padding: var(--space-6);
   background: var(--surface-working);
   border: 1px solid var(--divider);
@@ -33,6 +35,7 @@
 }
 .capture :global(.thought-composer) {
   margin-top: var(--space-4);
+  max-width: none;
 }
 .capture :global(.composer-surface) {
   border: 0;
@@ -43,7 +46,7 @@
   min-width: 0;
 }
 .capture :global(textarea) {
-  max-width: var(--width-reading);
+  max-width: none;
 }
 .capture :global(.company-form-actions) {
   flex-wrap: wrap;
@@ -53,17 +56,22 @@
   justify-content: flex-start;
 }
 .capture :global(.company-form-actions .auth-help) {
-  flex-basis: 100%;
-  margin-right: 0;
+  margin-right: auto;
 }
 .capture :global(.draft-privacy) {
   margin-top: var(--space-2);
+}
+.capture :global(.draft-privacy summary) {
+  padding-inline: 0;
+  width: fit-content;
 }
 .capture :global(.form-feedback:empty) {
   margin: 0;
 }
 .history {
   min-width: 0;
+  font-size: var(--type-reading);
+  max-width: calc(var(--width-reading) + 28px + var(--space-4));
 }
 .list {
   list-style: none;
@@ -71,9 +79,28 @@
   margin: var(--space-4) 0 0;
 }
 .entry {
-  padding-block: var(--space-6);
-  border-top: 1px solid var(--divider);
+  position: relative;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  column-gap: var(--space-4);
+  padding-block: var(--space-4) var(--space-6);
   scroll-margin-top: var(--space-8);
+}
+.sequence {
+  color: var(--text-secondary);
+  font-size: var(--type-meta);
+  font-variant-numeric: tabular-nums;
+  line-height: 28px;
+  text-align: center;
+}
+.entry:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 14px;
+  top: calc(var(--space-4) + 28px);
+  bottom: calc(-1 * var(--space-4));
+  width: 1px;
+  background: var(--divider);
 }
 .selected,
 .entry:target {
@@ -116,7 +143,7 @@
   gap: var(--space-2) var(--space-3);
 }
 .entryFooter {
-  margin-top: var(--space-3);
+  margin-top: var(--space-2);
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
@@ -131,7 +158,7 @@
   align-items: center;
   gap: var(--space-2);
   min-height: var(--target);
-  font-size: var(--type-control);
+  font-size: var(--type-meta);
   color: var(--accent);
   font-weight: 500;
   text-decoration: none;
@@ -185,12 +212,12 @@
   min-height: var(--target);
   margin-top: var(--space-3);
   padding: var(--space-2) var(--space-3);
-  border: 1px solid var(--control-border);
+  border: 1px solid var(--divider);
   border-radius: var(--radius-control);
-  background: var(--surface-context);
+  background: transparent;
   width: fit-content;
   overflow-wrap: anywhere;
-  font-size: var(--type-control);
+  font-size: var(--type-meta);
   color: var(--text-primary);
 }
 .longThought > summary:hover .readAction {
@@ -245,6 +272,9 @@
   font-weight: 400;
 }
 @media (max-width: 700px) {
+  .entry {
+    column-gap: var(--space-2);
+  }
   .capture {
     padding: var(--space-4);
   }
@@ -253,6 +283,10 @@
   }
   .capture :global(.company-form-actions) {
     gap: var(--space-2);
+  }
+  .capture :global(.company-form-actions .auth-help) {
+    flex-basis: 100%;
+    margin-right: 0;
   }
   .capture :global(.primary-button) {
     flex: 1 1 170px;

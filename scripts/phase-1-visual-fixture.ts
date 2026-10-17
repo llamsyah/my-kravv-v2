@@ -15,6 +15,7 @@ import {
   resolveRefinement,
 } from "../src/server/db/refinements.ts";
 import { createRefineService } from "../src/server/refinements/service.ts";
+import { setThoughtDisplay } from "../src/server/db/thought-display.ts";
 import {
   aiResponse,
   fixtureAIConfig,
@@ -42,6 +43,14 @@ type Fixture = {
   newestThought?: string;
   readingThoughts?: { id: string; raw_content: string }[];
   refineStates?: Record<string, string>;
+  displayStates?: Record<string, string>;
+  displayVersions?: Record<string, string>;
+  readingOrder?: boolean;
+  phase4b?: {
+    selectedThought: string;
+    selectedRefinement: string;
+    reviewProposal: string;
+  };
   refineCheckpoint?: {
     runs: number;
     originals: { id: string; raw_content: string }[];
@@ -90,6 +99,7 @@ if (mode === "setup") {
       "ai_run_attempts",
       "timeline_events",
       "user_settings",
+      "thought_display_preferences",
     ]) {
       const r = await admin.from(table).select("user_id").eq("user_id", f.id);
       assert.ok(
@@ -100,6 +110,263 @@ if (mode === "setup") {
     unlinkSync(file);
     console.log(
       "Disposable fixture and credential file removed; cascade cleanup verified.",
+    );
+  } else if (mode === "display-workspace") {
+    assert.ok(f.company && !f.displayStates);
+    assert.ok(
+      !(
+        await client.auth.signInWithPassword({
+          email: f.email,
+          password: f.password,
+        })
+      ).error,
+    );
+    const service = createRefineService({
+      configuration: () => ({
+        ...fixtureAIConfig,
+        outputTokenLimit: 512,
+        dailyCallLimit: 60,
+        pricingVersion: "synthetic-display-qa",
+      }),
+      accounting: () => createAIAccounting(admin),
+      writer: () => createRefinementWriter(admin),
+      provider: () => ({
+        async generate() {
+          return aiResponse(
+            JSON.stringify(
+              refineResponseText(
+                "aku tertarik sama rencana ekspansinya. aku belum memeriksa laporan arus kasnya.\n\nAku mau baca sumbernya dulu sebelum menyimpulkan.",
+              ),
+            ),
+          );
+        },
+      }),
+    });
+    const states: Record<string, string> = {},
+      versions: Record<string, string> = {};
+    for (const name of [
+      "original",
+      "available",
+      "selected",
+      "multiple",
+      "long",
+      "archived",
+    ]) {
+      const parent =
+        name === "archived"
+          ? await createCompany(client, f.id, {
+              name: "Sagara Karya — Arsip Pilihan Bacaan Fiktif",
+              ticker: "",
+              exchange: "",
+              sector: "",
+              short_note: "",
+            })
+          : { id: f.company };
+      const raw_content =
+        name === "long"
+          ? Array.from(
+              { length: 7 },
+              (_, i) =>
+                `${i + 1}. aku belum baca laporannya. aku tertarik pada ekspansinya, tapi belum tahu apakah arus kasnya cukup kuat. Aku mau cek dokumennya dulu.\n\nBelum ada kesimpulan.`,
+            ).join("\n\n")
+          : `aku tertarik sama ekspansinya (${name}, fiktif). aku belum memeriksa laporan arus kasnya, jadi belum tahu apakah mereka siap.\n\nAku mau baca laporannya dulu.`;
+      const thought = await createThought(client, f.id, {
+        company_id: parent.id,
+        capture_operation_id: randomUUID(),
+        raw_content,
+      });
+      states[name] = `/companies/${parent.id}/thoughts/${thought.id}/refine`;
+      if (name === "original") continue;
+      for (let i = 0; i < (name === "multiple" ? 22 : 1); i++) {
+        const proposal = await service(client, {
+          company_id: parent.id,
+          thought_id: thought.id,
+          operation_id: randomUUID(),
+        });
+        await resolveRefinement(
+          client,
+          f.id,
+          proposal,
+          "ACCEPTED",
+          `aku tertarik sama ekspansinya. aku belum memeriksa laporan arus kasnya.\n\nIni suntinganku sendiri (${name}, versi ${i + 1}, fiktif); aku belum punya kesimpulan.`,
+        );
+        if (i === 0) {
+          versions[name] = proposal.id;
+          if (name !== "available")
+            await setThoughtDisplay(client, f.id, {
+              company_id: parent.id,
+              thought_id: thought.id,
+              source: "REFINEMENT",
+              refinement_id: proposal.id,
+              expected_revision: 0,
+            });
+        }
+      }
+      if (name === "archived") await archiveCompany(client, f.id, parent.id);
+    }
+    Object.assign(f, { displayStates: states, displayVersions: versions });
+    writeFileSync(file, JSON.stringify(f));
+    const runs = await client.from("ai_runs").select("id").eq("user_id", f.id);
+    const originals = await client
+      .from("thoughts")
+      .select("id,raw_content")
+      .eq("user_id", f.id)
+      .order("id");
+    assert.ok(!runs.error && !originals.error);
+    f.refineCheckpoint = { runs: runs.data.length, originals: originals.data };
+    writeFileSync(file, JSON.stringify(f));
+    console.log(
+      "Disposable original/default/selected/historical/long/archived display states prepared; every provider response is injected locally.",
+    );
+  } else if (mode === "reading-order") {
+    assert.ok(f.company && f.displayStates && f.manyCompany && !f.readingOrder);
+    assert.ok(
+      !(
+        await client.auth.signInWithPassword({
+          email: f.email,
+          password: f.password,
+        })
+      ).error,
+    );
+    const thoughtId = f.displayStates.long.split("/").at(-2)!;
+    const service = createRefineService({
+      configuration: () => ({
+        ...fixtureAIConfig,
+        outputTokenLimit: 512,
+        dailyCallLimit: 60,
+        pricingVersion: "synthetic-reading-qa",
+      }),
+      accounting: () => createAIAccounting(admin),
+      writer: () => createRefinementWriter(admin),
+      provider: () => ({
+        async generate() {
+          return aiResponse(
+            JSON.stringify(
+              refineResponseText(
+                "aku belum membaca laporan arus kasnya. aku masih ingin memeriksa sumbernya.",
+              ),
+            ),
+          );
+        },
+      }),
+    });
+    const proposal = await service(client, {
+      company_id: f.company,
+      thought_id: thoughtId,
+      operation_id: randomUUID(),
+    });
+    await resolveRefinement(
+      client,
+      f.id,
+      proposal,
+      "ACCEPTED",
+      Array.from(
+        { length: 7 },
+        (_, i) =>
+          `${i + 1}. aku tertarik pada rencana ekspansinya, tapi belum memeriksa laporan keuangan. Aku ingin melihat arus kas operasional dan kebutuhan modalnya sebelum menyimpulkan. Ini catatan fiktif, belum ada jawaban yang terverifikasi.`,
+      ).join("\n\n"),
+    );
+    await setThoughtDisplay(client, f.id, {
+      company_id: f.company,
+      thought_id: thoughtId,
+      source: "REFINEMENT",
+      refinement_id: proposal.id,
+      expected_revision: 1,
+    });
+    await createThought(client, f.id, {
+      company_id: f.company,
+      capture_operation_id: randomUUID(),
+      raw_content:
+        "aku mau baca laporan arus kasnya dulu. pertanyaanku belum berubah: ekspansinya dibiayai dari mana?",
+    });
+    const runs = await admin.from("ai_runs").select("id").eq("user_id", f.id);
+    const originals = await admin
+      .from("thoughts")
+      .select("id,raw_content")
+      .eq("user_id", f.id)
+      .order("id");
+    assert.ok(!runs.error && !originals.error);
+    f.refineCheckpoint = { runs: runs.data.length, originals: originals.data };
+    f.readingOrder = true;
+    writeFileSync(file, JSON.stringify(f));
+    console.log(
+      "Short original and very long selected refinement prepared; mock provider only. Preservation checkpoint updated.",
+    );
+  } else if (mode === "phase-4b") {
+    assert.ok(f.refineStates && f.displayStates && !f.phase4b);
+    assert.ok(
+      !(
+        await client.auth.signInWithPassword({
+          email: f.email,
+          password: f.password,
+        })
+      ).error,
+    );
+    const selectedThought = f.refineStates.multiple.split("/").at(-2)!;
+    const selectedRefinement = new URL(
+      f.refineStates.outOfWindow,
+      "http://fixture",
+    ).searchParams.get("proposal")!;
+    await setThoughtDisplay(client, f.id, {
+      company_id: f.company!,
+      thought_id: selectedThought,
+      source: "REFINEMENT",
+      refinement_id: selectedRefinement,
+      expected_revision: 0,
+    });
+    const suggestions = await client
+      .from("refinements")
+      .select("id")
+      .eq("user_id", f.id)
+      .eq("thought_id", selectedThought)
+      .eq("status", "SUGGESTED")
+      .order("created_at", { ascending: false })
+      .order("id")
+      .limit(1);
+    assert.ok(!suggestions.error && suggestions.data.length === 1);
+    f.phase4b = {
+      selectedThought,
+      selectedRefinement,
+      reviewProposal: suggestions.data[0].id,
+    };
+    writeFileSync(file, JSON.stringify(f));
+    console.log(
+      "Review-priority fixture with independent historical display choice prepared; no provider request.",
+    );
+  } else if (mode === "phase-4b-verify") {
+    assert.ok(f.phase4b);
+    const preference = await admin
+      .from("thought_display_preferences")
+      .select("refinement_id,revision")
+      .eq("user_id", f.id)
+      .eq("thought_id", f.phase4b.selectedThought)
+      .single();
+    const decision = await admin
+      .from("refinements")
+      .select("status")
+      .eq("user_id", f.id)
+      .eq("id", f.phase4b.reviewProposal)
+      .single();
+    assert.ok(!preference.error && !decision.error);
+    assert.equal(preference.data.refinement_id, f.phase4b.selectedRefinement);
+    assert.equal(preference.data.revision, 1);
+    assert.equal(decision.data.status, "ACCEPTED");
+    console.log(
+      "Actual browser acceptance preserved the exact historical display preference and revision.",
+    );
+  } else if (mode === "display-verify") {
+    assert.ok(f.displayStates && f.refineCheckpoint);
+    const runs = await admin.from("ai_runs").select("id").eq("user_id", f.id);
+    const originals = await admin
+      .from("thoughts")
+      .select("id,raw_content")
+      .eq("user_id", f.id)
+      .order("id");
+    assert.ok(!runs.error && !originals.error);
+    assert.equal(runs.data.length, f.refineCheckpoint.runs);
+    assert.deepEqual(originals.data, f.refineCheckpoint.originals);
+    console.log(
+      "Display QA preserved exact originals and AI Run count; no real provider requests.",
     );
   } else if (mode === "refine-checkpoint" || mode === "refine-verify") {
     assert.ok(f.refineStates);

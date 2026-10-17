@@ -1,5 +1,7 @@
 # MY KRAVV — Milestone 5.5, Phase 1 implementation
 
+> V2 checkpoint, 17 October 2026: temporary browser captures and measurement dumps were retired. Historical results and limitations below remain; see the [curated visual index](../design/README.md) for retained evidence.
+
 Date: 2026-10-08. **Phase 1 foundations implemented; awaiting user review.**
 The user's Phase 1 brief separately authorizes this implementation after the
 design-only record in [the approved blueprint](15-milestone-5.5-ux-blueprint.md).
@@ -110,9 +112,8 @@ does not contact Groq/OpenAI. Its prices are test fixtures, not production price
 The account was signed out and deleted; all owned records and accounting cascades
 were verified absent, and the ignored credential file was removed.
 
-[Screenshot evidence and instructions](../design/milestone-5.5-phase-1/README.md),
-[render metrics](../design/milestone-5.5-phase-1/render-metrics.json),
-and [actual image dimensions](../design/milestone-5.5-phase-1/capture-manifest.json).
+[Historical QA instructions and retention note](../design/milestone-5.5-phase-1/README.md),
+Temporary raw metrics were retired; the results below remain.
 
 | Verification                                                                                                                        | Result                                                                                                                                                                                                                                                          |
 | ----------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

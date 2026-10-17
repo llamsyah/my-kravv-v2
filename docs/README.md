@@ -1,5 +1,15 @@
 # MY KRAVV
 
+> **Status V2 per 17 Oktober 2026:** berhenti pada implementasi Milestone 5.5
+> Phase 4B sebelum transisi ke V3, dengan review visual akhir masih terbuka.
+> Lihat [checkpoint V2](../CHECKPOINT-V2.md) dan
+> [laporan Phase 4B](22-milestone-5.5-phase-4b-notes.md). Bagian status dan rencana
+> awal di bawah dipertahankan sebagai dokumentasi historis.
+
+Untuk audit dan transisi V3, gunakan [indeks referensi visual terpilih](../design/README.md).
+Dump screenshot, log browser dan pengukuran QA lama telah dihentikan; ringkasan
+hasil pengujian pada catatan implementasi tetap dipertahankan sebagai hasil historis.
+
 > **A private AI-assisted investment reasoning workspace.**  
 > Capture messy thoughts, structure them, challenge assumptions, and preserve how your thesis evolves over time.
 

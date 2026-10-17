@@ -1,5 +1,7 @@
 # Milestone 5.5 — Company Refine workspace
 
+> V2 checkpoint, 17 October 2026: temporary browser captures and measurement dumps were retired. Historical results and limitations below remain; see the [curated visual index](../design/README.md) for retained evidence.
+
 Implemented October 9, 2026. Awaiting user visual review; no commit or push.
 
 ## Scope and preflight
@@ -119,3 +121,14 @@ all production ownership checks remain in place. No tests were disabled.
 
 Stop after this Refine workspace. Visual approval and the named manual device
 checks remain outstanding. Do not begin preferred-version reading or Phase 6.
+
+## Phase 4A contract update — 9 October 2026
+
+The subsequent explicitly authorized Phase 4A supersedes automatic preferred
+reading. The current ACCEPTED result still identifies a review comparison target;
+it does not select reading content. No stored preference defaults to ORIGINAL.
+An explicit saved ORIGINAL or exact previously accepted refinement is projected
+across readers, including SUPERSEDED wording. Accept/reject/generate never update
+that preference. The selector previews locally and saves only on explicit submit.
+Existing review actions, lifecycle, gateway/accounting and detail deep links stay
+independent. See [Phase 4A implementation notes](20-milestone-5.5-phase-4a-notes.md).

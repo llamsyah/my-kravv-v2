@@ -310,7 +310,13 @@ test(
           assert.equal(hub.status, 200);
           assert.ok((await hub.text()).includes("Ada usulan"));
           const current = await app.request(path);
-          assert.ok((await current.text()).includes("Versi pilihan"));
+          const currentHtml = await current.text();
+          assert.ok(
+            currentHtml
+              .replaceAll("<!-- -->", "")
+              .includes("Ditampilkan · Asli") &&
+              currentHtml.includes("Hasil Refine"),
+          );
           const page = await app.request(`${path}?proposal=${fourth.id}`);
           assert.equal(page.status, 200);
           const html = await page.text();

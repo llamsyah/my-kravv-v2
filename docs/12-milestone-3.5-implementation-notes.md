@@ -1,5 +1,7 @@
 # Milestone 3.5 implementation notes
 
+> V2 checkpoint, 17 October 2026: temporary browser captures and measurement dumps were retired. Historical results and limitations below remain; see the [curated visual index](../design/README.md) for retained evidence.
+
 Status: application implementation and live verification complete. Browser QA
 and visual refinement performed at all three requested sizes. Full visual
 fidelity remains FAILED because the approved standalone landscape is missing;
@@ -158,12 +160,7 @@ Company selection and draft controls absent from the mockup, so it remains talle
 User visual sign-off is still required; this report does not call the milestone
 visually complete.
 
-Screenshots and viewport measurements are saved locally at:
-`C:/Users/PIXWAR/.codex/visualizations/2026/10/07/01a11630-ec88-7b60-93ef-5a0f088d0b17/milestone-3.5/`.
-Files use `{home,companies,workspace}-{desktop-1440,tablet-768,mobile-390}.jpg`;
-`viewport-checks.json` records the final matrix. They contain explicitly marked
-disposable QA data, not another user's research. The QA account/data are removed
-after inspection, so those sample rows are not permanent application seed data.
+Screenshots and viewport measurements for this early stage were temporary local QA output outside the repository; they are not part of the V2 handoff. Historical results and limitations remain below. They used explicitly marked disposable data, and the account/data were removed after inspection. Use the curated visual index for portable retained evidence.
 
 ## Automated validation and dependency audit
 

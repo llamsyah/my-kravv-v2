@@ -1,8 +1,11 @@
 "use client";
 import Link from "next/link";
-import { useActionState } from "react";
+import { useActionState, useState, useSyncExternalStore } from "react";
 import { initialRefineFormState } from "@/domain/refinement/refinement";
 import { generateRefinementAction, reviewRefinementAction } from "./actions";
+const subscribe = () => () => {};
+const hydrated = () => true;
+const server = () => false;
 
 export function GenerateRefinementForm({
   companyId,
@@ -29,7 +32,7 @@ export function GenerateRefinementForm({
       <input type="hidden" name="thought_id" value={thoughtId} />
       <input type="hidden" name="operation_id" value={operationId} />
       <p className="auth-help">
-        AI merapikan kata-katamu; keputusan tetap milikmu.
+        Permintaan AI dicatat dalam batas anggaran aplikasi.
       </p>
       <div className="company-form-actions">
         <button
@@ -47,7 +50,7 @@ export function GenerateRefinementForm({
       </div>
       <p className="form-feedback" role="status" aria-live="polite">
         {pending
-          ? "Asli tetap tersimpan. Tunggu hasil permintaan ini."
+          ? "Tunggu hasil permintaan ini; jangan mengulang."
           : state.error || disabledReason}
       </p>
       {state.error && (
@@ -60,7 +63,7 @@ export function GenerateRefinementForm({
       className="refine-new-proposal"
       open={state.error ? true : undefined}
     >
-      <summary>Buat usulan baru</summary>
+      <summary>Buat usulan baru dari asli</summary>
       {form}
     </details>
   ) : (
@@ -99,12 +102,16 @@ export function ReviewRefinementForm({
     initialRefineFormState,
     `/companies/${companyId}/thoughts/${thoughtId}/refine?proposal=${refinementId}#refinement-${refinementId}`,
   );
+  const enhanced = useSyncExternalStore(subscribe, hydrated, server);
+  const [editing, setEditing] = useState(state.finalContent !== undefined);
+  const [draft, setDraft] = useState(state.finalContent ?? aiContent);
   return (
     <form
       id={`review-${refinementId}`}
       action={action}
       className="refine-review-form"
       aria-busy={pending}
+      onReset={(event) => event.preventDefault()}
     >
       <fieldset disabled={pending}>
         <legend className="sr-only">Tinjau usulan AI</legend>
@@ -113,25 +120,43 @@ export function ReviewRefinementForm({
         <input type="hidden" name="refinement_id" value={refinementId} />
         <details
           className="refine-edit"
-          open={state.finalContent !== undefined ? true : undefined}
+          open={editing}
+          onToggle={(event) => setEditing(event.currentTarget.open)}
         >
-          <summary>Ubah versi pilihan sebelum menerima</summary>
-          <label htmlFor={`final-${refinementId}`}>Versi pilihanmu</label>
+          <summary>Sunting</summary>
+          <label htmlFor={`final-${refinementId}`}>Suntingan usulan</label>
           <textarea
             id={`final-${refinementId}`}
             name="user_final_content"
-            defaultValue={state.finalContent ?? aiContent}
+            value={editing ? draft : aiContent}
+            onChange={(event) => setDraft(event.target.value)}
             maxLength={3000}
             required
             rows={5}
           />
           <p className="auth-help">
-            Suntinganmu disimpan terpisah. Teks asli dan usulan AI tetap utuh.
+            Suntingan belum diterima. Periksa makna sebelum menyimpan keputusan.
           </p>
+          {enhanced && (
+            <button
+              type="button"
+              className="quiet-button"
+              onClick={() => setEditing(false)}
+            >
+              Batal sunting
+            </button>
+          )}
         </details>
+        {!editing && draft !== aiContent && (
+          <p className="auth-help">Draf suntingan tersedia di Sunting.</p>
+        )}
         <div className="company-form-actions">
           <button className="primary-button" name="status" value="ACCEPTED">
-            {pending ? "Sedang menyimpan…" : "Terima versi pilihan"}
+            {pending
+              ? "Sedang menyimpan…"
+              : editing
+                ? "Terima suntingan"
+                : "Terima"}
           </button>
           <button
             className="quiet-button"
@@ -139,7 +164,7 @@ export function ReviewRefinementForm({
             value="REJECTED"
             formNoValidate
           >
-            Tolak usulan
+            Tolak
           </button>
         </div>
       </fieldset>

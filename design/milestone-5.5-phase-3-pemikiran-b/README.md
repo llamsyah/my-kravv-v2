@@ -1,76 +1,17 @@
-# Phase 3 — Visual Correction B: Pemikiran
+# Correction B — reading and writing
 
-Actual Next.js application screenshots, 2026-10-09; disposable fictional data.
-The reading/writing page now puts text first, followed by compact source/date
-metadata and contextual navigation. No AI generation or proposal review lives
-on this page. No real AI request was made.
+## V2 retention checkpoint — 17 October 2026
 
-| CSS viewport | Writing area                  | Full page with seven short, long and multiline originals |
-| ------------ | ----------------------------- | -------------------------------------------------------- |
-| 1440         | [Composer](composer-1440.jpg) | [Reading stream](mixed-full-1440.jpg)                    |
-| 768          | [Composer](composer-768.jpg)  | [Reading stream](mixed-full-768.jpg)                     |
-| 390          | [Composer](composer-390.jpg)  | [Reading stream](mixed-full-390.jpg)                     |
-| 320          | [Composer](composer-320.jpg)  | [Reading stream](mixed-full-320.jpg)                     |
+This was a temporary browser QA capture directory, using fictional owned records and injected mock providers. Its full screenshot matrix, browser logs and measurement dumps have been retired from the working tree. The original test results, implementation decisions, ownership/draft/pagination safeguards and known limitations remain in the [implementation notes](../../docs/18-milestone-5.5-phase-3-notes.md). Historical capture counts in those notes do not describe the retained inventory.
 
-![Desktop application](mixed-full-1440.jpg)
+No screenshots from this superseded stage are retained. Use the current curated evidence instead.
 
-![Mobile application](mixed-full-390.jpg)
+See the [curated visual index and retention policy](../README.md) for original references, static design prototypes and the complete 13-image application selection. Phase 4B visual approval remains pending; this cleanup is not design approval.
 
-[Before polishing](before-desktop.jpg), [secondary options](mobile-options-320.jpg),
-[render measurements](render-metrics.json), [runtime/interaction checks](runtime-summary.json),
-and [actual export dimensions](capture-manifest.json).
+## Reproduction and limitations
 
-Additional `many`, `older`, `focused`, `archived` and `empty` screenshots use the
-same four-width naming pattern. Many-Thought fixtures contain 25 originals:
-the current window has twenty; the next has five, with no repeated/missing IDs.
-Long entries have an honest five-line visual preview of the exact source, not a
-generated summary. Native full-reading disclosure exposes the complete unchanged
-text. Focus/saved targets open automatically; an ordinary first entry no longer
-forces a multi-screen expansion. Short Thoughts are already fully readable.
+Browser QA still uses the guarded disposable helper in `scripts/phase-1-visual-fixture.ts`, with `MY_KRAVV_LIVE_TESTS=development`. Use only purpose-marked development records, injected mock providers and explicit fixture cleanup. Capture/generation/review tests are preserved in source; no real-provider request is authorized by these historical instructions. Do not use production or real user records. Credentials stay in ignored local files.
 
-The original's single compact Asli indicator is secondary to its content. Refine
-is a labeled existing deep link; Opsi pemikiran is a quieter native disclosure.
-Deletion remains behind the same irreversible-action explanation, required
-checkbox and original Server Action. Its error-triggered opening is retained;
-there is no outer disclosure to hide server feedback. Keyboard operation and
-confirmation requirements were inspected without deleting through the browser.
+Write new outputs to `.qa/<task>/`, not this reference directory. The Phase 4A final-polish and Phase 4B runners have been updated accordingly. See the implementation report for the original fixture modes, covered states and historical validation results; regenerating a before-state requires its matching code and must not reset someone's uncommitted work.
 
-Composer: compact writing surface, one exact-storage helper, nearby draft/save
-controls with matching DOM/visual order, no redundant action divider or empty
-feedback spacing. Full draft privacy and recovery text, live errors, receipt
-handling and Home's existing copy remain intact. No philosophy sidebar.
-
-## Verification
-
-Twenty-four final cases: mixed / many / older / focused / archived / empty at
-1440 / 768 / 390 / 320 DOM-reported CSS px, height 1000. No document or local-nav
-overflow; measured visible main controls are at least 44px and textarea text is
-16px. Fonts loaded. Normal focused-page shared edges and content start match Correction A
-exactly: x = 70.5 / 24 / 16 / 16px. Short desktop pages without a scrollbar use
-80px rather than 70.5px because their client area is 19px wider; their header and
-body still share the same edge. Mixed-case measurements immediately after full-page
-export also show an 80px desktop edge because the capture temporarily removes the
-scrollbar; their measurement context is explicitly marked in the JSON. This
-export effect is separate from the normal viewport comparison. Reading stays left-aligned and at most 68ch.
-Selected entries have a purposeful 12px inset to clear the focus marker.
-
-Browser interaction checks cover exact seeded text at all four widths, keyboard
-reading/options expansion, validation, privacy disclosure, navigation/reload draft
-recovery, a real synthetic capture and exact receipt/anchor, legacy focus dispatch,
-specific Refine GET navigation and stable 20+5 pagination. No inline generation or
-review controls were found. Browser warning/error log empty; dev indicators active.
-
-Native browser zoom percentage is unverified and unchanged. CSS zoom 1 and visual
-viewport scale 1 are separate recorded values; DPR approximately 0.8 does not
-establish 80% native zoom. In-app exports can scale/trim the canvas or include
-blank space. Full-page mobile exports can place the fixed rail within the sheet;
-they do not prove physical phone keyboard or nonzero safe-area behavior. Those,
-native 100%/80% zoom and screen-reader checks remain manual checkpoints.
-
-Only original text is supplied today. The text-reading renderer is separate from
-its caller's provenance/version choice; future approved preferred-version reading
-can supply its projection without replacing the capture or reading controls.
-No accepted-version query, fabricated state, new route, Refine index or Referensi.
-
-See [Phase 3 notes](../../docs/18-milestone-5.5-phase-3-notes.md) for quality gates,
-exact changes and preservation. No commit or push. Stop for user review.
+Responsive captures do not establish native browser zoom, physical keyboard/safe-area behavior or screen-reader support. Full-page exports may position fixed navigation at the initial viewport band. These limits remain manual review items. No app styling or screenshot retouching was introduced by this cleanup.

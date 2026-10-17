@@ -1,5 +1,7 @@
 # MY KRAVV — Milestone 5.5, Phase 2
 
+> V2 checkpoint, 17 October 2026: temporary browser captures and measurement dumps were retired. Historical results and limitations below remain; see the [curated visual index](../design/README.md) for retained evidence.
+
 Date: 2026-10-09. **Navigation and Company shell implemented; awaiting user review.**
 This phase is separately authorized by the user's Phase 2 brief. The approved
 [blueprint](15-milestone-5.5-ux-blueprint.md) and [Phase 1 report](16-milestone-5.5-phase-1-notes.md)
@@ -128,9 +130,8 @@ AI prompts/routing/gateway or budget accounting. No real AI provider request.
 
 ## Browser evidence and quality gates
 
-[Captures and QA instructions](../design/milestone-5.5-phase-2/README.md),
-[final metrics](../design/milestone-5.5-phase-2/render-metrics.json), and
-[runtime evidence](../design/milestone-5.5-phase-2/runtime-summary.json).
+[Selected captures and historical QA instructions](../design/milestone-5.5-phase-2/README.md),
+Raw browser metrics and manifests were retired; see the [QA retention policy](../design/README.md#keluaran-qa-yang-dihentikan).
 
 Reused the existing development-only fixture helper with a new marked disposable
 account: fictional long/missing-metadata/archived Companies and a locally injected

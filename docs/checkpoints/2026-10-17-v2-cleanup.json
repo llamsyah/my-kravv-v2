@@ -1,0 +1,102 @@
+{
+  "recordedOn": "2026-10-17",
+  "timezone": "Asia/Jakarta",
+  "head": "6a80f47b87ac9bbb20259e93abafd2b0eb0aa65d",
+  "scope": "V2 QA cleanup only; no commit, push, history rewrite, remote DB or provider request.",
+  "removedFiles": 621,
+  "removedImages": 514,
+  "removedBytes": 61959478,
+  "designBytesBefore": 66994477,
+  "designBytesAfter": 5012912,
+  "removedByDirectory": {
+    "design/milestone-5.5/screenshots": 2,
+    "design/milestone-5.5-phase-1": 34,
+    "design/milestone-5.5-phase-2": 35,
+    "design/milestone-5.5-phase-3": 112,
+    "design/milestone-5.5-phase-3-alignment-a": 33,
+    "design/milestone-5.5-phase-3-pemikiran-b": 34,
+    "design/milestone-5.5-phase-4a": 50,
+    "design/milestone-5.5-phase-4a-final-polish": 100,
+    "design/milestone-5.5-phase-4a-reading-order": 40,
+    "design/milestone-5.5-phase-4b": 129,
+    "design/milestone-5.5-refine-workspace": 52
+  },
+  "retainedApplicationEvidence": [
+    {
+      "path": "design/milestone-5.5-phase-2/companies-1440.jpg",
+      "sha256": "cb69d40d359b1b9de648ec187b981d9d1c42c125d855beffe270613c87ba02e1"
+    },
+    {
+      "path": "design/milestone-5.5-phase-2/companies-390.jpg",
+      "sha256": "75ff55392af6969e9e56e6d4b45ba870052eaefc7936fe7329fce4e190c2a3a3"
+    },
+    {
+      "path": "design/milestone-5.5-phase-4a/1440-home.jpg",
+      "sha256": "2422eddcba5f9466d82b16e6a8cbde76e281741fb6a29f6a18b8bf45954b0d96"
+    },
+    {
+      "path": "design/milestone-5.5-phase-4a/390-home.jpg",
+      "sha256": "53c92f2bbd0b556a8abc7f2bfdead42b40654b18ffab515995b722c92d65ff3c"
+    },
+    {
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-overview-1440.png",
+      "sha256": "622094fd863e1f509a833c0b6590eb1843d74c2c7d0b8654ddade98193554a18"
+    },
+    {
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-overview-390.png",
+      "sha256": "34acc46133354625e0aa4906b118ef75407270b0449470cf13d107819ad92b6f"
+    },
+    {
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-thoughts-1440.png",
+      "sha256": "bc2d148753a30199e76c0eddb418fd4f381400cfe0e33affa28ab297acfab179"
+    },
+    {
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-thoughts-390.png",
+      "sha256": "6a75a5b4557c7475d5e0ae9caa548f250c4815aa817a606aa5ee90d65df5b4ca"
+    },
+    {
+      "path": "design/milestone-5.5-phase-4b/after-suggested-1440-viewport.png",
+      "sha256": "6a1eeef730e4ae45c9417a9f7fc8ca74efed3e45edee2081cb0f9ff905bddc10"
+    },
+    {
+      "path": "design/milestone-5.5-phase-4b/after-suggested-390.png",
+      "sha256": "9fe91458ce178756fbcd0548c69e062edda2b73a7d2e24897388ea271271e545"
+    },
+    {
+      "path": "design/milestone-5.5-phase-4b/after-selected-superseded-1440.png",
+      "sha256": "0c643c9d547c0d3c34a7bfb5ba23b49623049704a626c39274f12aa52f114a59"
+    },
+    {
+      "path": "design/milestone-5.5-phase-4b/version-trail-expanded-desktop.png",
+      "sha256": "b18b3d41a5972bb04c56ef533cb7ad9bd4bbb5d6c5c48d4fe7048802821dfc7d"
+    },
+    {
+      "path": "design/milestone-5.5-phase-4b/editing-retained-mobile.png",
+      "sha256": "11018ab3071dc01fedc4d579951ffd692341817e3501be3c9109b2418de0673f"
+    }
+  ],
+  "retainedOriginalPrototypeImages": 23,
+  "essentialFilesUnchanged": 212,
+  "unrelatedIndexEntriesUnchanged": true,
+  "note": "The earlier v2-state manifest is a historical pre-cleanup inventory, not an assertion that retired QA files still exist.",
+  "previouslyCommittedArtifactsRemoved": 302,
+  "stagedNewArtifactsRemoved": 319,
+  "ignoreRulesVerified": {
+    "temporaryOutputs": 7,
+    "retainedEvidenceAndSource": 19
+  },
+  "relativeLinksVerified": 386,
+  "brokenRelativeLinks": 0,
+  "validation": {
+    "lint": "passed",
+    "typecheck": "passed",
+    "formatting": "passed",
+    "deterministicTestsPassed": 89,
+    "deterministicTestsFailed": 0,
+    "productionBuild": "passed",
+    "browserRunnerSyntax": "passed",
+    "remoteDatabaseRetested": false,
+    "browserRetested": false,
+    "realProviderRequests": 0
+  }
+}

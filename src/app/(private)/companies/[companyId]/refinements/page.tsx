@@ -7,6 +7,7 @@ import { readThoughtCursor } from "@/domain/thought/thought";
 import { queueLabel } from "@/features/refinements/presentation";
 import { ThoughtTime } from "@/features/thoughts/thought-history";
 import styles from "@/features/refinements/refine-workspace.module.css";
+import { projectThoughts } from "@/server/db/thought-display";
 
 export default async function CompanyRefinementsPage({
   params,
@@ -31,6 +32,7 @@ export default async function CompanyRefinementsPage({
     company.id,
     history.thoughts.map((t) => t.id),
   );
+  const displayed = await projectThoughts(supabase, user.id, history.thoughts);
   const root = `/companies/${company.id}/refinements`;
   const last = history.thoughts.at(-1);
   return (
@@ -38,8 +40,7 @@ export default async function CompanyRefinementsPage({
       <section className={styles.workspace} aria-labelledby="refine-title">
         <header className={styles.heading}>
           <div>
-            <p className="eyebrow">REFINE</p>
-            <h2 id="refine-title">Tinjau kata, jaga makna.</h2>
+            <h2 id="refine-title">Antrean Refine</h2>
           </div>
           <Link
             className="secondary-button"
@@ -67,7 +68,7 @@ export default async function CompanyRefinementsPage({
           </div>
         )}
         <ol className={styles.queue}>
-          {history.thoughts.map((thought) => {
+          {displayed.map((thought) => {
             const state = queue.get(thought.id)!;
             return (
               <li key={thought.id}>
@@ -85,8 +86,13 @@ export default async function CompanyRefinementsPage({
                           <span className={styles.badge}>Versi diterima</span>
                         )}
                       <ThoughtTime value={thought.created_at} compact />
+                      <span>
+                        {thought.display.source === "UNAVAILABLE"
+                          ? thought.display.label
+                          : `Ditampilkan · ${thought.display.label}`}
+                      </span>
                     </div>
-                    <p className={styles.excerpt}>{thought.raw_content}</p>
+                    <p className={styles.excerpt}>{thought.display.text}</p>
                   </div>
                   <span className={styles.entrance}>
                     Buka Refine <span aria-hidden="true">→</span>

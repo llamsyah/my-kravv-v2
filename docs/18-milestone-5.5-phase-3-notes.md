@@ -1,5 +1,7 @@
 # MY KRAVV — Milestone 5.5, Phase 3 implementation
 
+> V2 checkpoint, 17 October 2026: temporary browser captures and measurement dumps were retired. Historical results and limitations below remain; see the [curated visual index](../design/README.md) for retained evidence.
+
 Date: 2026-10-09. **Phase 3 implemented and verified; ready for user review.**
 Overview and Pemikiran are separate working routes. This does not complete all
 Milestone 5.5 phases or authorize Phase 4 / Phase 6.
@@ -64,22 +66,22 @@ UUID targets are validated and normalized to database casing. Repeated/invalid
 values are omitted; invalid history follows the existing safe first-page reader.
 Unknown query return destinations and raw source text are never forwarded.
 
-| Input or mutation | Phase 3 behavior |
-| --- | --- |
-| Company root without Thought parameters | Overview; no blanket redirect. |
-| Root `before` | Temporary dispatch to `/thoughts`, keeping the validated cursor and `#thought-history-title`. |
-| Root `focus`, `saved`, or their combination with valid `before` | Preserve validated query context; exact saved hash takes precedence, otherwise exact focus hash. Independent owned lookups cover off-page targets. |
-| Root `deleted=thought` | Dispatch to `/thoughts?deleted=thought`, with history anchor. Other deletion values do not redirect Overview. |
-| Invalid/repeated root Thought parameters | Dispatch to safe first history page; no unvalidated value reaches a query or arbitrary destination. |
-| Root hash-only `#thought-UUID` | Tiny client allowlist replaces with `/thoughts?focus=UUID#thought-UUID`. Destination independently checks ownership. No history loop or action replay. |
-| Root hash-only `#thought-history-title` | Replace with `/thoughts#thought-history-title`; exact ID is retained. |
-| Unknown hashes | Untouched; no redirect. |
-| Root `#data-control` | Management remains physically in Overview, closed by default. Explicit hash/menu opens and focuses the native summary, including selecting the same hash again. |
-| Capture success | `/companies/:c/thoughts?saved=:t#thought-:t`; exact persisted receipt. |
-| Thought deletion success | `/companies/:c/thoughts?deleted=thought`. |
-| Company create/edit/archive and delete success | Existing root or `/companies?deleted=company` destinations retained. |
-| Existing Refine detail, `proposal`, `resolved`, `before`, refinement anchors | Retained; generation and review behavior untouched. Back / keep-original links now point to `/thoughts?focus=:t#thought-:t`. |
-| Home exact-Thought reading link | Canonical Pemikiran focus destination. Company/library/continuation links still enter Overview. |
+| Input or mutation                                                            | Phase 3 behavior                                                                                                                                                |
+| ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Company root without Thought parameters                                      | Overview; no blanket redirect.                                                                                                                                  |
+| Root `before`                                                                | Temporary dispatch to `/thoughts`, keeping the validated cursor and `#thought-history-title`.                                                                   |
+| Root `focus`, `saved`, or their combination with valid `before`              | Preserve validated query context; exact saved hash takes precedence, otherwise exact focus hash. Independent owned lookups cover off-page targets.              |
+| Root `deleted=thought`                                                       | Dispatch to `/thoughts?deleted=thought`, with history anchor. Other deletion values do not redirect Overview.                                                   |
+| Invalid/repeated root Thought parameters                                     | Dispatch to safe first history page; no unvalidated value reaches a query or arbitrary destination.                                                             |
+| Root hash-only `#thought-UUID`                                               | Tiny client allowlist replaces with `/thoughts?focus=UUID#thought-UUID`. Destination independently checks ownership. No history loop or action replay.          |
+| Root hash-only `#thought-history-title`                                      | Replace with `/thoughts#thought-history-title`; exact ID is retained.                                                                                           |
+| Unknown hashes                                                               | Untouched; no redirect.                                                                                                                                         |
+| Root `#data-control`                                                         | Management remains physically in Overview, closed by default. Explicit hash/menu opens and focuses the native summary, including selecting the same hash again. |
+| Capture success                                                              | `/companies/:c/thoughts?saved=:t#thought-:t`; exact persisted receipt.                                                                                          |
+| Thought deletion success                                                     | `/companies/:c/thoughts?deleted=thought`.                                                                                                                       |
+| Company create/edit/archive and delete success                               | Existing root or `/companies?deleted=company` destinations retained.                                                                                            |
+| Existing Refine detail, `proposal`, `resolved`, `before`, refinement anchors | Retained; generation and review behavior untouched. Back / keep-original links now point to `/thoughts?focus=:t#thought-:t`.                                    |
+| Home exact-Thought reading link                                              | Canonical Pemikiran focus destination. Company/library/continuation links still enter Overview.                                                                 |
 
 Installed Next.js `redirect()` provides temporary GET dispatch (307), or its
 standard temporary redirect marker if the parent loading boundary has already
@@ -133,23 +135,23 @@ POST; it does not submit, approve or alter destructive actions.
 
 ## Actual files changed
 
-| Files | Change |
-| --- | --- |
-| `src/app/(private)/companies/[companyId]/page.tsx` | Owned Overview, compatibility dispatch, bounded original previews/context and native management. |
-| `src/app/(private)/companies/[companyId]/thoughts/page.tsx` (new) | Dedicated writing/reading leaf, independent targets and exact receipts. |
-| `src/features/companies/legacy-navigation.ts`, `legacy-company-hash-navigation.tsx` (new) | Validated query/hash compatibility policy and tiny replace enhancement. |
-| `src/features/companies/company-data-control.tsx`, `company-overview.module.css` (new) | Default-collapsed single management region, explicit focus/error reveal and scoped Overview composition. |
-| `src/features/companies/company-workspace-shell.tsx`, `company-section-navigation.tsx`, `company-workspace.module.css` | Activate only real sections, context breadcrumb and narrow-mobile fit. |
-| `src/features/thoughts/thought-history.tsx`, `thought-workspace.module.css` (new stylesheet) | Continuous original reader, target section, canonical pagination, scoped working/list composition and archive-aware empty state. |
-| `src/server/db/thoughts.ts` | Minimal owned four-row Overview query. |
-| `src/features/thoughts/actions.ts`, `thought-composer.tsx` | Canonical save/permalink plus new-path invalidation; retain draft protocol and compact archived presentation. |
-| `src/features/data-control/actions.ts`, `delete-form.tsx` | Canonical Thought-delete destination/permalink and new-path invalidation; Company confirmations preserved. |
-| `src/features/companies/actions.ts` | New-path revalidation only. |
-| Existing nested Refine `page.tsx`, `src/features/refinements/refine-forms.tsx`, Home `page.tsx` | Exact-Thought navigation destinations only. |
-| `src/tests/legacy-navigation.test.ts` (new), `thoughts.test.ts` | Four dispatch/hash regressions and one bounded owned-query regression. |
-| `src/tests/live/companies.test.ts`, `thoughts.test.ts`, `data-control.test.ts` | Canonical form paths, additional ownership/dispatch/target/receipt/archive-empty assertions; security expectations retained. |
-| `scripts/phase-1-visual-fixture.ts` | Guarded optional 25-row Phase 3 history fixture, same disposable identity guard and cleanup. No real AI response. |
-| `design/milestone-5.5-phase-3/*`, this report | Real application captures and QA evidence. |
+| Files                                                                                                                  | Change                                                                                                                           |
+| ---------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `src/app/(private)/companies/[companyId]/page.tsx`                                                                     | Owned Overview, compatibility dispatch, bounded original previews/context and native management.                                 |
+| `src/app/(private)/companies/[companyId]/thoughts/page.tsx` (new)                                                      | Dedicated writing/reading leaf, independent targets and exact receipts.                                                          |
+| `src/features/companies/legacy-navigation.ts`, `legacy-company-hash-navigation.tsx` (new)                              | Validated query/hash compatibility policy and tiny replace enhancement.                                                          |
+| `src/features/companies/company-data-control.tsx`, `company-overview.module.css` (new)                                 | Default-collapsed single management region, explicit focus/error reveal and scoped Overview composition.                         |
+| `src/features/companies/company-workspace-shell.tsx`, `company-section-navigation.tsx`, `company-workspace.module.css` | Activate only real sections, context breadcrumb and narrow-mobile fit.                                                           |
+| `src/features/thoughts/thought-history.tsx`, `thought-workspace.module.css` (new stylesheet)                           | Continuous original reader, target section, canonical pagination, scoped working/list composition and archive-aware empty state. |
+| `src/server/db/thoughts.ts`                                                                                            | Minimal owned four-row Overview query.                                                                                           |
+| `src/features/thoughts/actions.ts`, `thought-composer.tsx`                                                             | Canonical save/permalink plus new-path invalidation; retain draft protocol and compact archived presentation.                    |
+| `src/features/data-control/actions.ts`, `delete-form.tsx`                                                              | Canonical Thought-delete destination/permalink and new-path invalidation; Company confirmations preserved.                       |
+| `src/features/companies/actions.ts`                                                                                    | New-path revalidation only.                                                                                                      |
+| Existing nested Refine `page.tsx`, `src/features/refinements/refine-forms.tsx`, Home `page.tsx`                        | Exact-Thought navigation destinations only.                                                                                      |
+| `src/tests/legacy-navigation.test.ts` (new), `thoughts.test.ts`                                                        | Four dispatch/hash regressions and one bounded owned-query regression.                                                           |
+| `src/tests/live/companies.test.ts`, `thoughts.test.ts`, `data-control.test.ts`                                         | Canonical form paths, additional ownership/dispatch/target/receipt/archive-empty assertions; security expectations retained.     |
+| `scripts/phase-1-visual-fixture.ts`                                                                                    | Guarded optional 25-row Phase 3 history fixture, same disposable identity guard and cleanup. No real AI response.                |
+| `design/milestone-5.5-phase-3/*`, this report                                                                          | Real application captures and QA evidence.                                                                                       |
 
 Existing blueprint/prototypes, foundations, draft implementation, auth,
 Supabase/RLS/schema, Refine service/contracts, provider routing and budgets were
@@ -157,23 +159,21 @@ not modified. No new dependency or product-facing AI role.
 
 ## Verification and evidence
 
-[Actual screenshot gallery](../design/milestone-5.5-phase-3/README.md),
-[48-case measurements](../design/milestone-5.5-phase-3/render-metrics.json),
-[61-image manifest](../design/milestone-5.5-phase-3/capture-manifest.json), and
-[runtime checks](../design/milestone-5.5-phase-3/runtime-summary.json).
+[Historical QA scope and retention note](../design/milestone-5.5-phase-3/README.md),
+Raw browser metrics and manifests were retired; see the [QA retention policy](../design/README.md#keluaran-qa-yang-dihentikan).
 
-| Gate | Result |
-| --- | --- |
-| ESLint, installed Next route generation/TypeScript, formatting | Passed after formatting the generated QA evidence; no source exemption added. |
-| Deterministic suite | 73 passed, no failures/skips: previous 68 plus five focused regressions. |
-| Development DB/HTTP suite | 50 passed, no failures/skips; includes all existing auth, Company, original capture/RLS, deletion, mocked Refine and accounting checks. |
-| Stronger off-page receipt regression | Focused Thought live suite: 9 passed after adding actual persisted capture-operation IDs and checking off-page receipt serialization. |
-| Production build | Passed; exactly one added route, `/companies/[companyId]/thoughts`, alongside all original routes. |
-| Real responsive application | Twelve views × 1440/768/390/320 CSS px: no document overflow, clipped local navigation, measured visible main control below 44px, input text below 16px or unloaded fonts. |
-| Content variants | Empty, one, 25, older, off-page target, archived, long name and 2,944-character multiline/unbroken original checked. Four extra one-Thought captures precede its deletion. |
-| Real browser actions | Capture validation/success/reload, draft recovery/mismatched receipt, hash compatibility, Refine Back, menu/hash management, Company edit/archive, retained archive draft, Thought and Company deletion, unavailable descendant and logout verified. |
-| Runtime | Browser warning/error log inspection returned zero entries. Dev indicators remain enabled. |
-| Cleanup | Disposable QA identity, eight owned-table cascades and ignored credential file removed. Viewport reset. Existing dev server retained. |
+| Gate                                                           | Result                                                                                                                                                                                                                                               |
+| -------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ESLint, installed Next route generation/TypeScript, formatting | Passed after formatting the generated QA evidence; no source exemption added.                                                                                                                                                                        |
+| Deterministic suite                                            | 73 passed, no failures/skips: previous 68 plus five focused regressions.                                                                                                                                                                             |
+| Development DB/HTTP suite                                      | 50 passed, no failures/skips; includes all existing auth, Company, original capture/RLS, deletion, mocked Refine and accounting checks.                                                                                                              |
+| Stronger off-page receipt regression                           | Focused Thought live suite: 9 passed after adding actual persisted capture-operation IDs and checking off-page receipt serialization.                                                                                                                |
+| Production build                                               | Passed; exactly one added route, `/companies/[companyId]/thoughts`, alongside all original routes.                                                                                                                                                   |
+| Real responsive application                                    | Twelve views × 1440/768/390/320 CSS px: no document overflow, clipped local navigation, measured visible main control below 44px, input text below 16px or unloaded fonts.                                                                           |
+| Content variants                                               | Empty, one, 25, older, off-page target, archived, long name and 2,944-character multiline/unbroken original checked. Four extra one-Thought captures precede its deletion.                                                                           |
+| Real browser actions                                           | Capture validation/success/reload, draft recovery/mismatched receipt, hash compatibility, Refine Back, menu/hash management, Company edit/archive, retained archive draft, Thought and Company deletion, unavailable descendant and logout verified. |
+| Runtime                                                        | Browser warning/error log inspection returned zero entries. Dev indicators remain enabled.                                                                                                                                                           |
+| Cleanup                                                        | Disposable QA identity, eight owned-table cascades and ignored credential file removed. Viewport reset. Existing dev server retained.                                                                                                                |
 
 Browser QA corrected concrete issues: duplicate composer border, two-link clipping
 at 320px, an unnecessary blocked-writing surface, misleading empty-archive capture
@@ -220,24 +220,24 @@ Actual cause: Pemikiran's `max-width: 1040px; margin-inline: auto` placed its bo
 (Overview versus generic Ruang) wrapped differently on mobile. Navigation's 4px
 inline padding added another unnecessary inset.
 
-| File changed in this correction | Change |
-| --- | --- |
-| `src/features/companies/company-workspace-shell.tsx` | Consistent Perusahaan / actual Company name / current section breadcrumb, plus a shared content boundary around existing children. Server/Client ownership unchanged. |
+| File changed in this correction                       | Change                                                                                                                                                                           |
+| ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/features/companies/company-workspace-shell.tsx`  | Consistent Perusahaan / actual Company name / current section breadcrumb, plus a shared content boundary around existing children. Server/Client ownership unchanged.            |
 | `src/features/companies/company-workspace.module.css` | Stable responsive breadcrumb grid, bounded accessible long name, shared flow-root content, aligned local links with inset keyboard focus, reduced redundant desktop header gaps. |
-| `src/features/thoughts/thought-workspace.module.css` | Remove independent centering, keep inner reading widths, cap only textarea at 68ch, remove redundant row horizontal padding. |
-| `src/features/companies/company-overview.module.css` | Empty/no-context Overview also follows the shared edge instead of independently centering. |
+| `src/features/thoughts/thought-workspace.module.css`  | Remove independent centering, keep inner reading widths, cap only textarea at 68ch, remove redundant row horizontal padding.                                                     |
+| `src/features/companies/company-overview.module.css`  | Empty/no-context Overview also follows the shared edge instead of independently centering.                                                                                       |
 
-[Before/after screenshots and detailed measurements](../design/milestone-5.5-phase-3-alignment-a/README.md).
+[Alignment QA retention note](../design/milestone-5.5-phase-3-alignment-a/README.md).
 Twelve before and twelve after comparisons use 1440/768/390/320 CSS px, height
 1000, scroll (0, 0), unchanged data and browser zoom. Three additional corrected
 cases cover empty Overview and long-original Refine.
 
 | Viewport | Shared left edge | Identity top | Navigation top | Divider bottom | Primary content start | Cross-route deviation after |
-| --- | --- | --- | --- | --- | --- | --- |
-| 1440 | 70.5 | 161 | 300.8125 | 369.8125 | 393.8125 | 0px |
-| 768 | 24 | 161 | 430.375 | 499.375 | 523.375 | 0px |
-| 390 | 16 | 193 | 500 | 569 | 593 | 0px |
-| 320 | 16 | 193 | 533.59375 | 602.59375 | 626.59375 | 0px |
+| -------- | ---------------- | ------------ | -------------- | -------------- | --------------------- | --------------------------- |
+| 1440     | 70.5             | 161          | 300.8125       | 369.8125       | 393.8125              | 0px                         |
+| 768      | 24               | 161          | 430.375        | 499.375        | 523.375               | 0px                         |
+| 390      | 16               | 193          | 500            | 569            | 593                   | 0px                         |
+| 320      | 16               | 193          | 533.59375      | 602.59375      | 626.59375             | 0px                         |
 
 Breadcrumb bounds, identity, local navigation, divider and body boundaries are
 stable across all three routes. The desktop 70.5px edge accounts for the 19px
@@ -279,14 +279,14 @@ approved blueprint, actual composer/stream, deletion disclosure, owned page and
 installed Next.js CSS guidance before editing. The shared Company shell and its
 Correction A spatial framework were not changed.
 
-| File | Correction B change |
-| --- | --- |
-| `src/features/thoughts/thought-history.tsx` | Text-first continuous entries; compact provenance/date below content; contextual Refine entrance; native full reader with exact-source visual preview. Focus/saved entries still expand; ordinary long entries start collapsed. |
-| `src/features/thoughts/thought-workspace.module.css` | Remove metadata column/action-button chrome, preserve left-aligned 68ch reading, quiet options, readable preview/reader states, protected focus-marker inset, compact nearby composer controls without redundant divider. |
-| `src/features/thoughts/thought-composer.tsx` | Shorten only the Company helper to Disimpan persis seperti ditulis; Home helper, all hooks/protocol/privacy/errors remain intact. |
-| `src/features/data-control/delete-form.tsx` | Optional presentation-only disclosure label/icon; Pemikiran requests Opsi pemikiran. Original confirmation/action/error-opening logic and default Company labels remain unchanged. |
-| `scripts/phase-1-visual-fixture.ts` | Guarded optional four-entry mixed-reading fixture; existing setup/history/mock/cleanup modes preserved. |
-| `design/milestone-5.5-phase-3-pemikiran-b/*`, this report | Actual app captures, responsive geometry and interaction evidence. |
+| File                                                      | Correction B change                                                                                                                                                                                                             |
+| --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/features/thoughts/thought-history.tsx`               | Text-first continuous entries; compact provenance/date below content; contextual Refine entrance; native full reader with exact-source visual preview. Focus/saved entries still expand; ordinary long entries start collapsed. |
+| `src/features/thoughts/thought-workspace.module.css`      | Remove metadata column/action-button chrome, preserve left-aligned 68ch reading, quiet options, readable preview/reader states, protected focus-marker inset, compact nearby composer controls without redundant divider.       |
+| `src/features/thoughts/thought-composer.tsx`              | Shorten only the Company helper to Disimpan persis seperti ditulis; Home helper, all hooks/protocol/privacy/errors remain intact.                                                                                               |
+| `src/features/data-control/delete-form.tsx`               | Optional presentation-only disclosure label/icon; Pemikiran requests Opsi pemikiran. Original confirmation/action/error-opening logic and default Company labels remain unchanged.                                              |
+| `scripts/phase-1-visual-fixture.ts`                       | Guarded optional four-entry mixed-reading fixture; existing setup/history/mock/cleanup modes preserved.                                                                                                                         |
+| `design/milestone-5.5-phase-3-pemikiran-b/*`, this report | Actual app captures, responsive geometry and interaction evidence.                                                                                                                                                              |
 
 Pemikiran owns capture and reading. It contains no generation, comparison,
 proposal-edit or accept/reject controls. Each Thought links to its existing
@@ -310,7 +310,7 @@ query is added, and an original is never labeled accepted. Future approved
 preferred wording must update the caller's real projection/provenance and retain
 original access. New Refine index, Referensi and later phases remain outside scope.
 
-[Actual seven-entry desktop/mobile screenshots and verification details](../design/milestone-5.5-phase-3-pemikiran-b/README.md).
+[Pemikiran QA retention note](../design/milestone-5.5-phase-3-pemikiran-b/README.md).
 Twenty-four final responsive cases cover mixed, 25-Thought pagination, older,
 focused, archived and empty pages at 1440/768/390/320 CSS px. No horizontal
 document/local-navigation overflow, unloaded fonts, measured visible main target

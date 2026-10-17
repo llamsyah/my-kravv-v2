@@ -1,6 +1,8 @@
 # MY KRAVV — Milestone 5.5 visual review
 
-Design artifacts only. **Visual design awaits user approval.**
+Design artifacts only. Major visual compositions were subsequently approved, with polishing revisions recorded in the UX blueprint. These historical prototypes are not production implementation; final Phase 4B visual approval remains open.
+
+V2 checkpoint, 17 October 2026: all prototype sources, assets and 23 design-reference renders are retained. Only the temporary JSON capture/measurement dumps were retired; see the [visual retention policy](../README.md).
 
 Open [index.html](index.html) for the screenshot gallery and links to five responsive
 static prototypes. The folder can be viewed directly from disk. For a local HTTP
@@ -67,11 +69,10 @@ Browser captures were taken using the Codex in-app browser:
   390px width with natural document height.
 - The browser capture surface trims the output relative to those reported CSS
   viewport sizes: main first-screen files are 1425×990 pixels desktop and 375×811
-  pixels mobile. Review boards are 1440×1000 pixels. Exact file dimensions are in
-  [capture manifest](screenshots/capture-manifest.json); viewport dimensions must
+  pixels mobile. Review boards are 1440×1000 pixels. The raw dimension manifest was retired at the V2 checkpoint; viewport dimensions must
   not be interpreted as a verified native pixel/zoom measurement.
 - All five layouts also received DOM width checks at 320px and 768px; no
-  page-wide horizontal overflow was observed. See [render metrics](screenshots/render-metrics.json).
+  page-wide horizontal overflow was observed. The raw metrics dump was retired; this paragraph retains the historical result.
 - Reading/source disclosure was opened and captured on mobile Refine.
 - CSS zoom was 1; the native browser zoom UI and device pixel ratio were not
   independently verified. These are desktop-browser responsive views with desktop

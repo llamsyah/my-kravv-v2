@@ -1,5 +1,15 @@
 # MY KRAVV
 
+> **Checkpoint V2 — 17 Oktober 2026:** pengembangan berhenti pada Milestone 5.5
+> Phase 4B untuk beralih ke V3; review visual akhir Phase 4B masih terbuka.
+> Baca [CHECKPOINT-V2.md](CHECKPOINT-V2.md) untuk kondisi lokal, perubahan yang
+> belum di-commit, hasil validasi terakhir, dan batas pekerjaan. Bagian historis
+> README di bawah tidak menggantikan checkpoint terbaru ini.
+
+Referensi visual telah dikurasi untuk transisi V3: lihat [indeks desain](design/README.md).
+Output QA sementara ditulis ke `.qa/` dan diabaikan Git; kode, migrasi, pengujian,
+aset desain asli serta catatan implementasi tetap dipertahankan.
+
 A private AI-assisted investment reasoning workspace. Milestone 4 adds internal
 AI infrastructure to the existing Company, Thought and data-control foundation.
 The UI defaults to Bahasa Indonesia and preserves the Hybrid KRAVV design.

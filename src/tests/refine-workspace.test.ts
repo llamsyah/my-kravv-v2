@@ -7,6 +7,7 @@ import {
   comparisonVersion,
   comparisonText,
   queueLabel,
+  refinePresentation,
 } from "../features/refinements/presentation.ts";
 import {
   getActiveRefinement,
@@ -39,13 +40,16 @@ const row = (
   created_at: "2026-10-09T00:00:00Z",
   resolved_at: null,
 });
-test("Refine comparison preserves edited acceptance independently of historical and suggested targets", () => {
+test("unresolved review takes priority without changing accepted wording or treating historical targets as new proposals", () => {
   const accepted = row(
     "ACCEPTED",
     "aku belum baca laporannya, jadi belum tahu.",
   );
-  const suggestion = row("SUGGESTED");
-  assert.equal(comparisonVersion(null, accepted, suggestion), accepted);
+  const suggestion = {
+    ...row("SUGGESTED"),
+    created_at: "2026-10-09T00:00:01Z",
+  };
+  assert.equal(comparisonVersion(null, accepted, suggestion), suggestion);
   assert.equal(comparisonText(accepted), accepted.user_final_content);
   assert.equal(
     comparisonText({ ...accepted, status: "SUPERSEDED" }),
@@ -55,13 +59,75 @@ test("Refine comparison preserves edited acceptance independently of historical 
   for (const status of ["REJECTED", "SUPERSEDED"] as const)
     assert.equal(
       comparisonVersion(row(status), accepted, suggestion),
-      accepted,
+      suggestion,
     );
   assert.equal(comparisonVersion(null, null, null), null);
   assert.equal(
     comparisonText(row("ACCEPTED")),
     "Aku belum memeriksa laporannya.",
   );
+});
+test("state-driven controls defer generation during review and uncertainty independently of saved display", () => {
+  const accepted = row("ACCEPTED"),
+    suggested = { ...row("SUGGESTED"), created_at: "2026-10-09T00:00:01Z" };
+  const inputs = {
+    uncertain: false,
+    pending: false,
+    target: null,
+    accepted: null,
+    suggested: null,
+    hasHistory: false,
+  };
+  assert.deepEqual(refinePresentation(inputs), {
+    state: "ORIGINAL",
+    review: null,
+    generation: "INITIAL",
+  });
+  assert.deepEqual(refinePresentation({ ...inputs, accepted }), {
+    state: "RESOLVED",
+    review: null,
+    generation: "SECONDARY",
+  });
+  for (const waiting of [{ uncertain: true }, { pending: true }]) {
+    assert.deepEqual(
+      refinePresentation({ ...inputs, ...waiting, accepted, suggested }),
+      { state: "WAITING", review: null, generation: null },
+    );
+  }
+  assert.deepEqual(refinePresentation({ ...inputs, accepted, suggested }), {
+    state: "REVIEW",
+    review: suggested,
+    generation: null,
+  });
+  assert.equal(
+    refinePresentation({ ...inputs, hasHistory: true }).generation,
+    "SECONDARY",
+  );
+  const previous = row("SUPERSEDED");
+  assert.equal(
+    refinePresentation({ ...inputs, accepted, target: previous }).review,
+    null,
+  );
+  assert.equal(comparisonVersion(previous, accepted, null), accepted);
+});
+test("older unresolved versions are history after a newer acceptance; explicit review and microsecond ordering remain precise", () => {
+  const accepted = {
+    ...row("ACCEPTED"),
+    created_at: "2026-10-09T00:00:00.000002+00:00",
+  };
+  const older = {
+    ...row("SUGGESTED"),
+    created_at: "2026-10-09T00:00:00.000001+00:00",
+  };
+  const newer = { ...older, created_at: "2026-10-09T00:00:00.000003+00:00" };
+  assert.equal(comparisonVersion(null, accepted, older), accepted);
+  assert.equal(comparisonVersion(older, accepted, newer), older);
+  assert.equal(comparisonVersion(null, accepted, newer), newer);
+  const equivalent = {
+    ...newer,
+    created_at: "2026-10-09T07:00:00.000003+07:00",
+  };
+  assert.equal(comparisonVersion(null, accepted, equivalent), equivalent);
 });
 test("queue never confuses unknown, rejected history, and unexamined absence", () => {
   assert.equal(queueLabel([], false), "Belum dirapikan");

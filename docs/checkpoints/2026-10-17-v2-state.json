@@ -1,0 +1,1863 @@
+{
+  "recordedOn": "2026-10-17",
+  "timezone": "Asia/Jakarta",
+  "scope": "Existing uncommitted V2 files before adding checkpoint documentation; no secrets or file contents included.",
+  "branch": "main",
+  "head": "6a80f47b87ac9bbb20259e93abafd2b0eb0aa65d",
+  "indexSha256": "90fe2ad4c36d5e5cc063475643ebd26dcb869379705aa11c98e6297ff0e2828f",
+  "stagedAdded": 351,
+  "stagedModified": 19,
+  "fileCount": 370,
+  "files": [
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/README.md",
+      "sha256": "ce070fc848ece3abc6661ea713c74229a92393967ff20c61e50cac048be8f764"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-archived-overview-1440.png",
+      "sha256": "0f75ca59cfd44f325d1c6c36250cf0863dc79fb068e406d20c0b86b9190e5069"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-archived-overview-320.png",
+      "sha256": "9916bfd5a87a9682059ffd32c681b7052dff4337be7cfbf48993d01d1ca85b59"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-archived-overview-390.png",
+      "sha256": "0f70f0fe18048a710eac99249b919e8160bfb9c5235eefbbf0bbb3dc32862395"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-archived-overview-768.png",
+      "sha256": "0e5d0a7b2798126a6d8538dc4eceae70ebbff23c3a9c65d33aa18be9a1df6d75"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-archived-thoughts-1440.png",
+      "sha256": "b1e1d29826c8801592e3e43c51772419f9b6992974b6e97d085109354519d30c"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-archived-thoughts-320.png",
+      "sha256": "f6819ebbf195b7b29cf57993715ab1d2c8143eb9f2ad3512d7267a7568d01b71"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-archived-thoughts-390.png",
+      "sha256": "8507282e77c7d17a82fb301fe0ea0b658e135d2698939c661d45c6ba72e7c237"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-archived-thoughts-768.png",
+      "sha256": "3afbdeddf8fa0690de049b841747ad9e7eea16b97c2574ed1c73a29268238576"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-browser-log.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-empty-overview-1440.png",
+      "sha256": "7c65a3f555d03cc3816b3eef18c3c032dc62ecb1bd4aa3c003a59d265135823c"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-empty-overview-320.png",
+      "sha256": "228f104cfc33a2d3f17c085f3c3b2fb8e5d3e4f2cb786d7bbbc1ce0af368cf18"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-empty-overview-390.png",
+      "sha256": "a384fcdefc1b757984fb9f13f1392ea76b1b0ea6f7139543d2cdf54f94a9fcda"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-empty-overview-768.png",
+      "sha256": "4cf9e723a3ef35d7c0babe6a4560b9c657f9560c5b7ecd4dd6eca77cf1d3d746"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-empty-thoughts-1440.png",
+      "sha256": "71a47c6be53a9652ca60cd7a55549ea43c013634376d19969c8fc20ece5d5b30"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-empty-thoughts-320.png",
+      "sha256": "d342190d71c770a83fd4269cc85e8ab8b3155c3198c77d77e7e4689009f36813"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-empty-thoughts-390.png",
+      "sha256": "06d933c3d89010696f4a9ba48fb5a1c42d3e07040893810ec2ebe456d201bb09"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-empty-thoughts-768.png",
+      "sha256": "ab2887b506f52a217cb5865f8d19bb59a2e52250936b12f0d95fa99e5514e05a"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-expanded-reading-1440.png",
+      "sha256": "14d8d0b9e3cc3895f5e8055c10fdf1045face744d0efa71b9342529e01c7b358"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-expanded-reading-320.png",
+      "sha256": "929a6cb43859a51efbc327c0f43dafc0ed028c39ae203de1decc1b0858cc3e98"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-expanded-reading-390.png",
+      "sha256": "3fc88c1652015837973da476fe636dbfb8a8512df66d922dddef07ab313dc8f0"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-expanded-reading-768.png",
+      "sha256": "febcbc869f982b873f1282253edecfe82f61f4c2a9d8e9a0fd9acf516ecb05b7"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-long-writing-1440.png",
+      "sha256": "ab042fc414376716d064e22f1e953400e2b07cd6c3ab12f41f000b750b0a8dbb"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-long-writing-320.png",
+      "sha256": "9d063d75f741b3e1d718c9ba9254b9cb6028edf71772daef5af477a681df90ba"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-long-writing-390.png",
+      "sha256": "c9772bf8966cb98f6520fa35bcda287d9fd759a4c501c4b33700f08c4adb935b"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-long-writing-768.png",
+      "sha256": "e0d50c93ac97e97f0407415b26818061c3e6b11dafeaf5e6c1ffbb7371293806"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-many-overview-1440.png",
+      "sha256": "268a88cc1813f9e173f843beb57676a3a1459e9af575a6ce271d29167d32095c"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-many-overview-320.png",
+      "sha256": "9e0caa8119c85ff80c5b2d2dc7b4c9d1aa34bdc2ab9c51053b54ac5657bf8137"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-many-overview-390.png",
+      "sha256": "81599b8b80c1237e4611ce20ac989203e6d7c0fb739d82cdc7d7a8038100daec"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-many-overview-768.png",
+      "sha256": "1b01c93fe34cd2c48ce00f86e5abf8a32044f7b836754cdcd42cf68bd718617d"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-many-thoughts-1440.png",
+      "sha256": "f3fe2656d01be5acd2abf49a1e07f8243d3a1a1d419dac88f88ebd04a8bfce53"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-many-thoughts-320.png",
+      "sha256": "4c99140ecf5685688a7476b136cec7998d5a8c2fbaf063cd57af2622d7296e6c"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-many-thoughts-390.png",
+      "sha256": "b53b52050724e9c8f111a71bb72eb5ba3f57f1eb928c136b2ef7a3eaaf772edc"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-many-thoughts-768.png",
+      "sha256": "53c2d1087fb3623af4d2ca4665c1297e537690b0f430a67c5f2bc26e761dffb6"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-measurements.json",
+      "sha256": "1ecef3da180f86537a0f152b0eb94537abaa035bbda4501d943fc908f8d3ba54"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-overview-1440.png",
+      "sha256": "622094fd863e1f509a833c0b6590eb1843d74c2c7d0b8654ddade98193554a18"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-overview-320.png",
+      "sha256": "cc56854e4deb88f892d230fd19429f65b93d8e4625c0f8d3ac331bd564a68cf6"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-overview-390.png",
+      "sha256": "34acc46133354625e0aa4906b118ef75407270b0449470cf13d107819ad92b6f"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-overview-768.png",
+      "sha256": "57f2de0d83710bd28db9a7c56300e5d9ba7022385305e9f53ebdce846bc6c294"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-refine-shell-1440.png",
+      "sha256": "b3560626534607c1892469d7d6ce04d22b7fece03779435c9510393110d240cb"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-refine-shell-320.png",
+      "sha256": "fe30751cc0145f4c4aa789eff7e523970c48241d0fab5563c1d60fe7c1db644c"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-refine-shell-390.png",
+      "sha256": "529e2fc4bc0a6b6d1a6909e0f9523423a1c628d419327f3e0304bd4e6608c49b"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-refine-shell-768.png",
+      "sha256": "dfdb57e62db569ef88a7ba00f45339f4f0d7026220ee1042eb6ce2275c83c8a9"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-thoughts-1440.png",
+      "sha256": "bc2d148753a30199e76c0eddb418fd4f381400cfe0e33affa28ab297acfab179"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-thoughts-320.png",
+      "sha256": "be806d877aa05713aa901de7793f31b9c6c08bfa3a879d0d3b31d99b49a7e4a6"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-thoughts-390.png",
+      "sha256": "6a75a5b4557c7475d5e0ae9caa548f250c4815aa817a606aa5ee90d65df5b4ca"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/after-thoughts-768.png",
+      "sha256": "6ba05bd0ee2d5ceed96ce4c935f8d190ed32ec3a216b8a828e126e5de9454939"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-archived-overview-1440.png",
+      "sha256": "6efc93ffc65cd44c717529ce047d4fd90bed5eb8ca63fbdf363a7db1694dce60"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-archived-overview-320.png",
+      "sha256": "c53c8ca7085836f38799d55ff820469cb39dee618357f7298c05fe2e495c9a94"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-archived-overview-390.png",
+      "sha256": "ed58bfb7bdb701b152f9ec3876e8420f21f736934632a67cae46233af778722f"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-archived-overview-768.png",
+      "sha256": "0da633c3970f56c9f537e5bdc853b0d43cd28539315b986f0d32aa7e7fd3367f"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-archived-thoughts-1440.png",
+      "sha256": "17a5deed448932fa09062e6d12d64b7ff6c2381da57e845dc43d8bf579425656"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-archived-thoughts-320.png",
+      "sha256": "b25734c3b677009847a579113326c37015650464386cf4009afd21f736ef264d"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-archived-thoughts-390.png",
+      "sha256": "149097c8e0020e96f4ff475188b84420298a56c6871274f359ad722660509843"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-archived-thoughts-768.png",
+      "sha256": "83105aee2b362d08a17e434ebf09ded9187e6ff89e548ecf0ab9a128b65b274f"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-empty-overview-1440.png",
+      "sha256": "38fd54c3e1648e90ca338a215df830d665a1cf1fac9361cada79ab92efc8e36f"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-empty-overview-320.png",
+      "sha256": "1515f45ce6da734c71ccc3b4262ecfb8182fec337695777ef1fd423cf2ee096d"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-empty-overview-390.png",
+      "sha256": "185bda77562a390597b978ff4a6549dc92592393ff11e3dc216562e7ce3f1aff"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-empty-overview-768.png",
+      "sha256": "35bfa5d92e9ae86e0bcf8a4e289d6d52da2e33ae9c422562e9050afd33ec45fd"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-empty-thoughts-1440.png",
+      "sha256": "57af87bcd08001e3bfbb5d50be256e6583441b8eb264705e913bd334f20504f5"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-empty-thoughts-320.png",
+      "sha256": "7573ef1154446a42b9805e813d6dd50465fedf18fa56014eb89b44d18ac65412"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-empty-thoughts-390.png",
+      "sha256": "d2db678f9cea9fa843dec9f33ee14677a037ba2385e11d592c5b04cfe9e86e5b"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-empty-thoughts-768.png",
+      "sha256": "49d64bfd24ea4937c3684c38849612aba6e9640119fa4bcfc330efcea21681e2"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-expanded-reading-1440.png",
+      "sha256": "93616da1e05de2e308f632cbc461c72048b5f3d76e8cbd3f36abba148838a518"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-expanded-reading-320.png",
+      "sha256": "93ea3ed22db2700fa1d9e0abd93a23dc9ca4e8213fc1fac42a35f9349579d7c7"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-expanded-reading-390.png",
+      "sha256": "1f952d407fd016f313242e07dbfc4b1654cccca49c7a651183fdb31e74fbe35e"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-expanded-reading-768.png",
+      "sha256": "48abbdf1b6f42a04e6e3778a64c352f0e61a2924ba0fb27cdc1eb12ede98e43a"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-long-writing-1440.png",
+      "sha256": "ea365bc7069be55438baedd61a9b7f98bcd26e43fbd5b285236b36f9d1a7abe6"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-long-writing-320.png",
+      "sha256": "18e50505e72c49143f70e29bd9928cc53a158a2ee8b71aa78d3c13beadc6a589"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-long-writing-390.png",
+      "sha256": "546ce9dd6f67fcb0b4de4d15b63cfe37d5df811c8793e028a1e347b55666064a"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-long-writing-768.png",
+      "sha256": "8c0ba25f57a5ed1cbe56794bb925f630945f6b5bc88a04dd515a28bcd472cded"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-many-overview-1440.png",
+      "sha256": "4e4ec05a8d75762d83a34a5362e23c6d658766f13063d0f0f6f58d283bfdf0cb"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-many-overview-320.png",
+      "sha256": "903eedd57263a306fe13196de71aa9e540cf1b96b889a9906ece4ba2b805335e"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-many-overview-390.png",
+      "sha256": "4bd4ac530712d4d3280f911025e8bbf83762f44b97590e5cd9c4f599a72a6a3a"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-many-overview-768.png",
+      "sha256": "741e22453d714f72b19baa43c7fe1f84221dbac0373f7e52fb81c12e23cf9642"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-many-thoughts-1440.png",
+      "sha256": "2438fd8ccf9e8074f105a31a680f2422ca50a05469f18d1574e0d6d4787f3f5f"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-many-thoughts-320.png",
+      "sha256": "c33be8f0e48d7e3de88ab53a01567197275ce2dc173e1855ff722d66587a28af"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-many-thoughts-390.png",
+      "sha256": "1ec0c645d0e6b7a1c7911c85c8ad99511017ed8ac30910d29ddaeda98e2bcc61"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-many-thoughts-768.png",
+      "sha256": "68d609da299fe39e8d6aca9ab5564b9b403aba7292d3d4ee989e418929496015"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-measurements.json",
+      "sha256": "78fd1110addc3d4cc4801d211c7ead88db00045545e8e64bb29167b8e08c9e2b"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-overview-1440.png",
+      "sha256": "d66f4e38d7fb00ee69561188a2d847fbc4ab0b2feef1f7f8c9793e7cfc53c05c"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-overview-320.png",
+      "sha256": "9221ca2fba79a22540cfbbf86d96ec1210d0c11d3f2898bb75b69f60c2e463ae"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-overview-390.png",
+      "sha256": "fda7c5f48afcd230292dd2764b06b795e41e9bea02ab31401929e42929822fe0"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-overview-768.png",
+      "sha256": "f5cb49b714e7ab01cc778528632a5e83de3955ee4f32d5bea4bf4c013b14a0f7"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-thoughts-1440.png",
+      "sha256": "3247494d8c84f5d4ba3bb1c9b6c6719efefb3dc8c114bd54e505eaed21576b65"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-thoughts-320.png",
+      "sha256": "7f8df19e0784842ef008918556da3bf318e3dbc7a0b893321375159ae9edc3fc"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-thoughts-390.png",
+      "sha256": "8fc96556989e0e6cce011193680f5bf4a26421afdb84e47cbd7aafa8e6ccb624"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/before-thoughts-768.png",
+      "sha256": "c52cc9aab7c3a27c5f13dd9e0df96673410c02d5e813ab7310b576b712e38102"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/breadcrumb-keyboard-focus-390.png",
+      "sha256": "7eac3d0fcbbc4cc46ffc489b04d5e079140bcc102a1a5ffedae9c593f87135bf"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/contrast-checks.json",
+      "sha256": "eb32f7192f14cbfe6d46d3769bdea132c2f9b8108d53cd2f8356a77f61485f36"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/interaction-checks.json",
+      "sha256": "6591bf5c6aa0bb020918d390734316b8b5d6107a7435532b947bba04044c8eb7"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/original-disclosure-390.png",
+      "sha256": "174cfcc65c3b3eb7fabf2ca0b981e69376cb776274a7156004d8b53ffa10a497"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/preservation-result.json",
+      "sha256": "0d7ae291c6961d6b868e7a9e6a861943f1dabbeabbdbdafebf5389533efd9d88"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/preserved-boundaries.json",
+      "sha256": "c6c7c42601f6686b0593a3339447dba9a837f08f2f5d266943c5c9a2af0d5d71"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/preview-browser-log.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/preview-measurements.json",
+      "sha256": "5d99afe196fe8181676e99b1c6ef23d3bc031f7a7b176ab442f408e6e349a31a"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/preview-overview-1440.png",
+      "sha256": "e75c73870cef438fdfcdfb00b2a3dbf86f4608c6dd4b1ba66f25fa0de1d84544"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/preview-overview-320.png",
+      "sha256": "8f5a63764a81349492e039a887de6e50c9e090af10431722faeab113da7f71a2"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/preview-overview-390.png",
+      "sha256": "92f2798ce102fd01b9689e55ddfff332f40c4142d04eb2819e74541c71ff6f94"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/preview-overview-768.png",
+      "sha256": "6f3a5df17ea012d8a292b565bcca201a751b5f383cdd9ee39e2697202f93e018"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/preview-thoughts-1440.png",
+      "sha256": "d312c5dfd188d46b9634e3106c5b8baa59851d62b3b66b1aeae94feaa494b6dd"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/preview-thoughts-320.png",
+      "sha256": "7afb5d2d849ccf5b094b868465032ad27556fff03d7e4f57ada597f9a3e9d104"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/preview-thoughts-390.png",
+      "sha256": "88da336e33961d174785940868284f15c8f79c48c8c5dbc5ea283f4e8aeab3c3"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/preview-thoughts-768.png",
+      "sha256": "45b4a81b59659990752332a9ed987b8212a2a58b8cefa925a724a42586614d3d"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-final-polish/shared-shell-measurements.json",
+      "sha256": "0eda1b7d2272dcca79e4bd4dcca20ead5aef4c38b0c538333f43d54322b32be2"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/README.md",
+      "sha256": "c9e557385fd61a4dc97adee4d72def8623b7b0568f4fd2aec5b0662784e126dd"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/additional-cases.json",
+      "sha256": "e5e1da68f1144081bfe39141771b172e5005fec9903a7c603668f5a0338520b0"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/after-overview-1440.jpg",
+      "sha256": "0c8086bd7b6265c2b61d2eeda3c43eac429f0976590deb1c105b2d3b167413a8"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/after-overview-320.jpg",
+      "sha256": "570ed183ce9137f0d1231d08892190a4079fc18540863854308f4ecd682c1b40"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/after-overview-390.jpg",
+      "sha256": "6ac9fe3bef42d918e866af88d69068d3b7d89ffc1232bc90306750fb876b1ef8"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/after-overview-768.jpg",
+      "sha256": "b23bd6be77908e1591e4425c2fda7695422ec48bc98ba9c92eb1fa1837f1ca7f"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/after-thoughts-1440.jpg",
+      "sha256": "98d2d7bd5e98381a47505758aefc6672526f244096bb6141fda54b5c24a2211e"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/after-thoughts-320.jpg",
+      "sha256": "1a3bb8cb459d4adbf900031ddda664cca5dc6dd47c953874cc8bc3203c362082"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/after-thoughts-390.jpg",
+      "sha256": "71c5be79a119fcf20a387968cfbf4eeab53273a9a57823c942a257dd254b460f"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/after-thoughts-768.jpg",
+      "sha256": "3ac6578679c7ba1556d8fe513398c31594eccca25fcf5809aad2efbb15f41978"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/before-overview-1440.jpg",
+      "sha256": "903dc845c510d3d95e5f8720176cf31ee6089a157cf85b63b050b5d2191e6143"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/before-overview-320.jpg",
+      "sha256": "421a0feb4390beb854049db96f3e3db6d9a00b07ca2be1fffb0bdd25083eecfc"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/before-overview-390.jpg",
+      "sha256": "a1eefdae35cdfd92eb9841d6ec636f74ea0ff61f6e816549c832524c0f22535f"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/before-overview-768.jpg",
+      "sha256": "70dfc5fef8d7fece2586f208e752854094920f1f2cbd4b16f73195fb9df12d18"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/before-thoughts-1440.jpg",
+      "sha256": "bf1279dd6d87e9cd3e6bfe71f3717d649ad95a56b8b874a4575dbdc338cf8104"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/before-thoughts-320.jpg",
+      "sha256": "9b437f36cecdd7658716fa2e04f0dd5403a658e0c79d05ad97aec04f87d8068a"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/before-thoughts-390.jpg",
+      "sha256": "fd9305c32e8cdb065703e6bec7d951ea6fe07addc29b03ec42bddfa0c51fbe2f"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/before-thoughts-768.jpg",
+      "sha256": "d079ae287e0a37d365961d5559b99334ef600df5b1c8cb9a14ab2582792e9443"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/browser-log.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/history-first-1440.jpg",
+      "sha256": "109543c429cf240fdd9804353d6e79516099aac149bff6b9ccbf03e5fab94b5c"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/history-first-320.jpg",
+      "sha256": "34539bad4d91970a8b5aa3deb6fa79af4b7a5a095a33c8c9d843ce42a0d98512"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/history-first-390.jpg",
+      "sha256": "6e0904f621be0198a4fe07a3e17dca0ac9fb73f22846c1085f4e075706ad08aa"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/history-first-768.jpg",
+      "sha256": "0a111f59860287a6fb0324f45a7a6812c7c7ea91b5798188000a783d657879e1"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/history-older-1440.jpg",
+      "sha256": "73f084655fe5c65ac17d942085e23c18667a9c676011897995eee918032a666b"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/history-older-320.jpg",
+      "sha256": "7443a27a354d2f6dd06735067a45f7c61b527667bfc0e05cc43f4a6d15a46ec9"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/history-older-390.jpg",
+      "sha256": "b940a0f9a9c075c4e798e6076ffa50caef620a06878702389696ae3c3407985b"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/history-older-768.jpg",
+      "sha256": "dba1fed8d537a3eb0977d551a07d2d01bd520ced459640536b82c46b523850fd"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/independent-focus-target-1440.jpg",
+      "sha256": "3f89745f7435943700aa3ba151518b121636af3c5949c4ca68157eba02697760"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/interaction-checks.json",
+      "sha256": "f9519b4b98ddebeb6dc9f07b4f6502db10bb44aad19896795a4f11acd891be16"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/long-refined-original-disclosure-390.jpg",
+      "sha256": "5669d16c15a37fff73987911a8216a2280a45dd53262dbde8b4ad8b96742b15f"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/measurements.json",
+      "sha256": "ed0710e1b44f6382d4bd30a2b2144c79325baf5d995b3d232a3879f146c344cd"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/overview-keyboard-focus-1440.jpg",
+      "sha256": "f58577e2f5ae52fcd9bf716a88b23eb000ab57782d8283b669919427a05e1aef"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/pemikiran-focused-reading-1440.jpg",
+      "sha256": "bac8fdaeffd250a0282284427bc015c53fc02812cba29750e45b4898f10c1022"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/single-overview-1440.jpg",
+      "sha256": "1f9216b993581174fe62fe77db26067442e9dbeaafe0fa2f0c780b9a71580cb6"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/single-overview-320.jpg",
+      "sha256": "df3b25eeeff15f5e3e01aac4f0aa7012ae175c770c391af5b7d9b51fa9fa1e68"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/single-overview-390.jpg",
+      "sha256": "ffad5cb1226d6ca81276daad9c26ef7293df78a77f6e856458ae4bb4494f9056"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/single-overview-768.jpg",
+      "sha256": "5703d6eb9c812745d4902a02a4a4401d2a857d6bcfaffbb1037a03f64867c6a0"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/single-thoughts-1440.jpg",
+      "sha256": "dbef323960a1cf07753e70c39f04a7574073ea33a1fb1e01fc4c019ff27b2884"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/single-thoughts-320.jpg",
+      "sha256": "459aa00137c8be1164b9006428ff9dbc95f35d7a9d9e6c35fda3ce7704876d5d"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/single-thoughts-390.jpg",
+      "sha256": "b3ed8c019eb5da20725b297b99e3a6e0b5d50629d4385fa49ad1d4dd5f93b852"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a-reading-order/single-thoughts-768.jpg",
+      "sha256": "d899699af349a672f092474eefb118295f34043a66981743958ec7e21af843e8"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/1440-archived.jpg",
+      "sha256": "f691b364ac94ed4442446fdc4bda872ea84c04925d5bb4131935ab829dbb8f17"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/1440-available.jpg",
+      "sha256": "d1abda97200d30040a03b7ec7e7029217c0143e5a2aaecfd70c56876a2816d47"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/1440-home.jpg",
+      "sha256": "2422eddcba5f9466d82b16e6a8cbde76e281741fb6a29f6a18b8bf45954b0d96"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/1440-invalid-target.jpg",
+      "sha256": "6b2dcffc6c9fd14df486d985dcf2d6992fcbc2aeb6e8bf2e9f707acec5804d81"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/1440-long-original.jpg",
+      "sha256": "96a76ca8172e140e69b042c2db8e20586fccceca3de3a41ce7c2fda9e12c3916"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/1440-long.jpg",
+      "sha256": "281615a5b63249fc80579887c656cf1bd15adaa6619ff36b8c6c500dcedf7a9a"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/1440-multiple.jpg",
+      "sha256": "0c355685adea0484fd9f9204e7e59dd68a5d4ff1b1735c286a24f04205dd883f"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/1440-original.jpg",
+      "sha256": "b18b1d275ef2dd332810589a6de03791fe82490996db2a85f0ee2aa441ed6d86"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/1440-overview.jpg",
+      "sha256": "06072a1e9ace76374c6431d0f629efe47874b059a10b48d6f8ccaaebed574511"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/1440-pemikiran.jpg",
+      "sha256": "e76d9e48332e63a9dce488e507e723d4e03565c0df586425396b4fc40a91b82f"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/1440-selected.jpg",
+      "sha256": "12c90b8fcc0aeaf19113e2f5b13e546f5442d0b14cfc4085606586b4f6214df9"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/320-archived.jpg",
+      "sha256": "27526a838676a256beb8dd23df51eaf11c598e538d4a2af8a1d10e0f98269ba9"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/320-available.jpg",
+      "sha256": "3a3f576d0580e874e16dfbe3c084f55e1ee2ee443f818e10e5db04327734b20f"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/320-home.jpg",
+      "sha256": "25d2b529664355dd440e60686e544ca5a079af08cc5320a6805c82be4feb8cfe"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/320-long-original.jpg",
+      "sha256": "fa41973f7aa546c9fe828a242474ccf183f8623fbb9e1c37efc9a32c1f5fd422"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/320-long.jpg",
+      "sha256": "804376bace98961a4c6b84aaac0d9b2796317571b00572c38b081959d6dbeb83"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/320-multiple.jpg",
+      "sha256": "e26cb8936e95d3a78d07f1c557b272ebc0107a8ea7f1957dc3f202402e82ac12"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/320-original.jpg",
+      "sha256": "d9d1d1ddad1b2e2a7f6ad8fe5ff040388e464957b3c8a66fafd8958a8c79ed18"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/320-overview.jpg",
+      "sha256": "d21da58b6dcb44139007fd480fc92c22d14c7b9f286b2f842718b42249f16d40"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/320-pemikiran.jpg",
+      "sha256": "f744b6c209aa03d72385e355940ccc139a234dfc0c832f4a16f050218f13c298"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/320-selected.jpg",
+      "sha256": "8fef426efd7ba598b92bf21c44d57caa8c138e64dd6fcd2ff5a74bdbe3d7229e"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/390-archived-save.jpg",
+      "sha256": "8dac2987e150f59839d40bc2685869f63593e63f10d331ae84d3af69916e9ec6"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/390-archived.jpg",
+      "sha256": "abb4c51da2b40853d324362fb33370b3e6752abc542d77d68d0f6d777717b982"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/390-available.jpg",
+      "sha256": "7ffa812520bb600b60cc52d1b10d15b2ed6778cc9440bcb6be6a9884d331a640"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/390-focused-original-disclosure.jpg",
+      "sha256": "282abbebf9529ee7e5b10094e9f43e4ddaae84262101e308e009c9a590d1d0ac"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/390-fresh-session.jpg",
+      "sha256": "701c6c763d78c00b248a490041e6417286e722ac90e2a53569bea0fc1a020055"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/390-home.jpg",
+      "sha256": "53c92f2bbd0b556a8abc7f2bfdead42b40654b18ffab515995b722c92d65ff3c"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/390-long-original.jpg",
+      "sha256": "d4713061997d3212d40adad6d54c260f1d5f641c7bd77285d9fbd3da847efcc2"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/390-long.jpg",
+      "sha256": "db6e14ee12a7ffadf99e9b4b6db4f88f6e8e724d9876fbe4b435a9f317d525f8"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/390-multiple.jpg",
+      "sha256": "74d6de66c90700c4b766d94bb7a38f287287b9f97c65ee49302edb1ad617f7d3"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/390-original.jpg",
+      "sha256": "33ffbfb1e15f3573f76d3eb030bee4b75fe8523f91e737ba75b77813016a3022"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/390-overview.jpg",
+      "sha256": "5b642b9129b2d9e519cb02ea47e6220d5966f3971726464990e47c23f6eb066d"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/390-pemikiran.jpg",
+      "sha256": "faca693aaa68c3e5dd5cb4c6c69a62bfdca76707d20a9ec8f8829f5915eb5dfd"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/390-selected.jpg",
+      "sha256": "941ecace714b09ecc522b2019c184d5a197b3bd42ea04af991dedebc8fa75cce"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/390-stale-save.jpg",
+      "sha256": "fda30498f500b4ea3d4a69e9f5720ba72db248ccdd4d322e406dd7ff6629def0"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/768-archived.jpg",
+      "sha256": "932a3f46987b1bf14ef8a91f538fa2cdef1f5d712d008eddee530aba88553580"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/768-available.jpg",
+      "sha256": "5035dee25863c89cc64465cf2e4c718ce3aba9c9cbd79aac85721b9a393cf410"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/768-home.jpg",
+      "sha256": "43c4304074b0429b115ae8b57ef1c2cffdd09ee8b44787cee0a834e2730b9a91"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/768-long-original.jpg",
+      "sha256": "5bcf6150b7373949a6e34384ea62966ccb27f1fbb244f5c600872282b0d10c8f"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/768-long.jpg",
+      "sha256": "02e8bcce6e7367a2bbbb9f88098c56bfd63543ab248eb21babb5c5eb8abd96b9"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/768-multiple.jpg",
+      "sha256": "577593ab5189a5b0e69fc12b82998bd95467d5a4b81195a3da1036f192f90081"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/768-original.jpg",
+      "sha256": "eecf1c675dc4f2f481fdc5c157d5928a6efb25df268e8efd673375bc9cd691b2"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/768-overview.jpg",
+      "sha256": "163a1367d61c1a7d1bb41aad52aada14d1f4e788dce6a5c2bce8a80ea5579ff4"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/768-pemikiran.jpg",
+      "sha256": "6851bb2a50566788a223dbdf9defaa06150fae6b784f29bb0ecb11bc308dc42d"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/768-selected.jpg",
+      "sha256": "e9d99a9abb564b7e2404f086ba80b537e47870cbd30c4478eb6653c75be232a8"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/README.md",
+      "sha256": "5a6bf82ffa95aabb77c3ec82a7bfc82d168f9d09708fb90e1d3c8a3278e0b8f1"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/browser-warnings-errors.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/desktop-original-preview.jpg",
+      "sha256": "d6b8c13337f8e22fa7c7565ef8ff3fdaab8d25e36c308db89bb036548abccb8a"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/desktop-selected-historical.jpg",
+      "sha256": "86c705792478385e4afe753b857b76d4a58aec32cf49d98ce1899fc1bdebe22e"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/home-final-measurements.json",
+      "sha256": "698dba7f412b6bfff107ece87c3c86acec69f4eb2d39ae28215270516856f68d"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/mobile-selector-320.jpg",
+      "sha256": "e09bf0419c32a2ccb90a549d44f27f9f8e6ed5d8932ab4336ed48da0345af3c0"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/reader-measurements.json",
+      "sha256": "feac4f0579f5aff93f829c99882b84dfa4f5974bd7375bbcb1b0c289a995ea44"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4a/responsive-measurements.json",
+      "sha256": "4c5dc767c677218bd5bfec3dd5abc35f85a1e22da73ca47d708a4eeeb4822723"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/README.md",
+      "sha256": "31757947b366ef747bacae1c8efe9c108bd7eee591f8a2e23b966916d9158109"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/accepted-display-unchanged-desktop.png",
+      "sha256": "eadb7e1bd51388e4cfdb343e8df938c4ec2037b740a65035857070a23c6a62fe"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/accessibility-browser-log.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/accessibility-checks.json",
+      "sha256": "2d6b8ec864f1ec528380f0b37e3e1f68c2355a1239c50f9e7f04c71ea1f4b6a4"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/accessibility-measurements.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-accepted-original-1440.png",
+      "sha256": "bb0a07cdf41c53dd325e4d069a506ed3eb24d10c0a7a8e9aca97e99de02b2656"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-accepted-original-320.png",
+      "sha256": "912434b04ab57b54c55a803ac67f45061e00a80ff7a2d887ca87a3df9b82daf6"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-accepted-original-390.png",
+      "sha256": "db883df4b7910f731a315a6d9ab99c68e4274fd44d9df2900345a6eb337eb15c"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-accepted-original-768.png",
+      "sha256": "55a363a14c2bbe329603aca7214f8b6a88da71a807381ab8a7b8e4b3344f8f15"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-accepted-selected-1440.png",
+      "sha256": "4b608515a6cece3147424bded157c965d99ee1a6298f523782e97cd8f9ed5f96"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-accepted-selected-320.png",
+      "sha256": "544997439e2648091c8dd1b12dd5534e09f01d2aa2e59a601063f5964fb5899b"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-accepted-selected-390.png",
+      "sha256": "07ba888c07696d647974449d5e8bcceebab43e3ce35be51538cf926f8613ec58"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-accepted-selected-768.png",
+      "sha256": "3fa37f782782d1e988229b2f6cb83c8a2e989300c6249f81906060e8652c9eeb"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-archived-1440.png",
+      "sha256": "e09996704a63ca65d232d2d7a69d7977df51722dc80542ff541544eddc67f2c2"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-archived-320.png",
+      "sha256": "aeb4627e0f9c4c8d25b7dbd49f68581ee4f7226bf0b6acb09e573166d043ba5b"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-archived-390.png",
+      "sha256": "022ac8f026e47bf17612c9bb6d9bcc6f23927216efa83b4d6b23821d3c8f377f"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-archived-768.png",
+      "sha256": "f7b2c89c478dcc846a5ae9728b59f7997ae76b080ec9c8623f85be43699a38a0"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-browser-log.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-editing-1440.png",
+      "sha256": "74e98d70829c062a4882181421713caebcd55508221e02cbd99e0d20d54e57f6"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-editing-320.png",
+      "sha256": "a938babc195e808e40cafc15e0eb1b64938b9be227fef1a74c2f998e3f39baac"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-editing-390.png",
+      "sha256": "db6ceae446b25613032a571c9047bca06478ebca0607739c484f05136ad70470"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-editing-768.png",
+      "sha256": "6a31fd6cb4fddd3f9386a4ccadaee9ce4027bb7d7690c012c5e68c8b94166a28"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-hub-1440.png",
+      "sha256": "637df35715f35f5cdb8bec55386b4e3f02739b4e6f690947ff3e98826cb89b91"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-hub-320.png",
+      "sha256": "75d212183b745602b75027b3622bf75b4ed0d3925676ae38f8a15816ac64fad3"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-hub-390.png",
+      "sha256": "8a1de0c774f5e463ded8b2af7f666a3f60b8c7ce29a8b9e21310a7639880f4e0"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-hub-768.png",
+      "sha256": "bfbc00dbb930e76ab25c4c098742a62a42ac52ae9ee499af1424b20ac05e48dd"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-long-1440.png",
+      "sha256": "8b1956a458587160b833b8f1cd1817bf70d01ac5a8d339f2889f5e7e1587cfe3"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-long-320.png",
+      "sha256": "62a2c878a9737d8adcda267dff41b4d56e3bae7e6958b0142e6f54fef5ffeb1a"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-long-390.png",
+      "sha256": "35e4661b96dce2f4fea8616e46467994fa35fdac19dcc3f709ac9ace0f8de745"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-long-768.png",
+      "sha256": "9673bded28bd22475d20bf30790fe14407ddcd3129eec4d66f1d65267217f6f6"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-measurements.json",
+      "sha256": "3ec9cdb751f1b9c86c7dd81e50683d986f46243cb7f9371b35179934af5ea347"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-multiple-1440.png",
+      "sha256": "3a68c20cafe5b84247e66eb23d489d9f903138a94009dc7d8a36bbc8e462ff3a"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-multiple-320.png",
+      "sha256": "2bc1060abc9188ee8f8bb3daebb11f67a43ce663b43bcdfe6354b2d8fe438624"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-multiple-390.png",
+      "sha256": "4f6a3aa8212d88833cd47dc1a8cb9c65a4eacaa5405ebc46200a7b17ceb3c9ac"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-multiple-768.png",
+      "sha256": "0d3ace60dd6f34c9f2528ba3436ab71b79fb66c45ae10e1ae57781d28b087418"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-original-1440.png",
+      "sha256": "762a0b85bb5e38f3563b259d25dac5bf5c886e5e77c9fd1fc771dae599409b92"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-original-320.png",
+      "sha256": "b88a467d19e4e3fdc611d726ffc04f331bece308e83f45cef6526e1f60f1e774"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-original-390.png",
+      "sha256": "5610525307889bbb0d6dfd6bc1471f76b4bad4086887ecbafa58bd9c009ec5e4"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-original-768.png",
+      "sha256": "1caf7ee23d935608d7ab43bda97348348f5664102a74fd1de27a331c380f3d0f"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-pending-1440.png",
+      "sha256": "5fbf3eaa98642d763ceecc295bf726261dce750563d0f5b98f21e632b5945e5d"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-pending-320.png",
+      "sha256": "b7389a17926c15596562612711c7064959704f4f1bfddfba4b4f35961ec498ae"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-pending-390.png",
+      "sha256": "91b3f1e90fdeaa13dcfbfc7544b5de72b9cea768f46064a5a9c1a44af444b587"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-pending-768.png",
+      "sha256": "731da8de8c437fc0e802265a5ea7a8b2dbe136a94c82ece43cf5ac44f96b3329"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-rejected-1440.png",
+      "sha256": "23b9aaab187dd014bdf82f59aa9dfbda6b6c5af17e0c9941c0ac9b37a4be60e8"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-rejected-320.png",
+      "sha256": "735c9079fb6f759cc11a1764e4db50e88addedbea18195845cf7af178d2a59ca"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-rejected-390.png",
+      "sha256": "636c8f05788da7dfcbadcf381c37012daf0bbb04870ffcf693c69923d80275ab"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-rejected-768.png",
+      "sha256": "5ba2e22ec3d61400aed22c3dfa8026d28effda4b24f6dd33d7d2677cc05a7658"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-selected-superseded-1440.png",
+      "sha256": "0c643c9d547c0d3c34a7bfb5ba23b49623049704a626c39274f12aa52f114a59"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-selected-superseded-320.png",
+      "sha256": "3bbacf711080f4dac134f5d92cb9e1f42df27d82b42c00b6fc0466c6f2aa9547"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-selected-superseded-390.png",
+      "sha256": "171d6382b41e08bd86b33a378a5f2c1563dc00774455efe09da681ecd6082060"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-selected-superseded-768.png",
+      "sha256": "df3c2a0fc6642a5fc41ecdee60f7b082415240a6ef4ef4ebdcacdbce9e0f2749"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-suggested-1440-viewport.png",
+      "sha256": "6a1eeef730e4ae45c9417a9f7fc8ca74efed3e45edee2081cb0f9ff905bddc10"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-suggested-1440.png",
+      "sha256": "cdcd20aa697e465f9bc771573e1e09a27cda7351525f43062ab5c57c0cf0dfc5"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-suggested-320-viewport.png",
+      "sha256": "b7a4c6a86d74f7e41c22f56ae1b91bb6b6f69bfc278258c871cbbb880bb2d56a"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-suggested-320.png",
+      "sha256": "d66e29b20fbe1cb41d3a845fce0fcafca8d8a256a25330ce0259b9ca2d816844"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-suggested-390-viewport.png",
+      "sha256": "5c506c6459b0da1abec4b211e7cfdd25044f8ea6aa0187aa55ed3f3de1f3d726"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-suggested-390.png",
+      "sha256": "9fe91458ce178756fbcd0548c69e062edda2b73a7d2e24897388ea271271e545"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-suggested-768-viewport.png",
+      "sha256": "703250de3fb7a9855c8690b4d08e6e414937dcbf396c15b75cf3abac23423a7d"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/after-suggested-768.png",
+      "sha256": "ccfa37fa29f66cff0b56b023c707a0291f88fec96a1863452821fd56c578b00f"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/baseline-status.txt",
+      "sha256": "dae9517a71c76518cab5e6cc72e8c17c0514631a5c7839a6bfb4163ceefdb627"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-accepted-original-1440.png",
+      "sha256": "5123b8dae11e5647110b739fe8bab66e2be160aace667cf173e2598a80e9e9cd"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-accepted-original-320.png",
+      "sha256": "70711a94d332ec2f250d8de17158d677609a17ece48991ce4e09d4ac9177e5ed"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-accepted-original-390.png",
+      "sha256": "7b3c9cc4751e50e23872b7dd93f77183512469dbb937ca9a73e40f175724c803"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-accepted-original-768.png",
+      "sha256": "fce9267cf7c160dcfbdc6dd8a5b22dcd0744e147166661dceb95a7ca347225f6"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-accepted-selected-1440.png",
+      "sha256": "7e5fc6e9ec6bfd9c4e5bb218ce4930de292f5ab60837c4d7ac94045c1f0f75d4"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-accepted-selected-320.png",
+      "sha256": "121903184d1e0eeff8253f7e6f597dafb77f6ad71c4cdad8687befffcf789be3"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-accepted-selected-390.png",
+      "sha256": "6c06dac185fb15de5c47fc208f18526c4ca161986e947c5f11d264d6476c1938"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-accepted-selected-768.png",
+      "sha256": "d3de88ad2bf83f49bfab51db29b8a90bbf150e7cd76c5b9e5e9cfcfce61565c9"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-archived-1440.png",
+      "sha256": "ada7d14c88f13a0bc15438ea233a9b6646a65736285f349b2b255945ac742428"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-archived-320.png",
+      "sha256": "acc0804d4704ec8783d0e909900515dab66c7da7fbd6320d79009984a1df74f1"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-archived-390.png",
+      "sha256": "01929ac112ec50723c07e62cb4d0c3b157c6b4218c5599145374bc5bb88d7548"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-archived-768.png",
+      "sha256": "533f8b414f82d5254f2e8dfcf085dbbb5559d9782bc07cbcad62e782914050e8"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-browser-log.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-editing-1440.png",
+      "sha256": "703211681867daacfbd012d6ff7add0df4f3b4620d4ef6259af327975cbd2988"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-editing-320.png",
+      "sha256": "33a0ffe58cbd66d014e1e7bdd0d624064d8b079c97dd977e12fb943298730eac"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-editing-390.png",
+      "sha256": "ea16d252eb569ab61eefa46d47871625ee919a132940a7edc890e2dc1cb92dc4"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-editing-768.png",
+      "sha256": "b27c1dd552efdc7a8fb49627d33991c6b836d04e59f8bd672e9f68c6fa3543d9"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-hub-1440.png",
+      "sha256": "9f6ab0d93a575673682346a334398e96e0ebc0c651cda0f8a470ab3ceb00c629"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-hub-320.png",
+      "sha256": "c5ab5d39782348ae3b796c68094195be892846c207c6b56557d96ef9bdb0eefb"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-hub-390.png",
+      "sha256": "8301dac479605795e85fecdd83130e84c182f14e0d73abdae379a211fb0cacb0"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-hub-768.png",
+      "sha256": "e83a5a97c21199fd04e869b91059a6c7a5fdcfe6d830d82015ab13add8ecdbeb"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-long-1440.png",
+      "sha256": "f325d5eea269b679719361241c5cb642dbb3eadb9fde6a8d3cd86ba635568f2d"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-long-320.png",
+      "sha256": "bc62369a90fcb918df2a9ab44797171ddcde4c92dd99bb0bc8d06673e047b901"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-long-390.png",
+      "sha256": "b992395701dc097eb504f3a848cd5c1ddfd90ce619b5096493d37631e43d1301"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-long-768.png",
+      "sha256": "5ebb2478e6a400c199235f35ece7c3df0caf8710edf919a546f5240561e9533d"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-measurements.json",
+      "sha256": "36d57646f0c8f80174da5cdf7631b3f89e9e1699ea9ff3b7d4bead6938748c5e"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-multiple-1440.png",
+      "sha256": "9fa2f4deacea921d19848526c3da34b96000abcea8fa617e8e2feac0d6484800"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-multiple-320.png",
+      "sha256": "56b5c4205a2cd4f0deb0aabbe4618eef9fcc0f94199b10b4b0e2c433c96dd728"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-multiple-390.png",
+      "sha256": "0f32995e015c2f97d7129695abc7a7cc326b3fcb4c3a697d2f7f9f6188e82b78"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-multiple-768.png",
+      "sha256": "d193de89f54c2c49520a8488332aa4088988825ad1fdc0a3f68c9c68e891310e"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-original-1440.png",
+      "sha256": "b41dae91c5f5c05e5c60a0be630315e31fda56ce1c9022c81e316b079f5c8b35"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-original-320.png",
+      "sha256": "7a5664533e32d7bd3af01a5ea6907cf628fe05eafc87d45d61b1cdfdfba3dfc0"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-original-390.png",
+      "sha256": "84d479b04b5330a478d6cb757985350f79bf3103eaa34fff41ac6c4df7a5ce73"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-original-768.png",
+      "sha256": "12b197f2bf8c0603988e5d431a0d9904ca384b32e85010d1e67955e03fb934bb"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-pending-1440.png",
+      "sha256": "d59a2c6c6f000ead4b11e0d4f672ccc8c304c542f03e8eb2f7d0a4fc91da493e"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-pending-320.png",
+      "sha256": "372b484952b2a4a85f0ecb61f1f658dede52dc06a7addd7b2df95b4ee20d3255"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-pending-390.png",
+      "sha256": "a3921ebd111ce6858b0aed273799abff2ef36927c2801df39847f46c2f6d6170"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-pending-768.png",
+      "sha256": "b907b8436f20466e4e790b3d8852b8363e2a2c0f945e81d35cf4657b9d573107"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-rejected-1440.png",
+      "sha256": "8b7d13baf60c7428703209f4750612fc78cb9bbf5eae5902d78ce3f0816e8d52"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-rejected-320.png",
+      "sha256": "f7f129425d34f524fd7de4b7572b677dc0e5d6a64cc3bdeda29c069aa1399a00"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-rejected-390.png",
+      "sha256": "c8001bedd73ede1e8020743643bc968e3a8ed76274efd4583c439f718511979f"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-rejected-768.png",
+      "sha256": "13ac91a75d12fa9a430d3d6c2240355b69a16ae20e584bd7c1f12253b01ed4b2"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-selected-superseded-1440.png",
+      "sha256": "ec11cb8692055b4e325be4c10788fa98aba6362a345724a7d099944fe772f955"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-selected-superseded-320.png",
+      "sha256": "dce71412888fd86724132107d833529564297759b03091d5cfae31143fd5e3ac"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-selected-superseded-390.png",
+      "sha256": "9ad007f6e8571691ab511a8a8fb1461529e8e4fa8c3da373ecd2e6b9b4483838"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-selected-superseded-768.png",
+      "sha256": "e13bbee85a1e3018cbcb03dc2fa55f34969547da324dc9d626f2a087c84b9bc9"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-suggested-1440-viewport.png",
+      "sha256": "485d3fcb036ea595c5d71cb3e4ee6bc4e6741f8693f45b962433ae9d4b814c79"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-suggested-1440.png",
+      "sha256": "b2a824458fde09109c1e5dddc7448fa450f037b798be223d8d4c59399b5e1834"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-suggested-320-viewport.png",
+      "sha256": "8f382a75ecc4180131733982f289e5df16f6be9fbd6dff7257eb93728a1c5ba5"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-suggested-320.png",
+      "sha256": "64d7b7ac3e36a2f7c5d5b44bf61fcc50214cab2d8d2d6b0c71c3ea0388ef210a"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-suggested-390-viewport.png",
+      "sha256": "9d542b7bb75eaef84ef2e234166a530bb6c67c95b4d014463575ce77cec19152"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-suggested-390.png",
+      "sha256": "9ec2c20a14f5fa2efd589ec9a2d2e289d311d0cb94861990e8c9c85f3c66d92d"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-suggested-768-viewport.png",
+      "sha256": "e448b02131f4efd96930389b6cb2be75f9e81dea1c7c4d22ddf485c5a561dea6"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/before-suggested-768.png",
+      "sha256": "188499512e29586d63ec43e6a685b0e19302d6ad65254eafd045f6256d3803f8"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/conflict-browser-log.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/conflict-checks.json",
+      "sha256": "93899e3a02e9d9ce26ea614ba41a8b1ab62f96d3683268a62bc5274b875e3eee"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/conflict-measurements.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/development-conflict-advisory.json",
+      "sha256": "0d066c679e9b734cffbf37d30fab96be594963a2b8d5596ca4efdd20aeda5a03"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/display-conflict-visible-desktop.png",
+      "sha256": "f414d4bddff647d54f0c1044a3d82a58c0d02b44e8d61559cd4a36a83383abe0"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/editing-retained-mobile.png",
+      "sha256": "11018ab3071dc01fedc4d579951ffd692341817e3501be3c9109b2418de0673f"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/fault-browser-log.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/fault-measurements.json",
+      "sha256": "d5d71c686fbf8e5ccb2129bf587a712b873a05f3ff1b4dcffd8bbfb51069c6f9"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/fault-uncertain-1440.png",
+      "sha256": "99a021ffdc049bd100cdbf66e1d957a334facc1436b1b3dec136455c43a99fc9"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/fault-uncertain-320.png",
+      "sha256": "4ef23f034f6a987565ff643b425df46c36c435a4d35edfc185a9eb8b6af26e6d"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/fault-uncertain-390.png",
+      "sha256": "e654ae0905b030f77909452901109388d41f37fbb0076d9b78e5922ee2596eff"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/fault-uncertain-768.png",
+      "sha256": "f13c86fa9efeac4c18e8ee5e168ff7ed9fd73b9cfe9950245bfdf47622f108d9"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/interaction-checks.json",
+      "sha256": "1cbdb551f928bdb67705dbae5483a86acff6c83941e213cb528219c81e2e5559"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/interactions-browser-log.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/interactions-measurements.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/no-client-enhancement-mobile.png",
+      "sha256": "e56bc06cb2e1e49ae6778cd025671c73741237a2adfcbedb04eb0786a2bdb28d"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/older-versions-desktop.png",
+      "sha256": "bf1c484571d83176528e54b7daa6c2c43fef110d3b9473c48f26d712641621d8"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/preservation-result.json",
+      "sha256": "303d8a11749ad6e34c61d519af34e1a0385be0643e7c908a84d4d40b30e5b64a"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/preview-not-saved-mobile.png",
+      "sha256": "927a88282ac96e28cfbb101f2e3d3a577ed0b24a994d1262ed9779bd90196f22"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/protected-files.json",
+      "sha256": "204cdd22b157a889296bcc267a826ef1d162b128a457ebb1092381d0d1a850bf"
+    },
+    {
+      "status": "A ",
+      "path": "design/milestone-5.5-phase-4b/version-trail-expanded-desktop.png",
+      "sha256": "b18b3d41a5972bb04c56ef533cb7ad9bd4bbb5d6c5c48d4fe7048802821dfc7d"
+    },
+    {
+      "status": "M ",
+      "path": "docs/15-milestone-5.5-ux-blueprint.md",
+      "sha256": "8bb6c7762663575669967e998b519c21dec4936fe66328a85925a7d0605b211e"
+    },
+    {
+      "status": "M ",
+      "path": "docs/19-milestone-5.5-refine-workspace-notes.md",
+      "sha256": "13c7e422d35a8b62eed22311c6970999ffc90fa57a77538a1bc4f3d58fd74853"
+    },
+    {
+      "status": "A ",
+      "path": "docs/20-milestone-5.5-phase-4a-notes.md",
+      "sha256": "a92f7e7c502a70b816366209e95e99b394a3c4972ee0b4d116c59c61d66fd204"
+    },
+    {
+      "status": "A ",
+      "path": "docs/21-milestone-5.5-phase-4a-visual-polish.md",
+      "sha256": "be2154470b0c57f38736c55000755e2393bb89c8ffbcf271489f0c77ca0ade21"
+    },
+    {
+      "status": "A ",
+      "path": "docs/22-milestone-5.5-phase-4b-notes.md",
+      "sha256": "bcbe36110925550ea55dc67e245946d2fedd954d3b09cda251f8efe840171d7d"
+    },
+    {
+      "status": "M ",
+      "path": "scripts/phase-1-visual-fixture.ts",
+      "sha256": "c5094d888e7da4977b1aa56f0c87f979a0d2bf5d0ef9c7b483f7d4b80563e3b4"
+    },
+    {
+      "status": "A ",
+      "path": "scripts/phase-4a-polish-qa.mjs",
+      "sha256": "a7f7ebc34e4c9c21778f95971ff5352af3e6db75b3e1c9f1bc9105768235ea24"
+    },
+    {
+      "status": "A ",
+      "path": "scripts/phase-4b-qa.mjs",
+      "sha256": "fa04acaf0633e2eed98996606a4cbbc0eab66e69b107eefcd1150e0b9b0e8b7b"
+    },
+    {
+      "status": "M ",
+      "path": "src/app/(private)/companies/[companyId]/page.tsx",
+      "sha256": "48e6a747a805c37f2946f362388a282407bd4a1a02c93d21db9d83a849079f55"
+    },
+    {
+      "status": "M ",
+      "path": "src/app/(private)/companies/[companyId]/refinements/page.tsx",
+      "sha256": "6ab418878c2b58581df58d17f06dca49149aeea98fe73b51b4102959c743fe9c"
+    },
+    {
+      "status": "M ",
+      "path": "src/app/(private)/companies/[companyId]/thoughts/[thoughtId]/refine/page.tsx",
+      "sha256": "ded991f5de29fd074c96fc3bb0c0830101a84eb15bc303dfb4c067472f5095d9"
+    },
+    {
+      "status": "M ",
+      "path": "src/app/(private)/companies/[companyId]/thoughts/page.tsx",
+      "sha256": "d29ff8f4bf1ca202a590b022224dc22f103df8cd0efb8a15e114aa0f38eb10e9"
+    },
+    {
+      "status": "M ",
+      "path": "src/app/(private)/page.tsx",
+      "sha256": "b85deca531f680c28cfca626b44e3fc299669cf19e4c7b93aaa0f3305ff152e9"
+    },
+    {
+      "status": "M ",
+      "path": "src/app/globals.css",
+      "sha256": "1357bb8286767306164eb95ec9140152063faf6ed70f9fee864838ac5bcb2047"
+    },
+    {
+      "status": "A ",
+      "path": "src/app/icon.svg",
+      "sha256": "e7c2d3f82e6994550ff12719a4598ea364132c644d51ba4958385277eefe2eaa"
+    },
+    {
+      "status": "A ",
+      "path": "src/domain/thought/display.ts",
+      "sha256": "3e07a38b986ab8df04de8b349bcc1fd7ceb65bf21aca05868f03a377ce0c1f40"
+    },
+    {
+      "status": "M ",
+      "path": "src/features/companies/company-overview.module.css",
+      "sha256": "17eafd4fd7d2746b0c7e1678c2f5fe643522b3778151cab97962879cb09cb895"
+    },
+    {
+      "status": "M ",
+      "path": "src/features/companies/company-workspace.module.css",
+      "sha256": "fbba4bd7f37f304644b2608d7b4e5f2351c4e28b7fa3cae30cf68697377e5063"
+    },
+    {
+      "status": "M ",
+      "path": "src/features/refinements/presentation.ts",
+      "sha256": "5bd6315018e4351235b3e40129e4d7b5f59f4cda106ba4d4c171e380744028da"
+    },
+    {
+      "status": "M ",
+      "path": "src/features/refinements/refine-comparison.tsx",
+      "sha256": "81b2d9f1dfc5a3b5a877a7bad664fb283d789402b26986ae5b93e5bd4766b234"
+    },
+    {
+      "status": "M ",
+      "path": "src/features/refinements/refine-forms.tsx",
+      "sha256": "1d212699c61f781e480e765baa99c658d407708063351c4b4291fbdba0630651"
+    },
+    {
+      "status": "M ",
+      "path": "src/features/refinements/refine-workspace.module.css",
+      "sha256": "fa77e715fac2b41f8aecb46494b439b1305eca0887e4b7f74e6d2c76ac68e947"
+    },
+    {
+      "status": "A ",
+      "path": "src/features/refinements/version-trail.tsx",
+      "sha256": "ebe8dff181c7b4a986ae359232f679cc4f1fc2aa3fdbd6e3d832ee19b2b0ddc3"
+    },
+    {
+      "status": "A ",
+      "path": "src/features/thoughts/display-actions.ts",
+      "sha256": "501219db3c766e59fee24c809a9c747fcf62cc47fc86e3de0b96f3bc1978b108"
+    },
+    {
+      "status": "A ",
+      "path": "src/features/thoughts/display-selector.tsx",
+      "sha256": "950852554f266a682782fdddc54633fd7ad02a0cd7cb9f86e446c312a8f2ab91"
+    },
+    {
+      "status": "A ",
+      "path": "src/features/thoughts/thought-display.module.css",
+      "sha256": "95151ab68f3e69960f8ba3c8b20183099fac75beecde12c940b68204eeeac8a7"
+    },
+    {
+      "status": "M ",
+      "path": "src/features/thoughts/thought-history.tsx",
+      "sha256": "e40423592655eaecedb343fb7d1830bf28e279b63113b31f39d1b63dec0f6b30"
+    },
+    {
+      "status": "M ",
+      "path": "src/features/thoughts/thought-workspace.module.css",
+      "sha256": "68ca02b1e968468fa696cf56b6b06f8db21fd5b70210142bcc3432cfa92554be"
+    },
+    {
+      "status": "A ",
+      "path": "src/server/db/thought-display.ts",
+      "sha256": "d0f4e9d25be879aa3aedc147beb46cf5be805c8625aa1e48270cc9c4b59084b6"
+    },
+    {
+      "status": "A ",
+      "path": "src/tests/helpers/phase-4b-read-fault.mjs",
+      "sha256": "a8995bb55d184b7b571e5db2850c4f22cda0ee942512a441ea949005d33e9bf2"
+    },
+    {
+      "status": "M ",
+      "path": "src/tests/live/refinements.test.ts",
+      "sha256": "217c948af26104252aed7c89442f3bf53af885544d7779c6b7c2fe7b57dd9a97"
+    },
+    {
+      "status": "A ",
+      "path": "src/tests/live/thought-display.test.ts",
+      "sha256": "f1808d5b46ffc768dae2089c758bd39e8976610d71eb1377b6e9da4b64597112"
+    },
+    {
+      "status": "M ",
+      "path": "src/tests/refine-workspace.test.ts",
+      "sha256": "e7f9e9de38168f05d7e1422eb13d4fbfcbbb1bf8eb73de6b78bd23955e68f311"
+    },
+    {
+      "status": "A ",
+      "path": "src/tests/thought-display.test.ts",
+      "sha256": "fcceddebd024e2a89fc8627ec433469effeb7d0633e736c58a3fb8d93fc0910e"
+    },
+    {
+      "status": "A ",
+      "path": "supabase/migrations/20261009000100_thought_display_preferences.sql",
+      "sha256": "c1df9dcacf3261d2d9170582fd811fe4d4c29f0946de250fd7b97de770aa58a1"
+    },
+    {
+      "status": "A ",
+      "path": "supabase/migrations/20261009000200_display_conflict_response.sql",
+      "sha256": "2b20814bd54d01cfb00a0b3fd372e91638c04f5e41a1eef1d838980dec6cec8a"
+    }
+  ]
+}

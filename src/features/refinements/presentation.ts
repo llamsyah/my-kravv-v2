@@ -1,14 +1,68 @@
 import type { Refinement } from "../../domain/refinement/refinement.ts";
 
-/** Detail-only projection. Never infer the accepted version from a history page. */
+const createdTick = (value: string) =>
+  BigInt(Math.floor(Date.parse(value) / 1000)) * 1000000n +
+  BigInt((value.match(/\.(\d+)/)?.[1] ?? "").padEnd(6, "0").slice(0, 6));
+/** An explicit historical suggestion is reviewable; older suggestions remain history. */
 export function comparisonVersion(
   target: Refinement | null,
   accepted: Refinement | null,
   suggested: Refinement | null,
 ) {
   if (target?.status === "SUGGESTED") return target;
-  return accepted ?? suggested;
+  return suggested &&
+    (!accepted ||
+      createdTick(suggested.created_at) > createdTick(accepted.created_at))
+    ? suggested
+    : accepted;
 }
+
+/** Presentation only: unresolved review takes priority; no lifecycle is inferred. */
+export function refinePresentation({
+  uncertain,
+  pending,
+  target,
+  accepted,
+  suggested,
+  hasHistory,
+}: {
+  uncertain: boolean;
+  pending: boolean;
+  target: Refinement | null;
+  accepted: Refinement | null;
+  suggested: Refinement | null;
+  hasHistory: boolean;
+}) {
+  const candidate = comparisonVersion(target, accepted, suggested);
+  const review =
+    !uncertain && !pending && candidate?.status === "SUGGESTED"
+      ? candidate
+      : null;
+  return {
+    state:
+      uncertain || pending
+        ? "WAITING"
+        : review
+          ? "REVIEW"
+          : hasHistory || accepted
+            ? "RESOLVED"
+            : "ORIGINAL",
+    review,
+    generation:
+      uncertain || pending || review
+        ? null
+        : hasHistory || accepted
+          ? "SECONDARY"
+          : "INITIAL",
+  } as const;
+}
+
+export const reviewLabels: Record<Refinement["status"], string> = {
+  SUGGESTED: "Belum ditinjau",
+  ACCEPTED: "Diterima",
+  REJECTED: "Ditolak",
+  SUPERSEDED: "Diterima sebelumnya",
+};
 
 export function comparisonText(row: Refinement) {
   return row.status === "ACCEPTED" || row.status === "SUPERSEDED"

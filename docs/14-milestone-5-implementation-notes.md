@@ -1,5 +1,7 @@
 # Milestone 5 — AI Refine Slice
 
+> V2 checkpoint, 17 October 2026: temporary browser captures and measurement dumps were retired. Historical results and limitations below remain; see the [curated visual index](../design/README.md) for retained evidence.
+
 Implementation date: 2026-10-08. Milestones 0–4 were committed before this work.
 This milestone adds Refine only; no commit or push is performed.
 

@@ -16,6 +16,7 @@ import {
 } from "@/server/db/thoughts";
 import { Icon } from "@/components/ui/icon";
 import styles from "@/features/thoughts/thought-workspace.module.css";
+import { projectThoughts } from "@/server/db/thought-display";
 
 export default async function CompanyThoughtsPage({
   params,
@@ -47,6 +48,10 @@ export default async function CompanyThoughtsPage({
   const receipt = [...history.thoughts, ...linkedThoughts].find(
     (thought) => thought.id === saved && thought.capture_operation_id,
   );
+  const displayed = await projectThoughts(supabase, user.id, [
+    ...history.thoughts,
+    ...linkedThoughts,
+  ]);
   return (
     <CompanyWorkspaceShell companyId={company.id} context="thoughts">
       {receipt?.capture_operation_id && (
@@ -113,7 +118,8 @@ export default async function CompanyThoughtsPage({
         )}
         <ThoughtHistory
           {...history}
-          linkedThoughts={linkedThoughts}
+          thoughts={displayed.slice(0, history.thoughts.length)}
+          linkedThoughts={displayed.slice(history.thoughts.length)}
           companyId={company.id}
           total={total}
           archived={company.state === "ARCHIVED"}

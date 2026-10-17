@@ -10,10 +10,12 @@ export function RefineComparison({
   original,
   proposal,
   label,
+  originalAnchor = false,
 }: {
   original: ReactNode;
   proposal: ReactNode;
   label: string;
+  originalAnchor?: boolean;
 }) {
   const enhanced = useSyncExternalStore(subscribe, hydrated, server);
   const [view, setView] = useState("proposal");
@@ -46,7 +48,7 @@ export function RefineComparison({
         ))}
       </div>
       <section id={`${id}-original`} className={styles.original}>
-        <h3 id="original-title">Asli</h3>
+        <h3 id={originalAnchor ? "original-title" : undefined}>Asli</h3>
         <div className={styles.reading}>{original}</div>
       </section>
       <section id={`${id}-proposal`} className={styles.proposal}>

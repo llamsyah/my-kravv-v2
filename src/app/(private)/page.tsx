@@ -5,13 +5,16 @@ import { getCompanies } from "@/server/db/companies";
 import { getRecentThoughts } from "@/server/db/thoughts";
 import { ThoughtComposer } from "@/features/thoughts/thought-composer";
 import { ThoughtTime } from "@/features/thoughts/thought-history";
+import { projectThoughts } from "@/server/db/thought-display";
+import displayStyles from "@/features/thoughts/thought-display.module.css";
 
 export default async function HomePage() {
   const { supabase, user } = await getCompanyContext();
-  const [companies, recent] = await Promise.all([
+  const [companies, originals] = await Promise.all([
     getCompanies(supabase, user.id),
     getRecentThoughts(supabase, user.id),
   ]);
+  const recent = await projectThoughts(supabase, user.id, originals);
   const latest = recent[0];
   const continuation = latest
     ? { id: latest.company_id, name: latest.companyName }
@@ -42,14 +45,21 @@ export default async function HomePage() {
           <h2>{continuation?.name ?? "Satu perusahaan. Satu awal."}</h2>
         </div>
         <div className="continuation-copy">
-          <p>
+          <p className={displayStyles.excerpt}>
             {latest
-              ? `${latest.raw_content.slice(0, 150).replace(/\s+/g, " ").trim()}${latest.raw_content.length > 150 ? "…" : ""}`
+              ? `${latest.display.text.slice(0, 150)}${latest.display.text.length > 150 ? "…" : ""}`
               : continuation
                 ? "Buka kembali ruang penelitian yang terakhir diperbarui."
                 : "Beri ruang untuk perusahaan yang ingin kamu pahami."}
           </p>
-          {latest && <ThoughtTime value={latest.created_at} />}
+          {latest && (
+            <>
+              <span className={displayStyles.source}>
+                {latest.display.label}
+              </span>
+              <ThoughtTime value={latest.created_at} />
+            </>
+          )}
         </div>
         <Link
           className="primary-button"
@@ -92,7 +102,6 @@ export default async function HomePage() {
         >
           <div className="section-heading">
             <h2 id="recent-thinking-title">Pemikiran terbaru</h2>
-            <span className="section-label">ASLI</span>
           </div>
           {!recent.length && (
             <p className="company-note empty-inline">
@@ -107,14 +116,17 @@ export default async function HomePage() {
                     {thought.companyName}
                   </Link>
                   <ThoughtTime value={thought.created_at} compact />
+                  <span className={displayStyles.source}>
+                    {thought.display.label}
+                  </span>
                 </div>
                 <Link
                   className="recent-content"
                   href={`/companies/${thought.company_id}/thoughts?focus=${thought.id}#thought-${thought.id}`}
                 >
-                  <span>
-                    {thought.raw_content.slice(0, 200)}
-                    {thought.raw_content.length > 200 ? "…" : ""}
+                  <span className={displayStyles.excerpt}>
+                    {thought.display.text.slice(0, 200)}
+                    {thought.display.text.length > 200 ? "…" : ""}
                   </span>
                   <span className="recent-arrow" aria-hidden="true">
                     ↗

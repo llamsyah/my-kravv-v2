@@ -1,8 +1,10 @@
 import Link from "next/link";
-import { thoughtCursor, type Thought } from "@/domain/thought/thought";
+import { thoughtCursor } from "@/domain/thought/thought";
+import type { DisplayedThought } from "@/domain/thought/display";
 import { DeleteForm } from "@/features/data-control/delete-form";
 import { Icon } from "@/components/ui/icon";
 import styles from "./thought-workspace.module.css";
+import displayStyles from "./thought-display.module.css";
 
 export function ThoughtTime({
   value,
@@ -57,30 +59,41 @@ function ThoughtReading({
     </details>
   );
 }
-/** Phase 3 supplies immutable originals; no acceptance is inferred here. */
+/** Reading uses the owned persisted projection; originals and receipts stay exact. */
 function ThoughtEntry({
   thought,
   companyId,
   expanded,
   selected,
+  position,
 }: {
-  thought: Thought;
+  thought: DisplayedThought;
   companyId: string;
   expanded: boolean;
   selected: boolean;
+  position: number;
 }) {
   return (
     <li
       id={`thought-${thought.id}`}
       className={`${styles.entry} ${selected ? styles.selected : ""}`}
     >
+      <span className={styles.sequence} aria-hidden="true">
+        {String(position).padStart(2, "0")}
+      </span>
       <div className={styles.body}>
-        <ThoughtReading text={thought.raw_content} expanded={expanded} />
+        <ThoughtReading text={thought.display.text} expanded={expanded} />
+        {thought.display.source === "REFINEMENT" && (
+          <details className={displayStyles.original}>
+            <summary>Lihat asli</summary>
+            <div className="thought-original">{thought.raw_content}</div>
+          </details>
+        )}
         <div className={styles.entryFooter}>
           <div className={styles.metadata}>
             <span className={styles.provenance}>
               <Icon name="pencil" size="small" />
-              Asli
+              {thought.display.label}
             </span>
             <ThoughtTime value={thought.created_at} compact />
           </div>
@@ -89,7 +102,10 @@ function ThoughtEntry({
               className={styles.refineLink}
               href={`/companies/${companyId}/thoughts/${thought.id}/refine`}
             >
-              Tinjau di Refine
+              {thought.display.hasApproved ||
+              thought.display.source === "UNAVAILABLE"
+                ? "Ubah versi di Refine"
+                : "Tinjau di Refine"}
               <Icon name="arrowRight" size="small" />
             </Link>
             <DeleteForm
@@ -114,8 +130,8 @@ export function ThoughtHistory({
   total,
   archived = false,
 }: {
-  thoughts: Thought[];
-  linkedThoughts?: Thought[];
+  thoughts: DisplayedThought[];
+  linkedThoughts?: DisplayedThought[];
   companyId: string;
   hasMore: boolean;
   older: boolean;
@@ -125,13 +141,14 @@ export function ThoughtHistory({
   archived?: boolean;
 }) {
   const last = thoughts.at(-1);
-  const entry = (thought: Thought) => (
+  const entry = (thought: DisplayedThought, index: number) => (
     <ThoughtEntry
       key={thought.id}
       thought={thought}
       companyId={companyId}
       expanded={thought.id === saved || thought.id === focus}
       selected={thought.id === saved || thought.id === focus}
+      position={index + 1}
     />
   );
   return (
@@ -141,7 +158,7 @@ export function ThoughtHistory({
           Pemikiran tersimpan{" "}
           <span className={styles.count}>{total.toLocaleString("id-ID")}</span>
         </h2>
-        <span>Terbaru terlebih dahulu · WIB</span>
+        <span>Urutan halaman ini · Terbaru dahulu</span>
       </div>
       {saved &&
         [...thoughts, ...linkedThoughts].some(
@@ -156,7 +173,13 @@ export function ThoughtHistory({
           <h3 id="linked-thought-title" className={styles.linkedTitle}>
             Pemikiran yang dituju <span>Di luar halaman riwayat ini</span>
           </h3>
-          <ol className={styles.list}>{linkedThoughts.map(entry)}</ol>
+          <ol
+            className={styles.list}
+            role="list"
+            aria-labelledby="linked-thought-title"
+          >
+            {linkedThoughts.map(entry)}
+          </ol>
         </section>
       )}
       {!thoughts.length && (
@@ -168,7 +191,13 @@ export function ThoughtHistory({
               : "Belum ada pemikiran. Mulai dari pengamatan atau pertanyaan pertamamu."}
         </p>
       )}
-      <ol className={styles.list}>{thoughts.map(entry)}</ol>
+      <ol
+        className={styles.list}
+        role="list"
+        aria-label="Pemikiran halaman ini, terbaru terlebih dahulu"
+      >
+        {thoughts.map(entry)}
+      </ol>
       <nav
         className={styles.pagination}
         aria-label="Navigasi riwayat pemikiran"

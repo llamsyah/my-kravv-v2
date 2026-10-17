@@ -12,3 +12,36 @@ Thumbs.db
 .vercel/
 supabase/.temp/
 supabase/.branches/
+
+# Disposable browser QA output. Promote only deliberately curated evidence to design/.
+/.qa/
+/test-results/
+/playwright-report/
+/blob-report/
+
+# Retired milestone capture locations; keep reports and source artifacts visible.
+/design/milestone-5.5-phase-*/*.png
+/design/milestone-5.5-phase-*/*.jpg
+/design/milestone-5.5-phase-*/*.jpeg
+/design/milestone-5.5-phase-*/*.webp
+/design/milestone-5.5-phase-*/*.json
+/design/milestone-5.5-phase-4b/baseline-status.txt
+/design/milestone-5.5-refine-workspace/*.png
+/design/milestone-5.5-refine-workspace/*.jpg
+/design/milestone-5.5-refine-workspace/*.json
+/design/milestone-5.5/screenshots/*.json
+
+# Small, explicitly retained V2 visual evidence set (see design/README.md).
+!/design/milestone-5.5-phase-2/companies-1440.jpg
+!/design/milestone-5.5-phase-2/companies-390.jpg
+!/design/milestone-5.5-phase-4a/1440-home.jpg
+!/design/milestone-5.5-phase-4a/390-home.jpg
+!/design/milestone-5.5-phase-4a-final-polish/after-overview-1440.png
+!/design/milestone-5.5-phase-4a-final-polish/after-overview-390.png
+!/design/milestone-5.5-phase-4a-final-polish/after-thoughts-1440.png
+!/design/milestone-5.5-phase-4a-final-polish/after-thoughts-390.png
+!/design/milestone-5.5-phase-4b/after-suggested-1440-viewport.png
+!/design/milestone-5.5-phase-4b/after-suggested-390.png
+!/design/milestone-5.5-phase-4b/after-selected-superseded-1440.png
+!/design/milestone-5.5-phase-4b/version-trail-expanded-desktop.png
+!/design/milestone-5.5-phase-4b/editing-retained-mobile.png

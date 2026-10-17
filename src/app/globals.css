@@ -1045,6 +1045,9 @@ a {
   .atmospheric-hero::before {
     inset-inline: -20px;
   }
+  .home-hero::before {
+    inset-inline: calc(-1 * var(--space-4));
+  }
   .home-hero h1 {
     margin-bottom: 16px;
   }
@@ -1282,6 +1285,9 @@ a {
 @media (min-width: 701px) and (max-width: 850px) {
   .atmospheric-hero::before {
     inset-inline: -28px;
+  }
+  .home-hero::before {
+    inset-inline: calc(-1 * var(--space-6));
   }
 }
 @media (min-width: 701px) and (max-width: 1100px) {

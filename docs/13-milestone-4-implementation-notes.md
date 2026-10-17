@@ -1,5 +1,7 @@
 # Milestone 4 — AI infrastructure
 
+> V2 checkpoint, 17 October 2026: temporary browser captures and measurement dumps were retired. Historical results and limitations below remain; see the [curated visual index](../design/README.md) for retained evidence.
+
 The user confirmed successful application of the new migration to the configured
 development Supabase project. The server infrastructure is implemented and final
 repository validation passed. The single explicitly authorized real Groq smoke

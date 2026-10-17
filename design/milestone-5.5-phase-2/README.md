@@ -1,41 +1,20 @@
-# Phase 2 — actual navigation and Company shell QA
+# Phase 2 — navigation and Company workspace
 
-Unretouched captures of the running Next.js application, using fictional records
-in a marked disposable development account. Its proposal used an injected mock;
-no external AI provider was called. All fixture records and credentials were
-removed after verification. Earlier prototype/Phase 1 artifacts were preserved.
+## V2 retention checkpoint — 17 October 2026
 
-- [Updated Company shell, desktop](updated-workspace-1440.jpg)
-- [Long Company identity, desktop](workspace-1440.jpg) / [mobile](workspace-390.jpg)
-- [Missing optional metadata, mobile](missing-metadata-390.jpg)
-- [Account disclosure, desktop](account-desktop-open.jpg) / [narrow mobile](account-mobile-open.jpg)
-- [Library, tablet](companies-768.jpg)
-- [Edit, narrow mobile](edit-320.jpg)
-- [Refine detail, desktop](refine-1440.jpg) / [mobile](refine-390.jpg)
-- [Archived Company](archived-390.jpg) / [archived Refine](archived-refine-390.jpg)
-- [Management disclosure](management-mobile-open.jpg)
-- [Deleted Company unavailable](deleted-company-unavailable-390.jpg)
-- [Final layout metrics](render-metrics.json) / [runtime summary](runtime-summary.json)
-- [Captured image dimensions](capture-manifest.json)
+This was a temporary browser QA capture directory, using fictional owned records and injected mock providers. Its full screenshot matrix, browser logs and measurement dumps have been retired from the working tree. The original test results, implementation decisions, ownership/draft/pagination safeguards and known limitations remain in the [implementation notes](../../docs/17-milestone-5.5-phase-2-notes.md). Historical capture counts in those notes do not describe the retained inventory.
 
-Seven existing views at 1440/768/390/320 CSS px plus two mutation cases provide
-30 final measured layouts: one h1, no page-wide document overflow, no unfinished
-section links, local fonts loaded and 44px account/management triggers. Keyboard,
-draft recovery/cleanup, capture receipt, real edit/archive/logout and disposable
-Company deletion were exercised. No provider generation button was submitted.
+Selected historical application evidence remains:
 
-The in-app capture surface scales/trims output; the CSS viewport is not the file's
-pixel size. CSS zoom 1, visual viewport scale 1 and reported DPR about 0.8 do not
-prove native 100% zoom. Native zoom, real mobile keyboard/safe-area behavior,
-screen-reader interaction and forced font-fallback testing remain manual. Fixed
-navigation in full-page exports can appear within the exported sheet. No images
-or application layouts were edited for screenshot export.
+- [companies-1440.jpg](companies-1440.jpg)
+- [companies-390.jpg](companies-390.jpg)
 
-To reproduce the disposable data, use the existing
-`scripts/phase-1-visual-fixture.ts` setup/populate/cleanup modes with the explicit
-development guard and server-side environment, as documented in the Phase 1 report.
-The helper retains its original Phase 1 purpose label; this run created a new
-account. Do not reuse actual user records or invoke configured AI providers.
+See the [curated visual index and retention policy](../README.md) for original references, static design prototypes and the complete 13-image application selection. Phase 4B visual approval remains pending; this cleanup is not design approval.
 
-See [Phase 2 report](../../docs/17-milestone-5.5-phase-2-notes.md) for architecture,
-preserved behavior, quality gates and the exact Phase 3 boundary.
+## Reproduction and limitations
+
+Browser QA still uses the guarded disposable helper in `scripts/phase-1-visual-fixture.ts`, with `MY_KRAVV_LIVE_TESTS=development`. Use only purpose-marked development records, injected mock providers and explicit fixture cleanup. Capture/generation/review tests are preserved in source; no real-provider request is authorized by these historical instructions. Do not use production or real user records. Credentials stay in ignored local files.
+
+Write new outputs to `.qa/<task>/`, not this reference directory. The Phase 4A final-polish and Phase 4B runners have been updated accordingly. See the implementation report for the original fixture modes, covered states and historical validation results; regenerating a before-state requires its matching code and must not reset someone's uncommitted work.
+
+Responsive captures do not establish native browser zoom, physical keyboard/safe-area behavior or screen-reader support. Full-page exports may position fixed navigation at the initial viewport band. These limits remain manual review items. No app styling or screenshot retouching was introduced by this cleanup.

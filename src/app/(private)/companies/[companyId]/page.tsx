@@ -18,6 +18,7 @@ import {
 import { Icon } from "@/components/ui/icon";
 import { StatusBadge } from "@/components/ui/status-badge";
 import styles from "@/features/companies/company-overview.module.css";
+import { projectThoughts } from "@/server/db/thought-display";
 
 export default async function CompanyPage({
   params,
@@ -31,13 +32,14 @@ export default async function CompanyPage({
     await getCompanyWorkspaceContext(companyId);
   const destination = legacyThoughtDestination(company.id, await searchParams);
   if (destination) redirect(destination);
-  const [thoughts, total] = await Promise.all([
+  const [originals, total] = await Promise.all([
     getCompanyOverviewThoughts(supabase, user.id, company.id),
     getCompanyThoughtCount(supabase, user.id, company.id),
   ]);
+  const thoughts = await projectThoughts(supabase, user.id, originals);
   const [latest, ...earlier] = thoughts;
   const path = `/companies/${company.id}/thoughts`;
-  const hasContext = !!company.short_note || total > 0;
+  const hasContext = !!company.short_note;
   const read = (id: string) => `${path}?focus=${id}#thought-${id}`;
   return (
     <CompanyWorkspaceShell companyId={company.id} context="workspace">
@@ -52,14 +54,27 @@ export default async function CompanyPage({
         <div className={styles.primary}>
           <section aria-labelledby="latest-thought-title">
             <div className={styles.heading}>
+              {latest && (
+                <span className={styles.sequence} aria-hidden="true">
+                  01
+                </span>
+              )}
               <h2 id="latest-thought-title">Pemikiran terakhir</h2>
               {latest && <ThoughtTime value={latest.created_at} compact />}
             </div>
             {latest ? (
               <article className={styles.latest} id={`thought-${latest.id}`}>
-                <StatusBadge tone="neutral">Asli</StatusBadge>
+                <StatusBadge
+                  tone={
+                    latest.display.source === "REFINEMENT"
+                      ? "accent"
+                      : "neutral"
+                  }
+                >
+                  {latest.display.label}
+                </StatusBadge>
                 <div className={`${styles.original} ${styles.latestExcerpt}`}>
-                  {latest.raw_content}
+                  {latest.display.text}
                 </div>
                 <Link className="secondary-button" href={read(latest.id)}>
                   <Icon name="read" />
@@ -111,15 +126,30 @@ export default async function CompanyPage({
               <div className={styles.heading}>
                 <h2 id="earlier-title">Sebelumnya di ruang ini</h2>
               </div>
-              <ol className={styles.recent}>
-                {earlier.map((thought) => (
+              <ol
+                className={styles.recent}
+                start={2}
+                role="list"
+                aria-label="Pemikiran terbaru berikutnya"
+              >
+                {earlier.map((thought, index) => (
                   <li key={thought.id} id={`thought-${thought.id}`}>
                     <Link href={read(thought.id)}>
-                      <ThoughtTime value={thought.created_at} compact />
-                      <span
-                        className={`${styles.original} ${styles.recentExcerpt}`}
-                      >
-                        {thought.raw_content}
+                      <span className={styles.sequence} aria-hidden="true">
+                        {String(index + 2).padStart(2, "0")}
+                      </span>
+                      <span className={styles.recentBody}>
+                        <span
+                          className={`${styles.original} ${styles.recentExcerpt}`}
+                        >
+                          {thought.display.text}
+                        </span>
+                        <span className={styles.recentMetadata}>
+                          <StatusBadge tone="neutral">
+                            {thought.display.label}
+                          </StatusBadge>
+                          <ThoughtTime value={thought.created_at} compact />
+                        </span>
                       </span>
                       <Icon name="arrowRight" />
                     </Link>
@@ -143,13 +173,6 @@ export default async function CompanyPage({
                   Ubah konteks
                 </Link>
               </section>
-            )}
-            {total > 0 && (
-              <p className={styles.count}>
-                <Icon name="read" />
-                <strong>{total.toLocaleString("id-ID")} pemikiran</strong>{" "}
-                tersimpan
-              </p>
             )}
           </aside>
         )}
