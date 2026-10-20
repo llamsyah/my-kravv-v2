@@ -1,11 +1,11 @@
 # MY KRAVV
 
-V3 preparation is active on `v3`. Start with the [V3 documentation authority](docs/v3/00-V3-INDEX.md) and [V3 design workspace](design/v3/README.md). The running application remains the V2 checkpoint at Milestone 5.5 Phase 4B; final V2 Phase 4B visual approval is still pending. This reorganization implements no V3 features.
+V3 preparation is active on `v3`. Start with the [V3 documentation authority](docs/v3/00-V3-INDEX.md), the [Draft Product Foundation](docs/v3/01-PRODUCT-FOUNDATION.md) and [V3 design workspace](design/v3/README.md). The running application remains the V2 checkpoint at Milestone 5.5 Phase 4B; final V2 Phase 4B visual approval is still pending. Documentation consolidation implements no V3 features.
 
 ## Where to start
 
 - [Documentation gateway](docs/README.md): active V3 documents and historical V2 knowledge.
-- [V3 approved reference index](design/v3/references/README.md): Hybrid C direction; Home image is `AWAITING_OWNER_ASSET`.
+- [V3 visual reference index](design/v3/references/README.md): all 14 canonical PNGs are present, with known exceptions; conceptual images do not prove implementation or accept the new Draft specifications.
 - [V3 explorations](design/v3/explorations/README.md): unapproved concepts only.
 - [V2 documentation archive](docs/archive-v2/README.md) and [V2 visual archive](design/archive-v2/README.md): historical evidence, without authority over approved V3 decisions.
 - [V2 checkpoint](CHECKPOINT-V2.md): dated implementation boundary and historical validation.

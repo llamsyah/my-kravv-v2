@@ -6,6 +6,8 @@ Date: **17 October 2026 (Asia/Jakarta)**
 
 Authority: [V3 documentation index](00-V3-INDEX.md). The owner accepted the overall audit direction on 17 October 2026 and requested the priority and Design Discovery clarifications below. This is directional acceptance, not approval of final specifications or implementation.
 
+**Historical scope note — 20 October 2026:** this audit retains its dated findings and earlier open questions. Current product intentions and the nine new Draft specifications are indexed in the [V3 authority](00-V3-INDEX.md); [Design Discovery](DESIGN-DISCOVERY.md) records the 14 now-present canonical images and exceptions. Earlier statements below that discovery/specifications do not exist or that no visual direction is selected describe the original audit boundary, not current document availability. This annotation changes no V2 implementation finding or document acceptance.
+
 ## 1. Verified Git baseline
 
 | Check                         | Observed result                                                                                                                                                                                           |
