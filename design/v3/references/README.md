@@ -2,9 +2,9 @@
 
 Status: **Draft — awaiting owner review** for this metadata consolidation. The files are owner-selected conceptual references with known imperfections; presence does not accept new product specifications or prove implementation.
 
-File integrity/metadata reverified: **21 October 2026 (Asia/Jakarta)**, branch `v3`, baseline `fd04ff5`. The PNGs were introduced at `5e85068` — `add visual reference v3`; their prior visual inspection is recorded in Design Discovery. Revision 2 changes no image bytes.
+File integrity/metadata reverified: **21 October 2026 (Asia/Jakarta)**, branch `v3`, baseline `5518624`. The PNGs were introduced at `5e85068` — `add visual reference v3`; their prior visual inspection is recorded in Design Discovery. Revision 3 changes no image bytes and performs no new visual interpretation of the PNGs.
 
-Authority: [V3 documentation index](../../../docs/v3/00-V3-INDEX.md), the owner's Documentation Revision 2 decisions P1–P8, and the [visual decision ledger](../../../docs/v3/DESIGN-DISCOVERY.md). Settled product contracts outrank accidental image details; all specifications remain Draft.
+Authority: [V3 documentation index](../../../docs/v3/00-V3-INDEX.md), the owner's preserved P1–P8 and Revision 3 C1/T1–T7 decisions, and the [visual decision ledger](../../../docs/v3/DESIGN-DISCOVERY.md). Settled contracts outrank accidental image details; all specifications remain Draft.
 
 ## Availability and provenance
 
@@ -68,7 +68,7 @@ Revision 2 fixes these interaction interpretations without replacing any PNG:
 - P7: Title/URL are the only required Reference fields. Writing reuse inserts them plus only selected notes, keeps the catalog source and does not fetch/verify its URL.
 - P8: replace the illustrated numerical slider with optional Rendah/Sedang/Tinggi/Not provided and optional reflection. A committed subjective Context Snapshot is immutable/skippable, not objective truth or an emotional-quality gate. Later perspectives require deliberate later commits, not retrospective edits.
 
-The [settled contract register](../../../docs/v3/01-PRODUCT-FOUNDATION.md#settled-owner-decisions) and separate Company policy C1 govern details. The dimensions/byte sizes/SHA-256 values above are measured metadata and must continue matching these exact files; original external filenames/approval timestamps remain unknown rather than fabricated.
+The [settled contract register](../../../docs/v3/01-PRODUCT-FOUNDATION.md#settled-owner-decisions), [empty-only Company deletion C1](../../../docs/v3/01-PRODUCT-FOUNDATION.md#settled-company-policy--c1) and [T1–T7](../../../docs/v3/06-TECHNICAL-ARCHITECTURE.md#settled-technical-directions) govern details. Company archive/cascading deletion is outside V3 scope; committed diff is desktop side-by-side and narrow unified. Markdown/save/review/budget mechanisms are specified in the Draft architecture, not inferred from images. Dimensions/byte sizes/SHA-256 above must continue matching the exact files; original external filenames/approval timestamps remain unknown.
 
 All images are light desktop concepts. Dark mode, narrow layouts, accessibility and failure/recovery states need later validation. Unapproved future alternatives belong in [explorations](../explorations/README.md); disposable QA goes to `.qa/<task>/`.
 

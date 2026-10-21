@@ -4,7 +4,7 @@ Status: **Draft — awaiting owner review**
 
 Date: **21 October 2026 (Asia/Jakarta)**
 
-Authority: [V3 documentation authority](00-V3-INDEX.md). Revision 2 incorporates the owner's explicit decisions P1–P8 dated 21 October 2026. Those product requirements are settled; this specification remains Draft and does not authorize implementation.
+Authority: [V3 documentation authority](00-V3-INDEX.md). Revision 3 preserves the owner's P1–P8 decisions and integrates settled C1 and primary T1–T7 directions. These requirements are authoritative; this specification remains Draft and does not authorize implementation.
 
 ## Purpose and product philosophy
 
@@ -38,7 +38,7 @@ Initial MVP excludes custom template management, a standalone general AI chat pr
 
 Existing V2 Refine is historical technical evidence. The new AI Review priorities do not require carrying Refine into primary V3 Company navigation. No V2 roadmap, data model, visual style or earlier provider authorization is inherited as a V3 implementation decision.
 
-No archive/trash system is required for Penampungan, Explore notes, writing drafts, Reference records or committed Thoughts. Company-level destructive policy is a separate open concern below; this exclusion does not remove existing V2 company functionality.
+No archive/trash system is required for Penampungan, Explore notes, writing drafts, Reference records or committed Thoughts. Company archive functionality is outside the initial V3 MVP. The separate settled C1 policy below permits permanent Company deletion only when empty; V2 functionality remains historical evidence and is not changed by this documentation task.
 
 ## Success criteria for owner review
 
@@ -46,7 +46,7 @@ The proposed MVP succeeds when the owner can save and resume private work, disti
 
 ## Settled owner decisions
 
-**P1–P8 are resolved by the owner and supersede the first draft's open alternatives.** Their implementation representations remain subject to [T1–T7](06-TECHNICAL-ARCHITECTURE.md#open-decisions--technical-questions); technical evaluation must honor these contracts rather than reopen them.
+**P1–P8 are resolved by the owner and supersede the first draft's open alternatives.** The [settled technical directions and proposed mechanisms](06-TECHNICAL-ARCHITECTURE.md#settled-technical-directions) implement these contracts without reopening them. The P1–P8 register below is preserved in meaning from Revision 2.
 
 | ID                                 | Settled product contract                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -61,8 +61,10 @@ The proposed MVP succeeds when the owner can save and resume private work, disti
 
 P4/P8 do not require automatic commits to revise metadata. Committed content and its recorded personal context stay consistent until an explicitly confirmed whole-Thought deletion; noncommitted materials need only sufficient technical state for safe saves, moves, authorization and retry recovery.
 
-## Narrow open owner policy — Company management
+## Settled Company policy — C1
 
-**C1 — Company archive/deletion policy:** should destructive Company actions be omitted initially, restricted while related content exists, or permitted with an explicit owner-approved child-record/deletion policy? The choice affects committed Thoughts, notes, drafts, references and candidate cleanup. V2's archive and cascade deletion are evidence, not V3 approval. Do not expose a V3 destructive Company action until this policy is approved; creating, listing, finding, editing and switching companies can proceed independently under separately approved scope.
+**C1 — Company deletion only when empty (owner-selected Option B).** Refuse permanent deletion if any associated user content remains: Thoughts or versions, writing drafts including staged membership, Explore notes, References, Company-associated Penampungan, or other approved owner-content records whose retention makes deletion unsafe. A Company cannot be made empty by automatically deleting, detaching or reassigning child research. Explain the refusal and offer return to the relevant workspace.
 
-No P1–P8 question is reopened by C1. The [workflow draft](02-WORKFLOWS-AND-INFORMATION-ARCHITECTURE.md#minimal-company-management-journeys) proposes the minimal nondestructive Company journeys. [Technical evaluation](06-TECHNICAL-ARCHITECTURE.md#open-decisions--technical-questions) and the [implementation sequence](08-IMPLEMENTATION-PLAN.md) remain planning for review, not permission to start.
+For a genuinely empty Company, require an explicit destructive action and appropriate confirmation, then recheck verified ownership and emptiness on the server at deletion time. The transaction must exclude concurrent content creation and delete only that owned empty Company. A failed or uncertain response must remain honestly recoverable. Frontend counts alone are insufficient. [Architecture](06-TECHNICAL-ARCHITECTURE.md#empty-company-deletion-and-locking) specifies the proposed RPC, restrictive foreign keys and permissions, including closure of V2 cascade bypasses.
+
+Company archive is outside the initial V3 MVP. C1 does not change P4: the owner can separately confirm deletion of an entire individual Thought and all its versions/Context Snapshots. No P1–P8 choice is reopened. The [minimal Company journeys](02-WORKFLOWS-AND-INFORMATION-ARCHITECTURE.md#minimal-company-management-journeys) and [implementation sequence](08-IMPLEMENTATION-PLAN.md) remain Draft, with implementation requiring separate authorization.

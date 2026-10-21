@@ -4,7 +4,7 @@ Status: **Draft — awaiting owner review**
 
 Date: **21 October 2026 (Asia/Jakarta)**
 
-Authority: [V3 index](00-V3-INDEX.md). Revision 2 incorporates the owner's settled P1–P8 decisions. The 14 canonical PNGs introduced at `5e85068` were visually inspected during the first consolidation; their bytes and inventory metadata are reverified at `fd04ff5` without image changes. No additional approval is inferred from asset presence, an earlier conversation, or this draft's creation.
+Authority: [V3 index](00-V3-INDEX.md). Revision 3 preserves P1–P8 and incorporates settled C1/primary T1–T7 for consistency. The 14 canonical PNGs introduced at `5e85068` were visually inspected during the first consolidation; their bytes/inventory metadata are reverified at `5518624` without image changes or new visual interpretation. No additional approval is inferred from asset presence, an earlier conversation, or this draft's creation.
 
 ## Accepted direction and evidence limits
 
@@ -12,7 +12,7 @@ Authority: [V3 index](00-V3-INDEX.md). Revision 2 incorporates the owner's settl
 
 **Observed visual evidence:** the references consistently favor pale surfaces, green primary actions, rounded groups, an identifiable writing canvas and contextual tools. These observations inform [UX/design-system proposals](05-UX-AND-DESIGN-SYSTEM.md); they do not select exact font families, pixel spacing, tokens, framework/editor packages or production behavior. All 14 supplied images depict light desktop concepts, not validated dark/mobile/accessibility states.
 
-**Verified availability:** all 14 canonical PNGs exist locally and are tracked. The [asset inventory](../../design/v3/references/README.md) records dimensions, byte sizes, hashes and canonical links, reverified against the files for Revision 2. `01-home.png` is present; there is no missing Home asset or alternate destination to populate. No new image, conversion or compression is part of this revision.
+**Verified availability:** all 14 canonical PNGs exist locally and are tracked. The [asset inventory](../../design/v3/references/README.md) records dimensions, byte sizes, hashes and canonical links, reverified against the files for Revision 3. `01-home.png` is present; there is no missing Home asset or alternate destination to populate. No new image, conversion or compression is part of this revision.
 
 ## Reference interpretation ledger
 
@@ -53,6 +53,6 @@ The V2 visual family remains historical material in [design/archive-v2](../../de
 
 ## Remaining design questions
 
-[P1–P8 are settled](01-PRODUCT-FOUNDATION.md#settled-owner-decisions): no-company capture with reliable moves, live candidates/withdrawal, explicit Thought identity and optional rationale, confirmed content/whole-Thought deletion, guidance-only switching, bounded review follow-ups, Title/URL-only references and optional qualitative immutable Context Snapshot. The separate [C1 Company destructive policy](01-PRODUCT-FOUNDATION.md#narrow-open-owner-policy--company-management) does not reopen these decisions. Design review still needs dark-mode surfaces and states, narrow-screen panel behavior, empty/failed/conflicted saves, staleness feedback and accessible committed-version diff presentation. No exact font/token system is accepted from the images alone.
+[P1–P8 are settled](01-PRODUCT-FOUNDATION.md#settled-owner-decisions): no-company capture with reliable moves, live candidates/withdrawal, explicit Thought identity and optional rationale, confirmed content/whole-Thought deletion, guidance-only switching, bounded review follow-ups, Title/URL-only references and optional qualitative immutable Context Snapshot. Settled [C1](01-PRODUCT-FOUNDATION.md#settled-company-policy--c1) permits Company deletion only when empty, without child cascades/detachment/reassignment; Company archive is outside MVP. [T1–T7](06-TECHNICAL-ARCHITECTURE.md#settled-technical-directions) fix the primary technical directions, including one Markdown document, server autosave and desktop side-by-side/narrow unified committed diff. Engineering/design review still validates dark-mode surfaces, panel behavior, save/conflict/staleness states and diff accessibility. Minor CSS values need measurement, not new product decisions. No exact font/token system is accepted from the images alone.
 
-These questions feed the [UX draft](05-UX-AND-DESIGN-SYSTEM.md), [technical questions](06-TECHNICAL-ARCHITECTURE.md#open-decisions--technical-questions) and [validation cases](07-VALIDATION-AND-RECOVERY.md). The discovery ledger's existence does not accept those drafts or authorize implementation.
+These recommendations feed the [UX draft](05-UX-AND-DESIGN-SYSTEM.md), [technical blueprint](06-TECHNICAL-ARCHITECTURE.md) and [validation cases](07-VALIDATION-AND-RECOVERY.md). Narrow inbox/move/Thought-title interactions remain labeled [recommendations](02-WORKFLOWS-AND-INFORMATION-ARCHITECTURE.md#revision-3-narrow-ux-recommendations). The discovery ledger's existence does not accept those drafts or authorize implementation.

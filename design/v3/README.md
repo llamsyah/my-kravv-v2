@@ -1,6 +1,6 @@
 # V3 design workspace
 
-Status: **Draft — awaiting owner review**. Hybrid C and settled P1–P8 constrain the revised specifications; the documents themselves are not Accepted. Updated: **21 October 2026 (Asia/Jakarta)** — Revision 2.
+Status: **Draft — awaiting owner review**. Hybrid C and settled P1–P8/C1/T1–T7 constrain the revised specifications; the documents themselves are not Accepted. Updated: **21 October 2026 (Asia/Jakarta)** — Revision 3.
 
 Start with the [V3 authority index](../../docs/v3/00-V3-INDEX.md), [Design Discovery ledger](../../docs/v3/DESIGN-DISCOVERY.md) and [UX/design-system draft](../../docs/v3/05-UX-AND-DESIGN-SYSTEM.md). These documents consolidate intentions and proposals, not implementation authorization.
 
@@ -17,7 +17,7 @@ The owner selected **Hybrid C**: calm, premium modern SaaS; light-first with del
 
 ## Assets and approval
 
-- [References](references/README.md): **all 14 canonical PNGs are tracked and locally present**, including `01-home.png`. Introduced at `5e85068` and visually inspected during consolidation; dimensions, sizes and hashes are reverified for Revision 2 at `fd04ff5`. Availability does not imply implementation or blanket feature approval; no Home asset is missing.
+- [References](references/README.md): **all 14 canonical PNGs are tracked and locally present**, including `01-home.png`. Introduced at `5e85068` and visually inspected during consolidation; dimensions, sizes and hashes are reverified for Revision 3 at `5518624`. Availability does not imply implementation or blanket feature approval; no Home asset is missing.
 - [Explorations](explorations/README.md): unapproved alternatives or unresolved details; record provenance and review status.
 - [V2 visuals](../archive-v2/README.md): historical evidence; no inherited V3 approval.
 
@@ -25,6 +25,6 @@ The [per-image ledger](../../docs/v3/DESIGN-DISCOVERY.md#reference-interpretatio
 
 Record source filenames, approval scope/dates and replacement context only when known. Presence does not supply missing external provenance. Future deliberate replacements need explicit review; unapproved concepts stay in explorations. V2 archive material remains historical evidence, unchanged by this task.
 
-The three local design README corrections present at Revision 2 preflight are preserved and synchronized rather than assumed to have been pushed with the first specifications. [P1–P8](../../docs/v3/01-PRODUCT-FOUNDATION.md#settled-owner-decisions) are settled; [C1](../../docs/v3/01-PRODUCT-FOUNDATION.md#narrow-open-owner-policy--company-management) is the separate Company archive/deletion policy. Minimal Company create/find/edit/switch journeys are documented without inheriting V2 cascades.
+Revision 3 begins from the clean committed Revision 2 baseline, including the earlier README corrections. [P1–P8](../../docs/v3/01-PRODUCT-FOUNDATION.md#settled-owner-decisions) remain intact. Settled [C1](../../docs/v3/01-PRODUCT-FOUNDATION.md#settled-company-policy--c1) permits Company deletion only when empty, without cascading/detaching research; Company archive is outside MVP. [T1–T7](../../docs/v3/06-TECHNICAL-ARCHITECTURE.md#settled-technical-directions) select Markdown, server autosave, staging on drafts, numeric revisions, bounded persistent reviews, isolated V3 development/server budget/one active model and desktop side-by-side/narrow unified diff. Exact design constants and minor interaction proposals remain recommendations to validate, not new product-choice blockers.
 
 **No PNG was compressed, converted, renamed, replaced, deleted or regenerated.** Optimization is a separate explicitly reviewed operation after documentation consolidation. Disposable screenshots, measurements, logs and generated QA reports belong in ignored `.qa/<task>/`, never the curated reference directory. New specifications remain Draft, pending owner review.
