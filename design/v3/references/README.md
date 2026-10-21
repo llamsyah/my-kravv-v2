@@ -1,96 +1,75 @@
-# MY KRAVV V3 — Visual References
+# MY KRAVV V3 — Canonical Visual Reference Inventory
 
-**Status:** Owner-selected conceptual references; verify actual PNG presence in the repo.  
-**Updated:** 20 October 2026 (Asia/Jakarta)  
-**Destination:** `design/v3/references/`  
-**Authority:** [V3 Documentation Authority](../../../docs/v3/00-V3-INDEX.md) and the owner's latest explicit decisions. This README is not proof of implementation or authorization to start coding.
+Status: **Draft — awaiting owner review** for this metadata consolidation. The files are owner-selected conceptual references with known imperfections; presence does not accept new product specifications or prove implementation.
 
-## Purpose
+File integrity/metadata reverified: **21 October 2026 (Asia/Jakarta)**, branch `v3`, baseline `fd04ff5`. The PNGs were introduced at `5e85068` — `add visual reference v3`; their prior visual inspection is recorded in Design Discovery. Revision 2 changes no image bytes.
 
-The images convey visual direction, not a literal feature checklist. The agreed direction is **Hybrid C**: calm, premium SaaS; light-first with thoughtfully designed dark mode; neutral reading surfaces; restrained **green** accents; consistent navigation; accessible and comfortable long-form writing. Avoid an unrelated blue active underline when a green pill already marks a selected tab.
+Authority: [V3 documentation index](../../../docs/v3/00-V3-INDEX.md), the owner's Documentation Revision 2 decisions P1–P8, and the [visual decision ledger](../../../docs/v3/DESIGN-DISCOVERY.md). Settled product contracts outrank accidental image details; all specifications remain Draft.
 
-Screenshots contain fabricated sample company details, market figures, dates, links, text, costs, and controls. **Do not treat them as verified facts or automatically implement everything the generator depicted.** The owner's latest decisions and accepted V3 product contracts outrank incidental details in screenshots.
+## Availability and provenance
 
-## Canonical PNG filenames
+**All 14 canonical PNGs are present, tracked, readable and visually inspected.** Total original size: **21,697,978 bytes**. Dimensions below are image pixels, not proof of CSS viewport, responsive behavior, physical-device rendering or browser zoom.
 
-| No. | Filename | What it illustrates |
-| --- | --- | --- |
-| 01 | `01-home.png` | Beranda: Quick Capture, Penampungan, continue draft, companies |
-| 02 | `02-company-directory.png` | Searchable company list |
-| 03 | `03-company-overview.png` | Overview within a company workspace |
-| 04 | `04-writing-space-guided.png` | Ruang Tulis — Terpandu |
-| 05 | `05-writing-space-companion.png` | Ruang Tulis — Pendamping |
-| 06 | `06-writing-space-ai-review.png` | Writing editor with AI Review side panel |
-| 07 | `07-working-tree.png` | Explicitly staged candidate Thoughts |
-| 08 | `08-thought-history.png` | Committed Thought history |
-| 09 | `09-thought-detail-diff.png` | Thought detail and committed-version comparison |
-| 10 | `10-explore-notebook.png` | Company's freeform Explore notebook |
-| 11 | `11-references-library.png` | External-source reference catalog |
-| 12 | `12-reference-create.png` | Tambah Referensi URL form/drawer |
-| 13 | `13-commit-context-snapshot.png` | Optional emotional/situational context *inside Tinjau & Rekam* |
-| 14 | `14-account-settings.png` | Global settings opened from navbar avatar |
+The images were supplied/committed by the owner as conceptual V3 design references. Canonical repository filenames and bytes are verified. Original external generation filenames, precise generation dates and exact individual approval dates are not established by the files. No production state, real company fact, live source verification, token usage or provider billing is established by sample contents.
 
-**Legacy Home path:** an earlier V3 scaffold named the Home destination `01-home-approved.png`. This consolidated index uses `01-home.png`. When placing the original approved asset, update any old path in `design/v3/README.md` and `docs/v3/00-V3-INDEX.md`; never generate a replacement merely to fill the missing file.
+The Home asset is [01-home.png](01-home.png). Earlier missing-asset notices have been corrected in active entry points; no alternate Home filename or placeholder is needed. Keep the canonical filenames intact.
 
-## Navigation and visual rules
+| No. | Canonical local file                                             | Intended visual purpose                                   | Pixels      | Bytes     |
+| --- | ---------------------------------------------------------------- | --------------------------------------------------------- | ----------- | --------- |
+| 01  | [01-home.png](01-home.png)                                       | Beranda, Quick Capture, Penampungan, resume and companies | 1536 × 1024 | 1,452,315 |
+| 02  | [02-company-directory.png](02-company-directory.png)             | Company browsing and workspace entry                      | 1672 × 941  | 1,660,643 |
+| 03  | [03-company-overview.png](03-company-overview.png)               | Company orientation and contextual sidebar                | 1586 × 992  | 1,512,964 |
+| 04  | [04-writing-space-guided.png](04-writing-space-guided.png)       | Terpandu and optional six-area guidance                   | 1585 × 992  | 1,523,966 |
+| 05  | [05-writing-space-companion.png](05-writing-space-companion.png) | Pendamping freeform writing with optional guidance        | 1586 × 992  | 1,301,820 |
+| 06  | [06-writing-space-ai-review.png](06-writing-space-ai-review.png) | Explicit AI Review alongside author text                  | 1586 × 992  | 1,625,538 |
+| 07  | [07-working-tree.png](07-working-tree.png)                       | Submitted candidates and review/record entry              | 1536 × 1024 | 1,482,273 |
+| 08  | [08-thought-history.png](08-thought-history.png)                 | Thought identities and committed-version history          | 1536 × 1024 | 1,639,030 |
+| 09  | [09-thought-detail-diff.png](09-thought-detail-diff.png)         | Committed-version detail and comparison                   | 1536 × 1024 | 1,729,168 |
+| 10  | [10-explore-notebook.png](10-explore-notebook.png)               | Personal notebook, Bahas nanti and writing reuse          | 1536 × 1024 | 1,646,967 |
+| 11  | [11-references-library.png](11-references-library.png)           | External-source catalog and metadata                      | 1536 × 1024 | 1,431,394 |
+| 12  | [12-reference-create.png](12-reference-create.png)               | Manual URL/source metadata form                           | 1536 × 1024 | 1,442,668 |
+| 13  | [13-commit-context-snapshot.png](13-commit-context-snapshot.png) | Optional context inside Tinjau & Rekam                    | 1584 × 993  | 1,666,881 |
+| 14  | [14-account-settings.png](14-account-settings.png)               | Global identity/auth, appearance and minimal AI usage     | 1672 × 941  | 1,582,351 |
 
-- Global navbar: **Beranda**, **Perusahaan**, search/theme/account utilities. Do not implement incidental **Kalender**, global Explore, or other destinations invented by images.
-- Collapsible company sidebar: **Overview**, **Ruang Tulis**, **Pemikiran**, **Explore**, **Referensi**. **Pengaturan is global**, accessible from the navbar avatar, not in the company sidebar.
-- The Writing Space's contextual right panel can open/close independently and should not crowd the editor. Tabs use a coherent selected state (prefer **green pill**, not green fill *plus* blue underline).
-- Images guide composition, spacing, hierarchy, accessibility, responsiveness, and visual tone. Actual product flow is defined in V3 documents and owner decisions.
+## Integrity fingerprints
 
-## Reference-specific intent and corrections
+SHA-256 records supplied bytes so later review can detect accidental image changes. No image optimization was performed.
 
-### 01 — Home
+| File number | SHA-256                                                            |
+| ----------- | ------------------------------------------------------------------ |
+| 01          | `8fbc54bcd543fd597e379abe77bdc1ea708d10e01d1be2ade8c636820d0ef728` |
+| 02          | `8cc03ffe083ee88abedd56cff6e9080a9269b7a7099d62fe87ae64a5e6b198f3` |
+| 03          | `dc7fc818f7c7a9ca38c4dacbbedd0db330eb7aaa3131622c0cac2ab02721d1b9` |
+| 04          | `cea502125c7d2a94130859003c83afd6831ad4da2f09014fb4c594eaa1b20818` |
+| 05          | `5b68d75f85ab24f0cadfadacdb4482a21d87517be5d35211bf1b1e06f2aadef9` |
+| 06          | `81c05d8a9257f17a3832656f074a0bcc4da73f9bad1a57e832b580d0d7bef276` |
+| 07          | `07cbc1f2b83993915e54e118091d20ee622cf1e8d9f1c89bd7d1e7f8dca0f106` |
+| 08          | `144959f9e99693bc2d49ccc4054b32bbf1aee90c70fdb9a7f562bcb402e4bbf6` |
+| 09          | `c9c0f68682f41eaf6b2248ef5d5f7b2777b8a9e91580715403345c2753bec60b` |
+| 10          | `ab86f5fa1945073f1536e02188308041034dc64fa071db7dbfafa5ec42ca663a` |
+| 11          | `35ccf706df93185b4d832437e75988223c483e6e7143a63fb94977640c671cae` |
+| 12          | `4e908876064047688d9574bac4ee92eea0a0e1daa1b83727298df9e08dad66d5` |
+| 13          | `503b6167859081f3fcae9fb31da98c0c7028c721831ac698ee0d830f6f5c7dff` |
+| 14          | `c43e586bb7e6bbf1635ce62507ea3f9d11aca76b64d6366ad1f39b36d924188b` |
 
-Quick Capture creates a fast input in a **separate Penampungan inbox**, not an Explore note or an immutable Thought. The user can resume an unfinished Writing Space draft. The early Home mockup's mountain/hero image is **not required**; a simpler content-first layout is fine.
+## Interpretation and correction authority
 
-### 02–03 — Company Directory and Overview
+Use [Design Discovery's per-image ledger](../../../docs/v3/DESIGN-DISCOVERY.md#reference-interpretation-ledger) for what to carry forward and correct. Global navigation, company sidebar, independently collapsible panels and coherent green selection follow the [UX draft](../../../docs/v3/05-UX-AND-DESIGN-SYSTEM.md). Draft requirements remain proposals for review.
 
-Directory must scale to many companies. Overview provides a company-level orientation, personal summary, continue-writing access, recent committed Thoughts, and references. Use the **revised Overview with contextual left sidebar** rather than superseded horizontal company tabs. Sample summaries, counts, and status labels are fictional and not prescribed taxonomy.
+Known excluded/superseded elements include horizontal company navigation, Explore as chatbot, required PDF upload/storage, standalone Context Snapshot, company Settings, extra global Kalender/Explore, mandatory numerical confidence, unrelated security-passphrase challenges, collaboration, speculative preferences/notifications, and competing blue underline beneath a selected green pill. Some canonical images already correct earlier alternatives; no replacement is requested by this index.
 
-### 04–06 — Writing Space and AI Review
+Sample identities, company statements, statistics, dates, source URLs, prices and usage figures are illustrative and unverified. A template progress bar is not a quality score; screenshot statuses/asterisks/tabs are not a mandatory taxonomy or field-validation specification. Opening AI Review is not a run, and a displayed chat box is not a recording gate or standalone chat product. See [workflows](../../../docs/v3/02-WORKFLOWS-AND-INFORMATION-ARCHITECTURE.md) and [AI behavior](../../../docs/v3/03-AI-BEHAVIOR-AND-OWNERSHIP.md).
 
-The editor supports three writing approaches: **Terpandu** (six optional fundamental-analysis areas), **Pendamping** (freeform with optional guidance), and **Kosong** (freeform). Sections/checklists are not mandatory gates; custom template management is not MVP scope. Autosave updates an unfinished draft without creating a commit version.
+Revision 2 fixes these interaction interpretations without replacing any PNG:
 
-**AI Review is on demand**: Clarify, Challenge, and Gap Check. It critiques and asks questions rather than automatically editing the user's writing, deciding what is true, or triggering commits. Preserve the reviewed draft snapshot and indicate when results become stale following edits. No mandatory AI chat product, continuous AI calls, live market-data verification, or automatic source scraping.
+- P1/P2: temporary captures allow no company and explicit reliable moves; Working Tree shows live staged saved drafts, not every autosave or frozen resubmission.
+- P3/P4: recording explicitly chooses Thought Baru/Versi Lanjutan, with optional rationale. Confirmed whole-Thought deletion removes versions/snapshots; no selective version deletion or content archive/trash requirement.
+- P5/P6: one editor model with guidance-only switching; deliberate contextual follow-ups are included. Outgoing draft context includes personal text copied into it; no hidden expansion to unselected notes, company data or stored Context Snapshot. Old results are stale after changes, with explicit continuation/refresh.
+- P7: Title/URL are the only required Reference fields. Writing reuse inserts them plus only selected notes, keeps the catalog source and does not fetch/verify its URL.
+- P8: replace the illustrated numerical slider with optional Rendah/Sedang/Tinggi/Not provided and optional reflection. A committed subjective Context Snapshot is immutable/skippable, not objective truth or an emotional-quality gate. Later perspectives require deliberate later commits, not retrospective edits.
 
-### 07–09 — Working Tree, Thought History, Detail & Diff
+The [settled contract register](../../../docs/v3/01-PRODUCT-FOUNDATION.md#settled-owner-decisions) and separate Company policy C1 govern details. The dimensions/byte sizes/SHA-256 values above are measured metadata and must continue matching these exact files; original external filenames/approval timestamps remain unknown rather than fabricated.
 
-**Working Tree contains intentionally staged/submitted candidates**, not every autosaved unfinished draft. A “Buat Draft Baru” action goes to **Ruang Tulis**. Candidates may reopen in the editor or proceed to review/record. Only the owner's explicit **Rekam/Commit** creates a committed Thought version; autosaves or AI feedback do not. History is for committed Thoughts; detail/diff shows their immutable version records. Screenshot labels such as “Draft Awal,” numbered version examples, and statuses are illustrative, not required rules.
+All images are light desktop concepts. Dark mode, narrow layouts, accessibility and failure/recovery states need later validation. Unapproved future alternatives belong in [explorations](../explorations/README.md); disposable QA goes to `.qa/<task>/`.
 
-### 10 — Explore Notebook
-
-Explore is a **company-scoped, informal personal notebook**, not the AI chatbot previously pictured and not Quick Capture/Penampungan. Notes are freeform, editable, optionally flagged **Bahas nanti**, and can be deliberately used as writing material. Do not auto-stage them or send private/emotional notes to AI.
-
-### 11–12 — References and Tambah Referensi
-
-**References are an external-link catalog, not file storage.** Manually save URL (prefer a direct PDF link where stable), title, type, and optional description/publisher/date/tags/private notes. A landing-page URL is acceptable when a direct link is unavailable or temporary. **Buka Sumber** opens the original external link; **Salin Tautan** copies it; **Gunakan di Ruang Tulis** references its link or selected notes, not the whole PDF. No internal PDF uploads, object-storage requirement, automatic scraping, or assumed source verification in MVP. Links may expire. Do not blindly enforce every asterisk or secondary tab invented by the mockup.
-
-### 13 — Commit Context Snapshot
-
-The screenshot depicts the optional **Context Snapshot within the Tinjau & Rekam step**, **not** a separate company page, new sidebar item, or second Company Overview. At commit time the owner *may* record emotional/situational state, possible influences, confidence, or an optional reflection. **Skipping it must not block commit.** When supplied, associate it with that committed Thought version for future comparison. No psychological scoring, mandatory `7/10` slider, automatic AI sharing, or required AI Review panel during commit. All sample entries are placeholders.
-
-### 14 — Account Settings
-
-Open through **navbar avatar → Pengaturan**. Core scope: authenticated account details; email/password login and logout; change password; change email with the auth provider's supported verification; forgot-password recovery; basic light/dark preference; and a minimal **AI & Penggunaan** area (model, token usage, estimated cost, budget alerts when meaningful). Switching accounts can be **logout and login**. Data remains isolated per user.
-
-Screenshot cost figures are **examples, not provider billing**; a budget alert is not necessarily a guaranteed hard cap. API secrets and passwords must not be exposed/stored in client-side app data. Use Supabase Auth capabilities instead of inventing a separate security-passphrase challenge: a *passphrase* is simply one kind of password. The screenshot's collaboration reference, speculative settings/notifications, and placeholder identity do not create MVP requirements. Codex may simplify the layout while meeting the approved needs.
-
-## Visual QA checklist
-
-- [ ] Consistent calm light palette and restrained **green** interaction accents; no competing blue active tab indicators.
-- [ ] Navbar and company sidebar reflect approved destinations; Account Settings stays global.
-- [ ] Clean long-form editor with independently collapsible contextual panel and readable width.
-- [ ] Mobile/responsive and keyboard-accessible states; visible focus and reduced motion where needed.
-- [ ] Quick Capture, Explore notes, Writing drafts, staged candidates, and committed Thoughts have distinct meanings.
-- [ ] AI is explicitly requested; no automatic changes to personal research.
-- [ ] Reference sources open via external URLs; no requirement to upload/host raw PDFs.
-- [ ] Context Snapshot stays optional within commit; no extra standalone navigation.
-- [ ] Screenshots' dates, example financial statements, counts, costs, and source URLs are not treated as verified data.
-
-## Asset provenance and availability
-
-These conceptual images were discussed with the owner in the MY KRAVV V3 design conversation and refined across iterations. **This README does not claim the PNG files are already present in the repository.** After copying each owner-provided original to the filename above, verify existence and record its source filename / SHA-256 and date if precise provenance is needed. Do not silently replace owner-selected images or promote rejected versions such as chatbot Explore, PDF-upload References, old horizontal company tabs, or the standalone Overview-like Context Snapshot.
-
-Product specification consolidation and the Codex implementation prompt are **separate future tasks** and are not included here.
+**Do not compress, convert, rename, replace, delete or regenerate these PNGs in this task.** Optimization requires its own explicit review after documentation consolidation. Future replacements must record known source/approval scope and actual new hashes rather than silently accepting incidental changes.

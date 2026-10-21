@@ -2,7 +2,7 @@
 
 Status: **Draft — awaiting owner review**
 
-Date: **20 October 2026 (Asia/Jakarta)**. Initial scaffold: 17 October 2026.
+Date: **21 October 2026 (Asia/Jakarta)**. Initial scaffold: 17 October 2026.
 
 Scope: product/UX documentation consolidation and reference metadata only; no application implementation authorized here.
 
@@ -10,9 +10,9 @@ Scope: product/UX documentation consolidation and reference metadata only; no ap
 
 V3 is a deliberate redesign of a personal investment reasoning workspace. V2 supplies technical evidence and product history; its screens, workflow sequence, milestones, and visual identity do not become V3 requirements by inheritance.
 
-The local `v3` branch starts at verified V2 commit `ee7be8ae8c481baebb5e159b57334333eb9994c9`; `main` remains at that checkpoint. This consolidation starts from clean `v3` commit `5e85068` (14 visual references added), following reorganization commit `c2e535d`. The [transition audit](00-V2-TRANSITION-AUDIT.md) remains dated V2 implementation/reuse evidence. The owner's latest Product & UX Documentation Consolidation brief supplies the product intentions recorded by these drafts.
+The local `v3` branch starts at verified V2 commit `ee7be8ae8c481baebb5e159b57334333eb9994c9`; `main` remains at that checkpoint. **Revision 2** starts at `fd04ff5`, after the first consolidation and asset commit `5e85068`; three existing local design README edits are preserved and synchronized here. The [transition audit](00-V2-TRANSITION-AUDIT.md) remains dated V2 implementation/reuse evidence. The owner's 21 October Documentation Revision 2 brief explicitly settles P1–P8 within the drafts, without accepting the documents or authorizing implementation.
 
-Start product review at the [Product Foundation](01-PRODUCT-FOUNDATION.md), then [workflows](02-WORKFLOWS-AND-INFORMATION-ARCHITECTURE.md) and [Design Discovery](DESIGN-DISCOVERY.md). Nine new drafts now exist. Their creation records intentions and proposals; it does not mean the owner has accepted specifications or authorized implementation.
+Start review at the [settled owner decisions](01-PRODUCT-FOUNDATION.md#settled-owner-decisions), then [workflows](02-WORKFLOWS-AND-INFORMATION-ARCHITECTURE.md) and [Design Discovery](DESIGN-DISCOVERY.md). The nine existing specifications remain **Draft — awaiting owner review**. P1–P8 are settled product requirements, not unanswered alternatives; T1–T7 remain technical evaluation and C1 is a separate narrow Company destructive-policy question.
 
 ## Source-of-truth precedence
 
@@ -39,7 +39,9 @@ The [documentation gateway](../README.md) now directs contributors here. The [V2
 - Excellent writing, reading, navigation, and feedback experiences; avoid unnecessary cards, excessive labels, decorative dashboards, and UI complexity.
 - No requirement to imitate a particular SaaS application and no inherited KRAVV-IENT visual dependency. V3 requires an experience redesign, beyond recoloring V2.
 - Preserve originals, separate AI proposals from user-approved wording, keep review independent of display selection, retain provenance and user ownership, and maintain security, recovery, idempotency, explicit AI invocation, validation, and cost controls. See the audit for the implemented scope and limits.
-- Do not impose the entire V2 lifecycle as a mandatory linear workflow. The later approved structural direction below constrains navigation; detailed workflows and product contracts remain pending.
+- Do not impose the entire V2 lifecycle as a mandatory linear workflow. Settled P1–P8 constrain these drafts; technical evaluation and owner review of the specifications remain pending.
+
+**Flexible before commit; deliberate and historically consistent after commit.** Prioritize the owner's own use without speculative public-user features. Autosave/recovery/authorization stay reliable, but temporary notes and moves do not require a permanent provenance or edit-history product. Recorded versions and their supplied Context Snapshots remain immutable while present; confirmed whole-Thought deletion is explicitly permitted.
 
 The latest owner brief prioritizes explicit **Clarify, Challenge and Gap Check** in Writing Space, plus a lightweight manual external-source catalog. Their intended behavior is now documented in draft specifications; unresolved details remain explicitly open. This direction does not activate V2 roles or authorize provider calls.
 
@@ -70,7 +72,7 @@ The accepted direction is **Hybrid C**. The [discovery ledger](DESIGN-DISCOVERY.
 | -------------------------------------------------------------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------- |
 | [00-V3-INDEX.md](00-V3-INDEX.md)                                                             | Draft   | Authority, conventions, current direction, and documentation map.                                                          |
 | [00-V2-TRANSITION-AUDIT.md](00-V2-TRANSITION-AUDIT.md)                                       | Draft   | Evidence-based V2 boundary, dispositions, risks, and review questions.                                                     |
-| [01-PRODUCT-FOUNDATION.md](01-PRODUCT-FOUNDATION.md)                                         | Draft   | Purpose, philosophy, MVP boundary/exclusions and owner Open Decisions P1–P8.                                               |
+| [01-PRODUCT-FOUNDATION.md](01-PRODUCT-FOUNDATION.md)                                         | Draft   | Purpose, philosophy, settled P1–P8 contracts, MVP boundary and separate Company-policy question C1.                        |
 | [02-WORKFLOWS-AND-INFORMATION-ARCHITECTURE.md](02-WORKFLOWS-AND-INFORMATION-ARCHITECTURE.md) | Draft   | Navigation, informal entry paths, three writing approaches and explicit stage/review/record workflow.                      |
 | [03-AI-BEHAVIOR-AND-OWNERSHIP.md](03-AI-BEHAVIOR-AND-OWNERSHIP.md)                           | Draft   | Review modes, snapshots/staleness, consent/context, ownership, failure and cost boundaries.                                |
 | [04-DOMAIN-AND-PROVENANCE.md](04-DOMAIN-AND-PROVENANCE.md)                                   | Draft   | Distinct content concepts, relationships, immutable versions and honest provenance; no schema.                             |
@@ -83,19 +85,20 @@ The accepted direction is **Hybrid C**. The [discovery ledger](DESIGN-DISCOVERY.
 
 ## Later owner-approved visual direction — 17 October 2026
 
-This dated heading is retained for historical incoming links. The initial reorganization established **Hybrid C**, a contextual sidebar, mutable Home capture and an externally discussed Home reference. The current 20 October brief and verified files supersede incomplete navigation and missing-asset statements from that scaffold. No precise image-approval date or wholesale screenshot acceptance is inferred.
+This dated heading is retained for historical incoming links. The initial reorganization established **Hybrid C**, a contextual sidebar, mutable Home capture and an externally discussed Home reference. The 20 October consolidation and 21 October Revision 2 supersede incomplete navigation and missing-asset statements from that scaffold. No precise image-approval date or wholesale screenshot acceptance is inferred.
 
-## Current consolidated direction — 20 October 2026
+## Current consolidated direction — 21 October 2026
 
 - Global Beranda/Perusahaan navigation; global Account Settings via avatar. Company sidebar: Overview, Ruang Tulis, Pemikiran, Explore, Referensi. Supporting panels collapse independently.
-- Quick Capture saves only to separate mutable Penampungan. Explore is a company notebook; serious writing uses multiple recoverable drafts with optional Terpandu/Pendamping/Kosong assistance.
-- Only explicit stage/submit enters Working Tree, and only explicit Rekam creates an immutable committed Thought version. Optional personal Context Snapshot is inside Tinjau & Rekam and never an AI or confidence-score gate.
-- AI Review is on-demand Clarify/Challenge/Gap Check, tied to a reviewed snapshot and stale after material changes; no silent rewrite, default personal-context disclosure, scraping or general chatbot.
-- Referensi catalogs external URLs/manual metadata without required uploads or hosted PDFs. Account/auth changes should reuse verified provider foundations, with basic light/dark and truthful minimal AI usage/budget visibility.
+- Quick Capture can omit company, then explicitly move from temporary Penampungan to Explore/writing with reliable save/remove/retry handling. One document/editor model supports guidance-only Terpandu/Pendamping/Kosong switching.
+- Kirim ke Pemikiran stages a live candidate reflecting its draft's latest saved state. Withdrawal retains the draft. Exact-content/revision confirmation selects Thought Baru/Versi Lanjutan with optional rationale; commit creates an immutable version and optional immutable Context Snapshot.
+- Context Snapshot is skippable and subjective, with optional Rendah/Sedang/Tinggi/Not provided confidence and optional reflection. No retrospective edit/correction system, score or automatic metadata commit. Confirmed whole-Thought deletion removes its versions/snapshots; no selective version deletion or content archive/trash system.
+- Clarify/Challenge/Gap Check support deliberate bounded follow-ups. Disclose the selected draft including incorporated personal text, plus explicitly selected additional material. Changed drafts make old results stale; old-context continuation/refresh stays explicit. No hidden private expansion, URL retrieval or automatic authoring/commit.
+- Referensi requires only Title/URL; reuse inserts them plus selected notes and retains the catalog record. Secure Auth/session foundations are preserved; full Account Settings UI does not block core writing. V3 Company create/find/edit/switch is a minimal draft approach, with destructive policy separately C1.
 - All [14 canonical references](../../design/v3/references/README.md) are present and inspected. Home is [01-home.png](../../design/v3/references/01-home.png). These images have known exceptions, not blanket acceptance of every control. Content-first Home does not require hero photography.
 
-Owner product choices are centralized in [P1–P8](01-PRODUCT-FOUNDATION.md#open-decisions--owner-product-choices); technical questions are [T1–T7](06-TECHNICAL-ARCHITECTURE.md#open-decisions--technical-questions). The [V3 design workspace](../../design/v3/README.md) and [exploration policy](../../design/v3/explorations/README.md) explain asset handling. No PNG compression, conversion, renaming, replacement or regeneration is authorized in this task.
+Settled [P1–P8](01-PRODUCT-FOUNDATION.md#settled-owner-decisions) are separate from [C1](01-PRODUCT-FOUNDATION.md#narrow-open-owner-policy--company-management) and technical [T1–T7](06-TECHNICAL-ARCHITECTURE.md#open-decisions--technical-questions). The [V3 design workspace](../../design/v3/README.md) and [reference inventory](../../design/v3/references/README.md) are synchronized with the files, including existing local corrections not present in the first consolidation commit. No PNG processing is authorized.
 
 ## Current review boundary
 
-This consolidation produces the nine requested drafts and corrects reference/navigation metadata. V2 archive/source/migrations remain evidence and are unchanged. Review the drafts and their explicit alternatives before approving dependent work. No application behavior, auth implementation, dependencies, migrations, remote database state, AI-provider requests, image processing, commits, pushes, merges or pull requests are part of this documentation preparation.
+Revision 2 edits the current drafts in place and preserves useful findings, cross-references and local README work. V2 audit/archive/source/migrations remain unchanged evidence. Review the revised specifications, technical recommendations and narrow C1 question before approving dependent implementation. No application behavior, authentication, dependencies, migrations, remote data, provider requests, image processing, commits, pushes, merges or pull requests are part of this revision.

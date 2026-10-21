@@ -2,7 +2,7 @@
 
 Status: **Draft — awaiting owner review**
 
-Date: **20 October 2026 (Asia/Jakarta)**
+Date: **21 October 2026 (Asia/Jakarta)**
 
 Authority: [V3 index](00-V3-INDEX.md). The owner's Hybrid C direction and product boundaries are constraints; interaction/system treatments below are proposed specifications for review, not accepted tokens or implemented UI. See [Design Discovery](DESIGN-DISCOVERY.md) for per-image exceptions and [workflows](02-WORKFLOWS-AND-INFORMATION-ARCHITECTURE.md) for page responsibilities.
 
@@ -20,7 +20,7 @@ Global Beranda/Perusahaan navigation stays separate from Company context. Accoun
 
 Use a controlled writing/reading width. Collapsing a sidebar must not stretch a paragraph across an uncomfortable full-screen measure. The left navigation and right context panel toggle independently, with discoverable reopen controls. The right panel can expose guidance, selected materials, references or AI Review; selecting a panel does not generate AI or fetch a reference.
 
-Terpandu presents optional editable structure, Pendamping keeps writing freeform with guidance beside it, and Kosong starts without an active template. Framework coverage, if shown, is informational, not a quality grade or gate. Approach switching must not silently delete/reorder authored material; resolve P5 before implementing conversion behavior.
+Under settled P5, Terpandu, Pendamping and Kosong use one writing document/editor model. Switching changes guidance only: no deletion, reordering, automatic rewriting, format conversion, new draft or committed version. Headings already inserted by the owner remain after leaving Terpandu. The six areas and any coverage display remain optional assistance, never a quality/completion gate. Pendamping offers optional side guidance and Kosong has none active.
 
 **Responsive proposal:** preserve the editor as the main task surface, move secondary panels into accessible toggled surfaces when space is limited, and avoid compressing both side panels beside a narrow editor. Exact breakpoints/drawer behavior remain T7. Keep selection and draft content while a panel is hidden. Do not promise mobile keyboard/safe-area or zoom behavior from desktop images.
 
@@ -35,6 +35,18 @@ Terpandu presents optional editable structure, Pendamping keeps writing freeform
 | Context Snapshot | Optional reflection versus commit requirement                                | Clear skip path that still allows Rekam; no mandatory confidence number.                        |
 | Reference        | Saved metadata versus reachable/verified external source                     | Open/copy URL actions; no false verification badge or silent disappearance on external failure. |
 | AI usage         | Measured tokens/estimated cost versus warning/enforced reservation           | Label uncertainty and the actual kind of budget control.                                        |
+
+## Revision 2 interaction contracts
+
+- **Temporary capture:** offer saving with no company, then explicit Move to Explore/Ruang Tulis. Ask for a company only when needed at that move. Keep the item visible on failure; remove it after destination save succeeds. Use a simple success/failure/uncertain-retry message, not a permanent lineage/history screen. Confirm permanent deletion; no capture archive/trash UI.
+- **Live Working Tree:** label **Kirim ke Pemikiran** and **Batalkan Pengajuan** distinctly. Candidate summaries reflect the latest saved draft and reopen its editor; withdrawal retains the draft. Do not display a frozen submission requiring resubmission. Buat Draft Baru leads to writing. Save pending edits before recording; changes during Tinjau & Rekam require a fresh exact preview and reconfirmation.
+- **Minimal recording:** clearly choose Thought Baru or Versi Lanjutan with its target. Keep a short rationale optional; omit unrelated required administrative forms. After confirmation show the committed result and remove pending candidate membership without implying autosaves were versions.
+- **Pressure-free reflection:** Context Snapshot is optional within Tinjau & Rekam. Confidence choices are **Rendah, Sedang, Tinggi, Not provided**, with optional explanation/reflection. Every field/whole block can be skipped; uncertainty is valid. No required numerical slider, psychological language, emotional-validity test or scientific-quality implication. Explain that supplied context preserves subjective perspective at recording time and cannot later be edited in place. Later perspectives require a deliberate new version; no separate correction flow.
+- **Deletion:** confirm irreversible content removal and its scope. A staged-draft deletion also removes its active candidate, never committed Thoughts; withdrawal deletes neither. A Thought delete removes the whole history and Context Snapshots, not selected versions. Reference deletion affects metadata, not external documents or recorded text. No trash/archive UI for these content types; Company destruction stays C1.
+- **Review context:** explicit initial/follow-up/refresh actions show the selected draft snapshot and deliberate additions. Personal text inside that draft is included. Old-review continuation remains labeled with its old snapshot; a changed draft makes prior results stale. No hidden extra context or auto-refresh/provider call.
+- **References:** require only Title and URL. Optional metadata never becomes a screenshot-implied asterisk gate. Gunakan di Ruang Tulis inserts title/URL and only specifically selected notes, while retaining the original catalog record. Do not imply URL/PDF retrieval or verification.
+
+Minimal Company create/find/edit/switch/empty-state guidance is specified in [workflows](02-WORKFLOWS-AND-INFORMATION-ARCHITECTURE.md#minimal-company-management-journeys). It is a draft approach grounded in existing functionality, not approval of a Company cascade-delete/archive UX. Resolve [C1](01-PRODUCT-FOUNDATION.md#narrow-open-owner-policy--company-management) before adding destructive Company controls.
 
 Labels such as Tersimpan must describe the actual persistence scope. An autosave is not Rekam; reopening a committed version in writing is not in-place editing of history. Use plain Indonesian interface labels, retaining natural names such as Explore, Working Tree and AI Review where the owner uses them. Final microcopy must not introduce a status taxonomy or extra workflow gate.
 

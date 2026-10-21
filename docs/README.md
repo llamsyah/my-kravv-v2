@@ -2,7 +2,7 @@
 
 **Active: [MY KRAVV V3 documentation authority](v3/00-V3-INDEX.md).** Read its precedence and status rules before proposing specifications or implementation. The [V2 transition audit](v3/00-V2-TRANSITION-AUDIT.md) records technical evidence and open decisions.
 
-The nine V3 specification/planning drafts now exist. Begin review with the [Product Foundation](v3/01-PRODUCT-FOUNDATION.md), [workflows](v3/02-WORKFLOWS-AND-INFORMATION-ARCHITECTURE.md) and [Design Discovery](v3/DESIGN-DISCOVERY.md); none is automatically Accepted. All 14 canonical visual references are present and indexed in the [reference inventory](../design/v3/references/README.md).
+The nine V3 specification/planning drafts are now **Revision 2 — Draft — awaiting owner review**. The owner has resolved [P1–P8](v3/01-PRODUCT-FOUNDATION.md#settled-owner-decisions); [workflows](v3/02-WORKFLOWS-AND-INFORMATION-ARCHITECTURE.md) apply them, while technical T1–T7 and the separate Company destructive-policy question C1 stay explicit. Review [Design Discovery](v3/DESIGN-DISCOVERY.md) for image exceptions. All 14 canonical PNGs and their recorded dimensions/sizes/hashes are reverified in the [inventory](../design/v3/references/README.md). Neither the revised drafts nor implementation are automatically accepted.
 
 | Area                                                                   | Purpose                                                                                                   |
 | ---------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
