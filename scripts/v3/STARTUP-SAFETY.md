@@ -2,7 +2,7 @@
 
 **Startup/reset remain blocked.** The retained-volume compatibility gate is implemented. No creation-time publisher is approved. Native localhost-only enforcement remains unresolved; the custom CLI and Docker upgrade are deferred. This is a tooling report, not database compatibility approval or a successful V3 runtime test.
 
-The later [offline Cloud adapter](../../supabase/v3-cloud/README.md) is a separate, unprovisioned path. It does not change this publisher gate, local service lock, migration/config hashes or retained receipts. Cloud entry points and application-facing Cloud target resolution share the same unconditional client-safe execution invariant. The initial adapter missed the application check; the remediation blocks populated approval metadata before identity requests or client creation, as verified using isolated synthetic configuration and mocked transport. Later owner-approved target and operations work remains necessary.
+The later [offline Cloud adapter](../../supabase/v3-cloud/README.md) is a separate, execution-blocked path with owner-approved target metadata and review-only Cloud bootstrap artifacts. It does not change this publisher gate, local service lock, migration/config hashes or retained receipts. Cloud entry points and application-facing Cloud target resolution share the same unconditional client-safe execution invariant. The initial adapter missed the application check; the remediation blocks populated approval metadata before identity requests or client creation, as verified using isolated synthetic configuration and mocked transport. Later owner-approved target and operations work remains necessary.
 
 ## Current decision and evidence
 

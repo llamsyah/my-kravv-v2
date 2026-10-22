@@ -1,10 +1,15 @@
 {
-  "status": "unprovisioned",
-  "projectRef": null,
-  "apiOrigin": null,
-  "databaseMarker": null,
+  "status": "owner-approved-target-artifacts-only",
+  "projectRef": "kjcvgjfwlmyfroiqlbmw",
+  "apiOrigin": "https://kjcvgjfwlmyfroiqlbmw.supabase.co",
+  "databaseMarker": {
+    "project_id": "kjcvgjfwlmyfroiqlbmw",
+    "purpose": "disposable-v3-slice0-cloud",
+    "schema_version": 1
+  },
   "foundationSource": "supabase/v3/supabase/migrations/20261021000100_slice0_foundation.sql",
   "foundationSourceSha256": "d819f9d322179dde279fbab3632783c9c2ed331d892054f3f39c2e1ffdd1b17c",
-  "cloudMigration": null,
-  "execution": "blocked-pending-owner-target-and-bootstrap-review"
+  "cloudMigration": "supabase/v3-cloud/bootstrap.sql",
+  "execution": "blocked-pending-bootstrap-and-live-operation-approval",
+  "cloudMigrationSha256": "3a833df429954f968daacff8ba4c4c54735eaa008f605b75a22a5c9edb1bbee9"
 }

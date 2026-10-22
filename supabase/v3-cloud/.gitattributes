@@ -1,0 +1,2 @@
+# Keep the reviewed bootstrap byte hash stable across Windows/Linux checkouts.
+bootstrap.sql text eol=lf

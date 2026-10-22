@@ -48,23 +48,12 @@ const source = {
   MY_KRAVV_V3_CLOUD_SECRET_KEY: "sb_secret_offline_fixture_only",
 };
 
-test("Cloud approval stays unprovisioned; environment values cannot approve a project", () => {
+test("Checked-in target approval cannot be replaced by environment values or missing evidence", () => {
   for (const candidate of [input, {}, { ...input, profile: v3ProjectId }])
-    assert.throws(
-      () => validateCloudTarget(candidate as typeof input),
-      /unprovisioned|unapproved/,
-    );
-  for (const unapproved of [
-    undefined,
-    null,
-    {},
-    { ...evidence, status: "unprovisioned" },
-  ])
+    assert.throws(() => validateCloudTarget(candidate as typeof input));
+  for (const unapproved of [null, {}, { ...evidence, status: "unprovisioned" }])
     assert.throws(() => validateCloudTarget(input, unapproved));
-  assert.throws(
-    () => configuredCloudTarget(source),
-    /unprovisioned|unapproved/,
-  );
+  assert.throws(() => configuredCloudTarget(source), /conflicts/);
 });
 
 test("Cloud identity requires exact reference, HTTPS origin and distinct strict marker", () => {
@@ -241,7 +230,7 @@ test("Cloud child sanitization uses only explicit inputs; privileged key enters 
   }
 });
 
-test("Unprovisioned public Cloud config rejects before any identity request and never returns private values", async (t) => {
+test("Substituted public Cloud config rejects before any identity request and never returns private values", async (t) => {
   const keys = [
     "NEXT_PUBLIC_MY_KRAVV_ENV",
     "NEXT_PUBLIC_SUPABASE_URL",
@@ -265,11 +254,8 @@ test("Unprovisioned public Cloud config rejects before any identity request and 
       throw Error("Unexpected network request");
     };
     t.mock.method(globalThis, "fetch", mock);
-    assert.throws(getPublicSupabaseConfig, /unprovisioned|unapproved/);
-    await assert.rejects(
-      () => verifyV3DatabaseTarget(mock),
-      /unprovisioned|unapproved/,
-    );
+    assert.throws(getPublicSupabaseConfig, /conflicts/);
+    await assert.rejects(() => verifyV3DatabaseTarget(mock), /conflicts/);
     assert.equal(requests, 0);
     Object.assign(process.env, {
       NEXT_PUBLIC_MY_KRAVV_ENV: v3ProjectId,
@@ -360,7 +346,7 @@ test("Cloud live entry and portable helper remain blocked; SQL/reset and missing
     );
     assert.equal(result.error, undefined);
     assert.equal(result.status, 1);
-    assert.match(result.stderr, /unprovisioned|unapproved|no SQL\/reset/);
+    assert.match(result.stderr, /conflicts|no SQL\/reset/);
     assert.ok(!result.stderr.includes(source.MY_KRAVV_V3_CLOUD_SECRET_KEY));
   }
 });
@@ -406,9 +392,10 @@ const hooks=registerHooks({resolve(specifier,context,nextResolve){
 }});
 const {createSupabaseServerClient}=await import('./src/server/auth/client.ts');
 hooks.deregister();
-const ref='a'.repeat(20), origin='https://'+ref+'.supabase.co';
+const actual=process.argv[1]==='approved';
+const ref=actual?approval.projectRef:'a'.repeat(20), origin='https://'+ref+'.supabase.co';
 const marker={project_id:ref,purpose:'disposable-v3-slice0-cloud',schema_version:1};
-Object.assign(approval,{status:'owner-approved',projectRef:ref,apiOrigin:origin,marker});
+if(!actual)Object.assign(approval,{status:'owner-approved',projectRef:ref,apiOrigin:origin,marker});
 assert.equal(validateCloudTarget({profile:'my-kravv-v3-cloud-dev',projectRef:ref,apiOrigin:origin}).projectRef,ref);
 let requests=0;
 globalThis.fetch=async()=>{requests++;return Response.json(marker)};
@@ -450,7 +437,7 @@ if(process.argv[1]==='local'){
 }
 `;
 
-function runPopulatedApplicationProbe(mode: "cloud" | "local") {
+function runPopulatedApplicationProbe(mode: "cloud" | "local" | "approved") {
   const result = spawnSync(
     process.execPath,
     [
@@ -484,5 +471,13 @@ test("Populated Cloud metadata leaves local application identity verification an
   assert.deepEqual(runPopulatedApplicationProbe("local"), {
     localProfilePreserved: true,
     mockedLocalIdentityRequests: 1,
+  });
+});
+
+test("Checked-in owner approval cannot activate real application or command paths; zero outbound requests", () => {
+  assert.deepEqual(runPopulatedApplicationProbe("approved"), {
+    populatedApproval: true,
+    applicationAndCommandsBlocked: true,
+    outboundIdentityRequests: 0,
   });
 });

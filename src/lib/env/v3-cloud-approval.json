@@ -1,6 +1,10 @@
 {
-  "status": "unprovisioned",
-  "projectRef": null,
-  "apiOrigin": null,
-  "marker": null
+  "status": "owner-approved",
+  "projectRef": "kjcvgjfwlmyfroiqlbmw",
+  "apiOrigin": "https://kjcvgjfwlmyfroiqlbmw.supabase.co",
+  "marker": {
+    "project_id": "kjcvgjfwlmyfroiqlbmw",
+    "purpose": "disposable-v3-slice0-cloud",
+    "schema_version": 1
+  }
 }
