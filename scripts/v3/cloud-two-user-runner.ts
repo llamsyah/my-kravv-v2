@@ -198,10 +198,39 @@ function readPrivate(root: string, name: string, simulation: boolean) {
   return readPrivateBytes(root, name, simulation).toString("utf8");
 }
 
+type FailureDiagnostic = {
+  requestIndex?: number;
+  stage:
+    | "preflight"
+    | "request"
+    | "transport"
+    | "response"
+    | "observation"
+    | "user"
+    | "jwt"
+    | "budget"
+    | "manifest";
+  category:
+    | "preflight"
+    | "request-contract"
+    | "transport"
+    | "http-status"
+    | "response-json"
+    | "response-shape"
+    | "user-identity"
+    | "jwt-claims"
+    | "deadline"
+    | "manifest-persistence";
+  httpStatus?: number;
+};
+type Progress = (
+  event: Pick<FailureDiagnostic, "stage" | "category" | "httpStatus">,
+) => void;
 type Wire = (
   url: string,
   init: RequestInit,
   timeout: number,
+  progress: Progress,
 ) => Promise<{ status: number; body: unknown }>;
 type Plan = ReturnType<typeof buildCloudTwoUserPlan>;
 
@@ -220,6 +249,10 @@ async function execute(
   const tokens: Partial<Record<"A" | "B", string>> = {};
   let requests = 0;
   let completed = 0;
+  let diagnostic: FailureDiagnostic = {
+    stage: "preflight",
+    category: "preflight",
+  };
   const started = monotonic();
   try {
     refuseInherited(source);
@@ -327,8 +360,15 @@ async function execute(
       0o600,
     );
     const record = (event: unknown) => {
+      const previous = diagnostic;
+      diagnostic = {
+        ...diagnostic,
+        stage: "manifest",
+        category: "manifest-persistence",
+      };
       try {
         durableManifestRecord(manifest!, event);
+        diagnostic = previous;
       } catch {
         manifestPersistenceFailed = true;
         throw fail();
@@ -343,6 +383,11 @@ async function execute(
     });
     const companyIds: Partial<Record<"A" | "B", string>> = {};
     for (const template of plan.steps) {
+      diagnostic = {
+        requestIndex: completed,
+        stage: "request",
+        category: "request-contract",
+      };
       const step = resolveCloudCompanyStep(template, companyIds);
       assertCloudFixtureWrite(step);
       const url = new URL(step.url);
@@ -373,6 +418,7 @@ async function execute(
         const user = creds.users[step.credentialSlot];
         body = { email: user.email, password: user.password };
       }
+      diagnostic = { ...diagnostic, stage: "budget", category: "deadline" };
       if (now() >= expiry) throw fail();
       budget.begin();
       requests = budget.count;
@@ -385,6 +431,9 @@ async function execute(
         path: url.pathname + url.search,
         ...(step.body ? { fixtureBody: step.body } : {}),
       });
+      diagnostic = { ...diagnostic, stage: "budget", category: "deadline" };
+      const timeout = budget.timeout();
+      diagnostic = { ...diagnostic, stage: "transport", category: "transport" };
       const reply = await wire(
         url.href,
         {
@@ -393,10 +442,40 @@ async function execute(
           body: body ? JSON.stringify(body) : undefined,
           redirect: "error",
         },
-        budget.timeout(),
+        timeout,
+        (event) => {
+          diagnostic = { requestIndex: completed, ...event };
+        },
       );
+      diagnostic = { ...diagnostic, stage: "budget", category: "deadline" };
       budget.check();
       if (now() >= expiry) throw fail();
+      diagnostic = {
+        requestIndex: completed,
+        stage: "observation",
+        category: "response-shape",
+        httpStatus: reply.status,
+      };
+      if (step.check === "login" || step.check === "user") {
+        const record =
+          reply.body !== null &&
+          typeof reply.body === "object" &&
+          !Array.isArray(reply.body)
+            ? (reply.body as Record<string, unknown>)
+            : undefined;
+        const user =
+          step.check === "login"
+            ? (record?.user as Record<string, unknown> | undefined)
+            : record;
+        if (reply.status !== 200) diagnostic.category = "http-status";
+        else if (
+          user &&
+          typeof user === "object" &&
+          "id" in user &&
+          user.id !== step.expected?.id
+        )
+          diagnostic.category = "user-identity";
+      }
       checkCloudTestObservation(step, reply.status, reply.body);
       if (step.check === "company-create") {
         if (step.actor === "anonymous") throw fail();
@@ -412,6 +491,11 @@ async function execute(
         });
       }
       if (step.check === "login") {
+        diagnostic = {
+          ...diagnostic,
+          stage: "user",
+          category: "user-identity",
+        };
         const b = reply.body as {
           access_token: string;
           user: { email: string };
@@ -422,6 +506,7 @@ async function execute(
             creds.users[step.actor].email.toLowerCase()
         )
           throw fail();
+        diagnostic = { ...diagnostic, stage: "jwt", category: "jwt-claims" };
         const claims = JSON.parse(
           Buffer.from(
             b.access_token.split(".")[1] ?? "",
@@ -440,6 +525,11 @@ async function execute(
         tokens[step.actor] = b.access_token;
       }
       if (step.check === "user") {
+        diagnostic = {
+          ...diagnostic,
+          stage: "user",
+          category: "user-identity",
+        };
         const user = reply.body as { email: string };
         if (
           step.actor === "anonymous" ||
@@ -458,6 +548,7 @@ async function execute(
         status: reply.status,
       });
     }
+    diagnostic = { ...diagnostic, stage: "budget", category: "deadline" };
     budget.check();
     record({
       state: "passed",
@@ -473,6 +564,7 @@ async function execute(
           state: "failed",
           requests,
           completed,
+          diagnostic,
           cleanup: "retained; review sending events for uncertain mutations",
         });
       } catch {
@@ -496,12 +588,25 @@ async function networkWire(
   url: string,
   init: RequestInit,
   timeout: number,
+  progress: Progress,
   fetcher: typeof fetch = fetch,
 ) {
+  let receivedStatus: number | undefined;
+  const update = (
+    stage: FailureDiagnostic["stage"],
+    category: FailureDiagnostic["category"],
+  ) =>
+    progress({
+      stage,
+      category,
+      ...(receivedStatus === undefined ? {} : { httpStatus: receivedStatus }),
+    });
+  update("transport", "transport");
   const controller = new AbortController();
   let timer: ReturnType<typeof setTimeout> | undefined;
   const expired = new Promise<never>((_, reject) => {
     timer = setTimeout(() => {
+      update("budget", "deadline");
       controller.abort();
       reject(fail());
     }, timeout);
@@ -514,6 +619,13 @@ async function networkWire(
           ...init,
           signal: controller.signal,
         });
+        if (
+          Number.isInteger(response.status) &&
+          response.status >= 100 &&
+          response.status <= 599
+        )
+          receivedStatus = response.status;
+        update("response", "transport");
         if (
           response.redirected ||
           response.url !== url ||
@@ -529,13 +641,17 @@ async function networkWire(
               const next = await reader.read();
               if (next.done) break;
               size += next.value.length;
-              if (size > 262144) throw fail();
+              if (size > 262144) {
+                update("response", "response-shape");
+                throw fail();
+              }
               chunks.push(next.value);
             }
           } finally {
             await reader.cancel().catch(() => {});
           }
         const raw = Buffer.concat(chunks).toString("utf8");
+        update("response", "response-json");
         return {
           status: response.status,
           body: raw ? (JSON.parse(raw) as unknown) : undefined,
@@ -600,7 +716,7 @@ export async function simulateCloudTwoUserRun(
     fixtureColumns?: string[];
     returnedRepresentation?: boolean;
   }[] = [];
-  const wire: Wire = async (url, init, timeout) => {
+  const wire: Wire = async (url, init, timeout, progress) => {
     let reply = replies[sent.length];
     // Mock database column ACL, independent of the response assertions.
     const table = new URL(url).pathname;
@@ -638,9 +754,12 @@ export async function simulateCloudTwoUserRun(
     });
     if (!reply) throw fail();
     clock += reply.elapsedMs ?? 0;
-    if (reply.transportFailure || (reply.elapsedMs ?? 0) >= timeout)
+    if (reply.transportFailure) throw fail();
+    if ((reply.elapsedMs ?? 0) >= timeout) {
+      progress({ stage: "budget", category: "deadline" });
       throw fail();
-    return networkWire(url, init, timeout, async () => {
+    }
+    return networkWire(url, init, timeout, progress, async () => {
       const response = new Response(
         reply.stallBody
           ? new ReadableStream()

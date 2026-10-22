@@ -921,3 +921,215 @@ test("Intended-write manifest partial/zero/exception/interruption/fsync failure 
 test("Verified-ID manifest partial/zero/exception/interruption/fsync failure prevents every dependent request", async (t) => {
   await assertManifestPersistenceFailures(t, "company-id-verified");
 });
+
+test("Login failures retain only bounded stage/category/status diagnostics and stop before writes", async () => {
+  const cases: {
+    reply: (f: ReturnType<typeof fixture>) => SyntheticReply;
+    category: string;
+    stage: string;
+    status?: number;
+  }[] = [
+    {
+      reply: () => ({ status: 200, transportFailure: true }),
+      category: "transport",
+      stage: "transport",
+    },
+    {
+      reply: () => ({
+        status: 400,
+        body: { message: "never-persist-private-server-message" },
+      }),
+      category: "http-status",
+      stage: "observation",
+      status: 400,
+    },
+    {
+      reply: () => ({
+        status: 200,
+        rawBody: "never-persist-private-invalid-json",
+      }),
+      category: "response-json",
+      stage: "response",
+      status: 200,
+    },
+    {
+      reply: () => ({ status: 200, body: {} }),
+      category: "response-shape",
+      stage: "observation",
+      status: 200,
+    },
+    {
+      reply: (f) => ({
+        status: 200,
+        body: { ...(f.replies[1].body as object), user: { id: spec.users.B } },
+      }),
+      category: "user-identity",
+      stage: "observation",
+      status: 200,
+    },
+    {
+      reply: (f) => {
+        const body = structuredClone(f.replies[1].body) as {
+          user: { email: string };
+        };
+        body.user.email = "never-persist-private@example.invalid";
+        return { status: 200, body };
+      },
+      category: "user-identity",
+      stage: "user",
+      status: 200,
+    },
+    {
+      reply: (f) => ({
+        status: 200,
+        body: {
+          ...(f.replies[1].body as object),
+          access_token: "never-persist-private-token",
+        },
+      }),
+      category: "jwt-claims",
+      stage: "jwt",
+      status: 200,
+    },
+    {
+      reply: (f) => ({
+        status: 200,
+        body: {
+          ...(f.replies[1].body as object),
+          access_token:
+            "header." +
+            Buffer.from(
+              JSON.stringify({
+                sub: spec.users.A,
+                iss: spec.apiOrigin + "/auth/v1",
+                role: "service_role",
+                exp: at / 1000 + 3600,
+              }),
+            ).toString("base64url") +
+            ".signature",
+        },
+      }),
+      category: "jwt-claims",
+      stage: "jwt",
+      status: 200,
+    },
+    {
+      reply: () => ({ status: 200, elapsedMs: 10000 }),
+      category: "deadline",
+      stage: "budget",
+    },
+    {
+      reply: () => ({ status: 200, stallBody: true }),
+      category: "deadline",
+      stage: "budget",
+      status: 200,
+    },
+  ];
+  for (const c of cases) {
+    const f = fixture();
+    try {
+      f.replies[1] = c.reply(f);
+      // Exercise the actual response-body timeout quickly with a synthetic grant.
+      if (f.replies[1].stallBody) {
+        f.grant.expiresAt = new Date(at + 5).toISOString();
+        f.save();
+      }
+      const r = await simulateCloudTwoUserRun(f.root, f.replies, at);
+      assert.equal(r.outcome, "failed");
+      assert.equal(r.sent.length, 2);
+      const events = f
+        .manifest()
+        .trim()
+        .split("\n")
+        .map((line) => JSON.parse(line));
+      const final = events.at(-1);
+      assert.deepEqual(final.diagnostic, {
+        requestIndex: 1,
+        stage: c.stage,
+        category: c.category,
+        ...(c.status === undefined ? {} : { httpStatus: c.status }),
+      });
+      assert.deepEqual(Object.keys(final).sort(), [
+        "cleanup",
+        "completed",
+        "diagnostic",
+        "requests",
+        "state",
+      ]);
+      const failed = JSON.stringify(final);
+      for (const secret of [
+        "never-persist",
+        f.creds.publishableKey,
+        f.creds.users.A.password,
+        f.creds.users.A.email,
+        spec.users.A,
+      ])
+        assert.ok(!failed.includes(secret));
+      assert.ok(!events.some((e) => e.state === "company-id-verified"));
+    } finally {
+      f.close();
+    }
+  }
+});
+
+test("Failed diagnostic short/zero/exception/interruption/fsync writes never permit another request or append", async (t) => {
+  for (const mode of ["partial", "zero", "exception", "interrupted", "fsync"]) {
+    const f = fixture();
+    f.replies[1] = { status: 400, body: { message: "never-persist-private" } };
+    const originalWrite = fs.writeSync,
+      originalSync = fs.fsyncSync;
+    let fault = false,
+      after = 0,
+      target: number | undefined;
+    const write = t.mock.method(
+      fs,
+      "writeSync",
+      (
+        fd: number,
+        bytes: Buffer,
+        offset: number,
+        length: number,
+        position: null,
+      ) => {
+        if (fault && fd === target) after++;
+        if (!bytes.toString("utf8").includes('"state":"failed"'))
+          return originalWrite(fd, bytes, offset, length, position);
+        fault = true;
+        target = fd;
+        if (mode === "zero") return 0;
+        if (mode === "exception")
+          throw Error("never-persist-private-exception");
+        if (mode === "partial" || mode === "interrupted") {
+          const count = originalWrite(fd, bytes, offset, 7, position);
+          if (mode === "interrupted")
+            throw Error("never-persist-private-interruption");
+          return count;
+        }
+        return originalWrite(fd, bytes, offset, length, position);
+      },
+    );
+    const sync = t.mock.method(fs, "fsyncSync", (fd: number) => {
+      if (fault && fd === target && mode === "fsync")
+        throw Error("never-persist-private-fsync");
+      return originalSync(fd);
+    });
+    try {
+      const r = await simulateCloudTwoUserRun(f.root, f.replies, at);
+      assert.equal(r.outcome, "failed");
+      assert.equal(r.sent.length, 2);
+      assert.equal(fault, true);
+      assert.equal(after, 0);
+      assert.ok(!f.manifest().includes('"state":"passed"'));
+      assert.ok(!f.manifest().includes("never-persist"));
+      assert.ok(
+        fs.existsSync(
+          path.join(f.root, "run-" + spec.runId + ".consumed.json"),
+        ),
+      );
+    } finally {
+      write.mock.restore();
+      sync.mock.restore();
+      f.close();
+    }
+  }
+});
