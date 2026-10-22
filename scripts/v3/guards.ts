@@ -53,8 +53,11 @@ export function verifyLayout(root = workdir) {
 }
 
 /** Next must never inherit V2 .env values, including keys added in the future. */
-export function isolatedChildEnvironment(root = repositoryRoot) {
-  const env: NodeJS.ProcessEnv = { ...process.env };
+export function isolatedChildEnvironment(
+  root = repositoryRoot,
+  inherited: NodeJS.ProcessEnv = process.env,
+) {
+  const env: NodeJS.ProcessEnv = { ...inherited };
   for (const key of Object.keys(env))
     if (
       /^(?:NEXT_PUBLIC_|SUPABASE_|AI_|OPENAI_|GROQ_|MY_KRAVV_|HTTP_PROXY$|HTTPS_PROXY$|ALL_PROXY$)/.test(

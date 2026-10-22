@@ -2,6 +2,8 @@
 
 V3 Slice 0 development is active on `v3`: an isolated local environment and a minimal security demonstration, with later product features unavailable. Start with the [Slice 0 operating guide](supabase/v3/README.md), [implementation evidence](docs/v3/SLICE-0-IMPLEMENTATION-NOTES.md), [V3 documentation authority](docs/v3/00-V3-INDEX.md) and [V3 design workspace](design/v3/README.md). The historical V2 checkpoint remains on `main`.
 
+The separate [Cloud adapter Checkpoint 1](supabase/v3-cloud/README.md) is offline preparation only: unprovisioned identity, denial-only Cloud commands, and no remote operations. It does not unblock local startup or authorize hosted access.
+
 ## Where to start
 
 - [Documentation gateway](docs/README.md): active V3 documents and historical V2 knowledge.

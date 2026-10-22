@@ -1,17 +1,16 @@
 import "server-only";
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
-import { getPublicSupabaseConfig } from "../../lib/env/public.ts";
-import { v3CookieName } from "../../lib/env/v3.ts";
+import { getPublicSupabaseTarget } from "../../lib/env/public.ts";
 import { verifyV3DatabaseTarget } from "./v3-target.ts";
 
 /** Request scoped, publishable key + user JWT; never an administrative client. */
 export async function createSupabaseServerClient() {
   await verifyV3DatabaseTarget();
   const cookieStore = await cookies();
-  const { url, publishableKey } = getPublicSupabaseConfig();
+  const { url, publishableKey, cookieName } = getPublicSupabaseTarget();
   return createServerClient(url, publishableKey, {
-    cookieOptions: { name: v3CookieName },
+    cookieOptions: { name: cookieName },
     cookies: {
       getAll: () => cookieStore.getAll(),
       setAll: (values) => {

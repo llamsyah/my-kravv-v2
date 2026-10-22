@@ -2,6 +2,8 @@
 
 **Startup/reset remain blocked.** The retained-volume compatibility gate is implemented. No creation-time publisher is approved. Native localhost-only enforcement remains unresolved; the custom CLI and Docker upgrade are deferred. This is a tooling report, not database compatibility approval or a successful V3 runtime test.
 
+The later [offline Cloud adapter](../../supabase/v3-cloud/README.md) is a separate, unprovisioned path. It does not change this publisher gate, local service lock, migration/config hashes or retained receipts. Cloud entry points and application-facing Cloud target resolution share the same unconditional client-safe execution invariant. The initial adapter missed the application check; the remediation blocks populated approval metadata before identity requests or client creation, as verified using isolated synthetic configuration and mocked transport. Later owner-approved target and operations work remains necessary.
+
 ## Current decision and evidence
 
 The owner selected Docker Desktop's native `local-only-port-binding` policy. On Desktop 4.85.0, the single approved implicit-publication nginx canary returned HTTP 200; Windows showed only `127.0.0.1:55999`, but Docker runtime metadata also reported wildcard `[::]:55999`. No volumes were attached, cleanup completed, and the listener disappeared. Read-only Windows and running WSL socket evidence for existing n8n showed IPv4 loopback without a matching IPv6 listener. These observations support a reporting discrepancy, not approval to ignore wildcard metadata.

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { assertV3PublicTarget } from "./v3.ts";
+import { resolveV3Target } from "./v3-target.ts";
 
 const supabaseSchema = z.object({
   url: z.url({ protocol: /^https?$/ }),
@@ -8,6 +8,11 @@ const supabaseSchema = z.object({
 
 /** Only public-safe values may be read by browser and authenticated SSR clients. */
 export function getPublicSupabaseConfig() {
+  const { url, publishableKey } = getPublicSupabaseTarget();
+  return { url, publishableKey };
+}
+
+export function getPublicSupabaseTarget() {
   const result = supabaseSchema.safeParse({
     url: process.env.NEXT_PUBLIC_SUPABASE_URL,
     publishableKey: process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
@@ -19,6 +24,10 @@ export function getPublicSupabaseConfig() {
     );
   }
 
-  assertV3PublicTarget(process.env.NEXT_PUBLIC_MY_KRAVV_ENV, result.data.url);
-  return result.data;
+  const target = resolveV3Target({
+    profile: process.env.NEXT_PUBLIC_MY_KRAVV_ENV,
+    url: result.data.url,
+    cloudProjectRef: process.env.NEXT_PUBLIC_MY_KRAVV_CLOUD_PROJECT_REF,
+  });
+  return { ...result.data, ...target };
 }

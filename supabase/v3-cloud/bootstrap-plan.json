@@ -1,0 +1,10 @@
+{
+  "status": "unprovisioned",
+  "projectRef": null,
+  "apiOrigin": null,
+  "databaseMarker": null,
+  "foundationSource": "supabase/v3/supabase/migrations/20261021000100_slice0_foundation.sql",
+  "foundationSourceSha256": "d819f9d322179dde279fbab3632783c9c2ed331d892054f3f39c2e1ffdd1b17c",
+  "cloudMigration": null,
+  "execution": "blocked-pending-owner-target-and-bootstrap-review"
+}

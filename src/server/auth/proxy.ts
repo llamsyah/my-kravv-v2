@@ -1,8 +1,7 @@
 import "server-only";
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server.js";
-import { getPublicSupabaseConfig } from "../../lib/env/public.ts";
-import { v3CookieName } from "../../lib/env/v3.ts";
+import { getPublicSupabaseTarget } from "../../lib/env/public.ts";
 import { verifyV3DatabaseTarget } from "./v3-target.ts";
 
 export async function updateSession(request: NextRequest) {
@@ -22,9 +21,9 @@ export async function updateSession(request: NextRequest) {
     });
   }
   let response = NextResponse.next({ request });
-  const { url, publishableKey } = getPublicSupabaseConfig();
+  const { url, publishableKey, cookieName } = getPublicSupabaseTarget();
   const supabase = createServerClient(url, publishableKey, {
-    cookieOptions: { name: v3CookieName },
+    cookieOptions: { name: cookieName },
     cookies: {
       getAll: () => request.cookies.getAll(),
       setAll: (values, headers) => {

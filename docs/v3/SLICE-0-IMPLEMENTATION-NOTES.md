@@ -4,6 +4,8 @@ Initial implementation: 21 October 2026 (Asia/Jakarta). Offline checkpoint updat
 
 **Status: partially complete; local runtime validation blocked. Slice 1 is not authorized or ready.** Source implementation and deterministic checks are present. Actual two-user Auth/RLS/HTTP tests, production build and reset/rebuild verification have not completed. This note records evidence, not approval of later features or replacement of the established specifications.
 
+The later offline Cloud adapter is recorded in section I and [its operating boundary](../../supabase/v3-cloud/README.md). The local runtime limitations below remain in force.
+
 ## Current checkpoint — 22 October 2026
 
 Slice 0 remains partially complete. The source implementation and offline checks are separate from unverified runtime security. The dated sections A–G below retain the initial implementation evidence; their file counts and test counts are historical. Section H records the current offline maintenance and validation.
@@ -158,3 +160,55 @@ Existing lint-tool audit findings in section D are historical, not a fresh vulne
 This checkpoint changes only four pre-existing Slice 0 working files: these implementation notes, `scripts/v3/STARTUP-SAFETY.md`, `supabase/v3/README.md`, and the two subprocess bounds in `src/tests/v3-live/foundation.test.ts`. They were already part of the uncommitted Slice 0 working tree; no new source file is introduced by this checkpoint. Earlier uncommitted implementation changes are retained, not claimed as changes made in this maintenance task.
 
 A task-start snapshot of 307 tracked/nonignored working files and the retained receipt is used for final comparison. All other snapshotted files, including V2 migrations, product/design documents and references, must remain byte-for-byte unchanged. The retained receipt SHA-256 remains `fe958d5b78506ddeb334a9df70b5a0fe2280e95c54bd59e76e01bb5a97aaa5ce`. Local validation metadata is ignored under `.qa/v3-offline-checkpoint/`; it is not a Git deliverable. Branch remains `v3`, HEAD `1b1234571b4802c391fb514f7668cc16033abd5b`, and local `main` remains `ee7be8ae8c481baebb5e159b57334333eb9994c9`. No Docker operation or live database test was executed in this checkpoint.
+
+## I. Cloud alternative — Checkpoint 1, offline only
+
+Base: clean branch `v3`, commit `da67ffa642e636d08ad548a7778e538b64453dc4`. This later maintenance is uncommitted and implements only the owner-authorized offline adapter. Earlier sections record dated pre-commit observations; no new checkpoint commit or Cloud acceptance is claimed.
+
+### Implemented boundary
+
+A separate Cloud target validator and public-safe approval record were added. The record is `unprovisioned` with null project reference, origin and marker. No real reference/identity was invented. A future approved reference must match its exact HTTPS Supabase origin and strict distinct Cloud marker. Only the explicit Cloud profile selects this validator; local selection still executes the original literal local guard and rejects a conflicting Cloud reference. Env variables cannot approve a project.
+
+The browser and SSR adapters select a distinct cookie namespace and marker from the validated target. The ordinary public configuration API still returns only URL/publishable key. Independent Auth/content authorization, no-store behavior, legacy route denial and disabled AI remain intact. The Cloud commands are denial-only. Initial implementation checked the execution interlock only in command/test paths; final review reproduced an application-facing gap with populated approval metadata. The remediation subsection below supersedes that incomplete protection claim. No fetch/SDK/CLI/Docker/child launch or real credential retrieval occurs through them.
+
+The environment preparation helper is tested using synthetic evidence and credentials only. It requires explicit namespaced inputs, refuses conflicting inherited generic targets/credentials, reuses the existing dotenv-key sanitization and assigns privileged credentials only to a future fixture child. Existing local sanitization has only gained an injectable inherited-env input, defaulting to the original `process.env`; its local effect is unchanged. No source dotenv file is edited.
+
+A non-executable Cloud bootstrap plan pins the original reviewed foundation source/hash but leaves the future migration and actual marker null. Local SQL must not be applied unchanged to Cloud because it embeds local identity. Hosted Auth/Data API settings and independent pre-DDL target proof are documented for later approval. Existing V2/local migrations and local startup/service/receipt guards remain unchanged.
+
+### Test preparation and remaining limits
+
+API/Auth/HTTP assertions were extracted into `src/tests/helpers/v3-portable.ts`, preserving the four portable subtests and exact synthetic fixture lifecycle. The local wrapper retains manifest/receipt/container/SQL preflight and its catalog/grant/delete/RPC/restrictive-FK subtest. The helper requires the local SQL callback and repeats the local API marker check before fixtures. Cleanup additionally binds to the exact synthetic run marker. The Cloud helper branch is explicitly blocked before credentials/network, not silently skipped.
+
+No Cloud fixture lifecycle, remote SQL, app/build/serve launch, live integration or runtime marker verification has run. Future Cloud execution requires separately reviewed implementation/authorization after target provisioning and bootstrap. Build-target provenance must be added before enabling Cloud serve, because Next public variables are frozen into builds. Catalog/FK SQL and reset/rebuild are not represented by the portable subset. No reset path was added.
+
+### Validation and change inventory
+
+- `node --conditions=react-server --test src/tests/v3-cloud.test.ts src/tests/v3-foundation.test.ts src/tests/v3-startup-safety.test.ts`: 20 passed, 0 failed/skipped before final review; the final complete suite covers these tests.
+- `npm test`: 109 passed, 0 failed, 0 cancelled, 0 skipped (101 existing plus 8 Cloud tests).
+- `npm run lint`, `npm run typecheck`, `npm run format:check`: all passed, exit 0 in the final verification. An initial TypeScript fixture-env typing error was corrected with an explicit test-only Node environment value; no unsafe production cast or guard relaxation was used.
+- Edited implementation notes are explicitly formatted/checked using `node node_modules/prettier/bin/prettier.cjs --ignore-path .gitignore --write docs/v3/SLICE-0-IMPLEMENTATION-NOTES.md` and the corresponding `--check`, because root formatting excludes `docs/`.
+- Offline comparison verifies the same five local live subtest titles and unchanged SQL probe text across the extraction. These are coverage-preservation source checks, not live-test passes.
+
+Modified: `package.json` (separate denial commands); `scripts/v3/guards.ts` (injectable inherited-env input, existing default preserved); `src/lib/env/public.ts` (explicit target dispatch); `src/lib/supabase/browser.ts`, `src/server/auth/client.ts`, `src/server/auth/proxy.ts`, `src/server/auth/v3-target.ts` (validated cookie/marker selection); `src/tests/v3-live/foundation.test.ts` (local preflight/SQL wrapper); root README, startup-safety report and these notes (boundaries/status).
+
+Added: `src/lib/env/v3-cloud-approval.json`, `src/lib/env/v3-cloud.ts`, `src/lib/env/v3-target.ts` (approval and exact target validation); `scripts/v3/cloud.ts`, `scripts/v3/cloud-guards.ts` (denial entry points and offline environment preparation); `src/tests/helpers/v3-portable.ts` (extracted assertions); `src/tests/v3-cloud.test.ts` (8 focused offline tests); `supabase/v3-cloud/bootstrap-plan.json` and `supabase/v3-cloud/README.md` (no executable migration or remote link).
+
+### Next owner checkpoint
+
+Owner review of this working tree comes first; do not commit automatically. Checkpoint 2 requires actual non-secret project reference/origin, organization/region and confirmation of a dedicated new V3 project distinct from V2, approval of the distinct marker/bootstrap scope and hosted Auth settings, and a decision on future credential delivery and SQL-check scope. Do not supply secrets in chat. No provisioning, Cloud access, database change, Docker operation, paid-provider request, Slice 1, commit or push is authorized by Checkpoint 1. See the Cloud README for the exact decision checklist.
+
+Initial Checkpoint 1 scope check, before security remediation: 11 existing files modified and 9 source/documentation files added, with nothing staged. The original local launcher, startup safety validator, service lock, local target constants, V2/local migrations/configuration, dependency lock and `.gitignore` are unchanged. The retained receipt checksum matches the offline checkpoint. Branch/HEAD/main are unchanged. All other tracked files retain their Git-baseline contents. No actual secret or generated artifact is included in the change set; ignored test logs remain under `.qa/v3-cloud-checkpoint-1/`. The later final review marked this initial state NOT-READY because application paths could accept populated approval without the execution interlock. The remediation below is required before reconsidering commit readiness; future Cloud provisioning/runtime work remains unauthorized.
+
+### Checkpoint 1 security blocker remediation
+
+The read-only final review reproduced one mocked identity request after filling otherwise valid approval metadata in child-process memory. This exposed a gap between metadata approval and execution authorization in the initial application adapter. The previous 109 passing tests did not cover that condition; they were not proof of the complete runtime boundary.
+
+The correction moves the existing unconditional gate into the client-safe `src/lib/env/v3-cloud-execution.ts` module. `scripts/v3/cloud-guards.ts` re-exports the same function; no second authorization rule exists. Application-facing `resolveV3Target` now calls it immediately after target approval validation and before returning Cloud configuration. Identity verification resolves the target before any request; browser/SSR clients and Proxy use that same path. The existing command and portable-test gates use the same invariant. Pure metadata validation and offline environment preparation remain separate and do not authorize a launch or request.
+
+There is intentionally no accepted execution grant at Checkpoint 1. No project metadata, env flag, missing/mismatched/ambiguous record or apparently positive approval can enable execution. A future activation requires a separately reviewed source change, not a runtime override. Local literal URL/identity behavior, cookies, no-store handling, Docker publisher/volume compatibility guards and all original migrations remain unchanged.
+
+Three regressions were added to `src/tests/v3-cloud.test.ts`: shared gate identity/rejection of arbitrary grant inputs; a process-isolated reproduction with populated valid synthetic project metadata covering resolver/public configuration, identity requests, browser/SSR clients, Proxy and commands; and unchanged local identity/conflict behavior under populated Cloud metadata. The network mock records zero Cloud requests. Local verification makes exactly one mocked local identity request. Source approval metadata remains unprovisioned and is never written by the probes. Node ESM resolves Next's actual headers entry via a child-only import mapping; no authorization function is mocked or bypassed.
+
+Remediation files: added `src/lib/env/v3-cloud-execution.ts`; updated `src/lib/env/v3-target.ts`, `scripts/v3/cloud-guards.ts`, `src/tests/v3-cloud.test.ts`, this report, `scripts/v3/STARTUP-SAFETY.md` and `supabase/v3-cloud/README.md`. No other adapter/business logic was refactored for this correction. Total uncommitted Checkpoint 1 scope is now 11 modified and 10 added files (21), including the original adapter work.
+
+Verification: focused Cloud suite `node --conditions=react-server --test src/tests/v3-cloud.test.ts` passed 11/11, zero failures/skips. Final `npm test`: **112 passed, 0 failed, 0 cancelled, 0 skipped** (109 prior tests plus 3 regressions). `npm run lint`, `npm run typecheck`, `npm run format:check`, explicit implementation-note formatting and `git diff --check` all passed, exit 0. The previously reproduced populated-metadata application bypass is now rejected with **zero outbound identity requests**. No remaining material blocker was identified in this focused remediation; a separate owner pre-commit review remains appropriate. The initial SSR probe import failure was fixed solely in the isolated test harness; no production module or guard was weakened. No real Cloud/service/SQL/provider operations, credentials, staging, commit or push occurred.
