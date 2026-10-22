@@ -156,6 +156,10 @@ function fixture() {
 }
 
 test("Production runner remains closed before file/network access, even with apparent authorization", async (t) => {
+  assert.match(
+    fs.readFileSync("scripts/v3/cloud-two-user-runner.ts", "utf8"),
+    /const approvedGrantSha256: string \| null = null;/,
+  );
   let calls = 0;
   t.mock.method(globalThis, "fetch", async () => {
     calls++;
@@ -193,6 +197,160 @@ test("Production runner remains closed before file/network access, even with app
   );
   assert.equal(child.status, 0, child.stderr);
   assert.deepEqual(JSON.parse(child.stdout), { reads: 0, requests: 0 });
+});
+
+// Fresh child module graph; only its in-memory source constant is replaced.
+// Actual runner source, private setup, application interlock and transport stay untouched.
+function pinnedGrantProbe(f: ReturnType<typeof fixture>, pin: string) {
+  const child = spawnSync(
+    process.execPath,
+    [
+      "--input-type=module",
+      "-e",
+      String.raw`
+    import fs from 'node:fs';
+    import path from 'node:path';
+    import {pathToFileURL} from 'node:url';
+    import {registerHooks,stripTypeScriptTypes} from 'node:module';
+    const [root,pin,replies,at]=process.argv.slice(1);
+    if(!/^[a-f0-9]{64}$/.test(pin))throw Error('Invalid synthetic pin');
+    const filename=path.resolve('scripts/v3/cloud-two-user-runner.ts');
+    const url=pathToFileURL(filename).href;
+    const source=fs.readFileSync(filename,'utf8');
+    const declaration='const approvedGrantSha256: string | null = null;';
+    if(!source.includes(declaration))throw Error('Source null pin missing');
+    const copy=source.replace(declaration,'const approvedGrantSha256: string | null = '+JSON.stringify(pin)+';');
+    const hooks=registerHooks({load(address,context,next){
+      if(address===url)return {format:'module',source:stripTypeScriptTypes(copy),shortCircuit:true};
+      return next(address,context);
+    }});
+    const {simulateCloudTwoUserRun}=await import(url);
+    hooks.deregister();
+    const raw=fs.readFileSync(path.join(root,'run-approval.json'),'utf8');
+    const parse=JSON.parse,open=fs.openSync,stat=fs.lstatSync;
+    let grantParses=0,credentialOpens=0,credentialMetadata=0,claimAttempts=0,network=0;
+    JSON.parse=function(value,...args){if(value===raw)grantParses++;return parse(value,...args)};
+    fs.openSync=function(file,...args){
+      if(path.basename(String(file))==='credentials.json')credentialOpens++;
+      if(String(file).endsWith('.consumed.json'))claimAttempts++;
+      return open(file,...args);
+    };
+    fs.lstatSync=function(file,...args){
+      if(path.basename(String(file))==='credentials.json')credentialMetadata++;
+      return stat(file,...args);
+    };
+    globalThis.fetch=async()=>{network++;throw Error('Offline probe forbids network')};
+    const result=await simulateCloudTwoUserRun(root,parse(replies),Number(at));
+    JSON.parse=parse;fs.openSync=open;fs.lstatSync=stat;
+    if(fs.readFileSync(filename,'utf8')!==source)throw Error('Source file changed');
+    console.log(JSON.stringify({outcome:result.outcome,sent:result.sent.length,
+      grantParses,credentialOpens,credentialMetadata,claimAttempts,network}));
+  `,
+      f.root,
+      pin,
+      JSON.stringify(f.replies),
+      String(at),
+    ],
+    {
+      env: { NODE_ENV: "test", PATH: "", Path: "" },
+      encoding: "utf8",
+      timeout: 15000,
+      windowsHide: true,
+    },
+  );
+  assert.equal(child.error, undefined);
+  assert.equal(child.status, 0, child.stderr);
+  return JSON.parse(child.stdout.trim()) as {
+    outcome: string;
+    sent: number;
+    grantParses: number;
+    credentialOpens: number;
+    credentialMetadata: number;
+    claimAttempts: number;
+    network: number;
+  };
+}
+
+test("Synthetic source pin rejects changed invalid grant bytes before parsing, credential access or claim", () => {
+  const f = fixture();
+  try {
+    const pin = sha(
+      fs.readFileSync(path.join(f.root, "run-approval.json"), "utf8"),
+    );
+    f.write("run-approval.json", "not valid JSON");
+    assert.deepEqual(pinnedGrantProbe(f, pin), {
+      outcome: "failed",
+      sent: 0,
+      grantParses: 0,
+      credentialOpens: 0,
+      credentialMetadata: 0,
+      claimAttempts: 0,
+      network: 0,
+    });
+    assert.ok(
+      !fs.existsSync(path.join(f.root, `run-${spec.runId}.consumed.json`)),
+    );
+  } finally {
+    f.close();
+  }
+});
+
+test("Synthetic source pin binds exact grant bytes, including whitespace-only changes", () => {
+  const f = fixture();
+  try {
+    const original = fs.readFileSync(
+      path.join(f.root, "run-approval.json"),
+      "utf8",
+    );
+    const pin = sha(original);
+    f.write("run-approval.json", original + "\n");
+    assert.deepEqual(pinnedGrantProbe(f, pin), {
+      outcome: "failed",
+      sent: 0,
+      grantParses: 0,
+      credentialOpens: 0,
+      credentialMetadata: 0,
+      claimAttempts: 0,
+      network: 0,
+    });
+  } finally {
+    f.close();
+  }
+});
+
+test("Matching synthetic source pin still enforces grant scope/expiry/plan and existing one-run checks", () => {
+  for (const mode of ["invalid-scope", "expired", "wrong-plan", "valid"]) {
+    const f = fixture();
+    try {
+      if (mode === "invalid-scope") f.grant.purpose = "wrong-purpose";
+      if (mode === "expired") f.grant.expiresAt = new Date(at).toISOString();
+      if (mode === "wrong-plan") f.grant.planSha256 = "0".repeat(64);
+      f.save();
+      const pin = sha(
+        fs.readFileSync(path.join(f.root, "run-approval.json"), "utf8"),
+      );
+      const result = pinnedGrantProbe(f, pin);
+      assert.equal(result.grantParses, 1);
+      assert.equal(result.network, 0);
+      if (mode === "valid") {
+        assert.equal(result.outcome, "passed");
+        assert.equal(result.sent, f.plan.steps.length);
+        assert.equal(result.credentialOpens, 1);
+        assert.equal(result.claimAttempts, 1);
+        const replay = pinnedGrantProbe(f, pin);
+        assert.equal(replay.outcome, "failed");
+        assert.equal(replay.sent, 0);
+      } else {
+        assert.equal(result.outcome, "failed");
+        assert.equal(result.sent, 0);
+        assert.equal(result.credentialOpens, 0);
+        assert.equal(result.credentialMetadata, 0);
+        assert.equal(result.claimAttempts, 0);
+      }
+    } finally {
+      f.close();
+    }
+  }
 });
 
 test("Dormant engine completes every assertion using canned transport, real file loader and one-run claim", async () => {

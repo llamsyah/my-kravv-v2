@@ -4,7 +4,6 @@ import path from "node:path";
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import { z } from "zod";
-import { assertCloudExecutionReady } from "../../src/lib/env/v3-cloud-execution.ts";
 import { v3CloudProfile } from "../../src/lib/env/v3-cloud.ts";
 import {
   buildCloudTwoUserPlan,
@@ -15,6 +14,8 @@ import {
 } from "./cloud-two-user-plan.ts";
 
 const repository = path.resolve(import.meta.dirname, "../..");
+// Owner-reviewed source edit only. Never populated from arguments/config/environment.
+const approvedGrantSha256: string | null = null;
 const sha = (bytes: string | Buffer) =>
   createHash("sha256").update(bytes).digest("hex");
 const fail = () =>
@@ -170,7 +171,7 @@ function privatePath(file: string, directory: boolean, simulation: boolean) {
     throw fail();
 }
 
-function readPrivate(root: string, name: string, simulation: boolean) {
+function readPrivateBytes(root: string, name: string, simulation: boolean) {
   const file = path.join(root, name);
   privatePath(file, false, simulation);
   const fd = fs.openSync(
@@ -187,10 +188,14 @@ function readPrivate(root: string, name: string, simulation: boolean) {
       opened.size > 32768
     )
       throw fail();
-    return fs.readFileSync(fd, "utf8");
+    return fs.readFileSync(fd);
   } finally {
     fs.closeSync(fd);
   }
+}
+
+function readPrivate(root: string, name: string, simulation: boolean) {
+  return readPrivateBytes(root, name, simulation).toString("utf8");
 }
 
 type Wire = (
@@ -237,8 +242,19 @@ async function execute(
     privatePath(root, true, simulation);
     if (readPrivate(root, ".gitignore", simulation).trim() !== "*")
       throw fail();
+    const grantBytes = readPrivateBytes(root, "run-approval.json", simulation);
+    // The canned simulator stays offline with a null pin. In-memory source-pinned
+    // test copies exercise this exact production check without a runtime override.
+    if (!simulation || approvedGrantSha256 !== null) {
+      if (
+        approvedGrantSha256 === null ||
+        !/^[a-f0-9]{64}$/.test(approvedGrantSha256) ||
+        sha(grantBytes) !== approvedGrantSha256
+      )
+        throw fail();
+    }
     const grant = grantSchema.safeParse(
-      JSON.parse(readPrivate(root, "run-approval.json", simulation)),
+      JSON.parse(grantBytes.toString("utf8")),
     );
     if (!grant.success) throw fail();
     const g = grant.data;
@@ -532,9 +548,15 @@ async function networkWire(
   }
 }
 
-/** Production boundary stays closed, before file access, environment or network. */
+/** Source-null production boundary rejects before private file/environment/network access. */
 export async function cloudTwoUserMain(args = process.argv.slice(2)) {
-  assertCloudExecutionReady();
+  if (
+    approvedGrantSha256 === null ||
+    !/^[a-f0-9]{64}$/.test(approvedGrantSha256)
+  )
+    throw Error(
+      "Cloud execution is blocked: no approved source-pinned runner grant.",
+    );
   if (args.length !== 0) throw fail();
   return execute(
     path.join(os.homedir(), ".my-kravv-v3-private"),
