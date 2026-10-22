@@ -2,6 +2,8 @@
 
 **Target identity approved; execution blocked.** Organization `MY KRAVV V3`, project `my-kravv-dev-v3`, reference `kjcvgjfwlmyfroiqlbmw`, exact origin `https://kjcvgjfwlmyfroiqlbmw.supabase.co`. Free plan and Healthy status are owner-reported, not independently verified. Region is owner-reported South Asia; exact provider identifier and acceptance remain pending. V2 `my-kravv-dev` and all local volumes are outside this package.
 
+See [Checkpoint 2F test preparation](TWO-USER-TEST-PLAN.md) for the newer owner-reported region/bootstrap/user status and the offline-only two-user request specification. Historical status below is the Checkpoint 2C record; no live acceptance is inferred.
+
 ## Approval is not execution authorization
 
 The [approval record](../../src/lib/env/v3-cloud-approval.json) now contains the owner-selected public identity using the existing strict schema. It approves only the target identity, not credential use, database access, SQL, Auth changes or runtime execution. [bootstrap-plan.json](bootstrap-plan.json) records the draft paths and hashes; it is not an executable runner or migration history.
