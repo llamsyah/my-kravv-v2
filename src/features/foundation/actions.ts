@@ -6,21 +6,23 @@ import {
   renameFoundationCompany,
   FoundationError,
 } from "../../server/foundation/service.ts";
+import type { WorkspaceCompany } from "../v3-workspace/model.ts";
 
 export async function saveFoundationCompanyAction(
-  _previous: { error: string | null },
+  _previous: { error: string | null; company?: WorkspaceCompany },
   form: FormData,
-): Promise<{ error: string | null }> {
+): Promise<{ error: string | null; company?: WorkspaceCompany }> {
+  let company: WorkspaceCompany;
   try {
     const client = await createSupabaseServerClient();
     // The service independently calls getUser; form.user_id is never authority.
     if (form.has("company_id"))
-      await renameFoundationCompany(
+      company = await renameFoundationCompany(
         client,
         form.get("company_id"),
         form.get("name"),
       );
-    else await createFoundationCompany(client, form.get("name"));
+    else company = await createFoundationCompany(client, form.get("name"));
   } catch (error) {
     return {
       error:
@@ -30,5 +32,5 @@ export async function saveFoundationCompanyAction(
     };
   }
   revalidatePath("/foundation");
-  return { error: null };
+  return { error: null, company };
 }
