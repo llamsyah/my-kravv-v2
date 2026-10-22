@@ -2,11 +2,29 @@ import "server-only";
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server.js";
 import { getPublicSupabaseConfig } from "../../lib/env/public.ts";
+import { v3CookieName } from "../../lib/env/v3.ts";
+import { verifyV3DatabaseTarget } from "./v3-target.ts";
 
 export async function updateSession(request: NextRequest) {
+  const path = request.nextUrl.pathname;
+  if (!["/", "/auth", "/foundation"].includes(path)) {
+    return new NextResponse("Unavailable in V3 Slice 0.", {
+      status: 404,
+      headers: { "Cache-Control": "private, no-store" },
+    });
+  }
+  try {
+    await verifyV3DatabaseTarget();
+  } catch {
+    return new NextResponse("V3 local environment is unavailable.", {
+      status: 503,
+      headers: { "Cache-Control": "private, no-store" },
+    });
+  }
   let response = NextResponse.next({ request });
   const { url, publishableKey } = getPublicSupabaseConfig();
   const supabase = createServerClient(url, publishableKey, {
+    cookieOptions: { name: v3CookieName },
     cookies: {
       getAll: () => request.cookies.getAll(),
       setAll: (values, headers) => {
@@ -35,6 +53,15 @@ export async function updateSession(request: NextRequest) {
     authUrl.pathname = "/auth";
     authUrl.search = "";
     const redirect = NextResponse.redirect(authUrl);
+    for (const cookie of response.cookies.getAll())
+      redirect.cookies.set(cookie);
+    response = redirect;
+  }
+  if (verified && path === "/" && request.method === "GET") {
+    const destination = request.nextUrl.clone();
+    destination.pathname = "/foundation";
+    destination.search = "";
+    const redirect = NextResponse.redirect(destination);
     for (const cookie of response.cookies.getAll())
       redirect.cookies.set(cookie);
     response = redirect;

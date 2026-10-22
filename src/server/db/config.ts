@@ -1,5 +1,6 @@
 import "server-only";
 import { z } from "zod";
+import { getPublicSupabaseConfig } from "../../lib/env/public.ts";
 
 /** Administration and narrow AI accounting only. User content uses Auth + RLS. */
 export function getSupabaseSecretKey(): string {
@@ -14,5 +15,6 @@ export function getSupabaseSecretKey(): string {
       "Set SUPABASE_SECRET_KEY before using administrative database operations.",
     );
   }
+  getPublicSupabaseConfig();
   return result.data;
 }

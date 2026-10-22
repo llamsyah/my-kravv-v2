@@ -17,7 +17,7 @@ export async function login(
   const state = await authenticatePassword(supabase, formData);
   if (state.error) return state;
   revalidatePath("/", "layout");
-  redirect("/");
+  redirect("/foundation");
 }
 
 export async function logout(): Promise<AuthFormState> {

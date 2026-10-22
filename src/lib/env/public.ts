@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { assertV3PublicTarget } from "./v3.ts";
 
 const supabaseSchema = z.object({
   url: z.url({ protocol: /^https?$/ }),
@@ -18,5 +19,6 @@ export function getPublicSupabaseConfig() {
     );
   }
 
+  assertV3PublicTarget(process.env.NEXT_PUBLIC_MY_KRAVV_ENV, result.data.url);
   return result.data;
 }

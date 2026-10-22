@@ -3,8 +3,10 @@ import { afterEach, beforeEach, test } from "node:test";
 import { getPublicSupabaseConfig } from "../lib/env/public.ts";
 import { getSupabaseSecretKey } from "../server/db/config.ts";
 import { getOpenAIConfig } from "../server/ai/config.ts";
+import { v3ApiUrl, v3ProjectId } from "../lib/env/v3.ts";
 
 const keys = [
+  "NEXT_PUBLIC_MY_KRAVV_ENV",
   "NEXT_PUBLIC_SUPABASE_URL",
   "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY",
   "SUPABASE_SECRET_KEY",
@@ -45,13 +47,14 @@ test("blank credentials and non-HTTP URLs are rejected without echoing values", 
 });
 
 test("public configuration exposes only URL and publishable key", () => {
-  process.env.NEXT_PUBLIC_SUPABASE_URL = "http://127.0.0.1:54321";
+  process.env.NEXT_PUBLIC_MY_KRAVV_ENV = v3ProjectId;
+  process.env.NEXT_PUBLIC_SUPABASE_URL = v3ApiUrl;
   process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_example-public-key";
   process.env.SUPABASE_SECRET_KEY = "sb_secret_example-server-only-key";
   process.env.OPENAI_API_KEY = "example-ai-key";
   assert.deepEqual(getPublicSupabaseConfig(), {
-    url: "http://127.0.0.1:54321",
+    url: v3ApiUrl,
     publishableKey: "sb_publishable_example-public-key",
   });
   assert.equal(getSupabaseSecretKey(), "sb_secret_example-server-only-key");

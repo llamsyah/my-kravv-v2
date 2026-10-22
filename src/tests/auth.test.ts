@@ -9,6 +9,7 @@ import {
 } from "../server/auth/operations.ts";
 import { updateSession } from "../server/auth/proxy.ts";
 import { ensureUserSettings } from "../server/db/user-settings.ts";
+import { v3ProjectId, v3CookieName } from "../lib/env/v3.ts";
 import {
   createAuthFixture,
   createCookieJar,
@@ -75,9 +76,13 @@ test("authenticated identity survives a fresh server client and logout clears co
 test("Proxy rejects anonymous/forged cookies and preserves refreshed cookies", async (t) => {
   const oldUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const oldKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+  const oldProfile = process.env.NEXT_PUBLIC_MY_KRAVV_ENV;
+  process.env.NEXT_PUBLIC_MY_KRAVV_ENV = v3ProjectId;
   process.env.NEXT_PUBLIC_SUPABASE_URL = fixtureUrl;
   process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY = fixtureKey;
   t.after(() => {
+    if (oldProfile === undefined) delete process.env.NEXT_PUBLIC_MY_KRAVV_ENV;
+    else process.env.NEXT_PUBLIC_MY_KRAVV_ENV = oldProfile;
     if (oldUrl === undefined) delete process.env.NEXT_PUBLIC_SUPABASE_URL;
     else process.env.NEXT_PUBLIC_SUPABASE_URL = oldUrl;
     if (oldKey === undefined)
@@ -100,7 +105,7 @@ test("Proxy rejects anonymous/forged cookies and preserves refreshed cookies", a
     assert.equal(
       (await updateSession(new NextRequest(`http://localhost:3000${path}`)))
         .status,
-      307,
+      404,
     );
   }
   const auth = await updateSession(
@@ -109,7 +114,7 @@ test("Proxy rejects anonymous/forged cookies and preserves refreshed cookies", a
   assert.equal(auth.status, 200);
   await authenticatePassword(fixture.createClient(), loginForm());
   const allowed = await updateSession(
-    new NextRequest("http://localhost:3000/", {
+    new NextRequest("http://localhost:3000/foundation", {
       headers: { cookie: fixture.jar.header() },
     }),
   );
@@ -168,7 +173,7 @@ test("Proxy rejects anonymous/forged cookies and preserves refreshed cookies", a
     },
   ]);
   const refreshed = await updateSession(
-    new NextRequest("http://localhost:3000/", {
+    new NextRequest("http://localhost:3000/foundation", {
       headers: { cookie: expiredJar.header() },
     }),
   );
@@ -178,6 +183,7 @@ test("Proxy rejects anonymous/forged cookies and preserves refreshed cookies", a
   // A fresh request using only response cookies can verify the new session.
   const refreshedJar = createCookieJar(refreshed.cookies.getAll());
   const freshClient = createServerClient(fixtureUrl, fixtureKey, {
+    cookieOptions: { name: v3CookieName },
     cookies: refreshedJar,
     global: { fetch: fixture.fetcher },
   });

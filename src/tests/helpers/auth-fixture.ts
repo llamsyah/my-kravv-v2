@@ -1,6 +1,7 @@
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
+import { v3ApiUrl, v3CookieName, v3ProjectId } from "../../lib/env/v3.ts";
 
-export const fixtureUrl = "http://127.0.0.1:54321";
+export const fixtureUrl = v3ApiUrl;
 export const fixtureKey = "sb_publishable_deterministic-test-key";
 export const fixtureUserId = "11111111-1111-4111-8111-111111111111";
 
@@ -58,6 +59,12 @@ export function createAuthFixture() {
           : input.url,
     );
     const headers = new Headers(init?.headers);
+    if (url.pathname === "/rest/v1/rpc/v3_target_identity")
+      return Response.json({
+        project_id: v3ProjectId,
+        purpose: "disposable-v3-slice0",
+        schema_version: 1,
+      });
     if (url.pathname === "/auth/v1/token") {
       if (url.searchParams.get("grant_type") === "refresh_token") {
         refreshCount++;
@@ -86,6 +93,7 @@ export function createAuthFixture() {
   const jar = createCookieJar();
   const createClient = () =>
     createServerClient(fixtureUrl, fixtureKey, {
+      cookieOptions: { name: v3CookieName },
       cookies: jar,
       global: { fetch: fetcher },
     });

@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "platform": "linux/amd64",
+  "cli": {
+    "version": "2.75.0",
+    "upstreamCommit": "e07c7ea15b842e9bb45c79518a5f20cea84fc753",
+    "executablePlatform": "win32/x64",
+    "executableSha256": "1fc4e6cae5d29d0c9259f09e34756cc00b165e59fc0be2ffafd4048036167b56"
+  },
+  "services": [
+    {
+      "service": "db",
+      "reference": "public.ecr.aws/supabase/postgres:17.6.1.075",
+      "registryDigest": "sha256:e4c5a3f62fed239ca9cd633b5a8e03385f636a9705cc759af0abf56de280b747",
+      "platformManifestDigest": "sha256:e4c5a3f62fed239ca9cd633b5a8e03385f636a9705cc759af0abf56de280b747",
+      "configDigest": "sha256:0fab7a426fa7aba838f6e4c746f975032237934f4ca5ace1a7222ba88deaacf7"
+    },
+    {
+      "service": "auth",
+      "reference": "public.ecr.aws/supabase/gotrue:v2.186.0",
+      "registryDigest": "sha256:f2112b9289422f205df4ea15b8b550d425ae42528ea54521faa32cc7b62490de",
+      "platformManifestDigest": "sha256:9b387cd7896c3f2ea4e72e0311b1ce727ef61d3b2a3a9789cc4935925dfe9d67",
+      "configDigest": "sha256:1a00f324d1ea23e5938de070ef2571cc8be5a7dbcd4c0be77e282e0aa1d1cae2"
+    },
+    {
+      "service": "rest",
+      "reference": "public.ecr.aws/supabase/postgrest:v14.3",
+      "registryDigest": "sha256:7c5840727ad683b0fdbfb9810930665b34f8b44884a4dc740aa8844748a2b85e",
+      "platformManifestDigest": "sha256:7924f769d8b3b173b93711c90d2fc4164667cffc563551d6a13bc5c93aca2487",
+      "configDigest": "sha256:8fef2fc016f1e9d785424f0d1362a7dc6b53c3519e89cb965d81419137f3fb41"
+    },
+    {
+      "service": "gateway",
+      "reference": "public.ecr.aws/supabase/kong:2.8.1",
+      "registryDigest": "sha256:1b53405d8680a09d6f44494b7990bf7da2ea43f84a258c59717d4539abf09f6d",
+      "platformManifestDigest": "sha256:e21b0b793879ab96720ed4188f9441260273f4bf775bcbff8d435e019ffb759a",
+      "configDigest": "sha256:3cefb958bcd694597b65adc00053a762b1f9a6df3c6031af528d052d75a64e1a"
+    },
+    {
+      "service": "mail",
+      "reference": "public.ecr.aws/supabase/mailpit:v1.22.3",
+      "registryDigest": "sha256:f7f7c31de4de59540ad6515a0ca057a77525bca2069b6e747d873ca66c10fe08",
+      "platformManifestDigest": "sha256:168f762c218e167ba88ae7e48194126eb5ba5e99ef652063e3f14f9c4f0ee70f",
+      "configDigest": "sha256:3f56e44ddc1a5655b8f288a2aa812db567b2f5f0b8bc18ef3da63b94a95608d5"
+    }
+  ]
+}

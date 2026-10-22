@@ -121,6 +121,8 @@ export function createAIProvider(
   config: AIConfig,
   fetcher?: typeof fetch,
 ): AIProvider {
+  // Slice 0 authorizes fake-transport regression tests, never a provider network call.
+  if (!fetcher) throw new AIError("AI_DISABLED");
   const sdk = new OpenAI({
     apiKey: config.apiKey,
     baseURL:

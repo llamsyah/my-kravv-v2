@@ -1,0 +1,25 @@
+# REVIEW ONLY — not applied, built, installed or approved for execution.
+# Upstream: supabase/cli v2.75.0, commit e07c7ea15b842e9bb45c79518a5f20cea84fc753
+# Source SHA-256: 204adad6f72d600c2c078d5b4edddaa550b67bd0d9902dd18e85265e9d9760ba
+# Exact project scope must be reviewed again if a new fresh V3 project ID is chosen.
+diff --git a/internal/utils/docker.go b/internal/utils/docker.go
+index 6da0d5a..53729e8 100644
+--- a/internal/utils/docker.go
++++ b/internal/utils/docker.go
+@@ -250,6 +250,16 @@ func DockerPullImageIfNotCached(ctx context.Context, imageName string) error {
+ var suggestDockerInstall = "Docker Desktop is a prerequisite for local development. Follow the official docs to install: https://docs.docker.com/desktop"
+ 
+ func DockerStart(ctx context.Context, config container.Config, hostConfig container.HostConfig, networkingConfig network.NetworkingConfig, containerName string) (string, error) {
++	// Dedicated MY KRAVV V3 build: never create another project or implicit publications.
++	if Config.ProjectId != "my-kravv-v3-local-01a14897" || hostConfig.PublishAllPorts {
++		return "", errors.New("MY KRAVV V3 publisher requires the reviewed project and explicit port mappings")
++	}
++	for port, bindings := range hostConfig.PortBindings {
++		for i := range bindings {
++			bindings[i].HostIP = "127.0.0.1"
++		}
++		hostConfig.PortBindings[port] = bindings
++	}
+ 	// Pull container image
+ 	if err := DockerPullImageIfNotCached(ctx, config.Image); err != nil {
+ 		if client.IsErrConnectionFailed(err) {
