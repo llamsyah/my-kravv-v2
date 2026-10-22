@@ -222,7 +222,29 @@ type FailureDiagnostic = {
     | "deadline"
     | "manifest-persistence";
   httpStatus?: number;
+  authReason?:
+    | "invalid-credentials"
+    | "email-unconfirmed"
+    | "account-restricted"
+    | "captcha-required"
+    | "unknown";
 };
+
+// Exact machine codes only; never copy a server-supplied string into evidence.
+function authFailureReason(code: unknown): FailureDiagnostic["authReason"] {
+  switch (code) {
+    case "invalid_credentials":
+      return "invalid-credentials";
+    case "email_not_confirmed":
+      return "email-unconfirmed";
+    case "user_banned":
+      return "account-restricted";
+    case "captcha_failed":
+      return "captcha-required";
+    default:
+      return "unknown";
+  }
+}
 type Progress = (
   event: Pick<FailureDiagnostic, "stage" | "category" | "httpStatus">,
 ) => void;
@@ -467,8 +489,11 @@ async function execute(
           step.check === "login"
             ? (record?.user as Record<string, unknown> | undefined)
             : record;
-        if (reply.status !== 200) diagnostic.category = "http-status";
-        else if (
+        if (reply.status !== 200) {
+          diagnostic.category = "http-status";
+          if (step.check === "login")
+            diagnostic.authReason = authFailureReason(record?.code);
+        } else if (
           user &&
           typeof user === "object" &&
           "id" in user &&

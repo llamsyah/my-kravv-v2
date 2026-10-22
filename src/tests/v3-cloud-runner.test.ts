@@ -1048,6 +1048,7 @@ test("Login failures retain only bounded stage/category/status diagnostics and s
         stage: c.stage,
         category: c.category,
         ...(c.status === undefined ? {} : { httpStatus: c.status }),
+        ...(c.category === "http-status" ? { authReason: "unknown" } : {}),
       });
       assert.deepEqual(Object.keys(final).sort(), [
         "cleanup",
@@ -1132,4 +1133,91 @@ test("Failed diagnostic short/zero/exception/interruption/fsync writes never per
       f.close();
     }
   }
+});
+
+test("User B Auth rejections persist only exact allowlisted reasons, never raw codes or private values", async (t) => {
+  const logs: unknown[] = [];
+  t.mock.method(console, "log", (...values: unknown[]) => {
+    logs.push(values);
+  });
+  t.mock.method(console, "error", (...values: unknown[]) => {
+    logs.push(values);
+  });
+  const cases: { body: unknown; reason: string }[] = [
+    { body: { code: "invalid_credentials" }, reason: "invalid-credentials" },
+    { body: { code: "email_not_confirmed" }, reason: "email-unconfirmed" },
+    { body: { code: "user_banned" }, reason: "account-restricted" },
+    { body: { code: "captcha_failed" }, reason: "captcha-required" },
+    { body: { code: "never-persist-private-unknown-code" }, reason: "unknown" },
+    { body: { code: "__proto__" }, reason: "unknown" },
+    { body: { code: "INVALID_CREDENTIALS" }, reason: "unknown" },
+    { body: { code: "invalid_credentials " }, reason: "unknown" },
+    { body: { code: null }, reason: "unknown" },
+    { body: { code: 400 }, reason: "unknown" },
+    { body: { code: ["invalid_credentials"] }, reason: "unknown" },
+    { body: { code: { message: "invalid_credentials" } }, reason: "unknown" },
+    {
+      body: {
+        error_code: "invalid_credentials",
+        message: "invalid_credentials",
+      },
+      reason: "unknown",
+    },
+    { body: null, reason: "unknown" },
+    { body: [], reason: "unknown" },
+    { body: "invalid_credentials", reason: "unknown" },
+  ];
+  for (const c of cases) {
+    const f = fixture();
+    try {
+      const body =
+        c.body && typeof c.body === "object" && !Array.isArray(c.body)
+          ? {
+              ...c.body,
+              message: "never-persist-private-message",
+              access_token: "never-persist-private-token",
+              email: f.creds.users.B.email,
+              password: f.creds.users.B.password,
+            }
+          : c.body;
+      f.replies[5] = { status: 400, body };
+      const r = await simulateCloudTwoUserRun(f.root, f.replies, at);
+      assert.equal(r.outcome, "failed");
+      assert.equal(r.sent.length, 6);
+      const events = f
+        .manifest()
+        .trim()
+        .split("\n")
+        .map((line) => JSON.parse(line));
+      const final = events.at(-1);
+      assert.deepEqual(final.diagnostic, {
+        requestIndex: 5,
+        stage: "observation",
+        category: "http-status",
+        httpStatus: 400,
+        authReason: c.reason,
+      });
+      const evidence = JSON.stringify(final);
+      for (const privateValue of [
+        "never-persist",
+        f.creds.users.B.email,
+        f.creds.users.B.password,
+        f.creds.publishableKey,
+        spec.users.B,
+      ])
+        assert.ok(!evidence.includes(privateValue));
+      if (
+        c.body &&
+        typeof c.body === "object" &&
+        !Array.isArray(c.body) &&
+        "code" in c.body &&
+        typeof c.body.code === "string"
+      )
+        assert.ok(!evidence.includes(c.body.code));
+      assert.ok(!events.some((event) => event.state === "company-id-verified"));
+    } finally {
+      f.close();
+    }
+  }
+  assert.deepEqual(logs, []);
 });
