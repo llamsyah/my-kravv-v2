@@ -1,0 +1,819 @@
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import { createHash } from "node:crypto";
+import { execFileSync } from "node:child_process";
+import { z } from "zod";
+import { v3CloudProfile } from "../../src/lib/env/v3-cloud.ts";
+import {
+  buildCompanyAcceptancePlan,
+  companyAcceptanceState,
+  resolveCompanyAcceptanceStep,
+  assertCompanyAcceptanceWrite,
+  observeCompanyAcceptance,
+} from "./company-acceptance-plan.ts";
+import { assertCloudPrivateAcl } from "./cloud-two-user-runner.ts";
+
+const repository = path.resolve(import.meta.dirname, "../..");
+// Owner-reviewed source edit only. Never populated from arguments/config/environment.
+const approvedGrantSha256: string | null = null;
+const sha = (bytes: string | Buffer) =>
+  createHash("sha256").update(bytes).digest("hex");
+const fail = () =>
+  new Error(
+    "Company management run refused or failed; review the private manifest.",
+  );
+
+// One complete UTF-8 record or fail closed; fsync alone cannot detect short writes.
+function durableManifestRecord(fd: number, event: unknown) {
+  const bytes = Buffer.from(JSON.stringify(event) + "\n", "utf8");
+  if (fs.writeSync(fd, bytes, 0, bytes.length, null) !== bytes.length)
+    throw fail();
+  fs.fsyncSync(fd);
+}
+const account = z
+  .object({
+    id: z.uuid(),
+    email: z.email(),
+    password: z
+      .string()
+      .min(1)
+      .max(1024)
+      .refine((value) => value.trim().length > 0),
+  })
+  .strict();
+const credentialsSchema = z
+  .object({
+    projectRef: z.literal("kjcvgjfwlmyfroiqlbmw"),
+    apiOrigin: z.literal("https://kjcvgjfwlmyfroiqlbmw.supabase.co"),
+    publishableKey: z.string().regex(/^sb_publishable_[A-Za-z0-9_-]{5,}$/),
+    users: z.object({ A: account, B: account }).strict(),
+  })
+  .strict();
+const grantSchema = z
+  .object({
+    purpose: z.literal("slice1-company-api-only"),
+    projectRef: z.literal("kjcvgjfwlmyfroiqlbmw"),
+    apiOrigin: z.literal("https://kjcvgjfwlmyfroiqlbmw.supabase.co"),
+    runId: z.uuid(),
+    users: z.object({ A: z.uuid(), B: z.uuid() }).strict(),
+    issuedAt: z.iso.datetime(),
+    expiresAt: z.iso.datetime(),
+    maxRequests: z.literal(100),
+    overallMs: z.literal(300000),
+    retries: z.literal(0),
+    planSha256: z.string().regex(/^[a-f0-9]{64}$/),
+    credentialSha256: z.string().regex(/^[a-f0-9]{64}$/),
+  })
+  .strict();
+
+/** Pure preparation helper, not an execution grant. Never accepts secrets. */
+export function companyAcceptancePlanDigest(spec: unknown) {
+  return sha(JSON.stringify(buildCompanyAcceptancePlan(spec)));
+}
+
+/** Shared budget, including Auth/identity and response-body time. */
+export function companyAcceptanceBudget(
+  start: number,
+  expiry: number,
+  now: () => number,
+) {
+  let count = 0;
+  const deadline = Math.min(start + 300000, expiry);
+  const check = () => {
+    if (now() >= deadline) throw fail();
+  };
+  return {
+    check,
+    timeout() {
+      check();
+      return Math.min(10000, deadline - now());
+    },
+    begin() {
+      check();
+      if (count >= 100) throw fail();
+      count++;
+      return Math.min(10000, deadline - now());
+    },
+    get count() {
+      return count;
+    },
+  };
+}
+
+function refuseInherited(source: Record<string, string | undefined>) {
+  for (const [key, value] of Object.entries(source))
+    if (
+      value &&
+      /^(?:NEXT_PUBLIC_|SUPABASE_|MY_KRAVV_|NODE_OPTIONS$|NODE_EXTRA_CA_CERTS$|NODE_TLS_REJECT_UNAUTHORIZED$|NODE_USE_ENV_PROXY$|SSL_CERT_FILE$|SSL_CERT_DIR$|HTTP_PROXY$|HTTPS_PROXY$|ALL_PROXY$)/i.test(
+        key,
+      )
+    )
+      throw fail();
+}
+
+// Owner, SYSTEM and local Administrators only. No ACL repair or chmod is done.
+function windowsPrivate(file: string) {
+  const script =
+    "$ErrorActionPreference='Stop'; $a=Get-Acl -LiteralPath $env:KRAVV_ACL_PATH; $sid=[System.Security.Principal.WindowsIdentity]::GetCurrent().User.Value; $owner=$a.GetOwner([System.Security.Principal.SecurityIdentifier]).Value; $rules=@($a.GetAccessRules($true,$true,[System.Security.Principal.SecurityIdentifier]) | Where-Object {$_.AccessControlType -eq 'Allow'} | ForEach-Object {$_.IdentityReference.Value}); $raw=[System.Security.AccessControl.RawSecurityDescriptor]::new($a.Sddl); @{owner=$owner; current=$sid; allowed=$rules; nonNullDacl=($null -ne $raw.DiscretionaryAcl)} | ConvertTo-Json -Compress";
+  const result = JSON.parse(
+    execFileSync(
+      path.join(
+        process.env.SystemRoot ?? "C:\\Windows",
+        "System32/WindowsPowerShell/v1.0/powershell.exe",
+      ),
+      ["-NoProfile", "-NonInteractive", "-Command", script],
+      {
+        env: {
+          NODE_ENV: "production",
+          SystemRoot: process.env.SystemRoot,
+          KRAVV_ACL_PATH: file,
+        },
+        encoding: "utf8",
+        timeout: 5000,
+        windowsHide: true,
+        stdio: ["ignore", "pipe", "pipe"],
+      },
+    ),
+  );
+  assertCloudPrivateAcl(result);
+}
+
+function privatePath(file: string, directory: boolean, simulation: boolean) {
+  const st = fs.lstatSync(file);
+  if (
+    st.isSymbolicLink() ||
+    (directory ? !st.isDirectory() : !st.isFile() || st.nlink !== 1)
+  )
+    throw fail();
+  if (process.platform === "win32") {
+    if (!simulation) windowsPrivate(file);
+  } else if (st.uid !== process.getuid?.() || (st.mode & 0o077) !== 0)
+    throw fail();
+}
+
+function readPrivateBytes(root: string, name: string, simulation: boolean) {
+  const file = path.join(root, name);
+  privatePath(file, false, simulation);
+  const fd = fs.openSync(
+    file,
+    fs.constants.O_RDONLY | (fs.constants.O_NOFOLLOW ?? 0),
+  );
+  try {
+    const before = fs.lstatSync(file),
+      opened = fs.fstatSync(fd);
+    if (
+      before.ino !== opened.ino ||
+      before.dev !== opened.dev ||
+      opened.nlink !== 1 ||
+      opened.size > 32768
+    )
+      throw fail();
+    return fs.readFileSync(fd);
+  } finally {
+    fs.closeSync(fd);
+  }
+}
+
+function readPrivate(root: string, name: string, simulation: boolean) {
+  return new TextDecoder("utf-8", { fatal: true }).decode(
+    readPrivateBytes(root, name, simulation),
+  );
+}
+
+type FailureDiagnostic = {
+  requestIndex?: number;
+  stage:
+    | "preflight"
+    | "request"
+    | "transport"
+    | "response"
+    | "observation"
+    | "user"
+    | "jwt"
+    | "budget"
+    | "manifest";
+  category:
+    | "preflight"
+    | "request-contract"
+    | "transport"
+    | "http-status"
+    | "response-json"
+    | "response-shape"
+    | "user-identity"
+    | "jwt-claims"
+    | "deadline"
+    | "manifest-persistence";
+  httpStatus?: number;
+  authReason?:
+    | "invalid-credentials"
+    | "email-unconfirmed"
+    | "account-restricted"
+    | "captcha-required"
+    | "unknown";
+};
+
+// Exact machine codes only; never copy a server-supplied string into evidence.
+function authFailureReason(code: unknown): FailureDiagnostic["authReason"] {
+  switch (code) {
+    case "invalid_credentials":
+      return "invalid-credentials";
+    case "email_not_confirmed":
+      return "email-unconfirmed";
+    case "user_banned":
+      return "account-restricted";
+    case "captcha_failed":
+      return "captcha-required";
+    default:
+      return "unknown";
+  }
+}
+type Progress = (
+  event: Pick<FailureDiagnostic, "stage" | "category" | "httpStatus">,
+) => void;
+type Wire = (
+  url: string,
+  init: RequestInit,
+  timeout: number,
+  progress: Progress,
+) => Promise<{ status: number; body: unknown }>;
+type Plan = ReturnType<typeof buildCompanyAcceptancePlan>;
+
+// Private kernel: there is no exported injectable-fetch path to real networking.
+async function execute(
+  root: string,
+  source: Record<string, string | undefined>,
+  now: () => number,
+  wire: Wire,
+  simulation: boolean,
+  monotonic: () => number,
+) {
+  let manifest: number | undefined;
+  let manifestPersistenceFailed = false;
+  let creds: z.infer<typeof credentialsSchema> | undefined;
+  const tokens: Partial<Record<"A" | "B", string>> = {};
+  let requests = 0;
+  let completed = 0;
+  let diagnostic: FailureDiagnostic = {
+    stage: "preflight",
+    category: "preflight",
+  };
+  const started = monotonic();
+  try {
+    refuseInherited(source);
+    if (
+      !path.isAbsolute(root) ||
+      fs.realpathSync(root) !== root ||
+      root === repository ||
+      root.startsWith(repository + path.sep)
+    )
+      throw fail();
+    // No symlinked ancestors or enclosing Git checkout, including other projects.
+    for (let ancestor = root; ; ancestor = path.dirname(ancestor)) {
+      if (
+        fs.lstatSync(ancestor).isSymbolicLink() ||
+        fs.existsSync(path.join(ancestor, ".git"))
+      )
+        throw fail();
+      if (ancestor === path.dirname(ancestor)) break;
+    }
+    privatePath(root, true, simulation);
+    if (readPrivate(root, ".gitignore", simulation).trim() !== "*")
+      throw fail();
+    const grantBytes = readPrivateBytes(
+      root,
+      "slice1-run-approval.json",
+      simulation,
+    );
+    // The canned simulator stays offline with a null pin. In-memory source-pinned
+    // test copies exercise this exact production check without a runtime override.
+    if (!simulation || approvedGrantSha256 !== null) {
+      if (
+        approvedGrantSha256 === null ||
+        !/^[a-f0-9]{64}$/.test(approvedGrantSha256) ||
+        sha(grantBytes) !== approvedGrantSha256
+      )
+        throw fail();
+    }
+    const grant = grantSchema.safeParse(
+      JSON.parse(grantBytes.toString("utf8")),
+    );
+    if (!grant.success) throw fail();
+    const g = grant.data;
+    const issued = Date.parse(g.issuedAt),
+      expiry = Date.parse(g.expiresAt);
+    if (
+      issued > now() ||
+      expiry <= now() ||
+      expiry <= issued ||
+      expiry - issued > 600000
+    )
+      throw fail();
+    const plan: Plan = buildCompanyAcceptancePlan({
+      profile: v3CloudProfile,
+      projectRef: g.projectRef,
+      apiOrigin: g.apiOrigin,
+      runId: g.runId,
+      users: g.users,
+    });
+    if (sha(JSON.stringify(plan)) !== g.planSha256) throw fail();
+    const credentialBytes = readPrivateBytes(
+      root,
+      "credentials.json",
+      simulation,
+    );
+    const raw = new TextDecoder("utf-8", {
+      fatal: true,
+      ignoreBOM: true,
+    }).decode(credentialBytes);
+    if (sha(credentialBytes) !== g.credentialSha256) throw fail();
+    const parsed = credentialsSchema.safeParse(JSON.parse(raw));
+    if (!parsed.success) throw fail();
+    creds = parsed.data;
+    if (
+      simulation &&
+      (!creds.publishableKey.startsWith("sb_publishable_offline_") ||
+        Object.values(creds.users).some(
+          (u) =>
+            !u.email.endsWith("@example.invalid") ||
+            !u.password.startsWith("offline-"),
+        ))
+    )
+      throw fail();
+    if (
+      creds.users.A.id !== g.users.A ||
+      creds.users.B.id !== g.users.B ||
+      creds.users.A.email.toLowerCase() === creds.users.B.email.toLowerCase()
+    )
+      throw fail();
+    const budget = companyAcceptanceBudget(
+      started,
+      monotonic() + expiry - now(),
+      monotonic,
+    );
+    budget.check();
+    // Exclusive persistent claim, never removed even on failure or crash.
+    const claim = fs.openSync(
+      path.join(root, `run-${g.runId}.consumed.json`),
+      "wx",
+      0o600,
+    );
+    try {
+      durableManifestRecord(claim, {
+        runId: g.runId,
+        projectRef: g.projectRef,
+        purpose: g.purpose,
+        planSha256: g.planSha256,
+      });
+    } finally {
+      fs.closeSync(claim);
+    }
+    manifest = fs.openSync(
+      path.join(root, `run-${g.runId}.manifest.jsonl`),
+      "wx",
+      0o600,
+    );
+    const record = (event: unknown) => {
+      const previous = diagnostic;
+      diagnostic = {
+        ...diagnostic,
+        stage: "manifest",
+        category: "manifest-persistence",
+      };
+      try {
+        durableManifestRecord(manifest!, event);
+        diagnostic = previous;
+      } catch {
+        manifestPersistenceFailed = true;
+        throw fail();
+      }
+    };
+    record({
+      state: "planned",
+      runId: g.runId,
+      projectRef: g.projectRef,
+      fixtures: plan.fixtures,
+      planSha256: g.planSha256,
+    });
+    const state = companyAcceptanceState();
+    for (const template of plan.steps) {
+      diagnostic = {
+        requestIndex: completed,
+        stage: "request",
+        category: "request-contract",
+      };
+      const step = resolveCompanyAcceptanceStep(template, state);
+      assertCompanyAcceptanceWrite(step);
+      const url = new URL(step.url);
+      if (
+        url.origin !== g.apiOrigin ||
+        url.protocol !== "https:" ||
+        url.username ||
+        url.password ||
+        url.hash
+      )
+        throw fail();
+      const headers: Record<string, string> = {
+        apikey: creds.publishableKey,
+        "Content-Type": "application/json",
+        Prefer: "return=representation",
+      };
+      if (
+        step.actor !== "anonymous" &&
+        !step.credentialSlot &&
+        step.check !== "unauthenticated"
+      ) {
+        const token = tokens[step.actor];
+        if (!token) throw fail();
+        headers.Authorization = `Bearer ${token}`;
+      }
+      let body = step.body;
+      if (step.credentialSlot) {
+        const user = creds.users[step.credentialSlot];
+        body = { email: user.email, password: user.password };
+      }
+      diagnostic = { ...diagnostic, stage: "budget", category: "deadline" };
+      if (now() >= expiry) throw fail();
+      budget.begin();
+      requests = budget.count;
+      // Persist exact planned mutation BEFORE transmission, including uncertainty.
+      record({
+        state: "sending",
+        index: completed,
+        label: step.label,
+        method: step.method,
+        path: url.pathname + url.search,
+        ...(step.body ? { fixtureBody: step.body } : {}),
+      });
+      diagnostic = { ...diagnostic, stage: "budget", category: "deadline" };
+      const timeout = budget.timeout();
+      diagnostic = { ...diagnostic, stage: "transport", category: "transport" };
+      const reply = await wire(
+        url.href,
+        {
+          method: step.method,
+          headers,
+          body: body ? JSON.stringify(body) : undefined,
+          redirect: "error",
+        },
+        timeout,
+        (event) => {
+          diagnostic = { requestIndex: completed, ...event };
+        },
+      );
+      diagnostic = { ...diagnostic, stage: "budget", category: "deadline" };
+      budget.check();
+      if (now() >= expiry) throw fail();
+      diagnostic = {
+        requestIndex: completed,
+        stage: "observation",
+        category: "response-shape",
+        httpStatus: reply.status,
+      };
+      if (step.check === "login" || step.check === "user") {
+        const record =
+          reply.body !== null &&
+          typeof reply.body === "object" &&
+          !Array.isArray(reply.body)
+            ? (reply.body as Record<string, unknown>)
+            : undefined;
+        const user =
+          step.check === "login"
+            ? (record?.user as Record<string, unknown> | undefined)
+            : record;
+        if (reply.status !== 200) {
+          diagnostic.category = "http-status";
+          if (step.check === "login")
+            diagnostic.authReason = authFailureReason(record?.code);
+        } else if (
+          user &&
+          typeof user === "object" &&
+          "id" in user &&
+          user.id !== step.expected?.id
+        )
+          diagnostic.category = "user-identity";
+      }
+      const evidence = observeCompanyAcceptance(
+        step,
+        reply.status,
+        reply.body,
+        state,
+      );
+      if (evidence)
+        record({ state: "observation-verified", index: completed, evidence });
+      if (step.check === "login") {
+        diagnostic = {
+          ...diagnostic,
+          stage: "user",
+          category: "user-identity",
+        };
+        const b = reply.body as {
+          access_token: string;
+          user: { email: string };
+        };
+        if (
+          step.actor === "anonymous" ||
+          b.user.email?.toLowerCase() !==
+            creds.users[step.actor].email.toLowerCase()
+        )
+          throw fail();
+        diagnostic = { ...diagnostic, stage: "jwt", category: "jwt-claims" };
+        const claims = JSON.parse(
+          Buffer.from(
+            b.access_token.split(".")[1] ?? "",
+            "base64url",
+          ).toString(),
+        ) as Record<string, unknown>;
+        if (
+          b.access_token.split(".").length !== 3 ||
+          claims.iss !== `${g.apiOrigin}/auth/v1` ||
+          claims.sub !== g.users[step.actor] ||
+          claims.role !== "authenticated" ||
+          typeof claims.exp !== "number" ||
+          claims.exp * 1000 <= now()
+        )
+          throw fail();
+        tokens[step.actor] = b.access_token;
+      }
+      if (step.check === "user") {
+        diagnostic = {
+          ...diagnostic,
+          stage: "user",
+          category: "user-identity",
+        };
+        const user = reply.body as { email: string };
+        if (
+          step.actor === "anonymous" ||
+          user.email?.toLowerCase() !==
+            creds.users[step.actor].email.toLowerCase()
+        )
+          throw fail();
+      }
+      if (step.check === "logout" && step.actor !== "anonymous")
+        delete tokens[step.actor];
+      completed++;
+      record({
+        state: "verified",
+        index: completed - 1,
+        label: step.label,
+        status: reply.status,
+      });
+    }
+    diagnostic = { ...diagnostic, stage: "budget", category: "deadline" };
+    budget.check();
+    record({
+      state: "passed",
+      requests,
+      completed,
+      cleanup: "retained; no automatic cleanup",
+    });
+    return { outcome: "passed" as const, requests, completed };
+  } catch {
+    if (manifest !== undefined && !manifestPersistenceFailed) {
+      try {
+        durableManifestRecord(manifest, {
+          state: "failed",
+          requests,
+          completed,
+          diagnostic,
+          cleanup: "retained; review sending events for uncertain mutations",
+        });
+      } catch {
+        /* Never continue or disclose a raw filesystem/transport error. */
+      }
+    }
+    return { outcome: "failed" as const, requests, completed };
+  } finally {
+    if (manifest !== undefined) fs.closeSync(manifest);
+    delete tokens.A;
+    delete tokens.B;
+    if (creds) {
+      creds.users.A.password = "";
+      creds.users.B.password = "";
+      creds.publishableKey = "";
+    }
+  }
+}
+
+async function networkWire(
+  url: string,
+  init: RequestInit,
+  timeout: number,
+  progress: Progress,
+  fetcher: typeof fetch = fetch,
+) {
+  let receivedStatus: number | undefined;
+  const update = (
+    stage: FailureDiagnostic["stage"],
+    category: FailureDiagnostic["category"],
+  ) =>
+    progress({
+      stage,
+      category,
+      ...(receivedStatus === undefined ? {} : { httpStatus: receivedStatus }),
+    });
+  update("transport", "transport");
+  const controller = new AbortController();
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const expired = new Promise<never>((_, reject) => {
+    timer = setTimeout(() => {
+      update("budget", "deadline");
+      controller.abort();
+      reject(fail());
+    }, timeout);
+  });
+  try {
+    return await Promise.race([
+      expired,
+      (async () => {
+        const response = await fetcher(url, {
+          ...init,
+          signal: controller.signal,
+        });
+        if (
+          Number.isInteger(response.status) &&
+          response.status >= 100 &&
+          response.status <= 599
+        )
+          receivedStatus = response.status;
+        update("response", "transport");
+        if (
+          response.redirected ||
+          response.url !== url ||
+          (response.status >= 300 && response.status < 400)
+        )
+          throw fail();
+        const reader = response.body?.getReader();
+        const chunks: Uint8Array[] = [];
+        let size = 0;
+        if (reader)
+          try {
+            for (;;) {
+              const next = await reader.read();
+              if (next.done) break;
+              size += next.value.length;
+              if (size > 262144) {
+                update("response", "response-shape");
+                throw fail();
+              }
+              chunks.push(next.value);
+            }
+          } finally {
+            await reader.cancel().catch(() => {});
+          }
+        const raw = Buffer.concat(chunks).toString("utf8");
+        update("response", "response-json");
+        return {
+          status: response.status,
+          body: raw ? (JSON.parse(raw) as unknown) : undefined,
+        };
+      })(),
+    ]);
+  } finally {
+    if (timer) clearTimeout(timer);
+    controller.abort();
+  }
+}
+
+/** Source-null production boundary rejects before private file/environment/network access. */
+export async function companyAcceptanceMain(args = process.argv.slice(2)) {
+  if (
+    approvedGrantSha256 === null ||
+    !/^[a-f0-9]{64}$/.test(approvedGrantSha256)
+  )
+    throw Error(
+      "Cloud execution is blocked: no approved source-pinned runner grant.",
+    );
+  if (args.length !== 0) throw fail();
+  return execute(
+    path.join(os.homedir(), ".my-kravv-v3-private"),
+    process.env,
+    Date.now,
+    networkWire,
+    false,
+    () => performance.now(),
+  );
+}
+
+export type SyntheticReply = {
+  status: number;
+  body?: unknown;
+  elapsedMs?: number;
+  transportFailure?: boolean;
+  url?: string;
+  redirected?: boolean;
+  rawBody?: string;
+  stallBody?: boolean;
+};
+/** Offline-only adapter: canned data only, no injected callbacks/fetch/network. */
+export async function simulateCompanyAcceptanceRun(
+  root: string,
+  replies: SyntheticReply[],
+  at: number,
+  source: Record<string, string | undefined> = {},
+) {
+  // Simulator can only read test-created temporary roots with this exact prefix.
+  const absolute = path.resolve(root);
+  if (
+    path.dirname(absolute) !== fs.realpathSync(os.tmpdir()) ||
+    !path.basename(absolute).startsWith("kravv-v3-company-offline-")
+  )
+    throw fail();
+  let clock = at;
+  const sent: {
+    url: string;
+    method: string;
+    actorAuthorization: boolean;
+    fixtureColumns?: string[];
+    returnedRepresentation?: boolean;
+  }[] = [];
+  const wire: Wire = async (url, init, timeout, progress) => {
+    let reply = replies[sent.length];
+    // Mock database column ACL, independent of the response assertions.
+    const table = new URL(url).pathname;
+    let fixtureColumns: string[] | undefined;
+    if (
+      init.method !== "GET" &&
+      ["/rest/v1/companies", "/rest/v1/user_settings"].includes(table)
+    ) {
+      fixtureColumns = Object.keys(
+        JSON.parse(String(init.body)) as Record<string, unknown>,
+      );
+      const permitted =
+        table === "/rest/v1/user_settings"
+          ? init.method === "POST"
+            ? ["user_id", "theme"]
+            : ["theme"]
+          : init.method === "POST"
+            ? ["user_id", "name", "ticker", "exchange", "sector", "short_note"]
+            : ["name", "ticker", "exchange", "sector", "short_note"];
+      if (fixtureColumns.some((column) => !permitted.includes(column)))
+        reply = { ...reply, status: 403, body: { code: "42501" } };
+    }
+    sent.push({
+      url,
+      method: init.method!,
+      actorAuthorization: Boolean(
+        (init.headers as Record<string, string>).Authorization,
+      ),
+      ...(fixtureColumns
+        ? {
+            fixtureColumns,
+            returnedRepresentation:
+              (init.headers as Record<string, string>).Prefer ===
+              "return=representation",
+          }
+        : {}),
+    });
+    if (!reply) throw fail();
+    clock += reply.elapsedMs ?? 0;
+    if (reply.transportFailure) throw fail();
+    if ((reply.elapsedMs ?? 0) >= timeout) {
+      progress({ stage: "budget", category: "deadline" });
+      throw fail();
+    }
+    return networkWire(url, init, timeout, progress, async () => {
+      const response = new Response(
+        reply.stallBody
+          ? new ReadableStream()
+          : (reply.rawBody ??
+              (reply.body === undefined ? null : JSON.stringify(reply.body))),
+        { status: reply.status },
+      );
+      Object.defineProperty(response, "url", { value: reply.url ?? url });
+      Object.defineProperty(response, "redirected", {
+        value: reply.redirected ?? false,
+      });
+      return response;
+    });
+  };
+  return {
+    ...(await execute(
+      absolute,
+      source,
+      () => clock,
+      wire,
+      true,
+      () => clock,
+    )),
+    sent,
+  };
+}
+
+if (path.resolve(process.argv[1] ?? "") === import.meta.filename) {
+  companyAcceptanceMain()
+    .then((result) => {
+      console.log(
+        result.outcome === "passed"
+          ? "Company acceptance completed; inspect retained manifest."
+          : "Company acceptance failed; inspect retained manifest.",
+      );
+      if (result.outcome !== "passed") process.exitCode = 1;
+    })
+    .catch(() => {
+      console.error(
+        "Company acceptance refused or interrupted; inspect private evidence.",
+      );
+      process.exitCode = 1;
+    });
+}
