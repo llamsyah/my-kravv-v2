@@ -4,6 +4,8 @@ import fs from "node:fs";
 import ts from "typescript";
 import * as jsx from "react/jsx-runtime";
 import * as model from "../../features/v3-workspace/model.ts";
+import * as theme from "../../features/v3-workspace/theme-preference.ts";
+import * as management from "../../features/v3-workspace/management-contract.ts";
 
 let compact = false,
   store,
@@ -62,6 +64,17 @@ const imports = {
   "./company-editor": { CompanyEditor: () => null },
   "./model": model,
   "./sidebar-preference": preference,
+  "./theme-preference": theme,
+  "./management-contract": management,
+  "./directory-controls": {
+    CompanySearch: () => null,
+    CompanyPagination: () => null,
+  },
+  "../foundation/actions": {
+    saveFoundationThemeAction: () => {
+      throw Error("Offline actions blocked");
+    },
+  },
   "./workspace.module.css": {
     __esModule: true,
     default: new Proxy({}, { get: (_, name) => name }),

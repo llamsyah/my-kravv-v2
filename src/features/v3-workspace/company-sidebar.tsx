@@ -10,6 +10,8 @@ import {
   type WorkspaceLocation,
 } from "./model";
 import styles from "./workspace.module.css";
+import { CompanySearch, CompanyPagination } from "./directory-controls";
+import type { DirectoryState } from "./management-contract";
 
 function closeDisclosure(event: KeyboardEvent<HTMLDetailsElement>) {
   if (event.key !== "Escape" || !event.currentTarget.open) return;
@@ -48,6 +50,7 @@ export function CompanySidebar({
   compact,
   open,
   onClose,
+  directory,
 }: {
   company: WorkspaceCompany;
   companies: WorkspaceCompany[];
@@ -55,6 +58,7 @@ export function CompanySidebar({
   compact: boolean;
   open: boolean;
   onClose: () => void;
+  directory?: DirectoryState;
 }) {
   const [query, setQuery] = useState("");
   const dialog = useRef<HTMLDialogElement>(null);
@@ -76,7 +80,9 @@ export function CompanySidebar({
       document.body.style.overflow = overflow;
     };
   }, [compact, open]);
-  const filtered = findWorkspaceCompanies(companies, query);
+  const filtered = directory
+    ? companies
+    : findWorkspaceCompanies(companies, query);
   const navigate = () => {
     if (compact) onClose();
   };
@@ -117,15 +123,28 @@ export function CompanySidebar({
           <Icon name="chevronDown" />
         </summary>
         <div className={styles.switcherBody}>
-          <label htmlFor="company-switch-search">Cari perusahaan milikmu</label>
-          <input
-            id="company-switch-search"
-            type="search"
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            maxLength={200}
-            placeholder="Cari nama…"
-          />
+          {directory ? (
+            <CompanySearch
+              state={directory}
+              view={location.view}
+              companyId={company.id}
+              label="Cari perusahaan milikmu"
+            />
+          ) : (
+            <>
+              <label htmlFor="company-switch-search">
+                Cari perusahaan milikmu
+              </label>
+              <input
+                id="company-switch-search"
+                type="search"
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                maxLength={200}
+                placeholder="Cari nama…"
+              />
+            </>
+          )}
           <ul>
             {filtered.map((item) => (
               <li key={item.id}>
@@ -135,11 +154,20 @@ export function CompanySidebar({
                   aria-current={item.id === company.id ? "page" : undefined}
                 >
                   {item.name}
+                  {item.ticker ? ` · ${item.ticker}` : ""}
                 </Link>
               </li>
             ))}
           </ul>
           {!filtered.length && <p>Tidak ada nama yang cocok.</p>}
+          {directory && (
+            <CompanyPagination
+              state={directory}
+              view={location.view}
+              companyId={company.id}
+              label="Halaman pemilih perusahaan"
+            />
+          )}
           <Link
             className={styles.switcherCreate}
             href={workspaceHref("new")}

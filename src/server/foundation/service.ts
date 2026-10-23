@@ -14,7 +14,7 @@ export class FoundationError extends Error {
   }
 }
 
-async function verifiedOwner(client: SupabaseClient) {
+export async function verifiedOwner(client: SupabaseClient) {
   try {
     const { data, error } = await client.auth.getUser();
     const id = z.uuid().safeParse(data.user?.id);

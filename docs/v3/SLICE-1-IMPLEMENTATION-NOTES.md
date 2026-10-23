@@ -2,6 +2,8 @@
 
 22 October 2026. Owner-authorized product implementation; offline checkpoint.
 
+Historical first milestone. The next Company Management functionality and its unapplied schema review package are documented in [SLICE-1-COMPANY-MANAGEMENT.md](SLICE-1-COMPANY-MANAGEMENT.md). Later accepted UI/navigation checkpoints remain the visual baseline.
+
 ## Delivered product surface
 
 The authenticated V3 entry point /foundation now renders the first V3 product shell instead of the Slice 0 test form. Query-based navigation stays inside the existing proxy allowlist: view=home, companies, new, company&company=<UUID> and edit&company=<UUID>. The root login/session redirect remains unchanged. No legacy V2 route is enabled or rewritten.

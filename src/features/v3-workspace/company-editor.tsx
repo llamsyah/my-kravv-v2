@@ -1,15 +1,32 @@
 "use client";
 import { useActionState, useEffect, useId, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { saveFoundationCompanyAction } from "../foundation/actions";
 import type { WorkspaceCompany } from "./model";
 import { workspaceHref } from "./model";
 import styles from "./workspace.module.css";
+import { companyMetadataInput } from "./management-contract";
 
-export function CompanyEditor({ company }: { company?: WorkspaceCompany }) {
+export function CompanyEditor({
+  company,
+  metadataReady = false,
+}: {
+  company?: WorkspaceCompany;
+  metadataReady?: boolean;
+}) {
   const router = useRouter();
   const id = useId();
   const [name, setName] = useState(company?.name ?? "");
+  const [metadata, setMetadata] = useState({
+    ticker: company?.ticker ?? "",
+    exchange: company?.exchange ?? "",
+    sector: company?.sector ?? "",
+    short_note: company?.short_note ?? "",
+  });
+  const valid = metadataReady
+    ? companyMetadataInput.safeParse({ name, ...metadata }).success
+    : !!name.trim();
   const [state, action, pending] = useActionState(saveFoundationCompanyAction, {
     error: null,
   });
@@ -42,26 +59,72 @@ export function CompanyEditor({ company }: { company?: WorkspaceCompany }) {
       <span className={styles.meta}>
         Maksimal 200 karakter. Nama tidak mengubah pemilik atau isi perusahaan.
       </span>
-      <details className={styles.capabilities}>
-        <summary>Informasi lainnya</summary>
-        <p>Ticker, bursa, sektor, dan catatan pribadi belum tersedia.</p>
-      </details>
+      {metadataReady ? (
+        <fieldset disabled={pending} className={styles.metadataFields}>
+          <legend>Informasi tambahan · opsional</legend>
+          {(
+            [
+              ["ticker", "Ticker", 32],
+              ["exchange", "Bursa", 80],
+              ["sector", "Sektor", 120],
+            ] as const
+          ).map(([field, label, max]) => (
+            <label key={field}>
+              {label}
+              <input
+                name={field}
+                value={metadata[field]}
+                maxLength={max}
+                onChange={(event) =>
+                  setMetadata({ ...metadata, [field]: event.target.value })
+                }
+                autoComplete="off"
+              />
+            </label>
+          ))}
+          <label>
+            Catatan pribadi
+            <textarea
+              name="short_note"
+              value={metadata.short_note}
+              maxLength={2000}
+              rows={4}
+              onChange={(event) =>
+                setMetadata({ ...metadata, short_note: event.target.value })
+              }
+            />
+          </label>
+          <p className={styles.meta}>
+            Catatan pribadi tidak dikirim ke AI. Maksimal 2.000 karakter.
+          </p>
+        </fieldset>
+      ) : (
+        <details className={styles.capabilities}>
+          <summary>Informasi lainnya</summary>
+          <p>
+            Ticker, bursa, sektor, dan catatan pribadi menunggu pembaruan skema
+            yang disetujui.
+          </p>
+        </details>
+      )}
       {state.error && (
         <div className={styles.error} role="alert" id={id + "-error"}>
-          <strong>Nama belum terkonfirmasi tersimpan.</strong>
+          <strong>Perubahan belum terkonfirmasi tersimpan.</strong>
           <p>{state.error}</p>
           <p>
             Jika sambungan terputus, periksa daftar perusahaan sebelum mengirim
             ulang agar tidak membuat duplikat.
           </p>
-          <a href={workspaceHref("companies")}>Periksa daftar perusahaan →</a>
+          <Link href={workspaceHref("companies")}>
+            Periksa daftar perusahaan →
+          </Link>
         </div>
       )}
       <div className={styles.actions}>
         <button
           className={styles.primary}
           type="submit"
-          disabled={pending || !name.trim()}
+          disabled={pending || !valid}
         >
           {pending
             ? "Menyimpan…"
@@ -69,12 +132,12 @@ export function CompanyEditor({ company }: { company?: WorkspaceCompany }) {
               ? "Simpan perubahan"
               : "Buat perusahaan"}
         </button>
-        <a
+        <Link
           className={styles.secondary}
           href={workspaceHref(company ? "company" : "companies", company?.id)}
         >
           Batal
-        </a>
+        </Link>
       </div>
       <p role="status" aria-live="polite">
         {pending

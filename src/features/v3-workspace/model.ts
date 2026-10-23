@@ -1,10 +1,14 @@
 import { z } from "zod";
 
-/** Current Slice 0 projection: never assume the richer V2 Company contract. */
+/** Optional metadata is supplied only after the V3 management contract is verified. */
 export const workspaceCompanySchema = z.object({
   id: z.uuid(),
   user_id: z.uuid(),
   name: z.string().min(1).max(200),
+  ticker: z.string().max(32).nullable().optional(),
+  exchange: z.string().max(80).nullable().optional(),
+  sector: z.string().max(120).nullable().optional(),
+  short_note: z.string().max(2000).nullable().optional(),
 });
 export type WorkspaceCompany = z.infer<typeof workspaceCompanySchema>;
 export type WorkspaceView = "home" | "companies" | "company" | "new" | "edit";
@@ -52,8 +56,10 @@ export function findWorkspaceCompanies(
   query: string,
 ) {
   const needle = query.trim().slice(0, 200).toLocaleLowerCase("id-ID");
-  return companies.filter((company) =>
-    company.name.toLocaleLowerCase("id-ID").includes(needle),
+  return companies.filter(
+    (company) =>
+      company.name.toLocaleLowerCase("id-ID").includes(needle) ||
+      (company.ticker ?? "").toLocaleLowerCase("id-ID").includes(needle),
   );
 }
 export function companyInitials(name: string) {

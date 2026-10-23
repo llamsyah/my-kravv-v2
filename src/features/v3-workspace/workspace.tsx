@@ -12,6 +12,18 @@ import { Icon } from "../../components/ui/icon";
 import { LogoutForm } from "../auth/logout-form";
 import { CompanyEditor } from "./company-editor";
 import { CompanySidebar } from "./company-sidebar";
+import { CompanySearch, CompanyPagination } from "./directory-controls";
+import {
+  directoryHref,
+  type DirectoryState,
+  type Theme,
+} from "./management-contract";
+import {
+  readThemePreference,
+  setThemePreference,
+  subscribeThemePreference,
+} from "./theme-preference";
+import { saveFoundationThemeAction } from "../foundation/actions";
 import {
   readSidebarPreference,
   setSidebarPreference,
@@ -45,12 +57,49 @@ export function V3Workspace({
   companies,
   location,
   failed = false,
+  directory: directoryState,
+  selectedCompany,
+  initialTheme = "light",
 }: {
   companies: WorkspaceCompany[];
   location: WorkspaceLocation;
   failed?: boolean;
+  directory?: DirectoryState;
+  selectedCompany?: WorkspaceCompany | null;
+  initialTheme?: Theme;
 }) {
-  const [dark, setDark] = useState(false);
+  const browserTheme = useSyncExternalStore(
+    subscribeThemePreference,
+    readThemePreference,
+    () => "light" as const,
+  );
+  const [themeChoice, setThemeChoice] = useState<Theme | null>(null);
+  const [themeSaving, setThemeSaving] = useState(false);
+  const [themeError, setThemeError] = useState<string | null>(null);
+  const metadataReady = directoryState?.metadataReady ?? false;
+  const dark =
+    (themeChoice ?? (metadataReady ? initialTheme : browserTheme)) === "dark";
+  async function toggleTheme() {
+    const next = dark ? "light" : "dark";
+    setThemeChoice(next);
+    setThemePreference(next);
+    setThemeError(null);
+    if (!metadataReady) return;
+    setThemeSaving(true);
+    try {
+      const result = await saveFoundationThemeAction(next);
+      if (result.error || result.theme !== next)
+        setThemeError(
+          "Tema di perangkat ini berubah, tetapi penyimpanan akun belum terkonfirmasi.",
+        );
+    } catch {
+      setThemeError(
+        "Tema di perangkat ini berubah, tetapi penyimpanan akun belum terkonfirmasi.",
+      );
+    } finally {
+      setThemeSaving(false);
+    }
+  }
   const compact = useSyncExternalStore(
     subscribeViewport,
     compactViewport,
@@ -79,12 +128,17 @@ export function V3Workspace({
   const [context, setContext] = useState(false);
   const contextControl = useRef<HTMLButtonElement>(null);
   const [query, setQuery] = useState("");
-  const company = selectedWorkspaceCompany(companies, location);
+  const company =
+    selectedCompany === undefined
+      ? selectedWorkspaceCompany(companies, location)
+      : (selectedCompany ?? undefined);
   const inCompany = location.view === "company" || location.view === "edit";
   const workspace = inCompany && !!company && !failed;
   const home = location.view === "home",
     directory = location.view === "companies";
-  const filtered = findWorkspaceCompanies(companies, query);
+  const filtered = directoryState
+    ? companies
+    : findWorkspaceCompanies(companies, query);
   const title = home
     ? "Ruang berpikirmu,"
     : directory
@@ -92,7 +146,9 @@ export function V3Workspace({
       : location.view === "new"
         ? "Tambah perusahaan"
         : location.view === "edit"
-          ? "Ubah nama perusahaan"
+          ? metadataReady
+            ? "Ubah perusahaan"
+            : "Ubah nama perusahaan"
           : (company?.name ?? "Perusahaan tidak tersedia");
   const createLink = (
     <Link className={styles.primary} href={workspaceHref("new")}>
@@ -132,7 +188,8 @@ export function V3Workspace({
           <div className={styles.headerTools}>
             <button
               className={styles.iconButton}
-              onClick={() => setDark(!dark)}
+              onClick={toggleTheme}
+              disabled={themeSaving}
               aria-pressed={dark}
               aria-label={
                 dark ? "Gunakan tampilan terang" : "Gunakan tampilan gelap"
@@ -150,7 +207,11 @@ export function V3Workspace({
               </summary>
               <div className={styles.popover}>
                 <strong>Ruang pribadi</strong>
-                <p>Sidebar desktop diingat selama sesi ini.</p>
+                <p>
+                  {metadataReady
+                    ? "Tema disimpan untuk akunmu."
+                    : "Tema diingat di perangkat ini. Sinkronisasi akun menunggu pembaruan skema."}
+                </p>
                 <p>Pengaturan akun belum tersedia.</p>
                 <LogoutForm />
               </div>
@@ -177,9 +238,15 @@ export function V3Workspace({
               compact={compact}
               open={sidebar}
               onClose={closeSidebar}
+              directory={directoryState}
             />
           )}
           <main id="v3-main" tabIndex={-1} className={styles.main}>
+            {themeError && (
+              <p role="status" className={styles.notice}>
+                {themeError}
+              </p>
+            )}
             <div className={styles.breadcrumb}>
               <div className={styles.workspaceTrail}>
                 {workspace && (compact || !sidebar) && (
@@ -283,6 +350,7 @@ export function V3Workspace({
                 <CompanyEditor
                   key={company?.id ?? "new"}
                   company={location.view === "edit" ? company : undefined}
+                  metadataReady={metadataReady}
                 />
               </section>
             ) : workspace && company ? (
@@ -304,22 +372,46 @@ export function V3Workspace({
                       href={workspaceHref("edit", company.id)}
                     >
                       <Icon name="pencil" />
-                      Ubah nama
+                      {metadataReady ? "Ubah metadata" : "Ubah nama"}
                     </Link>
                   </div>
-                  <details
-                    className={styles.capabilities}
-                    onKeyDown={closeDisclosure}
-                  >
-                    <summary>
-                      Informasi tambahan
-                      <Icon name="chevronDown" />
-                    </summary>
-                    <p>
-                      Saat ini hanya nama perusahaan. Ticker, sektor, dan
-                      catatan pribadi belum tersedia.
-                    </p>
-                  </details>
+                  {metadataReady && (
+                    <dl className={styles.metadataSummary}>
+                      <div>
+                        <dt>Ticker</dt>
+                        <dd>{company.ticker || "Belum diisi"}</dd>
+                      </div>
+                      <div>
+                        <dt>Bursa</dt>
+                        <dd>{company.exchange || "Belum diisi"}</dd>
+                      </div>
+                      <div>
+                        <dt>Sektor</dt>
+                        <dd>{company.sector || "Belum diisi"}</dd>
+                      </div>
+                      <div>
+                        <dt>Catatan pribadi</dt>
+                        <dd className={styles.privateNote}>
+                          {company.short_note || "Belum diisi"}
+                        </dd>
+                      </div>
+                    </dl>
+                  )}
+                  {!metadataReady && (
+                    <details
+                      className={styles.capabilities}
+                      onKeyDown={closeDisclosure}
+                    >
+                      <summary>
+                        Informasi tambahan
+                        <Icon name="chevronDown" />
+                      </summary>
+                      <p>
+                        Saat ini hanya nama perusahaan. Ticker, sektor, dan
+                        catatan pribadi belum tersedia.
+                      </p>
+                    </details>
+                  )}
                 </section>
                 <section className={styles.researchNote}>
                   <span className={styles.sectionIcon}>
@@ -345,53 +437,76 @@ export function V3Workspace({
                     <div>
                       <h2 id="company-list-title">
                         Perusahaanmu{" "}
-                        <span className={styles.count}>{companies.length}</span>
+                        <span className={styles.count}>
+                          {companies.length}
+                          {directoryState?.hasNext ? "+" : ""}
+                        </span>
                       </h2>
                     </div>
                     {home && createLink}
                   </div>
                   <div className={styles.directoryTools}>
-                    <div className={styles.search}>
-                      <Icon name="search" />
-                      <label className="sr-only" htmlFor="company-find">
-                        Cari nama perusahaan
-                      </label>
-                      <input
-                        id="company-find"
-                        type="search"
-                        value={query}
-                        onChange={(e) => setQuery(e.target.value)}
-                        maxLength={200}
-                        placeholder="Cari nama perusahaan…"
+                    {directoryState ? (
+                      <CompanySearch
+                        state={directoryState}
+                        view={home ? "home" : "companies"}
+                        label={
+                          metadataReady
+                            ? "Cari nama atau ticker"
+                            : "Cari nama perusahaan"
+                        }
                       />
-                      {query && (
-                        <button
-                          onClick={() => setQuery("")}
-                          aria-label="Hapus pencarian"
-                        >
-                          ×
-                        </button>
-                      )}
-                    </div>
+                    ) : (
+                      <div className={styles.search}>
+                        <Icon name="search" />
+                        <label className="sr-only" htmlFor="company-find">
+                          Cari nama perusahaan
+                        </label>
+                        <input
+                          id="company-find"
+                          type="search"
+                          value={query}
+                          onChange={(e) => setQuery(e.target.value)}
+                          maxLength={200}
+                          placeholder="Cari nama perusahaan…"
+                        />
+                        {query && (
+                          <button
+                            onClick={() => setQuery("")}
+                            aria-label="Hapus pencarian"
+                          >
+                            ×
+                          </button>
+                        )}
+                      </div>
+                    )}
                     <span className={styles.meta} role="status">
-                      {filtered.length} dari {companies.length} dimuat
+                      {directoryState
+                        ? `${companies.length} perusahaan di halaman ini`
+                        : `${filtered.length} dari ${companies.length} dimuat`}
                     </span>
                     {home && (
                       <Link
                         className={styles.textLink}
-                        href={workspaceHref("companies")}
+                        href={directoryHref(
+                          "companies",
+                          directoryState?.query ?? "",
+                          0,
+                        )}
                       >
                         Lihat direktori <Icon name="arrowRight" />
                       </Link>
                     )}
                   </div>
-                  {companies.length >= 100 && (
+                  {!directoryState && companies.length >= 100 && (
                     <p className={styles.notice}>
                       Menampilkan hingga 100 perusahaan pertama. Pencarian
                       terbatas pada daftar yang dimuat.
                     </p>
                   )}
-                  {!companies.length ? (
+                  {!companies.length &&
+                  !directoryState?.query &&
+                  !directoryState?.page ? (
                     <State title="Mulai dari satu perusahaan.">
                       <p>Cukup sebuah nama. Informasi lainnya bisa menyusul.</p>
                       {!home && (
@@ -423,7 +538,9 @@ export function V3Workspace({
                                 <div className={styles.tileIdentity}>
                                   <h3>{item.name}</h3>
                                   <span className={styles.meta}>
-                                    Overview perusahaan
+                                    {[item.ticker, item.exchange]
+                                      .filter(Boolean)
+                                      .join(" · ") || "Overview perusahaan"}
                                   </span>
                                 </div>
                                 <Icon name="arrowRight" />
@@ -449,7 +566,11 @@ export function V3Workspace({
                                   >
                                     {item.name}
                                   </Link>
-                                  <p>Workspace pribadi</p>
+                                  <p>
+                                    {[item.ticker, item.exchange, item.sector]
+                                      .filter(Boolean)
+                                      .join(" · ") || "Workspace pribadi"}
+                                  </p>
                                 </div>
                                 <Link
                                   className={styles.rowAction}
@@ -466,10 +587,21 @@ export function V3Workspace({
                       )}
                     </ul>
                   )}
-                  {home && filtered.length > 6 && (
+                  {directory && directoryState && (
+                    <CompanyPagination
+                      state={directoryState}
+                      view="companies"
+                      label="Halaman direktori perusahaan"
+                    />
+                  )}
+                  {home && (filtered.length > 6 || directoryState?.hasNext) && (
                     <Link
                       className={styles.moreLink}
-                      href={workspaceHref("companies")}
+                      href={directoryHref(
+                        "companies",
+                        directoryState?.query ?? "",
+                        0,
+                      )}
                     >
                       Lihat seluruh perusahaan di direktori
                       <Icon name="arrowRight" />

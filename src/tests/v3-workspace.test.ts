@@ -146,7 +146,7 @@ test("Company action returns only confirmed service identity and never revalidat
     import assert from "node:assert/strict";
     import fs from "node:fs";
     import ts from "typescript";
-    const calls = [], invalidations = [];
+    const calls = [], invalidations = [], metadataCalls = [], themeCalls = [];
     const company = { id: "10000000-0000-4000-8000-000000000001", user_id: "20000000-0000-4000-8000-000000000001", name: "Nama tersimpan" };
     class FoundationError extends Error {}
     let failed = false;
@@ -156,6 +156,7 @@ test("Company action returns only confirmed service identity and never revalidat
       "next/cache": {revalidatePath: (value) => invalidations.push(value)},
       "../../server/auth/client.ts": {createSupabaseServerClient: async () => client},
       "../../server/foundation/service.ts": {createFoundationCompany:save, renameFoundationCompany:save, FoundationError},
+      "../../server/foundation/management.ts": {saveCompanyMetadata: async (...args) => { metadataCalls.push(args); return company; }, saveAccountTheme: async (...args) => { themeCalls.push(args); if (failed) throw Error("PRIVATE FAILURE"); return "dark"; }},
     };
     const source = fs.readFileSync("src/features/foundation/actions.ts","utf8");
     const output = ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
@@ -170,10 +171,19 @@ test("Company action returns only confirmed service identity and never revalidat
       assert.deepEqual(calls.at(-1),rename?[client,company.id,"Nama baru"]:[client,"Nama baru"]);
     }
     assert.deepEqual(invalidations,["/foundation","/foundation"]);
+    const metadata = new FormData();
+    for (const [key,value] of Object.entries({company_id:company.id,name:"Name",ticker:"SYN",exchange:"",sector:"",short_note:"Private synthetic note",user_id:"forged"})) metadata.set(key,value);
+    assert.deepEqual(await exported.saveFoundationCompanyAction({error:null},metadata),{error:null,company});
+    assert.deepEqual(metadataCalls,[[client,company.id,{name:"Name",ticker:"SYN",exchange:"",sector:"",short_note:"Private synthetic note"}]]);
+    assert.deepEqual(await exported.saveFoundationThemeAction("dark"),{error:null,theme:"dark"});
+    assert.deepEqual(themeCalls,[[client,"dark"]]);
     failed=true;
     const form = new FormData();form.set("name","Pertahankan input");
     assert.deepEqual(await exported.saveFoundationCompanyAction({error:null,company},form),{error:"Gagal tersimpan."});
-    assert.equal(invalidations.length,2);
+    assert.equal(invalidations.length,4);
+    const themeFailure=await exported.saveFoundationThemeAction("dark");
+    assert.ok(themeFailure.error); assert.ok(!themeFailure.error.includes("PRIVATE FAILURE"));
+    assert.equal(invalidations.length,4);
   `,
     ],
     { encoding: "utf8", timeout: 20000 },
@@ -195,6 +205,53 @@ test("Company directory open links have distinct accessible names", () => {
   });
   assert.ok(html.includes('aria-label="Buka ruang Perusahaan Sintetis"'));
   assert.ok(html.includes('aria-label="Buka ruang Usaha lain"'));
+});
+
+test("Managed company editor exposes optional bounded metadata only when the schema is available", () => {
+  const directory = { query: "", page: 0, hasNext: false, metadataReady: true };
+  const html = render({
+    companies: [company],
+    selectedCompany: {
+      ...company,
+      ticker: "SYN",
+      exchange: null,
+      sector: null,
+      short_note: "Private synthetic note",
+    },
+    location: { view: "edit", companyId: company.id },
+    directory,
+  });
+  for (const field of ["ticker", "exchange", "sector", "short_note"])
+    assert.ok(html.includes(`name="${field}"`));
+  assert.ok(html.includes('value="SYN"'));
+  assert.ok(html.includes("Private synthetic note"));
+  assert.ok(!html.includes('name="user_id"'));
+  const legacy = render({
+    companies: [company],
+    location: { view: "edit", companyId: company.id },
+  });
+  assert.ok(!legacy.includes('name="ticker"'));
+  assert.ok(legacy.includes("menunggu pembaruan skema"));
+});
+
+test("Server-paged switcher preserves selected company outside the result page and carries literal search", () => {
+  const other = {
+    ...company,
+    id: "10000000-0000-4000-8000-000000000002",
+    name: "Another company",
+  };
+  const html = render({
+    companies: [other],
+    selectedCompany: company,
+    location: { view: "company", companyId: company.id },
+    directory: { query: "SYN&x", page: 2, hasNext: true, metadataReady: true },
+  });
+  assert.ok(html.includes("Perusahaan Sintetis"));
+  assert.ok(html.includes("Halaman pemilih perusahaan"));
+  assert.ok(html.includes("page=3"));
+  assert.ok(html.includes("q=SYN%26x"));
+  assert.ok(html.includes("company=" + company.id));
+  assert.ok(!html.includes("Ruang ini tidak dapat dibuka."));
 });
 
 test("Home integrates creation and compact owned-company shortcuts without fabricated dashboard modules", () => {
