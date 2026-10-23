@@ -25,7 +25,8 @@
     "test": "node --conditions=react-server --test src/tests/*.test.ts",
     "test:live": "node --env-file=.env.local --conditions=react-server --test src/tests/live/*.test.ts",
     "test:ai-smoke": "node --env-file=.env.local --conditions=react-server scripts/ai-smoke.ts",
-    "check": "npm run lint && npm run typecheck && npm run format:check && npm test"
+    "check": "npm run lint && npm run typecheck && npm run format:check && npm test",
+    "v3:ui:preview": "node scripts/v3/ui-preview.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "0.12.7",

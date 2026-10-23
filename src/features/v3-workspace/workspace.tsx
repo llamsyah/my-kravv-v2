@@ -1,6 +1,11 @@
 "use client";
 import Link from "next/link";
-import { useState, type ReactNode } from "react";
+import {
+  useState,
+  useSyncExternalStore,
+  type ReactNode,
+  type KeyboardEvent,
+} from "react";
 import { Icon } from "../../components/ui/icon";
 import { LogoutForm } from "../auth/logout-form";
 import { CompanyEditor } from "./company-editor";
@@ -14,6 +19,21 @@ import {
 } from "./model";
 import styles from "./workspace.module.css";
 
+function subscribeViewport(changed: () => void) {
+  const query = window.matchMedia("(max-width: 720px)");
+  query.addEventListener("change", changed);
+  return () => query.removeEventListener("change", changed);
+}
+function compactViewport() {
+  return window.matchMedia("(max-width: 720px)").matches;
+}
+function closeDisclosure(event: KeyboardEvent<HTMLDetailsElement>) {
+  if (event.key !== "Escape" || !event.currentTarget.open) return;
+  event.preventDefault();
+  event.currentTarget.open = false;
+  event.currentTarget.querySelector("summary")?.focus();
+}
+
 export function V3Workspace({
   companies,
   location,
@@ -24,8 +44,15 @@ export function V3Workspace({
   failed?: boolean;
 }) {
   const [dark, setDark] = useState(false);
-  const [sidebar, setSidebar] = useState(true);
-  const [context, setContext] = useState(true);
+  const compact = useSyncExternalStore(
+    subscribeViewport,
+    compactViewport,
+    () => false,
+  );
+  const [sidebarChoice, setSidebar] = useState<boolean | null>(null);
+  const [contextChoice, setContext] = useState<boolean | null>(null);
+  const sidebar = sidebarChoice ?? !compact;
+  const context = contextChoice ?? !compact;
   const [query, setQuery] = useState("");
   const company = selectedWorkspaceCompany(companies, location);
   const inCompany = location.view === "company" || location.view === "edit";
@@ -79,7 +106,7 @@ export function V3Workspace({
           >
             {dark ? "☀" : "☾"}
           </button>
-          <details className={styles.account}>
+          <details className={styles.account} onKeyDown={closeDisclosure}>
             <summary>
               <Icon name="user" />
               <span>Akun</span>
@@ -129,7 +156,7 @@ export function V3Workspace({
                 {companyInitials(company.name)}
               </span>
               <h2>{company.name}</h2>
-              <details className={styles.switcher}>
+              <details className={styles.switcher} onKeyDown={closeDisclosure}>
                 <summary>
                   Ganti perusahaan <Icon name="chevronDown" />
                 </summary>
@@ -365,12 +392,6 @@ export function V3Workspace({
                       Coba nama lain atau hapus pencarian untuk melihat semua
                       perusahaan yang dimuat.
                     </p>
-                    <button
-                      className={styles.secondary}
-                      onClick={() => setQuery("")}
-                    >
-                      Hapus pencarian
-                    </button>
                   </State>
                 ) : (
                   <ul className={styles.directory}>
@@ -391,6 +412,7 @@ export function V3Workspace({
                         <Link
                           className={styles.secondary}
                           href={workspaceHref("company", item.id)}
+                          aria-label={`Buka ruang ${item.name}`}
                         >
                           Buka ruang <Icon name="arrowRight" />
                         </Link>

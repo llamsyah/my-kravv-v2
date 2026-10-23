@@ -180,3 +180,36 @@ test("Company action returns only confirmed service identity and never revalidat
   );
   assert.equal(child.status, 0, child.stderr);
 });
+
+test("Company directory open links have distinct accessible names", () => {
+  const html = render({
+    companies: [
+      company,
+      {
+        ...company,
+        id: "10000000-0000-4000-8000-000000000002",
+        name: "Usaha lain",
+      },
+    ],
+    location: { view: "companies" },
+  });
+  assert.ok(html.includes('aria-label="Buka ruang Perusahaan Sintetis"'));
+  assert.ok(html.includes('aria-label="Buka ruang Usaha lain"'));
+});
+
+test("Isolated interactive preview compiles actual UI with mocked boundaries and exits without a server", () => {
+  const result = spawnSync(
+    process.execPath,
+    ["scripts/v3/ui-preview.mjs", "--check"],
+    { encoding: "utf8", timeout: 30000 },
+  );
+  assert.equal(result.status, 0, result.stderr);
+  assert.ok(result.stdout.includes("no server or backend started"));
+  const refused = spawnSync(
+    process.execPath,
+    ["scripts/v3/ui-preview.mjs", "--target=https://other.invalid"],
+    { encoding: "utf8", timeout: 10000 },
+  );
+  assert.notEqual(refused.status, 0);
+  assert.ok(!refused.stdout.includes("Synthetic UI preview:"));
+});

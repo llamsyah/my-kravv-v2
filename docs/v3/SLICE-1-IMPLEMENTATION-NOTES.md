@@ -32,7 +32,7 @@ Final checks: npm run lint, npm run typecheck, npm run format:check and git diff
 
 Build check: npm run v3:cloud:build exits 1 with “V3 Cloud target identity conflicts with owner approval” in the unconfigured execution-blocked process. No compiler or backend operation is launched. A successful production build is not claimed; no placeholder credentials or direct-build bypass is introduced.
 
-Static synthetic HTML rendering is tested offline. A temporary loopback-only static preview was unreachable from the available browser. Desktop/mobile/dark keyboard interaction and visual browser acceptance remain unverified. Rendered-markup tests do not prove HTTP login/account switching or deployed behavior.
+Static synthetic HTML rendering was tested at the first checkpoint. The 23 October visual refinement adds a separate interactive fixture preview, with real browser checks and screenshots documented in SLICE-1-VISUAL-REVIEW.md. This verifies synthetic UI interactions, not HTTP login/account switching, database persistence or deployed behavior.
 
 ## Remaining Slice 1 acceptance
 
