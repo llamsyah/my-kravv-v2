@@ -185,6 +185,7 @@ export function V3Workspace({
                 {workspace && (compact || !sidebar) && (
                   <button
                     ref={sidebarControl}
+                    type="button"
                     className={styles.navigationToggle}
                     aria-label="Buka navigasi perusahaan"
                     aria-expanded={sidebar}
@@ -194,18 +195,29 @@ export function V3Workspace({
                       else setSidebarPreference(true);
                     }}
                   >
-                    <Icon name="overview" />
+                    <Icon name="panelLeftOpen" />
                     <span>Navigasi</span>
                   </button>
                 )}
                 <span>
-                  {home
-                    ? "BERANDA"
-                    : directory
-                      ? "DIREKTORI PERUSAHAAN"
-                      : location.view === "new"
-                        ? "PERUSAHAAN / BARU"
-                        : "PERUSAHAAN / OVERVIEW"}
+                  {workspace && !sidebar ? (
+                    <Link
+                      className={styles.sideReturn}
+                      href={workspaceHref("companies")}
+                      aria-label="Semua perusahaan"
+                    >
+                      <Icon name="arrowLeft" />
+                      Semua perusahaan
+                    </Link>
+                  ) : home ? (
+                    "BERANDA"
+                  ) : directory ? (
+                    "DIREKTORI PERUSAHAAN"
+                  ) : location.view === "new" ? (
+                    "PERUSAHAAN / BARU"
+                  ) : (
+                    "PERUSAHAAN / OVERVIEW"
+                  )}
                 </span>
               </div>
               {workspace && (

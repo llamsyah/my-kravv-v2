@@ -89,11 +89,12 @@ export function CompanySidebar({
           aria-label="Semua perusahaan"
           onClick={navigate}
         >
-          <Icon name="building" />
-          <span>Perusahaan</span>
+          <Icon name="arrowLeft" />
+          <span>Semua perusahaan</span>
         </Link>
         <button
           ref={closeControl}
+          type="button"
           className={styles.iconButton}
           onClick={onClose}
           aria-label="Tutup navigasi perusahaan"
@@ -101,7 +102,7 @@ export function CompanySidebar({
           aria-controls="v3-company-sidebar"
           title="Tutup navigasi perusahaan"
         >
-          <Icon name="arrowLeft" />
+          <Icon name="panelLeftClose" />
         </button>
       </div>
       <h2 id="v3-sidebar-title" className={styles.sideLabel}>

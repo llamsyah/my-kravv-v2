@@ -654,6 +654,8 @@
   gap: 10px;
   color: var(--v-muted);
   font-size: 12px;
+  font-weight: 500;
+  letter-spacing: normal;
   min-height: 40px;
 }
 .sideReturn:hover {

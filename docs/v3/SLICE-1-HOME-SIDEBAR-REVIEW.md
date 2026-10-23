@@ -49,3 +49,11 @@ Full npm test — 158 passed, 0 failed/skipped. npm run lint, npm run typecheck,
 The Company Overview content, name-only create/rename contract, Cloud execution interlock, dormant API runner pin, approved bootstrap SQL/hash, V2, main and historical private evidence are unchanged. No dependencies, backend capability, migration, destructive action, paid provider request, push or merge are included.
 
 No material blocker was found for owner visual review. Live application HTTP acceptance and production build remain separately guarded and unverified. This milestone does not advance Quick Capture, Thought, writing or AI features.
+
+## Focused navigation semantics correction
+
+After owner feedback on checkpoint 9c4686a905aa89c0c143ac1f3262ba44d66c9552, the expanded sidebar now explicitly displays arrow-left + Semua perusahaan as a real directory link. Collapse and reopen use separate panel icons and distinct accessible button names. When closed, the workspace header retains its own directory link alongside the reopen control. Neither toggle changes the selected company or route. No Home redesign, Overview content change or future global navigation item was introduced.
+
+Desktop/mobile synthetic browser checks verified directory navigation from both expanded and collapsed states, full width release, preserved company/URL after toggling, mobile Tab containment, Escape dismissal and focus/scroll restoration. No console warnings/errors were observed. Screenshots are outside Git in C:/Users/PIXWAR/.codex/visualizations/2026/10/22/01a16214-37fb-78d2-a02b-777e2110cd88/slice1-navigation-semantics/ (desktop-expanded.jpg, desktop-collapsed.jpg, mobile-expanded.jpg, mobile-collapsed.jpg).
+
+An isolated event-level regression exercises the actual workspace/sidebar handlers for desktop and mobile, keeping effects inert and refusing unexpected dependencies. It asserts distinct link/button semantics, the directory destination, preserved active company/Overview route, and no navigation during collapse/reopen. Focused suite: 14 passed. Full deterministic suite: 159 passed, 0 failed/skipped. Lint, typecheck, formatting and diff checks passed. These synthetic checks do not establish live application HTTP acceptance. Cloud guards, backend contracts, V2 and main remain unchanged.

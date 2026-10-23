@@ -289,6 +289,15 @@ test("Sidebar session preference survives module navigation and fails safely wit
   assert.equal(result.status, 0, result.stderr);
 });
 
+test("Directory return and sidebar collapse/reopen preserve independent navigation semantics", () => {
+  const result = spawnSync(
+    process.execPath,
+    ["src/tests/helpers/v3-navigation-interaction.mjs"],
+    { encoding: "utf8", timeout: 10000 },
+  );
+  assert.equal(result.status, 0, result.stderr);
+});
+
 test("Mobile drawer cycles visible keyboard controls and ignores hidden disclosure content", () => {
   const result = spawnSync(
     process.execPath,

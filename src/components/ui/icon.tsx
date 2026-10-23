@@ -11,6 +11,8 @@ const paths = {
   user: ["M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0", "M4 21v-2a8 8 0 0 1 16 0v2"],
   chevronDown: ["m6 9 6 6 6-6"],
   arrowLeft: ["M19 12H5m6-6-6 6 6 6"],
+  panelLeftClose: ["M3 3h18v18H3ZM9 3v18", "m16 9-3 3 3 3"],
+  panelLeftOpen: ["M3 3h18v18H3ZM9 3v18", "m13 9 3 3-3 3"],
   overview: ["M3 3h7v7H3ZM14 3h7v7h-7ZM3 14h7v7H3ZM14 14h7v7h-7Z"],
   plus: ["M12 5v14M5 12h14"],
   arrowRight: ["M5 12h14m-6-6 6 6-6 6"],
