@@ -20,7 +20,7 @@ export default async function FoundationPage({
 }: {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
-  const { supabase } = await requireAuthenticatedSession();
+  const { supabase, user } = await requireAuthenticatedSession();
   const search = await searchParams;
   const location = workspaceLocation(search);
   const directory = parseDirectorySearch(search);
@@ -49,9 +49,16 @@ export default async function FoundationPage({
     if (metadataReady) initialTheme = await readAccountTheme(supabase);
   } catch {
     failed = true;
+    // Never render a partially confirmed projection after a later read fails.
+    companies = [];
+    selectedCompany = undefined;
+    metadataReady = false;
+    hasNext = false;
+    initialTheme = "light";
   }
   return (
     <V3Workspace
+      key={user.id}
       companies={companies}
       selectedCompany={selectedCompany ?? null}
       location={location}
