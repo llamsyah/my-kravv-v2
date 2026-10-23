@@ -5,8 +5,14 @@ import path from "node:path";
 import http from "node:http";
 import { createRequire } from "node:module";
 const args = process.argv.slice(2);
-if (args.length > 1 || (args.length === 1 && args[0] !== "--check"))
-  throw Error("Only an optional offline --check is supported.");
+if (
+  args.length > 1 ||
+  (args.length === 1 && !["--check", "--port=3105"].includes(args[0]))
+)
+  throw Error(
+    "Only --check or the alternate loopback --port=3105 is supported.",
+  );
+const previewPort = args[0] === "--port=3105" ? 3105 : 3104;
 const require = createRequire(import.meta.url);
 const { webpack } = require("next/dist/compiled/webpack/webpack");
 const root = path.resolve(import.meta.dirname, "../..");
@@ -160,9 +166,11 @@ const server = http.createServer((req, res) => {
   res.setHeader("Content-Type", "text/html; charset=utf-8");
   res.end(html);
 });
-server.listen(3104, "127.0.0.1", () =>
+server.listen(previewPort, "127.0.0.1", () =>
   console.log(
-    "Synthetic UI preview: http://127.0.0.1:3104/foundation?view=companies",
+    "Synthetic UI preview: http://127.0.0.1:" +
+      previewPort +
+      "/foundation?view=companies",
   ),
 );
 const stop = () =>

@@ -25,10 +25,7 @@ export function CompanyEditor({ company }: { company?: WorkspaceCompany }) {
       <label htmlFor={id}>
         Nama perusahaan <span aria-hidden="true">*</span>
       </label>
-      <p id={id + "-hint"}>
-        Gunakan nama yang mudah kamu kenali. Tidak perlu melengkapi profil
-        terlebih dahulu.
-      </p>
+      <p id={id + "-hint"}>Gunakan nama yang mudah kamu kenali.</p>
       <input
         id={id}
         name="name"
@@ -45,10 +42,10 @@ export function CompanyEditor({ company }: { company?: WorkspaceCompany }) {
       <span className={styles.meta}>
         Maksimal 200 karakter. Nama tidak mengubah pemilik atau isi perusahaan.
       </span>
-      <div className={styles.notice}>
-        Ticker, bursa, sektor, dan catatan pribadi belum didukung oleh skema V3
-        saat ini.
-      </div>
+      <details className={styles.capabilities}>
+        <summary>Informasi lainnya</summary>
+        <p>Ticker, bursa, sektor, dan catatan pribadi belum tersedia.</p>
+      </details>
       {state.error && (
         <div className={styles.error} role="alert" id={id + "-error"}>
           <strong>Nama belum terkonfirmasi tersimpan.</strong>

@@ -2,6 +2,8 @@
 
 23 October 2026, Asia/Jakarta. Baseline: 41ef9b9fd5ef4a024253c652e4e241debf501cfb.
 
+This records the first visual pass. The subsequent owner-requested redesign, current panel defaults, screenshots and validation are recorded in [SLICE-1-REDESIGN-REVIEW.md](SLICE-1-REDESIGN-REVIEW.md).
+
 ## Safe preview
 
 Run npm run v3:ui:preview from the repository, then open http://127.0.0.1:3104/foundation?view=companies.
@@ -10,11 +12,11 @@ This is a separate synthetic fixture host, not the authenticated Next applicatio
 
 The preview reads no environment credentials or dotenv files. Exactly the existing Auth and foundation action imports are replaced with local mocks; unreviewed actions, Supabase and server-only imports fail compilation. There is no login or successful database write implementation. Save simulates a bounded local failure; logout returns a synthetic unavailable-session message.
 
-Only GET requests for the fixed document, bundle and local font are served. The server binds explicitly to 127.0.0.1:3104, sends no-store headers and a CSP with connect-src none and form-action none, and stops after 30 minutes or Ctrl+C. Generated bundles live in a unique OS temporary directory, removed only after checking its location/prefix. No project database, secret, SQL, app proxy or execution interlock is involved.
+Only GET requests for the fixed document, bundle and local font are served. The server binds explicitly to 127.0.0.1:3104 by default, sends no-store headers and a CSP with connect-src none and form-action none, and stops after 30 minutes or Ctrl+C. Generated bundles live in a unique OS temporary directory, removed only after checking its location/prefix. No project database, secret, SQL, app proxy or execution interlock is involved.
 
-Run node scripts/v3/ui-preview.mjs --check to compile and check the fixture graph without starting a server. Other CLI options are refused. This is not a production build or authentication bypass; never expose the fixture server publicly or present its samples as real account data.
+Run node scripts/v3/ui-preview.mjs --check to compile and check the fixture graph without starting a server. The redesign adds exactly one alternate option: npm run v3:ui:preview -- --port=3105, for an occupied default port. Other options and combined flags are refused. Both supported ports bind explicitly to 127.0.0.1. This is not a production build or authentication bypass; never expose the fixture server publicly or present its samples as real account data.
 
-Fixtures: state=empty, state=error and state=loading; ordinary view and company query fields exercise directory, create, edit and inaccessible-company UI. All Company names/IDs are synthetic.
+Fixtures: state=empty, state=error, state=loading and state=long-name; ordinary view and company query fields exercise Home, directory, create, edit and inaccessible-company UI. All Company names/IDs are synthetic.
 
 ## Corrections
 

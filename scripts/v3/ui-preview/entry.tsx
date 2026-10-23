@@ -7,20 +7,28 @@ const companies = [
   {
     id: "10000000-0000-4000-8000-000000000001",
     user_id: owner,
-    name: "Perusahaan Contoh Nusantara",
+    name: "Nusantara Industri",
   },
   {
     id: "10000000-0000-4000-8000-000000000002",
     user_id: owner,
-    name: "Usaha Contoh Bersama",
+    name: "Cakrawala Konsumer",
   },
   {
     id: "10000000-0000-4000-8000-000000000003",
     user_id: owner,
-    name: "Perusahaan dengan nama panjang untuk memeriksa tata letak responsif",
+    name: "Arunika Infrastruktur",
+  },
+  {
+    id: "10000000-0000-4000-8000-000000000004",
+    user_id: owner,
+    name: "Lestari Teknologi",
   },
 ];
 const search = Object.fromEntries(new URLSearchParams(window.location.search));
+if (search.state === "long-name")
+  companies[0].name =
+    "Perusahaan dengan nama panjang untuk memeriksa tata letak responsif";
 createRoot(document.getElementById("preview")!).render(
   search.state === "loading" ? (
     <Loading />

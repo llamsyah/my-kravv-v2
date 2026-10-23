@@ -197,6 +197,43 @@ test("Company directory open links have distinct accessible names", () => {
   assert.ok(html.includes('aria-label="Buka ruang Usaha lain"'));
 });
 
+test("Home separates bounded company discovery from creation without invented research activity", () => {
+  const companies = Array.from({ length: 8 }, (_, index) => ({
+    ...company,
+    id: "10000000-0000-4000-8000-" + String(index + 1).padStart(12, "0"),
+    name: "Perusahaan " + (index + 1),
+  }));
+  const html = render({ companies, location: { view: "home" } });
+  assert.ok(html.includes("Ruang penelitianmu."));
+  assert.equal((html.match(/aria-label="Buka ruang /g) ?? []).length, 6);
+  assert.ok(html.includes("Lihat seluruh perusahaan di direktori"));
+  assert.ok(html.includes("Ada perusahaan yang ingin kamu pahami?"));
+  assert.ok(!html.includes("Quick Capture"));
+  assert.ok(!html.includes("Inbox"));
+  assert.ok(!html.includes("AI review"));
+  assert.ok(!/<img[\s>]/.test(html));
+});
+
+test("Workspace integrates sidebar controls and keeps optional context and future destinations disclosed", () => {
+  const html = render({
+    companies: [company],
+    location: { view: "company", companyId: company.id },
+  });
+  const sidebar = html.match(
+    /<aside[^>]*aria-label="Sidebar perusahaan"[\s\S]*?<\/aside>/,
+  )?.[0];
+  assert.ok(sidebar?.includes('aria-label="Ciutkan sidebar"'));
+  assert.ok(sidebar?.includes('aria-label="Ganti perusahaan"'));
+  assert.ok(sidebar?.includes('aria-label="Navigasi perusahaan"'));
+  assert.match(html, /<aside[^>]*id="v3-company-context"[^>]*hidden=""/);
+  assert.match(html, /<details[^>]*><summary>[^<]*<svg[\s\S]*?Area penelitian/);
+  assert.equal((html.match(/aria-disabled="true"/g) ?? []).length, 4);
+  assert.ok(!html.includes("Sembunyikan navigasi"));
+  assert.ok(!html.includes("Sembunyikan konteks"));
+  assert.ok(!html.includes("Segera hadir"));
+  assert.ok(html.includes('<summary aria-label="Akun">'));
+});
+
 test("Isolated interactive preview compiles actual UI with mocked boundaries and exits without a server", () => {
   const result = spawnSync(
     process.execPath,
@@ -212,4 +249,11 @@ test("Isolated interactive preview compiles actual UI with mocked boundaries and
   );
   assert.notEqual(refused.status, 0);
   assert.ok(!refused.stdout.includes("Synthetic UI preview:"));
+  const combined = spawnSync(
+    process.execPath,
+    ["scripts/v3/ui-preview.mjs", "--port=3105", "--check"],
+    { encoding: "utf8", timeout: 10000 },
+  );
+  assert.notEqual(combined.status, 0);
+  assert.ok(!combined.stdout.includes("Synthetic UI preview:"));
 });
