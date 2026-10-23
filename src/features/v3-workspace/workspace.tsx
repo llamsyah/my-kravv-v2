@@ -3,6 +3,7 @@ import Link from "next/link";
 import {
   useState,
   useRef,
+  useEffect,
   useSyncExternalStore,
   type ReactNode,
   type KeyboardEvent,
@@ -10,6 +11,12 @@ import {
 import { Icon } from "../../components/ui/icon";
 import { LogoutForm } from "../auth/logout-form";
 import { CompanyEditor } from "./company-editor";
+import { CompanySidebar } from "./company-sidebar";
+import {
+  readSidebarPreference,
+  setSidebarPreference,
+  subscribeSidebarPreference,
+} from "./sidebar-preference";
 import {
   companyInitials,
   findWorkspaceCompanies,
@@ -33,7 +40,6 @@ function closeDisclosure(event: KeyboardEvent<HTMLDetailsElement>) {
   event.currentTarget.open = false;
   event.currentTarget.querySelector("summary")?.focus();
 }
-const futureAreas = ["Ruang Tulis", "Pemikiran", "Explore", "Referensi"];
 
 export function V3Workspace({
   companies,
@@ -50,21 +56,37 @@ export function V3Workspace({
     compactViewport,
     () => false,
   );
-  const [sidebarChoice, setSidebar] = useState<boolean | null>(null);
-  const sidebar = sidebarChoice ?? !compact;
+  const desktopSidebar = useSyncExternalStore(
+    subscribeSidebarPreference,
+    readSidebarPreference,
+    () => true,
+  );
+  const [mobileSidebar, setMobileSidebar] = useState(false);
+  const sidebar = compact ? mobileSidebar : desktopSidebar;
+  const sidebarControl = useRef<HTMLButtonElement>(null);
+  const restoreSidebarFocus = useRef(false);
+  const closeSidebar = () => {
+    restoreSidebarFocus.current = true;
+    if (compact) setMobileSidebar(false);
+    else setSidebarPreference(false);
+  };
+  useEffect(() => {
+    if (!sidebar && restoreSidebarFocus.current) {
+      sidebarControl.current?.focus();
+      restoreSidebarFocus.current = false;
+    }
+  }, [sidebar]);
   const [context, setContext] = useState(false);
   const contextControl = useRef<HTMLButtonElement>(null);
   const [query, setQuery] = useState("");
-  const [switchQuery, setSwitchQuery] = useState("");
   const company = selectedWorkspaceCompany(companies, location);
   const inCompany = location.view === "company" || location.view === "edit";
   const workspace = inCompany && !!company && !failed;
   const home = location.view === "home",
     directory = location.view === "companies";
-  const filtered = findWorkspaceCompanies(companies, query),
-    switchCompanies = findWorkspaceCompanies(companies, switchQuery);
+  const filtered = findWorkspaceCompanies(companies, query);
   const title = home
-    ? "Ruang penelitianmu."
+    ? "Ruang berpikirmu,"
     : directory
       ? "Perusahaan"
       : location.view === "new"
@@ -128,7 +150,7 @@ export function V3Workspace({
               </summary>
               <div className={styles.popover}>
                 <strong>Ruang pribadi</strong>
-                <p>Tampilan dan panel berlaku selama halaman ini terbuka.</p>
+                <p>Sidebar desktop diingat selama sesi ini.</p>
                 <p>Pengaturan akun belum tersedia.</p>
                 <LogoutForm />
               </div>
@@ -136,7 +158,11 @@ export function V3Workspace({
           </div>
         </div>
       </header>
-      <div className={styles.canvas} data-workspace={workspace}>
+      <div
+        className={styles.canvas}
+        data-workspace={workspace}
+        data-home={home}
+      >
         <div
           className={styles.layout}
           data-workspace={workspace}
@@ -144,145 +170,44 @@ export function V3Workspace({
           data-context={workspace && context}
         >
           {workspace && company && (
-            <aside
-              className={styles.sidebar}
-              aria-label="Sidebar perusahaan"
-              data-expanded={sidebar}
-            >
-              <div className={styles.sidebarHead}>
-                <Link
-                  href={workspaceHref("companies")}
-                  className={styles.sideReturn}
-                  aria-label="Semua perusahaan"
-                  title="Semua perusahaan"
-                >
-                  <Icon name="building" />
-                  <span>Perusahaan</span>
-                </Link>
-                <button
-                  className={styles.iconButton}
-                  onClick={() => setSidebar(!sidebar)}
-                  aria-expanded={sidebar}
-                  aria-controls="v3-company-sidebar"
-                  aria-label={
-                    sidebar ? "Ciutkan sidebar" : "Buka navigasi perusahaan"
-                  }
-                  title={
-                    sidebar ? "Ciutkan sidebar" : "Buka navigasi perusahaan"
-                  }
-                >
-                  <Icon name={sidebar ? "arrowLeft" : "arrowRight"} />
-                </button>
-              </div>
-              {!sidebar && (
-                <span className={styles.railIdentity} aria-hidden="true">
-                  {companyInitials(company.name)}
-                </span>
-              )}
-              <div id="v3-company-sidebar" hidden={!sidebar}>
-                <p className={styles.sideLabel}>WORKSPACE</p>
-                <details
-                  className={styles.switcher}
-                  onKeyDown={closeDisclosure}
-                >
-                  <summary aria-label="Ganti perusahaan">
-                    <span className={styles.monogram} aria-hidden="true">
-                      {companyInitials(company.name)}
-                    </span>
-                    <strong>{company.name}</strong>
-                    <Icon name="chevronDown" />
-                  </summary>
-                  <div className={styles.switcherBody}>
-                    <label htmlFor="company-switch-search">
-                      Cari perusahaan milikmu
-                    </label>
-                    <input
-                      id="company-switch-search"
-                      type="search"
-                      value={switchQuery}
-                      onChange={(e) => setSwitchQuery(e.target.value)}
-                      maxLength={200}
-                      placeholder="Cari nama…"
-                    />
-                    <ul>
-                      {switchCompanies.map((item) => (
-                        <li key={item.id}>
-                          <Link
-                            href={workspaceHref("company", item.id)}
-                            onClick={() => {
-                              if (compact) setSidebar(false);
-                            }}
-                            aria-current={
-                              item.id === company.id ? "page" : undefined
-                            }
-                          >
-                            {item.name}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                    {!switchCompanies.length && (
-                      <p>Tidak ada nama yang cocok.</p>
-                    )}
-                    <Link
-                      className={styles.switcherCreate}
-                      href={workspaceHref("new")}
-                    >
-                      <Icon name="plus" />
-                      Tambah perusahaan
-                    </Link>
-                  </div>
-                </details>
-                <nav
-                  className={styles.companyNav}
-                  aria-label="Navigasi perusahaan"
-                >
-                  <Link
-                    href={workspaceHref("company", company.id)}
-                    aria-current={
-                      location.view === "company" ? "page" : undefined
-                    }
-                  >
-                    <Icon name="overview" />
-                    Overview
-                  </Link>
-                  <details
-                    className={styles.futureAreas}
-                    onKeyDown={closeDisclosure}
-                  >
-                    <summary>
-                      <Icon name="read" />
-                      Area penelitian
-                      <Icon name="chevronDown" />
-                    </summary>
-                    <p>Belum tersedia pada tahap ini.</p>
-                    <ul>
-                      {futureAreas.map((label) => (
-                        <li key={label}>
-                          <span aria-disabled="true">{label}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </details>
-                </nav>
-                <div className={styles.sidebarFoot}>
-                  <Icon name="user" />
-                  <span>Hanya untuk akunmu</span>
-                </div>
-              </div>
-            </aside>
+            <CompanySidebar
+              company={company}
+              companies={companies}
+              location={location}
+              compact={compact}
+              open={sidebar}
+              onClose={closeSidebar}
+            />
           )}
           <main id="v3-main" tabIndex={-1} className={styles.main}>
             <div className={styles.breadcrumb}>
-              <span>
-                {home
-                  ? "BERANDA"
-                  : directory
-                    ? "DIREKTORI PERUSAHAAN"
-                    : location.view === "new"
-                      ? "PERUSAHAAN / BARU"
-                      : "PERUSAHAAN / OVERVIEW"}
-              </span>
+              <div className={styles.workspaceTrail}>
+                {workspace && (compact || !sidebar) && (
+                  <button
+                    ref={sidebarControl}
+                    className={styles.navigationToggle}
+                    aria-label="Buka navigasi perusahaan"
+                    aria-expanded={sidebar}
+                    aria-controls="v3-company-sidebar"
+                    onClick={() => {
+                      if (compact) setMobileSidebar(true);
+                      else setSidebarPreference(true);
+                    }}
+                  >
+                    <Icon name="overview" />
+                    <span>Navigasi</span>
+                  </button>
+                )}
+                <span>
+                  {home
+                    ? "BERANDA"
+                    : directory
+                      ? "DIREKTORI PERUSAHAAN"
+                      : location.view === "new"
+                        ? "PERUSAHAAN / BARU"
+                        : "PERUSAHAAN / OVERVIEW"}
+                </span>
+              </div>
               {workspace && (
                 <button
                   ref={contextControl}
@@ -296,14 +221,12 @@ export function V3Workspace({
                 </button>
               )}
             </div>
-            <div className={styles.pageHeading}>
+            <div className={home ? styles.homeHeading : styles.pageHeading}>
               <div>
-                <h1>{title}</h1>
-                {home && (
-                  <p className={styles.lead}>
-                    Tempat menata perusahaan yang ingin kamu pahami lebih dalam.
-                  </p>
-                )}
+                <h1>
+                  {title}
+                  {home && <span>lebih terarah.</span>}
+                </h1>
                 {directory && (
                   <p className={styles.lead}>
                     Seluruh ruang perusahaanmu, dalam satu tempat.
@@ -403,6 +326,7 @@ export function V3Workspace({
               <div className={styles.dashboard} data-home={home}>
                 <section
                   className={styles.companySection}
+                  data-dashboard-module={home ? "companies" : undefined}
                   aria-labelledby="company-list-title"
                 >
                   <div className={styles.sectionHeading}>
@@ -411,18 +335,8 @@ export function V3Workspace({
                         Perusahaanmu{" "}
                         <span className={styles.count}>{companies.length}</span>
                       </h2>
-                      {home && (
-                        <p>Buka sebuah ruang untuk menjaga konteksnya.</p>
-                      )}
                     </div>
-                    {home && (
-                      <Link
-                        className={styles.textLink}
-                        href={workspaceHref("companies")}
-                      >
-                        Lihat direktori <Icon name="arrowRight" />
-                      </Link>
-                    )}
+                    {home && createLink}
                   </div>
                   <div className={styles.directoryTools}>
                     <div className={styles.search}>
@@ -450,6 +364,14 @@ export function V3Workspace({
                     <span className={styles.meta} role="status">
                       {filtered.length} dari {companies.length} dimuat
                     </span>
+                    {home && (
+                      <Link
+                        className={styles.textLink}
+                        href={workspaceHref("companies")}
+                      >
+                        Lihat direktori <Icon name="arrowRight" />
+                      </Link>
+                    )}
                   </div>
                   {companies.length >= 100 && (
                     <p className={styles.notice}>
@@ -460,12 +382,14 @@ export function V3Workspace({
                   {!companies.length ? (
                     <State title="Mulai dari satu perusahaan.">
                       <p>Cukup sebuah nama. Informasi lainnya bisa menyusul.</p>
-                      <Link
-                        className={styles.primary}
-                        href={workspaceHref("new")}
-                      >
-                        Tambah perusahaan pertama
-                      </Link>
+                      {!home && (
+                        <Link
+                          className={styles.primary}
+                          href={workspaceHref("new")}
+                        >
+                          Tambah perusahaan pertama
+                        </Link>
+                      )}
                     </State>
                   ) : !filtered.length ? (
                     <State title="Tidak ada nama yang cocok.">
@@ -484,20 +408,13 @@ export function V3Workspace({
                                 href={workspaceHref("company", item.id)}
                                 aria-label={"Buka ruang " + item.name}
                               >
-                                <span
-                                  className={styles.monogram}
-                                  aria-hidden="true"
-                                >
-                                  {companyInitials(item.name)}
-                                </span>
-                                <h3>{item.name}</h3>
-                                <span className={styles.meta}>
-                                  Workspace perusahaan
-                                </span>
-                                <span className={styles.tileFoot}>
-                                  Buka ruang
-                                  <Icon name="arrowRight" />
-                                </span>
+                                <div className={styles.tileIdentity}>
+                                  <h3>{item.name}</h3>
+                                  <span className={styles.meta}>
+                                    Overview perusahaan
+                                  </span>
+                                </div>
+                                <Icon name="arrowRight" />
                               </Link>
                             ) : (
                               <>
@@ -547,36 +464,6 @@ export function V3Workspace({
                     </Link>
                   )}
                 </section>
-                {home && (
-                  <aside className={styles.homeAside}>
-                    <section className={styles.createPanel}>
-                      <span className={styles.sectionIcon}>
-                        <Icon name="plus" />
-                      </span>
-                      <p className={styles.eyebrow}>RUANG BARU</p>
-                      <h2>Ada perusahaan yang ingin kamu pahami?</h2>
-                      <p>
-                        Mulai dengan namanya. Bangun ruang penelitianmu sedikit
-                        demi sedikit.
-                      </p>
-                      {createLink}
-                    </section>
-                    <details
-                      className={styles.homeHelp}
-                      onKeyDown={closeDisclosure}
-                    >
-                      <summary>
-                        Tentang ruang penelitianmu
-                        <Icon name="chevronDown" />
-                      </summary>
-                      <p>
-                        Perusahaan tersimpan untuk akunmu. Pengelolaan nama
-                        tersedia; area penulisan dan penelitian belum
-                        diaktifkan.
-                      </p>
-                    </details>
-                  </aside>
-                )}
               </div>
             )}
           </main>

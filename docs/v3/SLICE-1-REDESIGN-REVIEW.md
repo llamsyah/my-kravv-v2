@@ -2,6 +2,8 @@
 
 23 October 2026, Asia/Jakarta. Baseline: e62c1755b87346ba069b06818a6b4cfd4b4f7ffd on v3. Owner visual review is pending.
 
+Historical redesign record. The owner accepted the workspace overall and requested a focused Home/sidebar refinement, documented in [SLICE-1-HOME-SIDEBAR-REVIEW.md](SLICE-1-HOME-SIDEBAR-REVIEW.md). That later checkpoint replaces the promotional Home panel and collapsed rail described below.
+
 ## Design decisions
 
 Used design/v3/references/01-home.png and 03-company-overview.png for typographic hierarchy, restrained green accents, surface depth and workspace composition. No photography, illustrations, decorative images, unsupported research activity, metrics, inbox or AI features were added.

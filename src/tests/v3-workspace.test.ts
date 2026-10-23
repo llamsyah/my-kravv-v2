@@ -197,17 +197,24 @@ test("Company directory open links have distinct accessible names", () => {
   assert.ok(html.includes('aria-label="Buka ruang Usaha lain"'));
 });
 
-test("Home separates bounded company discovery from creation without invented research activity", () => {
+test("Home integrates creation and compact owned-company shortcuts without fabricated dashboard modules", () => {
   const companies = Array.from({ length: 8 }, (_, index) => ({
     ...company,
     id: "10000000-0000-4000-8000-" + String(index + 1).padStart(12, "0"),
     name: "Perusahaan " + (index + 1),
   }));
   const html = render({ companies, location: { view: "home" } });
-  assert.ok(html.includes("Ruang penelitianmu."));
+  assert.ok(html.includes("Ruang berpikirmu,"));
+  assert.ok(html.includes("lebih terarah."));
   assert.equal((html.match(/aria-label="Buka ruang /g) ?? []).length, 6);
   assert.ok(html.includes("Lihat seluruh perusahaan di direktori"));
-  assert.ok(html.includes("Ada perusahaan yang ingin kamu pahami?"));
+  const section = html.match(
+    /<section[^>]*data-dashboard-module="companies"[\s\S]*?<\/section>/,
+  )?.[0];
+  assert.ok(section?.includes("Tambah perusahaan"));
+  assert.ok(section?.includes("Cari nama perusahaan"));
+  assert.ok(!html.includes("Ada perusahaan yang ingin kamu pahami?"));
+  assert.ok(!html.includes("homeAside"));
   assert.ok(!html.includes("Quick Capture"));
   assert.ok(!html.includes("Inbox"));
   assert.ok(!html.includes("AI review"));
@@ -222,7 +229,7 @@ test("Workspace integrates sidebar controls and keeps optional context and futur
   const sidebar = html.match(
     /<aside[^>]*aria-label="Sidebar perusahaan"[\s\S]*?<\/aside>/,
   )?.[0];
-  assert.ok(sidebar?.includes('aria-label="Ciutkan sidebar"'));
+  assert.ok(sidebar?.includes('aria-label="Tutup navigasi perusahaan"'));
   assert.ok(sidebar?.includes('aria-label="Ganti perusahaan"'));
   assert.ok(sidebar?.includes('aria-label="Navigasi perusahaan"'));
   assert.match(html, /<aside[^>]*id="v3-company-context"[^>]*hidden=""/);
@@ -232,6 +239,91 @@ test("Workspace integrates sidebar controls and keeps optional context and futur
   assert.ok(!html.includes("Sembunyikan konteks"));
   assert.ok(!html.includes("Segera hadir"));
   assert.ok(html.includes('<summary aria-label="Akun">'));
+});
+
+test("Sidebar session preference survives module navigation and fails safely without storage", () => {
+  const result = spawnSync(
+    process.execPath,
+    [
+      "--input-type=module",
+      "-e",
+      `
+    import assert from "node:assert/strict";
+    const values = new Map();
+    globalThis.window = { sessionStorage: {
+      getItem: key => values.get(key) ?? null,
+      setItem: (key,value) => values.set(key,value),
+    }};
+    const first = await import("./src/features/v3-workspace/sidebar-preference.ts?first");
+    assert.equal(first.readSidebarPreference(), true);
+    let notifications = 0;
+    const unsubscribe = first.subscribeSidebarPreference(() => notifications++);
+    first.setSidebarPreference(false);
+    assert.equal(first.readSidebarPreference(), false);
+    assert.equal(notifications, 1);
+    assert.deepEqual([...values], [["my-kravv:v3:company-sidebar", "closed"]]);
+    const remounted = await import("./src/features/v3-workspace/sidebar-preference.ts?remount");
+    assert.equal(remounted.readSidebarPreference(), false);
+    remounted.setSidebarPreference(true);
+    const reopened = await import("./src/features/v3-workspace/sidebar-preference.ts?reopen");
+    assert.equal(reopened.readSidebarPreference(), true);
+    unsubscribe();
+    first.setSidebarPreference(true);
+    assert.equal(notifications, 1);
+    window.sessionStorage.getItem = () => { throw Error("Storage unavailable"); };
+    window.sessionStorage.setItem = () => { throw Error("Storage unavailable"); };
+    const restricted = await import("./src/features/v3-workspace/sidebar-preference.ts?restricted");
+    assert.equal(restricted.readSidebarPreference(), true);
+    restricted.setSidebarPreference(false);
+    assert.equal(restricted.readSidebarPreference(), false);
+    // A blocked write must not leave an old stored value in control.
+    window.sessionStorage.getItem = () => "open";
+    assert.equal(restricted.readSidebarPreference(), false);
+    window.sessionStorage.getItem = () => "not-a-boolean";
+    const malformed = await import("./src/features/v3-workspace/sidebar-preference.ts?malformed");
+    assert.equal(malformed.readSidebarPreference(), true);
+  `,
+    ],
+    { encoding: "utf8", timeout: 10000 },
+  );
+  assert.equal(result.status, 0, result.stderr);
+});
+
+test("Mobile drawer cycles visible keyboard controls and ignores hidden disclosure content", () => {
+  const result = spawnSync(
+    process.execPath,
+    [
+      "--input-type=module",
+      "-e",
+      `
+    import assert from "node:assert/strict";
+    import fs from "node:fs";
+    import ts from "typescript";
+    const source = fs.readFileSync("src/features/v3-workspace/company-sidebar.tsx", "utf8");
+    const output = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.ReactJSX, target: ts.ScriptTarget.ES2022 } }).outputText;
+    const exported = {};
+    new Function("require", "exports", output)(() => ({}), exported);
+    let focused = null, prevented = false;
+    const control = visible => ({ getClientRects: () => visible ? [{}] : [], focus() { focused = this; } });
+    const first = control(true), hidden = control(false), middle = control(true), last = control(true);
+    const dialog = { querySelectorAll: () => [first, hidden, middle, last], ownerDocument: { activeElement: last }, focus() { focused = this; } };
+    const event = { key: "Tab", shiftKey: false, currentTarget: dialog, preventDefault() { prevented = true; } };
+    exported.cycleDrawerFocus(event);
+    assert.equal(prevented, true); assert.equal(focused, first);
+    prevented = false; event.shiftKey = true; dialog.ownerDocument.activeElement = first;
+    exported.cycleDrawerFocus(event);
+    assert.equal(prevented, true); assert.equal(focused, last);
+    prevented = false; focused = null; event.shiftKey = false; dialog.ownerDocument.activeElement = middle;
+    exported.cycleDrawerFocus(event);
+    assert.equal(prevented, false); assert.equal(focused, null);
+    dialog.querySelectorAll = () => [hidden];
+    exported.cycleDrawerFocus(event);
+    assert.equal(prevented, true); assert.equal(focused, dialog);
+  `,
+    ],
+    { encoding: "utf8", timeout: 10000 },
+  );
+  assert.equal(result.status, 0, result.stderr);
 });
 
 test("Isolated interactive preview compiles actual UI with mocked boundaries and exits without a server", () => {
