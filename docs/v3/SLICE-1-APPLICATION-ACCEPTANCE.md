@@ -54,16 +54,19 @@ configuration it refuses target identity. A deterministic check supplies only th
 approved public target metadata (no credential) and confirms the next boundary is
 the unchanged unconditional application execution interlock, with zero requests.
 
-The Cloud launcher currently contains no Next process dispatch even beyond that
-gate. A real production build therefore needs a separately reviewed, narrowly
-scoped build/launch implementation and application authorization. Merely adding
-environment values cannot legitimately enable it. Directly running `next build`,
-dummy credentials, patching the gate or using test replacements to label a build
-successful would bypass the approved workflow and is not done here.
+The Cloud launcher contains no Next process dispatch even beyond that gate.
+Cloud-configured build/launch support still needs separate review and authorization.
+The subsequent [final build/readiness plan](SLICE-1-LIVE-APPLICATION-PLAN.md) adds a
+legitimate isolated **offline production-build** check with unchanged source and
+interlocks, no environment files/credentials, and denied Node network access. That
+check passed; its disposable artifact is not Cloud-configured or deployment-ready.
+This corrects the earlier overbroad assumption that production compilation itself
+necessarily requires application activation.
 
-Safe checks are TypeScript/Next route type generation, lint, formatting, deterministic
-tests and `npm run v3:ui:preview -- --check`. The latter compiles real UI components
-with explicitly offline fixtures/actions; it is not a Next production build.
+Do not run raw `next build` in the owner checkout with inherited environment files,
+add dummy credentials or replace guards to obtain a green result. Type generation,
+static tests and the separate offline UI fixture bundle remain useful checks but
+are distinct from the now-verified isolated full Next production build.
 
 ## Remaining separately authorized live application acceptance
 
