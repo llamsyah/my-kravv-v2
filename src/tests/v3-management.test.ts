@@ -318,3 +318,59 @@ test("Review-only migration is exact-target, additive and preserves restricted S
     "3a833df429954f968daacff8ba4c4c54735eaa008f605b75a22a5c9edb1bbee9",
   );
 });
+
+test("Catalog verification checks effective access and the complete owner policy set", () => {
+  const sql = fs.readFileSync(
+    "supabase/v3-company-management/verify.sql",
+    "utf8",
+  );
+  assert.match(sql, /count\(\*\) from v3_internal.environment\) <> 1/);
+  assert.match(sql, /has_column_privilege\('anon'/);
+  assert.match(sql, /is distinct from expected_insert/);
+  assert.match(sql, /is distinct from expected_update/);
+  assert.match(sql, /array\['DELETE','TRUNCATE','REFERENCES','TRIGGER'\]/);
+  assert.match(sql, /polroles=array/);
+  assert.match(sql, /Unexpected ownership policy set/);
+  assert.match(sql, /p\.polpermissive/);
+  assert.ok(!sql.includes("like '%auth.uid()%'"));
+  // Exercise the verifier's deliberately narrow canonical comparison. Unknown
+  // renderings fail closed and require review; this is not a PostgreSQL test.
+  const normalize = (value: string) =>
+    value
+      .toLowerCase()
+      .replace(/[\s()]/g, "")
+      .replaceAll("asuid", "");
+  const ownerExpression = "selectauth.uid=user_id";
+  assert.equal(
+    normalize("(( SELECT auth.uid() AS uid) = user_id)"),
+    ownerExpression,
+  );
+  for (const unsafe of [
+    "auth.uid() = user_id OR true",
+    "((SELECT auth.uid()) = user_id) OR true",
+    "true",
+    "user_id IS NOT NULL",
+  ]) {
+    assert.notEqual(normalize(unsafe), ownerExpression);
+  }
+});
+
+test("Verification separates catalog assertions from observed definitions and never repairs data", () => {
+  const sql = fs.readFileSync(
+    "supabase/v3-company-management/verify.sql",
+    "utf8",
+  );
+  assert.match(sql, /Wrong metadata type, nullability or theme default/);
+  assert.match(sql, /definition review and live acceptance still required/);
+  for (const field of [
+    "observed_constraints",
+    "observed_indexes",
+    "observed_triggers",
+  ])
+    assert.ok(sql.includes(field));
+  assert.ok(
+    !/^\s*(alter|create|drop|grant|revoke|insert|update|delete|truncate|notify)\b/im.test(
+      sql,
+    ),
+  );
+});
