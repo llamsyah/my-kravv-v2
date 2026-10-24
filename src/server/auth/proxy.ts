@@ -1,7 +1,7 @@
 import "server-only";
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server.js";
-import { getPublicSupabaseTarget } from "../../lib/env/public.ts";
+import { serverApplicationTarget } from "./application-target.ts";
 import { verifyV3DatabaseTarget } from "./v3-target.ts";
 
 export async function updateSession(request: NextRequest) {
@@ -21,9 +21,13 @@ export async function updateSession(request: NextRequest) {
     });
   }
   let response = NextResponse.next({ request });
-  const { url, publishableKey, cookieName } = getPublicSupabaseTarget();
+  const {
+    target: { url, publishableKey, cookieName },
+    fetcher,
+  } = serverApplicationTarget(request.headers.get("origin") ?? undefined);
   const supabase = createServerClient(url, publishableKey, {
     cookieOptions: { name: cookieName },
+    ...(fetcher ? { global: { fetch: fetcher } } : {}),
     cookies: {
       getAll: () => request.cookies.getAll(),
       setAll: (values, headers) => {

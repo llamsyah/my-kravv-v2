@@ -9,6 +9,37 @@ import { test } from "node:test";
 import * as offline from "../../scripts/v3/offline-build.mjs";
 const { offlineBuildFiles, offlineBuildEnvironment } = offline;
 
+test("Closed smoke preload permits only the fixed numeric loopback listener without DNS/network", () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "kravv-closed-listener-"));
+  try {
+    for (const file of ["offline-network-deny.cjs", "offline-server-deny.cjs"])
+      fs.copyFileSync(path.resolve("scripts/v3", file), path.join(root, file));
+    const result = spawnSync(
+      process.execPath,
+      [
+        "--require",
+        path.join(root, "offline-server-deny.cjs"),
+        "-e",
+        `const s=require('node:http').createServer();s.listen(3103,'127.0.0.1',()=>{if(s.address().address!=='127.0.0.1')throw Error();s.close(()=>console.log('CLOSED_LOOPBACK_PASS'));});`,
+      ],
+      {
+        env: { SystemRoot: process.env.SystemRoot, NODE_ENV: "test" },
+        encoding: "utf8",
+        timeout: 10000,
+        windowsHide: true,
+      },
+    );
+    assert.equal(result.status, 0, result.stderr);
+    assert.match(result.stdout, /CLOSED_LOOPBACK_PASS/);
+    assert.equal(
+      fs.existsSync(path.join(root, "offline-network-attempt")),
+      false,
+    );
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test("Offline production build includes source inputs but excludes environment/private/unrelated files", () => {
   assert.deepEqual(
     offlineBuildFiles([

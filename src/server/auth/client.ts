@@ -1,16 +1,20 @@
 import "server-only";
 import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
-import { getPublicSupabaseTarget } from "../../lib/env/public.ts";
+import { cookies, headers } from "next/headers";
+import { serverApplicationTarget } from "./application-target.ts";
 import { verifyV3DatabaseTarget } from "./v3-target.ts";
 
 /** Request scoped, publishable key + user JWT; never an administrative client. */
 export async function createSupabaseServerClient() {
   await verifyV3DatabaseTarget();
   const cookieStore = await cookies();
-  const { url, publishableKey, cookieName } = getPublicSupabaseTarget();
+  const {
+    target: { url, publishableKey, cookieName },
+    fetcher,
+  } = serverApplicationTarget((await headers()).get("origin") ?? undefined);
   return createServerClient(url, publishableKey, {
     cookieOptions: { name: cookieName },
+    ...(fetcher ? { global: { fetch: fetcher } } : {}),
     cookies: {
       getAll: () => cookieStore.getAll(),
       setAll: (values) => {

@@ -1,135 +1,177 @@
-# Slice 1 — final build readiness and proposed live application window
+# Slice 1 — guarded Next.js application acceptance
 
-Status: offline production compilation is verified; live execution is still
-unauthorized. This is a proposal, not a grant or an implemented application launcher.
-Preserve the completed 92/92 Cloud API and 141 offline HTTP checks. Do not repeat
-the database bootstrap, migrations or RLS acceptance.
+Status: offline dispatch support implemented; **live application execution remains
+unauthorized**. The committed application pin and both API runner pins are null.
+The original shared/browser Cloud execution interlock remains unconditional.
+The completed 92/92 Cloud API acceptance and 141 mocked HTTP checks are retained;
+neither is proof of production browser acceptance.
 
-## Compilation and execution are different boundaries
+## Compilation versus application execution
 
-`scripts/v3/cloud.ts` validates action/target and then unconditionally invokes
-`assertCloudExecutionReady()`. It never dispatches Next. Configuring the correct
-project therefore cannot make `v3:cloud:build`, `dev` or `serve` work. Independently,
-`resolveV3Target()` invokes the same gate before any application Cloud client or
-identity request. Neither gate is changed here.
+`node scripts/v3/offline-build.mjs` verifies a real isolated Next 16.4.0 production
+Webpack build. It excludes environment/private files, strips inherited secrets,
+proxies and Node overrides, links installed dependencies without downloading, and
+denies Node fetch/sockets/HTTP/DNS/datagrams during compilation. No grant or
+credentials are needed. The temporary artifact is discarded and is not deployable.
 
-The legitimate build-only command is now:
+`node scripts/v3/offline-server-smoke.mjs` additionally starts the real closed-gate
+production artifact on **127.0.0.1:3103**, checks actual Windows listener ownership,
+requires `/auth` to return private/no-store 503 and an actual generated
+`/_next/static/` JavaScript asset to return 200, then
+stops only its child and verifies listener removal. A smoke-only preload denies
+outbound Node networking while permitting this one numeric loopback listener.
+Its literal-address lookup is resolved in memory, never through DNS. This is not
+an activated Cloud server or successful authentication test. The build preload
+continues to deny every listener. Both mechanisms are Node-level defense in depth,
+not an OS sandbox against arbitrary native code.
 
-```powershell
-node scripts/v3/offline-build.mjs
-```
+The ordinary Cloud launcher actions `dev/build/serve/test` still deny execution.
+A new **dormant** action, `node scripts/v3/cloud.ts accept-app`, dispatches the real
+production Next server only after the separate server application approval below.
+Do not execute it now. There are no target, origin, command, credential, pin or
+budget overrides accepted by this command.
 
-It copies source/configuration inputs into a disposable temporary directory, omits
-all environment files (including `.env.example`), strips inherited credentials,
-project/proxy configuration and Node overrides, and links installed dependencies
-without downloading anything. Source, Next config and the application guard are
-unchanged. A build-only CommonJS preload denies fetch, Node sockets/listeners,
-HTTP(S), DNS and datagrams, including inherited Node workers. Telemetry is disabled.
-This is defense in depth for this reviewed Node/Webpack path, not a general OS
-network sandbox against arbitrary native code. Any intercepted attempt leaves a
-fixed marker and fails the verification, even if Next catches the exception.
+## Separate server-only authority
 
-The command runs **Next 16.4.0 `build --webpack`**, including optimized compilation,
-TypeScript, page-data collection, static generation and build tracing. It passed
-with no intercepted network attempts. Private routes remain dynamic; no user/data
-render is activated. No fake credentials, SDK mocks or guard replacement are used.
-The temporary artifact is discarded after verification; remove only the exact
-temporary dependency link before deleting the checked temporary directory.
-Windows may require filesystem permission for the temporary junction.
+The unexported `approvedApplicationGrantSha256` in
+`scripts/v3/application-authority.ts` is committed as **null**. Null rejects before
+any private-file read, process launch or network request. Approval metadata and
+environment variables cannot activate it. A future separately approved source edit
+must pin the exact SHA-256 of the private grant's raw bytes, checked before JSON
+parsing, credential reads or claim creation. Whitespace changes invalidate the pin.
 
-This is a real offline production-build pass, **not** a deployable Cloud-configured
-artifact, Turbopack verification, running-server acceptance or permission to run
-`next start`. No publishable key was embedded. The normal Cloud launcher remains
-closed. A subsequent authorized Cloud-configured build must be rebuilt and tested;
-do not reuse this temporary artifact as an activated application.
+The existing server auth client, Proxy and identity fetch use the server-only
+`src/server/auth/application-target.ts` adapter. With no source approval they use
+exactly the existing public target resolver; local behavior is unchanged and Cloud
+remains denied. During an approved server window they use the pinned private V3
+target and guarded fetch. The shared resolver, browser Supabase factory and API
+runner interlocks do not receive that authorization. A response CSP restricts
+browser connections and form submissions to the owned app; no browser Cloud SDK
+permission is introduced.
 
-## Smallest next owner approval: bounded application support, not live execution
+Reuse the existing owner-private location `%USERPROFILE%\.my-kravv-v3-private`,
+its restricted owner/SYSTEM/Administrators ACLs, no links or Git ancestors, and its
+existing `credentials.json` schema. `scripts/v3/private-files.ts` extracts the
+existing API runner's file/ACL checks without changing their behavior. No generic
+environment credential fallback exists. Passwords, tokens and raw Auth responses
+are never written to evidence or stdout. Only the publishable key enters public
+build configuration; test passwords remain private and are entered by the owner
+in the controlled login form, never placed in NEXT_PUBLIC variables.
 
-Approve an offline implementation of a narrow application window and launcher,
-followed by a separate decision to execute it. Do not merely replace the shared
-gate with a no-op or permanently allow the Cloud profile.
+### Future private application grant (not created in this checkpoint)
 
-Reuse the private credentials/ACL validation, exact project/marker checks,
-source-pinned raw grant digest, fresh run UUID, exclusive consumed claim,
-complete-byte/fsync evidence and default-deny pattern already reviewed. The old
-API runner and all claims/manifests remain unchanged. Keep the browser-facing
-guard closed for browser SDK use (the current V3 UI uses Server Actions, not the
-unused browser Supabase factory). Any application-window branch must be server
-only, source-approved, exact-target and expiry-bound; never an environment boolean.
+Fixed filename: `application-run-approval.json`, separate from both API grants.
+Its strict schema contains exactly:
 
-The future controller must consume one private application grant before launch,
-verify the one temporary source diff, and start one Next process on explicit
-`127.0.0.1:3103` with a sanitized V3-only environment. Verify port availability and
-actual IPv4 listener first; no wildcard or IPv6 listener is permitted in this
-first application window. Bind via Next's documented `--hostname`/`--port`
-arguments, not a default hostname. No V2 credentials, administrative key or owner
-password is put in NEXT_PUBLIC values. The publishable key is public by design;
-test passwords stay private and are entered only into the controlled login flow.
+- `purpose`: `slice1-application-only`.
+- `projectRef`: `kjcvgjfwlmyfroiqlbmw`.
+- `apiOrigin`: `https://kjcvgjfwlmyfroiqlbmw.supabase.co`.
+- `runId`: fresh UUID, never reused.
+- `head`: full reviewed committed HEAD on `v3`.
+- `users`: `{ A: approvedSyntheticUuid, B: distinctApprovedSyntheticUuid }`.
+- `issuedAt`, `expiresAt`: UTC ISO timestamps, fresh and at most ten minutes apart.
+- `maxCloudRequests`: 600; `maxHttpRequests`: 300; `overallMs`: 600000; `retries`: 0.
+- `planSha256`: `applicationPlanDigest(runId, users)` from the committed module.
+- `credentialSha256`: exact raw-byte digest of the existing private credential file.
 
-Instrument the existing identity fetch and SSR SDK fetch points with one shared
-controller-owned budget/abort state across page, Proxy and worker execution. It
-must count **every** outbound Auth/identity/REST/RPC request before transmission,
-pin the HTTPS origin, reject redirects and deny after expiry/failure. Do not use a
-per-worker in-memory counter. Block unreviewed endpoints, privileged auth/admin,
-SQL, DELETE, V2 and AI/provider destinations. Browser traffic may reach only the
-owned loopback app. No automatic browser/action retries; an unexpected Cloud
-failure latches the run closed so SDK retries cannot transmit additional calls.
-Keep existing identity/RLS/ownership checks and form validation intact.
+No UUIDs, digests, grant contents or secrets should be returned in chat. The owner
+must confirm the UUID/email pairs and both confirmed synthetic accounts privately.
+An existing fixed-path grant must be archived only with owner authorization,
+preserving bytes and ACLs; the launcher neither creates nor overwrites grants.
 
-Prefer small hooks at the existing client/Proxy identity boundaries and the
-existing browser tool for the walkthrough. Do not create a second application,
-test-only production endpoints, a generic remote execution service or a new E2E
-framework. The exact grant schema, server-only gate implementation, cross-worker
-budget, shutdown and zero-retry enforcement need deterministic review **before**
-activation. They are not implemented or authorized by this document.
+## Exact future activation and restoration gates
 
-### Planned activation sequence after support is reviewed
+1. **Separate owner approval:** authorize one application window, its synthetic
+   write allowance, private grant creation and one runner-only source pin edit.
+   Current authorization covers offline implementation only.
+2. Prepare one fresh grant privately, pin its exact bytes in the single source
+   constant, and verify only that pin differs from the reviewed committed HEAD.
+   Keep both API pins null. No application environment boolean is involved.
+3. Invoke once, from `v3`: `node scripts/v3/cloud.ts accept-app`. The launcher
+   validates branch/HEAD, index, tracked/untracked scope, pin bytes, ACLs, target,
+   accounts, credential/plan digests, expiry and unused port. It requires at least
+   60 seconds remaining; prepare immediately before invocation because build time
+   consumes the same ten-minute window. Insufficient walkthrough time means STOP,
+   not a grant extension. No automatic renewal or second invocation.
+4. Create the shared namespace `run-<uuid>.consumed.json` with exclusive `wx` and
+   fsync, before any Cloud call. Existing/ambiguous claims refuse replay. A partial
+   initialization still consumes the run; never delete claims to recover.
+5. Build reviewed source in a disposable isolated workspace, with public V3 values
+   only and all Node network denied. Recheck repository scope after the build.
+   Verify the exact V3 identity RPC under the shared Cloud budget before Auth/data
+   I/O. No prior identity receipt can substitute for this request.
+6. Spawn one production `next start --hostname 127.0.0.1 --port 3103`, no dev server,
+   without inherited credentials/proxy/Node overrides. Persist the owned PID.
+   Confirm **all** port-3103 Windows listeners are 127.0.0.1 and owned by that PID
+   before opening application dispatch. Wildcard/IPv6/other-owner evidence fails.
+7. On `APPLICATION_WINDOW_READY`, use a fresh owner-controlled browser profile for
+   the checklist below. The launcher does not open a browser, enter passwords,
+   create fixtures automatically or report acceptance PASS.
+8. Stop with Ctrl+C, on first unexpected failure, or at expiry. The controller
+   stops only the owned process tree, verifies listener removal, persists closure,
+   and restores the exact committed null-pin source if no concurrent edit exists.
+   Verify clean Git status, both API pins null and shared/browser gate unchanged.
+   No source restoration overwrites concurrent edits. A replay encountering an
+   existing open/ambiguous consumed window must not restore the pin beneath its
+   original controller; it stops for owner shutdown/restoration review instead. If shutdown cannot be
+   verified, stop and ask the owner to inspect the recorded PID before restoration.
+   Never retry/renew/clean up automatically.
 
-Reuse the Cloud entry point with a proposed `accept-app` action:
-`node scripts/v3/cloud.ts accept-app`. **That action does not exist today; do not
-execute it.** Keep its grant in the existing owner-private directory as
-`application-run-approval.json`, separate from both API grant filenames. Archive
-an existing fixed-path application grant only with owner authorization, preserving
-bytes/ACLs; never overwrite evidence.
+## Shared budgets, scope and durable evidence
 
-The single future invocation must: verify the approved HEAD/clean tree and closed
-pins; validate credentials/ACLs and the public request plan; create one fresh grant
-after owner approval; verify its own bytes/digests/identities; consume the run claim
-durably; make only the reviewed temporary server-application pin edit; verify that
-exact diff; build unchanged source for the approved V3 configuration without
-prerender network; launch one loopback process; verify listener/target; then open
-the isolated browser. Grant expiry bounds build, startup and testing together; no
-clock extension after build. The API runner pins remain null throughout.
+The controller, preload, Proxy and Next workers share one private file ledger,
+exclusive creation lock, fsynced evidence and atomically replaced state. No worker
+has its own independent request allowance. The ledger also pins the controller and
+owned Next process IDs; only that controller, the owned Next PID and its direct
+worker children may use it. A separately started server cannot inherit an active
+window merely by loading the source pin. Unexpected deeper process nesting fails
+closed and needs review rather than a runtime exemption. Every permitted Cloud transmission is
+reserved and durably recorded first, including identity, login, refresh, logout,
+JWKS, user, capability, directory and owned table requests. The HTTP preload counts
+all dispatched loopback requests including assets, RSC, prefetch and actions.
+The window permits at most **600 Cloud** and **300 HTTP** requests, **600 seconds**
+including build/startup, and **zero automatic outbound retries**. Per-request/body
+read deadline is at most ten seconds, bounded by grant expiry; response size is
+limited to 256 KiB. SDK fallback/retry attempts cannot transmit after a failure.
 
-Application authorization must stay server-only; do not import private-file or
-credential code into the shared/client-safe resolver. The exact minimal wiring is
-part of the separately approved support review, with tests proving that ordinary
-metadata, configuration and the unused browser SDK cannot authorize execution.
+The exact HTTPS origin is pinned; redirects, admin/Auth mutation, SQL, DELETE,
+unknown endpoints, foreign accounts and unapproved operations are refused. Only
+current-window tokens returned from the approved accounts' password login can
+access data. JWT subject/issuer/audience/role/expiry and confirmed returned account
+identity are checked in addition to the existing SDK/server identity checks.
+Only current-window registered refresh tokens are accepted; an older session is
+not a shortcut into the window. Refresh availability remains a live prerequisite.
 
-## Proposed one-window execution envelope (subject to owner review)
+Mutation ceilings: **one new company per user**, one name-only rename and one
+metadata update to that returned new ID, and **two theme saves per user**. Company
+names must be `v3-slice1-app:<runId>:A` or `:B` with an optional bounded synthetic
+ASCII suffix. Use synthetic metadata only. No owner/ID updates, upserts, deletes or
+historical fixture edits. Settings writes use only the approved user's owner/theme
+INSERT or theme-only UPDATE. Responses must confirm the approved owner, exact
+fields, successful status, single row and actual server-generated company UUID.
+Both list and explicitly requested single-object PostgREST responses are handled.
+Expected attempts to mutate a foreign/historical company are recorded and denied
+without transmission; they do not grant additional write scope.
 
-- One fresh application run, two existing approved/confirmed synthetic accounts,
-  exact V3 project `kjcvgjfwlmyfroiqlbmw` and marker. Do not create Auth users.
-- Maximum **600 seconds**, maximum **600 Cloud requests**, maximum **300 loopback
-  HTTP requests** including assets/RSC/prefetch/actions; zero automatic retries.
-  These are ceilings, not a request target. Proxy identity checks, verified-user
-  reads and normal Next prefetch mean browser navigation costs more than an API
-  assertion. Keep normal prefetch enabled so cache behavior is actually tested.
-  If the full checklist cannot fit, stop and report partial coverage; never raise
-  limits or skip checks automatically. Confirm the final exact plan during support
-  implementation; no live network is used to estimate the budget here.
-- A fresh grant valid for at most ten minutes; start only with enough remaining
-  time. Consume it once. Never extend, renew or replay it automatically.
-- At most **two new companies**: one per user with a fresh run-specific prefix.
-  Each may receive one rename and one metadata update. No deletion/archive.
-- At most **four successful theme saves** total, only for these users. If settings
-  already exist, update theme only; otherwise at most one settings insert per user.
-  Record original theme values, but retain final values without implicit restore.
-- Use the 26 retained API fixtures for read-only pagination/search/selection;
-  baseline and snapshot existing company records before/after. Never edit a prior
-  fixture or assume the accounts/setting baselines are empty.
+Intended fixture values (excluding account identifiers), verified fixture IDs,
+fixed status/category counters and final theme values remain **private**. No raw
+Auth bodies, passwords, keys, authorization headers, cookies, tokens or raw errors
+are persisted. Complete-byte write plus fsync is required before transmission;
+verified-ID evidence and durable state are required before dependent requests.
+An uncertain response never invents an ID or retries a write. Failed/incomplete
+persistence, stale ten-second controller heartbeat, budgets or expiry fail closed.
+An abandoned lock is never broken automatically. Parent disconnect stops the root
+child; the lease separately denies Cloud work in surviving workers. Abrupt OS or
+power termination can leave incomplete evidence or a source pin needing manual
+restoration; the consumed claim still prevents replay.
 
-## Proposed actual Next/browser checklist
+Preserve `run-<uuid>.application.manifest.jsonl`, state, stop/consumed claim and
+fixtures. No cleanup, Auth changes or implicit theme restoration. Closure means
+**owner review required**, never automatic PASS. The owner walkthrough must record
+original themes and review retained company baselines before/after; this launcher
+is a bounded dispatcher, not a replacement for those acceptance assertions.
+
+## Required live Next/browser checklist — still pending
 
 1. **Preflight:** approved commit/clean tree, guard closed, private ACL/schema,
    exact target, current approved UUID/email pairs, source/grant/plan/credential
@@ -164,43 +206,55 @@ metadata, configuration and the unused browser SDK cannot authorize execution.
    claim immediate revocation of old JWTs. Compare retained-record snapshots and
    capture sanitized screenshots without identity/credential/session details.
 
-## Failure, shutdown and restoration
+## Failure and acceptance criteria
 
-Persist intended synthetic mutations before send; persist exact returned IDs and
-confirmed fields before dependent requests. Never persist login bodies, cookies,
-tokens, passwords, headers, raw server responses or personal identifiers in public
-reports. Keep detailed fixture identifiers only in the approved private manifest.
-Use fixed stage/category/status diagnostics and request/verification counters.
+One harmless foreign-Origin probe (`https://csrf.invalid`) is permitted to reach
+actual Next CSRF handling; a second probe/other origin is denied. Server-side
+mutations independently require the owned Origin. No allowedOrigins relaxation is
+introduced. Require actual Next rejection with the real action ID and no transmitted
+mutation; a custom gate failure or unknown-action response alone is not CSRF PASS.
 
-On failed preflight, do not launch. On a runtime failure, unexpected target,
-budget/expiry, network/CSRF surprise, hydration error or uncertain write: abort
-outbound work, stop browser automation and stop only the owned process tree.
-Do not retry the action, restart Next, renew a grant or clean up data.
+On hydration/cache leakage, failed assertion, uncertain mutation, unexpected target,
+request budget/deadline, evidence failure or unexpected response: stop the browser
+walkthrough and controller; preserve evidence and do not retry. Logout records
+local session clearing, not immediate revocation of every previously issued JWT.
 
-The future controller must retain the exact child PID/tree, stop it in a finally
-path and on a hard watchdog, and verify its loopback listener is gone. Only then
-restore the exact original source pin/gate bytes and remove credentials from the
-child/browser session. Delete only disposable build/browser output after evidence
-is preserved; do not touch owner profiles or prior receipts. Verify both API runner
-pins are null, shared application gate is closed, Git is clean at the approved
-baseline and `main` is unchanged. Do not commit an activated source pin or publish
-a built artifact containing one. Preserve grant, claim, manifest and fixtures.
+PASS requires production hydration, actual Auth/cookie/Server Action/CSRF behavior,
+A/B account switching and navigation-cache isolation, all requested company/theme/
+pagination checks, retained-record comparison, complete evidence and verified
+shutdown/relocking. Failed assertions are FAIL. Interruption, missing refresh
+coverage, uncertain writes, incomplete evidence or partial walkthrough are
+INCONCLUSIVE for full application acceptance. Offline mocks and a closed-gate
+server smoke are explicitly not live PASS.
 
-PASS requires the actual production server, every required browser/HTTP check,
-complete durable final evidence, no failed/uncertain mutation and verified shutdown
-and relocking. A failed assertion is FAIL; interruption, uncertain write, missing
-refresh coverage, dev-only testing or incomplete durable evidence is INCONCLUSIVE
-for full application acceptance. An offline build pass alone is never live PASS.
+## Offline validation
 
-## Offline validation for this readiness checkpoint
+Run focused dispatch tests, the full deterministic suite, lint, TypeScript/Next type
+generation, formatting, diff checks and `node scripts/v3/offline-server-smoke.mjs`.
+The smoke includes a full offline production build. Record actual results in the
+checkpoint report. Synthetic pins exist only in in-memory module copies; the
+actual application/API pins stay null. Windows ACL reuse is regression-tested with
+synthetic policy evidence, not re-inspected against private owner files here.
+The live configured artifact, active private ACL/session behavior, browser cookies,
+CSRF, refresh and cross-tab caching remain separately authorized acceptance work.
 
-- Isolated full `next build --webpack`: PASS (compilation, TypeScript, static
-  generation and tracing), no intercepted Node network attempts; output discarded.
-- New build-isolation tests: 3 PASS; combined focused build/HTTP tests: 5 PASS.
-- Full deterministic suite: 194 PASS, 0 failed, 0 skipped.
-- Lint, TypeScript/Next type generation, formatting and diff checks: PASS.
-- Existing Cloud launcher and both API/application execution boundaries: unchanged.
+### Recorded dispatch checkpoint results
 
-No Cloud-configured artifact, browser session, grant or credential was created.
-The compilation result supersedes the earlier offline checkpoint's unverified
-build status, without superseding its outstanding live browser acceptance.
+- `node --conditions=react-server --test src/tests/v3-application-dispatch.test.ts`:
+  **25 passed, 0 failed, 0 skipped**.
+- `npm test`: **220 passed, 0 failed, 0 skipped**, including the existing 141
+  mocked HTTP assertions and both dormant API runner regression suites.
+- `npm run lint`, `npm run typecheck`, `npm run format:check`,
+  `git diff --check`: **PASS**.
+- `node scripts/v3/offline-server-smoke.mjs`: **PASS**, including optimized
+  Webpack compilation, TypeScript, static generation/tracing, actual production
+  startup, owned IPv4-only listener, guarded private 503, real static asset 200,
+  verified shutdown and discarded temporary artifact. No Node network attempt
+  marker, private credential/grant reads or Cloud calls occurred.
+
+The temporary ledger replacement and loopback checks required Windows sandbox
+permission for only their own synthetic files/processes. No validation skipped
+security checks to pass. The first smoke attempts exposed harness issues (numeric
+loopback lookup under the deny preload and choosing a Proxy-blocked icon for a
+static check), plus a test-only environment typing error; these were corrected
+and the complete final build/smoke passed. None was live application acceptance.

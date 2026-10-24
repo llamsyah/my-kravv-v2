@@ -38,9 +38,19 @@ export function offlineBuildEnvironment(source, preload) {
   return env;
 }
 
-export async function offlineBuild() {
-  if (process.argv.slice(2).length)
-    throw Error("Offline build accepts no arguments");
+export async function withOfflineBuild(visitor, publicValues = {}, signal) {
+  if (signal?.aborted) throw Error("Build window expired");
+  const allowed = [
+    "NEXT_PUBLIC_MY_KRAVV_ENV",
+    "NEXT_PUBLIC_MY_KRAVV_CLOUD_PROJECT_REF",
+    "NEXT_PUBLIC_SUPABASE_URL",
+    "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY",
+  ];
+  if (
+    Object.keys(publicValues).some((k) => !allowed.includes(k)) ||
+    Object.values(publicValues).some((v) => typeof v !== "string")
+  )
+    throw Error("Unexpected build configuration");
   const candidates = execFileSync(
     "git",
     ["ls-files", "--cached", "--others", "--exclude-standard", "-z"],
@@ -85,7 +95,10 @@ export async function offlineBuild() {
         [path.join(dependencies, "next/dist/bin/next"), "build", "--webpack"],
         {
           cwd: output,
-          env: offlineBuildEnvironment(process.env, preload),
+          env: {
+            ...offlineBuildEnvironment(process.env, preload),
+            ...publicValues,
+          },
           windowsHide: true,
           detached: process.platform !== "win32",
           stdio: ["ignore", "pipe", "pipe"],
@@ -106,10 +119,13 @@ export async function offlineBuild() {
         }
       };
       const timer = setTimeout(stop, 240000);
+      signal?.addEventListener("abort", stop, { once: true });
+      if (signal?.aborted) stop();
       process.once("SIGINT", stop);
       process.once("SIGTERM", stop);
       const clear = () => {
         clearTimeout(timer);
+        signal?.removeEventListener("abort", stop);
         process.removeListener("SIGINT", stop);
         process.removeListener("SIGTERM", stop);
       };
@@ -125,12 +141,14 @@ export async function offlineBuild() {
       });
     });
     if (
+      signal?.aborted ||
       result !== 0 ||
       fs.existsSync(path.join(output, "offline-network-attempt"))
     )
       throw Error(
         "Isolated offline build failed; no application execution authorized",
       );
+    if (visitor) await visitor(output);
     console.log(
       "OFFLINE_PRODUCTION_BUILD_PASS: unchanged source, no credentials, no Node network attempts; artifact not deployment-ready.",
     );
@@ -144,6 +162,11 @@ export async function offlineBuild() {
     if (fs.existsSync(dependencies)) fs.unlinkSync(dependencies);
     fs.rmSync(resolved, { recursive: true, force: true });
   }
+}
+export async function offlineBuild() {
+  if (process.argv.slice(2).length)
+    throw Error("Offline build accepts no arguments");
+  return withOfflineBuild();
 }
 if (path.resolve(process.argv[1] ?? "") === import.meta.filename)
   offlineBuild().catch(() => {

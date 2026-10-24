@@ -272,7 +272,11 @@ function load(file) {
   const customRequire = (name) => {
     if (name === "server-only") return {};
     if (name === "@supabase/ssr") return { createServerClient: fakeSdk };
-    if (name === "next/headers") return { cookies: async () => ctx().cookies };
+    if (name === "next/headers")
+      return {
+        cookies: async () => ctx().cookies,
+        headers: async () => new Headers(),
+      };
     if (name === "next/cache")
       return { revalidatePath: (...args) => ctx().invalidations.push(args) };
     if (name === "next/navigation")
@@ -316,6 +320,7 @@ function load(file) {
               throw Error("Synthetic identity refusal");
           },
         };
+      if (target.endsWith(".json")) return { default: require(target) };
       return load(target);
     }
     return require(name);
