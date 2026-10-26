@@ -3,6 +3,13 @@ import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { setTimeout as pause } from "node:timers/promises";
 import {
+  shutdownDiagnostic,
+  refusalReason,
+  safeReason,
+  type StopReason,
+  type DiagnosticStage,
+} from "./application-diagnostics.ts";
+import {
   applicationAuthority,
   applicationSourceApproved,
   applicationPinMatchesSource,
@@ -45,15 +52,48 @@ function git(args: string[]) {
 
 /** No grant, pin, target, port, command or credential override arguments. */
 export async function applicationMain() {
-  if (!applicationSourceApproved())
+  const startedAt = Date.now();
+  if (!applicationSourceApproved()) {
+    console.error(
+      "APPLICATION_DIAGNOSTIC " +
+        JSON.stringify(
+          shutdownDiagnostic(
+            "preflight-refused",
+            "preflight",
+            startedAt,
+            Date.now(),
+          ),
+        ),
+    );
     throw Error(
       "Application execution is blocked; separate owner authorization required.",
     );
+  }
   let original: string | undefined, activated: string | undefined;
   let shutdownVerified = false,
     initialized = false,
     launchAttempted = false;
   const authority = applicationAuthority();
+  let stage: DiagnosticStage = "preflight",
+    cause: StopReason = "unknown";
+  let hasCause = false;
+  const setCause = (reason: StopReason) => {
+    if (!hasCause) {
+      cause = reason;
+      hasCause = true;
+    }
+  };
+  const report = (
+    reason: unknown,
+    where: DiagnosticStage,
+    child: { childExitCode?: unknown; childSignal?: unknown } = {},
+  ) => {
+    const record = initialized
+      ? authority.diagnostic(reason, where, child)
+      : shutdownDiagnostic(reason, where, startedAt, Date.now(), child);
+    console.error("APPLICATION_DIAGNOSTIC " + JSON.stringify(record));
+    if (initialized) authority.noteDiagnostic(reason, where, child);
+  };
   try {
     const baseline = execFileSync("git", ["show", `HEAD:${source}`], {
       cwd: root,
@@ -92,16 +132,43 @@ export async function applicationMain() {
     initialized = true;
     let failed = false;
     const abort = new AbortController();
-    const deadline = setTimeout(() => abort.abort(), expiry - Date.now());
+    const deadline = setTimeout(() => {
+      setCause("grant-expired");
+      try {
+        report("grant-expired", stage);
+      } catch {
+        /* Abort regardless of evidence failure. */
+      }
+      abort.abort("grant-expired");
+    }, expiry - Date.now());
     const timer = setInterval(() => {
       authority.heartbeat().catch(() => {
         failed = true;
-        abort.abort();
+        const reason = authority.stopReason();
+        setCause(reason === "unknown" ? "heartbeat-failure" : reason);
+        try {
+          report(cause, "heartbeat");
+        } catch {
+          /* Abort regardless. */
+        }
+        abort.abort(cause);
       });
     }, 1000);
     timer.unref();
+    const onExternal = () => {
+      setCause("external-signal");
+      try {
+        report("external-signal", stage);
+      } catch {
+        /* Abort even if evidence is unwritable. */
+      }
+      abort.abort("external-signal");
+    };
+    process.once("SIGINT", onExternal);
+    process.once("SIGTERM", onExternal);
     try {
       // The build receives public configuration only and denies all Node network.
+      stage = "build";
       await withOfflineBuild(
         async (directory: string) => {
           if (failed || Date.now() >= expiry) throw Error();
@@ -113,6 +180,7 @@ export async function applicationMain() {
             fs.readFileSync(path.join(root, source), "utf8") !== activated
           )
             throw Error();
+          stage = "launch";
           const { c } = authority.load();
           await authority.fetch(
             `${g.apiOrigin}/rest/v1/rpc/v3_target_identity`,
@@ -142,6 +210,7 @@ export async function applicationMain() {
               signalCode: string | null;
             }) => {
               await authority.serve(child.pid);
+              stage = "serving";
               console.log(
                 "APPLICATION_WINDOW_READY: loopback only; owner walkthrough required; no automatic acceptance.",
               );
@@ -153,9 +222,34 @@ export async function applicationMain() {
                 child.signalCode === null
               )
                 await pause(100);
+              setCause(
+                Date.now() >= expiry
+                  ? "grant-expired"
+                  : failed
+                    ? "heartbeat-failure"
+                    : authority.isStopped()
+                      ? authority.stopReason()
+                      : child.exitCode !== null || child.signalCode !== null
+                        ? "child-exit"
+                        : "unknown",
+              );
+              report(cause, "serving", {
+                childExitCode: child.exitCode,
+                childSignal: child.signalCode,
+              });
             },
             {
               signal: abort.signal,
+              onDiagnostic: (event: {
+                reason: unknown;
+                stage: DiagnosticStage;
+                childExitCode?: unknown;
+                childSignal?: unknown;
+              }) => {
+                const reason = safeReason(event.reason);
+                if (reason !== "owned-stop") setCause(reason);
+                report(reason, event.stage, event);
+              },
               onStarted: async (child: { pid: number }) => {
                 launchAttempted = true;
                 await authority.launched(child.pid);
@@ -170,47 +264,121 @@ export async function applicationMain() {
     } finally {
       clearInterval(timer);
       clearTimeout(deadline);
+      process.removeListener("SIGINT", onExternal);
+      process.removeListener("SIGTERM", onExternal);
     }
-  } catch {
+  } catch (error) {
+    setCause(
+      refusalReason(
+        error,
+        stage === "preflight"
+          ? "preflight-refused"
+          : stage === "build"
+            ? "build-failed"
+            : stage === "launch"
+              ? "launch-failed"
+              : "unknown",
+      ),
+    );
+    try {
+      report(cause, stage);
+    } catch {
+      console.error(
+        "APPLICATION_DIAGNOSTIC " +
+          JSON.stringify(
+            shutdownDiagnostic(
+              "evidence-persistence",
+              stage,
+              startedAt,
+              Date.now(),
+            ),
+          ),
+      );
+    }
     throw Error(
       "Application dispatch stopped; review private evidence; no retry authorized.",
     );
   } finally {
     // Pre-launch failures have no server. Once launched, withNextServer must
     // confirm listener removal before the source pin can be restored.
-    if (!initialized && !authority.replayRestorationAllowed())
+    if (!initialized && !authority.replayRestorationAllowed()) {
+      report("restoration-refused", "restoration");
       throw Error(
         "Existing consumed window requires owner shutdown/restoration review.",
       );
-    if (!launchAttempted) shutdownVerified = !listeners().length;
-    else if (!shutdownVerified && !listeners().length) shutdownVerified = true;
-    if (initialized)
+    }
+    try {
+      if (!launchAttempted) shutdownVerified = !listeners().length;
+      else if (!shutdownVerified && !listeners().length)
+        shutdownVerified = true;
+    } catch {
       try {
-        await authority.close();
+        report("shutdown-unverified", "shutdown");
       } catch {
+        /* No restoration. */
+      }
+      throw Error("Shutdown verification unavailable; owner review required.");
+    }
+    let evidenceIncomplete = false;
+    if (initialized) {
+      try {
+        report(cause, "restoration");
+      } catch {
+        evidenceIncomplete = true;
+      }
+      try {
+        await authority.close(cause);
+      } catch {
+        evidenceIncomplete = true;
         console.error(
-          "APPLICATION_EVIDENCE_INCOMPLETE; no further requests permitted.",
+          "APPLICATION_DIAGNOSTIC " +
+            JSON.stringify(
+              shutdownDiagnostic(
+                "evidence-persistence",
+                "shutdown",
+                startedAt,
+                Date.now(),
+              ),
+            ),
         );
       }
+    }
     if (shutdownVerified && original && activated) {
-      if (fs.readFileSync(path.join(root, source), "utf8") !== activated)
-        throw Error(
-          "Source changed during window; owner restoration required.",
+      try {
+        if (fs.readFileSync(path.join(root, source), "utf8") !== activated)
+          throw Error("Concurrent source edit.");
+        fs.writeFileSync(
+          path.join(root, source),
+          applicationRestoration(
+            original,
+            activated,
+            fs.readFileSync(path.join(root, source), "utf8"),
+            shutdownVerified,
+          ),
         );
-      fs.writeFileSync(
-        path.join(root, source),
-        applicationRestoration(
-          original,
-          activated,
-          fs.readFileSync(path.join(root, source), "utf8"),
-          shutdownVerified,
-        ),
-      );
-      if (git(["status", "--porcelain"]))
-        throw Error("Restoration requires owner review.");
-    } else if (!shutdownVerified)
+        if (git(["status", "--porcelain"]))
+          throw Error("Restoration requires owner review.");
+      } catch {
+        try {
+          report("restoration-refused", "restoration");
+        } catch {
+          /* Preserve the original failure. */
+        }
+        throw Error("Pin restoration unverified; owner review required.");
+      }
+      if (evidenceIncomplete)
+        throw Error(
+          "APPLICATION_EVIDENCE_INCOMPLETE; pin restored after verified shutdown.",
+        );
+    } else if (!shutdownVerified) {
+      try {
+        report("shutdown-unverified", "shutdown");
+      } catch {
+        /* No restoration without verified shutdown. */
+      }
       throw Error(
         "Shutdown unresolved; owner must verify process before restoring pin.",
       );
+    }
   }
 }

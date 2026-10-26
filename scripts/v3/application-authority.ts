@@ -6,6 +6,14 @@ import os from "node:os";
 import { createHash } from "node:crypto";
 import { setTimeout as pause } from "node:timers/promises";
 import { z } from "zod";
+import {
+  ApplicationRefusal,
+  refusalReason,
+  safeReason,
+  shutdownDiagnostic,
+  type StopReason,
+  type DiagnosticStage,
+} from "./application-diagnostics.ts";
 import { privatePath, readPrivateBytes } from "./private-files.ts";
 import {
   validateCloudTarget,
@@ -26,8 +34,8 @@ export function applicationPinMatchesSource(source: string) {
 }
 const sha = (bytes: string | Buffer) =>
   createHash("sha256").update(bytes).digest("hex");
-const refused = () =>
-  Error("V3 application window refused; inspect private evidence.");
+const refused = (reason: StopReason = "request-scope") =>
+  new ApplicationRefusal(reason);
 export const applicationOrigin = "http://127.0.0.1:3103";
 export function applicationSourceApproved() {
   return (
@@ -195,6 +203,8 @@ class ApplicationAuthority {
   private now: () => number;
   private wire: Transport;
   private synthetic: boolean;
+  private executionStartedAt?: number;
+  private monotonicStarted = performance.now();
   constructor(
     root = path.join(os.homedir(), ".my-kravv-v3-private"),
     now = Date.now,
@@ -209,7 +219,7 @@ class ApplicationAuthority {
   load() {
     if (!applicationSourceApproved()) throw refused();
     if (this.config) {
-      if (this.now() >= this.config.expiry) throw refused();
+      if (this.now() >= this.config.expiry) throw refused("grant-expired");
       return this.config;
     }
     if (
@@ -299,79 +309,131 @@ class ApplicationAuthority {
       `run-${(this.config ?? this.load()).g.runId}.${suffix}`,
     );
   }
-  latch() {
+  diagnostic(
+    reason: unknown,
+    stage: DiagnosticStage,
+    child: { childExitCode?: unknown; childSignal?: unknown } = {},
+  ) {
+    return {
+      ...shutdownDiagnostic(
+        reason,
+        stage,
+        this.executionStartedAt ?? this.now(),
+        this.now(),
+        child,
+      ),
+      processElapsedMs: Math.max(0, performance.now() - this.monotonicStarted),
+    };
+  }
+  // First cause wins. Existing receipts, including old-format stop files, are never overwritten.
+  latch(reason: StopReason = "unknown", stage: DiagnosticStage = "state") {
     try {
       const fd = fs.openSync(this.file("application-stop"), "wx", 0o600);
       try {
-        durable(fd, { state: "stopped" });
+        durable(fd, { state: "stopped", ...this.diagnostic(reason, stage) });
       } finally {
         fs.closeSync(fd);
       }
-    } catch {
-      /* Any existing stop or storage error remains terminal. */
+    } catch (error) {
+      if ((error as NodeJS.ErrnoException).code !== "EEXIST") return false;
     }
+    return true;
   }
   private terminal = false;
   private record(event: unknown) {
-    const fd = fs.openSync(this.file("application.manifest.jsonl"), "a", 0o600);
+    let fd: number | undefined;
     try {
+      fd = fs.openSync(this.file("application.manifest.jsonl"), "a", 0o600);
       durable(fd, event);
     } catch {
       this.terminal = true;
-      this.latch();
-      throw refused();
+      this.latch("evidence-persistence", "state");
+      throw refused("evidence-persistence");
     } finally {
-      fs.closeSync(fd);
+      if (fd !== undefined) fs.closeSync(fd);
+    }
+  }
+  noteDiagnostic(
+    reason: unknown,
+    stage: DiagnosticStage,
+    child: { childExitCode?: unknown; childSignal?: unknown } = {},
+  ) {
+    this.record({
+      state: "diagnostic",
+      ...this.diagnostic(reason, stage, child),
+    });
+  }
+  private stop(reason: StopReason, stage: DiagnosticStage) {
+    this.terminal = true;
+    this.latch(reason, stage);
+    try {
+      this.noteDiagnostic(reason, stage);
+    } catch {
+      /* Terminal even when no storage remains writable. */
+    }
+  }
+  stopReason(): StopReason {
+    try {
+      return safeReason(readEvidence(this.file("application-stop")).reason);
+    } catch {
+      return "unknown";
     }
   }
   private read() {
     const { expiry } = this.load();
-    if (
-      this.terminal ||
-      this.now() >= expiry ||
-      fs.existsSync(this.file("application-stop"))
-    )
-      throw refused();
+    if (this.now() >= expiry) throw refused("grant-expired");
+    if (this.terminal || fs.existsSync(this.file("application-stop")))
+      throw refused(this.stopReason());
     const claim = readEvidence(this.file("consumed.json"));
     if (
       claim.grantSha256 !== approvedApplicationGrantSha256 ||
       claim.purpose !== "slice1-application-only"
     )
-      throw refused();
+      throw refused("state-invalid");
+    if (
+      typeof claim.startedAtMs === "number" &&
+      Number.isFinite(claim.startedAtMs)
+    )
+      this.executionStartedAt = claim.startedAtMs;
     const s = stateSchema.parse(
       readEvidence(this.file("application-state.json")),
     );
+    if (!(
+      process.pid === s.controllerPid ||
+      process.pid === s.nextPid ||
+      (s.nextPid !== null && process.ppid === s.nextPid)
+    ))
+      throw refused("process-scope");
+    if (!["building", "serving"].includes(s.phase))
+      throw refused("state-invalid");
     if (
-      !(
-        process.pid === s.controllerPid ||
-        process.pid === s.nextPid ||
-        (s.nextPid !== null && process.ppid === s.nextPid)
-      ) ||
-      !["building", "serving"].includes(s.phase) ||
       !Number.isFinite(s.heartbeat) ||
       this.now() < s.heartbeat ||
-      this.now() - s.heartbeat > 10000 ||
-      s.cloud < 0 ||
-      s.cloud > 600 ||
-      s.http < 0 ||
-      s.http > 300
+      this.now() - s.heartbeat > 10000
     )
-      throw refused();
+      throw refused("lease-invalid");
+    if (s.cloud < 0 || s.cloud > 600 || s.http < 0 || s.http > 300)
+      throw refused("state-invalid");
     return s;
   }
   private save(s: State) {
     const temporary = this.file("application-state.next");
-    const fd = fs.openSync(temporary, "wx", 0o600);
     try {
-      durable(fd, s);
-    } finally {
-      fs.closeSync(fd);
+      const fd = fs.openSync(temporary, "wx", 0o600);
+      try {
+        durable(fd, s);
+      } finally {
+        fs.closeSync(fd);
+      }
+      fs.renameSync(temporary, this.file("application-state.json"));
+    } catch {
+      throw refused("evidence-persistence");
     }
-    fs.renameSync(temporary, this.file("application-state.json"));
   }
   async transaction<T>(
     action: (s: State) => T,
     allowStopped = false,
+    stage: DiagnosticStage = "state",
   ): Promise<T> {
     const lock = this.file("application-lock");
     const until = Date.now() + 2000;
@@ -384,9 +446,8 @@ class ApplicationAuthority {
           (error as NodeJS.ErrnoException).code !== "EEXIST" ||
           Date.now() >= until
         ) {
-          this.terminal = true;
-          this.latch();
-          throw refused();
+          this.stop("lock-unavailable", stage);
+          throw refused("lock-unavailable");
         }
         await pause(10);
       }
@@ -400,24 +461,41 @@ class ApplicationAuthority {
       return result;
     } catch (error) {
       if (error instanceof ScopeDenied) {
-        this.record({ state: "scope-denied", kind: "company-mutation" });
+        this.record({
+          state: "scope-denied",
+          kind: "company-mutation",
+          ...this.diagnostic("request-scope", stage),
+        });
         throw error;
       }
-      this.terminal = true;
-      this.latch();
-      throw refused();
+      let reason = refusalReason(
+        error,
+        stage === "before-transmission" ? "request-shape" : "state-invalid",
+      );
+      if (stage === "response" && reason === "request-scope")
+        reason = "response-invalid";
+      this.stop(reason, stage);
+      throw refused(reason);
     } finally {
-      fs.closeSync(fd);
-      fs.unlinkSync(lock);
+      try {
+        fs.closeSync(fd);
+        fs.unlinkSync(lock);
+      } catch {
+        this.stop("evidence-persistence", stage);
+        throw refused("evidence-persistence");
+      }
     }
   }
   initialize() {
     const { g } = this.load();
+    this.executionStartedAt = this.now();
+    this.monotonicStarted = performance.now();
     const fd = fs.openSync(this.file("consumed.json"), "wx", 0o600);
     try {
       durable(fd, {
         purpose: g.purpose,
         grantSha256: approvedApplicationGrantSha256,
+        startedAtMs: this.executionStartedAt,
       });
     } finally {
       fs.closeSync(fd);
@@ -461,9 +539,13 @@ class ApplicationAuthority {
     }
   }
   async heartbeat() {
-    await this.transaction((s) => {
-      s.heartbeat = this.now();
-    });
+    await this.transaction(
+      (s) => {
+        s.heartbeat = this.now();
+      },
+      false,
+      "heartbeat",
+    );
   }
   async launched(pid: number) {
     await this.transaction((s) => {
@@ -492,19 +574,26 @@ class ApplicationAuthority {
     });
   }
   target() {
-    const { g, c } = this.load();
-    if (this.read().phase !== "serving") throw refused();
-    return {
-      kind: "cloud" as const,
-      url: g.apiOrigin,
-      publishableKey: c.publishableKey,
-      cookieName: v3CloudCookieName,
-      marker: {
-        project_id: g.projectRef,
-        purpose: "disposable-v3-slice0-cloud" as const,
-        schema_version: 1 as const,
-      },
-    };
+    if (!applicationSourceApproved()) throw refused("preflight-refused");
+    try {
+      const { g, c } = this.load();
+      if (this.read().phase !== "serving") throw refused();
+      return {
+        kind: "cloud" as const,
+        url: g.apiOrigin,
+        publishableKey: c.publishableKey,
+        cookieName: v3CloudCookieName,
+        marker: {
+          project_id: g.projectRef,
+          purpose: "disposable-v3-slice0-cloud" as const,
+          schema_version: 1 as const,
+        },
+      };
+    } catch (error) {
+      const reason = refusalReason(error, "state-invalid");
+      if (!this.terminal) this.stop(reason, "state");
+      throw refused(reason);
+    }
   }
   publicEnvironment() {
     const { g, c } = this.load();
@@ -521,53 +610,82 @@ class ApplicationAuthority {
     origin: string | undefined,
     pathname: string,
   ) {
-    await this.transaction((s) => {
-      if (s.phase !== "serving" || s.http >= 300) throw refused();
-      s.http++;
-      const route =
-        ["/", "/auth", "/foundation", "/icon.svg", "/favicon.ico"].includes(
-          pathname,
-        ) || pathname.startsWith("/_next/static/");
-      const csrf =
-        method === "POST" && origin === "https://csrf.invalid" && !s.csrfProbe;
-      if (
-        host !== "127.0.0.1:3103" ||
-        !["GET", "HEAD", "POST"].includes(method) ||
-        !route ||
-        (method === "POST" && !["/auth", "/foundation"].includes(pathname)) ||
-        (origin && origin !== applicationOrigin && !csrf)
-      )
-        throw refused();
-      if (csrf) s.csrfProbe = true;
-      this.record({
-        state: "http",
-        index: s.http,
-        method,
-        route: pathname.startsWith("/_next/") ? "asset" : pathname,
-        csrf,
-      });
-    });
+    await this.transaction(
+      (s) => {
+        if (s.phase !== "serving") throw refused("state-invalid");
+        if (s.http >= 300) throw refused("http-budget");
+        s.http++;
+        const route =
+          ["/", "/auth", "/foundation", "/icon.svg", "/favicon.ico"].includes(
+            pathname,
+          ) || pathname.startsWith("/_next/static/");
+        const csrf =
+          method === "POST" &&
+          origin === "https://csrf.invalid" &&
+          !s.csrfProbe;
+        if (
+          host !== "127.0.0.1:3103" ||
+          (origin && origin !== applicationOrigin && !csrf)
+        )
+          throw refused("request-origin");
+        if (
+          !["GET", "HEAD", "POST"].includes(method) ||
+          !route ||
+          (method === "POST" && !["/auth", "/foundation"].includes(pathname))
+        )
+          throw refused("request-scope");
+        if (csrf) s.csrfProbe = true;
+        this.record({
+          state: "http",
+          index: s.http,
+          method,
+          route: pathname.startsWith("/_next/") ? "asset" : pathname,
+          csrf,
+        });
+      },
+      false,
+      "http-entry",
+    );
   }
   private claims(token: string) {
-    const { g } = this.load();
-    const parts = token.split(".");
-    if (parts.length !== 3) throw refused();
-    const p = JSON.parse(Buffer.from(parts[1], "base64url").toString());
-    const actor = (["A", "B"] as const).find((a) => g.users[a] === p.sub);
-    if (
-      !actor ||
-      p.iss !== g.apiOrigin + "/auth/v1" ||
-      p.role !== "authenticated" ||
-      p.aud !== "authenticated" ||
-      typeof p.exp !== "number" ||
-      p.exp * 1000 <= this.now()
-    )
-      throw refused();
-    return actor;
+    try {
+      const { g } = this.load();
+      const parts = token.split(".");
+      if (parts.length !== 3) throw refused("token-scope");
+      const p = JSON.parse(Buffer.from(parts[1], "base64url").toString());
+      const actor = (["A", "B"] as const).find((a) => g.users[a] === p.sub);
+      if (
+        !actor ||
+        p.iss !== g.apiOrigin + "/auth/v1" ||
+        p.role !== "authenticated" ||
+        p.aud !== "authenticated" ||
+        typeof p.exp !== "number" ||
+        p.exp * 1000 <= this.now()
+      )
+        throw refused("token-scope");
+      return actor;
+    } catch {
+      throw refused("token-scope");
+    }
   }
   async fetch(
     input: string | URL | Request,
     init: RequestInit = {},
+    origin?: string,
+  ): Promise<Response> {
+    if (!applicationSourceApproved()) throw refused("preflight-refused");
+    try {
+      return await this.request(input, init, origin);
+    } catch (error) {
+      if (error instanceof ScopeDenied) throw error;
+      const reason = refusalReason(error, "request-shape");
+      if (!this.terminal) this.stop(reason, "before-transmission");
+      throw refused(reason);
+    }
+  }
+  private async request(
+    input: string | URL | Request,
+    init: RequestInit,
     origin?: string,
   ): Promise<Response> {
     const { g, c, expiry } = this.load();
@@ -609,232 +727,244 @@ class ApplicationAuthority {
       .get("authorization")
       ?.replace(/^Bearer /i, "");
     let index = 0;
-    await this.transaction((s) => {
-      if (s.cloud >= 600) throw refused();
-      if (token && token !== c.publishableKey) {
-        actor = this.claims(token);
-        if (s.tokens[sha(token)] !== actor) throw refused();
-      }
-      if (
-        url.pathname === "/rest/v1/rpc/v3_target_identity" &&
-        method === "POST" &&
-        Object.keys(body ?? {}).length === 0
-      ) {
-        kind = "identity";
-      } else {
-        if (s.phase !== "serving" || !s.identity) throw refused();
+    await this.transaction(
+      (s) => {
+        if (s.cloud >= 600) throw refused("cloud-budget");
+        if (token && token !== c.publishableKey) {
+          actor = this.claims(token);
+          if (s.tokens[sha(token)] !== actor) throw refused("token-scope");
+        }
         if (
-          url.pathname === "/auth/v1/token" &&
+          url.pathname === "/rest/v1/rpc/v3_target_identity" &&
           method === "POST" &&
-          url.searchParams.get("grant_type") === "password"
+          Object.keys(body ?? {}).length === 0
         ) {
-          login = (["A", "B"] as const).find(
-            (a) =>
-              c.users[a].email.toLowerCase() ===
-                String(body?.email).toLowerCase() &&
-              c.users[a].password === body?.password,
-          );
+          kind = "identity";
+        } else {
+          if (s.phase !== "serving" || !s.identity) throw refused();
           if (
-            !login ||
-            origin !== applicationOrigin ||
-            Object.keys(body ?? {}).some(
-              (k) => !["email", "password", "gotrue_meta_security"].includes(k),
-            )
-          )
-            throw refused();
-          kind = "login";
-        } else if (
-          url.pathname === "/auth/v1/token" &&
-          method === "POST" &&
-          url.searchParams.get("grant_type") === "refresh_token"
-        ) {
-          login = s.refresh[sha(String(body?.refresh_token))];
-          if (!login) throw refused();
-          kind = "login";
-        } else if (
-          url.pathname === "/auth/v1/.well-known/jwks.json" &&
-          method === "GET"
-        )
-          kind = "jwks";
-        else {
-          if (!actor) throw refused();
-          if (url.pathname === "/auth/v1/user" && method === "GET")
-            kind = "user";
-          else if (
-            url.pathname === "/auth/v1/logout" &&
+            url.pathname === "/auth/v1/token" &&
             method === "POST" &&
-            url.searchParams.get("scope") === "local" &&
-            origin === applicationOrigin
-          )
-            kind = "logout";
-          else if (
-            url.pathname === "/rest/v1/rpc/v3_company_management_contract" &&
-            method === "POST" &&
-            Object.keys(body ?? {}).length === 0
-          )
-            kind = "capability";
-          else if (
-            url.pathname === "/rest/v1/rpc/v3_company_directory" &&
-            method === "POST"
+            url.searchParams.get("grant_type") === "password"
           ) {
-            kind = "directory";
-            z.object({
-              p_query: z.string().max(200),
-              p_page: z.number().int().min(0).max(10000),
-            })
-              .strict()
-              .parse(body);
+            login = (["A", "B"] as const).find(
+              (a) =>
+                c.users[a].email.toLowerCase() ===
+                  String(body?.email).toLowerCase() &&
+                c.users[a].password === body?.password,
+            );
+            if (!login) throw refused("login-credentials");
+            if (origin !== applicationOrigin) throw refused("login-origin");
+            if (
+              Object.keys(body ?? {}).some(
+                (k) =>
+                  !["email", "password", "gotrue_meta_security"].includes(k),
+              )
+            )
+              throw refused("login-payload");
+            kind = "login";
           } else if (
-            ["/rest/v1/companies", "/rest/v1/user_settings"].includes(
-              url.pathname,
-            )
+            url.pathname === "/auth/v1/token" &&
+            method === "POST" &&
+            url.searchParams.get("grant_type") === "refresh_token"
           ) {
-            const table = url.pathname.endsWith("companies")
-              ? "companies"
-              : "settings";
-            const allowed =
-              table === "companies"
-                ? [
-                    "id",
+            login = s.refresh[sha(String(body?.refresh_token))];
+            if (!login) throw refused("token-scope");
+            kind = "login";
+          } else if (
+            url.pathname === "/auth/v1/.well-known/jwks.json" &&
+            method === "GET"
+          )
+            kind = "jwks";
+          else {
+            if (!actor) throw refused();
+            if (url.pathname === "/auth/v1/user" && method === "GET")
+              kind = "user";
+            else if (
+              url.pathname === "/auth/v1/logout" &&
+              method === "POST" &&
+              url.searchParams.get("scope") === "local" &&
+              origin === applicationOrigin
+            )
+              kind = "logout";
+            else if (
+              url.pathname === "/rest/v1/rpc/v3_company_management_contract" &&
+              method === "POST" &&
+              Object.keys(body ?? {}).length === 0
+            )
+              kind = "capability";
+            else if (
+              url.pathname === "/rest/v1/rpc/v3_company_directory" &&
+              method === "POST"
+            ) {
+              kind = "directory";
+              z.object({
+                p_query: z.string().max(200),
+                p_page: z.number().int().min(0).max(10000),
+              })
+                .strict()
+                .parse(body);
+            } else if (
+              ["/rest/v1/companies", "/rest/v1/user_settings"].includes(
+                url.pathname,
+              )
+            ) {
+              const table = url.pathname.endsWith("companies")
+                ? "companies"
+                : "settings";
+              const allowed =
+                table === "companies"
+                  ? [
+                      "id",
+                      "user_id",
+                      "name",
+                      "ticker",
+                      "exchange",
+                      "sector",
+                      "short_note",
+                      "created_at",
+                      "updated_at",
+                    ]
+                  : ["user_id", "theme"];
+              for (const key of url.searchParams.keys())
+                if (
+                  ![
+                    "select",
                     "user_id",
+                    "id",
+                    "order",
+                    "limit",
+                    "offset",
                     "name",
-                    "ticker",
-                    "exchange",
-                    "sector",
-                    "short_note",
-                    "created_at",
-                    "updated_at",
-                  ]
-                : ["user_id", "theme"];
-            for (const key of url.searchParams.keys())
+                  ].includes(key)
+                )
+                  throw refused();
+              const selected = (url.searchParams.get("select") ?? "").split(
+                ",",
+              );
               if (
-                ![
-                  "select",
-                  "user_id",
-                  "id",
-                  "order",
-                  "limit",
-                  "offset",
-                  "name",
-                ].includes(key)
+                !selected.length ||
+                selected.some((k) => !allowed.includes(k))
               )
                 throw refused();
-            const selected = (url.searchParams.get("select") ?? "").split(",");
-            if (!selected.length || selected.some((k) => !allowed.includes(k)))
-              throw refused();
-            if (
-              method !== "POST" &&
-              url.searchParams.get("user_id") !== `eq.${g.users[actor]}`
-            )
-              throw refused();
-            if (method === "GET") kind = table;
-            else {
-              if (origin !== applicationOrigin) throw refused();
-              const payload = { ...body };
-              if (table === "companies") {
-                if (method === "POST") {
-                  if (
-                    payload.user_id !== g.users[actor] ||
-                    s.writes[actor].create >= 1
-                  )
-                    throw refused();
-                  delete payload.user_id;
-                  const parsed = companyMetadataInput
-                    .partial({
-                      ticker: true,
-                      exchange: true,
-                      sector: true,
-                      short_note: true,
-                    })
-                    .parse(payload);
-                  if (
-                    !new RegExp(
-                      `^v3-slice1-app:${g.runId}:${actor}(?:[ :_-][A-Za-z0-9 _:-]{0,60})?$`,
-                    ).test(parsed.name)
-                  )
-                    throw refused();
-                  mutation = { actor, kind: "create", body: body! };
+              if (
+                method !== "POST" &&
+                url.searchParams.get("user_id") !== `eq.${g.users[actor]}`
+              )
+                throw refused();
+              if (method === "GET") kind = table;
+              else {
+                if (origin !== applicationOrigin) throw refused();
+                const payload = { ...body };
+                if (table === "companies") {
+                  if (method === "POST") {
+                    if (
+                      payload.user_id !== g.users[actor] ||
+                      s.writes[actor].create >= 1
+                    )
+                      throw refused();
+                    delete payload.user_id;
+                    const parsed = companyMetadataInput
+                      .partial({
+                        ticker: true,
+                        exchange: true,
+                        sector: true,
+                        short_note: true,
+                      })
+                      .parse(payload);
+                    if (
+                      !new RegExp(
+                        `^v3-slice1-app:${g.runId}:${actor}(?:[ :_-][A-Za-z0-9 _:-]{0,60})?$`,
+                      ).test(parsed.name)
+                    )
+                      throw refused();
+                    mutation = { actor, kind: "create", body: body! };
+                  } else {
+                    if (
+                      !s.ids[actor] ||
+                      url.searchParams.get("id") !== `eq.${s.ids[actor]}`
+                    )
+                      throw new ScopeDenied(
+                        "Company mutation outside this run refused.",
+                      );
+                    const parsed = companyMetadataInput
+                      .partial({
+                        ticker: true,
+                        exchange: true,
+                        sector: true,
+                        short_note: true,
+                      })
+                      .parse(payload);
+                    if (
+                      !new RegExp(
+                        `^v3-slice1-app:${g.runId}:${actor}(?:[ :_-][A-Za-z0-9 _:-]{0,60})?$`,
+                      ).test(parsed.name)
+                    )
+                      throw refused();
+                    const write = Object.keys(payload).some((k) => k !== "name")
+                      ? "metadata"
+                      : "rename";
+                    if (s.writes[actor][write] >= 1) throw refused();
+                    mutation = { actor, kind: write, body: body! };
+                  }
                 } else {
-                  if (
-                    !s.ids[actor] ||
-                    url.searchParams.get("id") !== `eq.${s.ids[actor]}`
-                  )
-                    throw new ScopeDenied(
-                      "Company mutation outside this run refused.",
-                    );
-                  const parsed = companyMetadataInput
-                    .partial({
-                      ticker: true,
-                      exchange: true,
-                      sector: true,
-                      short_note: true,
-                    })
-                    .parse(payload);
-                  if (
-                    !new RegExp(
-                      `^v3-slice1-app:${g.runId}:${actor}(?:[ :_-][A-Za-z0-9 _:-]{0,60})?$`,
-                    ).test(parsed.name)
-                  )
-                    throw refused();
-                  const write = Object.keys(payload).some((k) => k !== "name")
-                    ? "metadata"
-                    : "rename";
-                  if (s.writes[actor][write] >= 1) throw refused();
-                  mutation = { actor, kind: write, body: body! };
+                  if (s.writes[actor].theme >= 2) throw refused();
+                  z.object({
+                    ...(method === "POST"
+                      ? { user_id: z.literal(g.users[actor]) }
+                      : {}),
+                    theme: z.enum(["light", "dark"]),
+                  })
+                    .strict()
+                    .parse(body);
+                  mutation = { actor, kind: "theme", body: body! };
                 }
-              } else {
-                if (s.writes[actor].theme >= 2) throw refused();
-                z.object({
-                  ...(method === "POST"
-                    ? { user_id: z.literal(g.users[actor]) }
-                    : {}),
-                  theme: z.enum(["light", "dark"]),
-                })
-                  .strict()
-                  .parse(body);
-                mutation = { actor, kind: "theme", body: body! };
+                s.writes[actor][mutation.kind]++;
+                kind = "mutation";
               }
-              s.writes[actor][mutation.kind]++;
-              kind = "mutation";
-            }
-          } else throw refused();
+            } else throw refused();
+          }
         }
-      }
-      index = ++s.cloud;
-      this.record({
-        state: "sending",
-        index,
-        kind,
-        method,
-        ...(mutation
-          ? {
-              write: {
-                actor: mutation.actor,
-                kind: mutation.kind,
-                payload: Object.fromEntries(
-                  Object.entries(mutation.body).filter(
-                    ([k]) => k !== "user_id",
+        index = ++s.cloud;
+        this.record({
+          state: "sending",
+          index,
+          kind,
+          method,
+          ...(mutation
+            ? {
+                write: {
+                  actor: mutation.actor,
+                  kind: mutation.kind,
+                  payload: Object.fromEntries(
+                    Object.entries(mutation.body).filter(
+                      ([k]) => k !== "user_id",
+                    ),
                   ),
-                ),
-                ...(s.ids[mutation.actor] ? { id: s.ids[mutation.actor] } : {}),
-              },
-            }
-          : {}),
-        ...(kind === "logout" ? { actor } : {}),
-      });
-    });
+                  ...(s.ids[mutation.actor]
+                    ? { id: s.ids[mutation.actor] }
+                    : {}),
+                },
+              }
+            : {}),
+          ...(kind === "logout" ? { actor } : {}),
+        });
+      },
+      false,
+      "before-transmission",
+    );
     let httpStatus: number | undefined;
     try {
       const deadline = Math.min(this.now() + 10000, expiry);
       const timeout = deadline - this.now();
-      if (timeout <= 0) throw refused();
+      if (timeout <= 0) throw refused("grant-expired");
       let timeoutHandle: ReturnType<typeof setTimeout> | undefined;
       const timed = <T>(promise: Promise<T>) =>
         Promise.race([
           promise,
           new Promise<never>((_, reject) => {
             timeoutHandle = setTimeout(
-              () => reject(refused()),
+              () => reject(refused("request-timeout")),
               Math.max(1, deadline - this.now()),
             );
           }),
@@ -878,133 +1008,138 @@ class ApplicationAuthority {
         value = raw.length
           ? JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(raw))
           : undefined;
-      await this.transaction((s) => {
-        if (kind === "identity") {
-          if (
-            response.status !== 200 ||
-            !matchesCloudMarker(value, {
-              project_id: g.projectRef,
-              purpose: "disposable-v3-slice0-cloud",
-              schema_version: 1,
-            })
-          )
-            throw refused();
-          s.identity = true;
-        }
-        if (kind === "login" || kind === "user") {
-          const user = kind === "login" ? value?.user : value;
-          const who = login ?? actor;
-          if (
-            !who ||
-            response.status !== 200 ||
-            user?.id !== g.users[who] ||
-            user?.email?.toLowerCase() !== c.users[who].email.toLowerCase() ||
-            !Number.isFinite(Date.parse(user?.email_confirmed_at))
-          )
-            throw refused();
-          if (kind === "login") {
+      await this.transaction(
+        (s) => {
+          if (kind === "identity") {
             if (
-              typeof value.access_token !== "string" ||
-              this.claims(value.access_token) !== who ||
-              typeof value.refresh_token !== "string"
+              response.status !== 200 ||
+              !matchesCloudMarker(value, {
+                project_id: g.projectRef,
+                purpose: "disposable-v3-slice0-cloud",
+                schema_version: 1,
+              })
             )
               throw refused();
-            s.tokens[sha(value.access_token)] = who;
-            s.refresh[sha(value.refresh_token)] = who;
+            s.identity = true;
           }
-        }
-        if (["directory", "companies", "settings"].includes(kind)) {
-          const rows = Array.isArray(value)
-            ? value
-            : request.headers.get("accept") ===
-                  "application/vnd.pgrst.object+json" &&
-                value &&
-                typeof value === "object"
-              ? [value]
-              : undefined;
-          if (
-            !actor ||
-            response.status !== 200 ||
-            !rows ||
-            rows.length > (kind === "settings" ? 1 : 25)
-          )
-            throw refused();
-          for (const row of rows) {
-            if (!row || row.user_id !== g.users[actor]) throw refused();
-            if (kind !== "settings") {
+          if (kind === "login" || kind === "user") {
+            const user = kind === "login" ? value?.user : value;
+            const who = login ?? actor;
+            if (
+              !who ||
+              response.status !== 200 ||
+              user?.id !== g.users[who] ||
+              user?.email?.toLowerCase() !== c.users[who].email.toLowerCase() ||
+              !Number.isFinite(Date.parse(user?.email_confirmed_at))
+            )
+              throw refused();
+            if (kind === "login") {
               if (
-                !z.uuid().safeParse(row.id).success ||
-                typeof row.name !== "string" ||
-                !row.name.trim() ||
-                row.name.length > 200
+                typeof value.access_token !== "string" ||
+                this.claims(value.access_token) !== who ||
+                typeof value.refresh_token !== "string"
               )
                 throw refused();
-              const id = url.searchParams.get("id");
-              if (id && id !== `eq.${row.id}`) throw refused();
-            } else if (
-              url.searchParams.get("select")?.split(",").includes("theme") &&
-              !["light", "dark"].includes(row.theme)
+              s.tokens[sha(value.access_token)] = who;
+              s.refresh[sha(value.refresh_token)] = who;
+            }
+          }
+          if (["directory", "companies", "settings"].includes(kind)) {
+            const rows = Array.isArray(value)
+              ? value
+              : request.headers.get("accept") ===
+                    "application/vnd.pgrst.object+json" &&
+                  value &&
+                  typeof value === "object"
+                ? [value]
+                : undefined;
+            if (
+              !actor ||
+              response.status !== 200 ||
+              !rows ||
+              rows.length > (kind === "settings" ? 1 : 25)
             )
               throw refused();
+            for (const row of rows) {
+              if (!row || row.user_id !== g.users[actor]) throw refused();
+              if (kind !== "settings") {
+                if (
+                  !z.uuid().safeParse(row.id).success ||
+                  typeof row.name !== "string" ||
+                  !row.name.trim() ||
+                  row.name.length > 200
+                )
+                  throw refused();
+                const id = url.searchParams.get("id");
+                if (id && id !== `eq.${row.id}`) throw refused();
+              } else if (
+                url.searchParams.get("select")?.split(",").includes("theme") &&
+                !["light", "dark"].includes(row.theme)
+              )
+                throw refused();
+            }
           }
-        }
-        if (kind === "capability" && value !== 1) throw refused();
-        if (kind === "logout") {
-          if (response.status !== 204) throw refused();
-          if (!actor) throw refused();
-          for (const [hash, owner] of Object.entries(s.tokens))
-            if (owner === actor) delete s.tokens[hash];
-          for (const [hash, owner] of Object.entries(s.refresh))
-            if (owner === actor) delete s.refresh[hash];
-        }
-        if (mutation) {
-          const rows = Array.isArray(value)
-            ? value
-            : request.headers.get("accept") ===
-                  "application/vnd.pgrst.object+json" &&
-                value &&
-                typeof value === "object"
-              ? [value]
-              : [];
-          if (
-            response.status !== (method === "POST" ? 201 : 200) ||
-            rows.length !== 1 ||
-            rows[0]?.user_id !== g.users[mutation.actor]
-          )
-            throw refused();
-          for (const [key, v] of Object.entries(mutation.body))
-            if (rows[0][key] !== v) throw refused();
-          if (mutation.kind === "create") {
-            const id = z.uuid().parse(rows[0].id);
-            if (Object.values(s.ids).includes(id)) throw refused();
-            s.ids[mutation.actor] = id;
-          } else if (
-            mutation.kind !== "theme" &&
-            rows[0].id !== s.ids[mutation.actor]
-          )
-            throw refused();
+          if (kind === "capability" && value !== 1) throw refused();
+          if (kind === "logout") {
+            if (response.status !== 204) throw refused();
+            if (!actor) throw refused();
+            for (const [hash, owner] of Object.entries(s.tokens))
+              if (owner === actor) delete s.tokens[hash];
+            for (const [hash, owner] of Object.entries(s.refresh))
+              if (owner === actor) delete s.refresh[hash];
+          }
+          if (mutation) {
+            const rows = Array.isArray(value)
+              ? value
+              : request.headers.get("accept") ===
+                    "application/vnd.pgrst.object+json" &&
+                  value &&
+                  typeof value === "object"
+                ? [value]
+                : [];
+            if (
+              response.status !== (method === "POST" ? 201 : 200) ||
+              rows.length !== 1 ||
+              rows[0]?.user_id !== g.users[mutation.actor]
+            )
+              throw refused();
+            for (const [key, v] of Object.entries(mutation.body))
+              if (rows[0][key] !== v) throw refused();
+            if (mutation.kind === "create") {
+              const id = z.uuid().parse(rows[0].id);
+              if (Object.values(s.ids).includes(id)) throw refused();
+              s.ids[mutation.actor] = id;
+            } else if (
+              mutation.kind !== "theme" &&
+              rows[0].id !== s.ids[mutation.actor]
+            )
+              throw refused();
+            this.record({
+              state: "write-verified",
+              index,
+              kind: mutation.kind,
+              actor: mutation.actor,
+              ...(mutation.kind !== "theme" ? { id: rows[0].id } : {}),
+            });
+          }
           this.record({
-            state: "write-verified",
+            state: "verified",
             index,
-            kind: mutation.kind,
-            actor: mutation.actor,
-            ...(mutation.kind !== "theme" ? { id: rows[0].id } : {}),
+            kind,
+            httpStatus: response.status,
           });
-        }
-        this.record({
-          state: "verified",
-          index,
-          kind,
-          httpStatus: response.status,
-        });
-      });
+        },
+        false,
+        "response",
+      );
       return new Response(raw.length ? raw : null, {
         status: response.status,
         headers: response.headers,
       });
-    } catch {
-      this.terminal = true;
-      this.latch();
+    } catch (error) {
+      let reason = refusalReason(error, "transport-or-response");
+      if (reason === "request-scope") reason = "response-invalid";
+      this.stop(reason, "response");
       try {
         this.record({
           state: "failed",
@@ -1016,7 +1151,7 @@ class ApplicationAuthority {
       } catch {
         /* Fail closed even without final evidence. */
       }
-      throw refused();
+      throw refused(reason);
     }
   }
   replayRestorationAllowed() {
@@ -1033,17 +1168,22 @@ class ApplicationAuthority {
   isStopped() {
     return this.terminal || fs.existsSync(this.file("application-stop"));
   }
-  async close() {
-    this.latch();
-    await this.transaction((s) => {
-      s.phase = "closed";
-      this.record({
-        state: "closed",
-        cloud: s.cloud,
-        http: s.http,
-        acceptance: "owner review required",
-      });
-    }, true);
+  async close(reason: StopReason = "normal") {
+    this.latch(reason, "shutdown");
+    await this.transaction(
+      (s) => {
+        s.phase = "closed";
+        this.record({
+          state: "closed",
+          cloud: s.cloud,
+          http: s.http,
+          acceptance: "owner review required",
+          ...this.diagnostic(this.stopReason(), "shutdown"),
+        });
+      },
+      true,
+      "shutdown",
+    );
   }
 }
 

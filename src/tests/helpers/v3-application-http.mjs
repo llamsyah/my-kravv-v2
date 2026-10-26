@@ -326,6 +326,9 @@ function load(file) {
     return require(name);
   };
   const output = ts.transpileModule(fs.readFileSync(file, "utf8"), {
+    // Respect .ts versus .tsx. Otherwise generic TypeScript arrows can be
+    // misparsed as JSX when an imported server module grows or is reformatted.
+    fileName: file,
     compilerOptions: {
       jsx: ts.JsxEmit.ReactJSX,
       module: ts.ModuleKind.CommonJS,

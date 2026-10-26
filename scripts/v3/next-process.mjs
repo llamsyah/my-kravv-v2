@@ -1,5 +1,6 @@
 import { execFileSync, spawn } from "node:child_process";
 import path from "node:path";
+import { ApplicationRefusal, safeReason } from "./application-diagnostics.ts";
 import { setTimeout as pause } from "node:timers/promises";
 
 export function listeners() {
@@ -34,7 +35,7 @@ export function verifyOwnedListeners(rows, pid) {
     !rows.length ||
     rows.some((r) => r.LocalAddress !== "127.0.0.1" || r.OwningProcess !== pid)
   )
-    throw Error("Unexpected listener binding or owner.");
+    throw new ApplicationRefusal("listener-unverified");
 }
 export function stopOwned(child) {
   if (!Number.isSafeInteger(child.pid) || child.pid <= 0)
@@ -60,10 +61,11 @@ export async function withNextServer(
     wait = pause,
     signal,
     onStarted = () => {},
+    onDiagnostic = () => {},
   } = {},
 ) {
-  if (signal?.aborted) throw Error("Application window expired.");
-  if (inspect().length) throw Error("Application port already occupied.");
+  if (signal?.aborted) throw new ApplicationRefusal(safeReason(signal.reason));
+  if (inspect().length) throw new ApplicationRefusal("listener-unverified");
   const child = start(
     process.execPath,
     [
@@ -82,19 +84,60 @@ export async function withNextServer(
       stdio: ["ignore", "ignore", "ignore", "ipc"],
     },
   );
-  let error = false;
+  let error = false,
+    diagnosticFailed = false,
+    stopping = false;
+  const emit = (
+    reason,
+    stage,
+    code = child.exitCode,
+    sig = child.signalCode,
+  ) => {
+    try {
+      onDiagnostic({
+        reason: safeReason(reason),
+        stage,
+        childExitCode: code ?? null,
+        childSignal: sig ?? null,
+      });
+    } catch {
+      error = true;
+      diagnosticFailed = true;
+      try {
+        stopping = true;
+        stop(child);
+      } catch {
+        /* Finally verifies shutdown. */
+      }
+    }
+  };
   child.once("error", () => {
     error = true;
+    emit("launch-failed", "launch");
   });
+  const onExit = (code, sig) =>
+    emit(stopping ? "owned-stop" : "child-exit", "shutdown", code, sig);
+  child.once("exit", onExit);
   const onSignal = () => {
+    emit("external-signal", "shutdown");
+    stopping = true;
     try {
       stop(child);
     } catch {
       error = true;
     }
   };
-  signal?.addEventListener("abort", onSignal, { once: true });
-  if (signal?.aborted) onSignal();
+  const onAbort = () => {
+    emit(safeReason(signal?.reason), "shutdown");
+    stopping = true;
+    try {
+      stop(child);
+    } catch {
+      error = true;
+    }
+  };
+  signal?.addEventListener("abort", onAbort, { once: true });
+  if (signal?.aborted) onAbort();
   process.once("SIGINT", onSignal);
   process.once("SIGTERM", onSignal);
   try {
@@ -108,7 +151,7 @@ export async function withNextServer(
         child.exitCode !== null ||
         child.signalCode !== null
       )
-        throw Error("Next launch failed.");
+        throw new ApplicationRefusal("launch-failed");
       const rows = inspect();
       if (rows.length) {
         verifyOwnedListeners(rows, child.pid);
@@ -117,20 +160,25 @@ export async function withNextServer(
       }
       await wait(100);
     }
-    if (!ready) throw Error("Next readiness timed out.");
+    if (!ready) throw new ApplicationRefusal("launch-failed");
     return await work(child);
   } finally {
-    signal?.removeEventListener("abort", onSignal);
+    signal?.removeEventListener("abort", onAbort);
     process.removeListener("SIGINT", onSignal);
     process.removeListener("SIGTERM", onSignal);
     try {
+      stopping = true;
       stop(child);
     } catch {
       if (child.exitCode === null && child.signalCode === null)
-        throw Error("Owned process shutdown unverified.");
+        throw new ApplicationRefusal("shutdown-unverified");
     }
     for (let i = 0; i < 50 && inspect().length; i++) await wait(100);
-    if (inspect().length)
-      throw Error("Application listener remains; restoration refused.");
+    if (inspect().length) throw new ApplicationRefusal("shutdown-unverified");
+    // Give queued exit events one turn; absence remains null, never an invented status.
+    await wait(0);
+    emit("owned-stop", "shutdown");
+    child.removeListener("exit", onExit);
+    if (diagnosticFailed) throw new ApplicationRefusal("evidence-persistence");
   }
 }

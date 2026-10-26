@@ -227,6 +227,28 @@ coverage, uncertain writes, incomplete evidence or partial walkthrough are
 INCONCLUSIVE for full application acceptance. Offline mocks and a closed-gate
 server smoke are explicitly not live PASS.
 
+## Offline shutdown-diagnostics follow-up
+
+Shutdown diagnostics now use the fixed vocabulary in
+`scripts/v3/application-diagnostics.ts`. The existing manifest and exclusive stop
+file record the first reason, stage, UTC timestamp and elapsed execution time;
+controller diagnostics also include available sanitized child exit code/signal.
+Authority refusals before transmission are recorded without credentials or user
+identifiers. Preflight failures before a trusted initialized claim have fixed
+console diagnostics only. Persistence failure remains terminal; it cannot prevent
+safe null-pin restoration after verified shutdown, and it cannot be reported as
+complete durable evidence. Later cleanup preserves the first stop-file cause.
+
+This does not reconstruct the missing Window 2 cause, and historical evidence is
+not rewritten. No grant schema, target, allowed operation, request/time budget,
+process-ownership check or shared/browser interlock is expanded.
+
+The next proposed walkthrough is [focused User B/account-switching acceptance](SLICE-1-USER-B-ACCEPTANCE.md),
+using retained fixtures with no planned company, metadata or theme writes. CSRF
+and expiry-timed refresh remain separate unresolved coverage. A fresh window still
+requires separate explicit owner approval and verified same-tab readiness before
+any private grant creation or source-pin activation.
+
 ## Offline validation
 
 Run focused dispatch tests, the full deterministic suite, lint, TypeScript/Next type
