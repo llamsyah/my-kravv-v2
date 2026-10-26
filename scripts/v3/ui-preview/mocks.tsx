@@ -1,4 +1,23 @@
 import type { AnchorHTMLAttributes } from "react";
+export async function saveCaptureAction() {
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  return {
+    error:
+      "Simulasi lokal: penyimpanan gagal. Tidak ada permintaan server atau data tersimpan.",
+  };
+}
+export async function findCaptureCompaniesAction() {
+  return {
+    error: null,
+    items: [
+      {
+        id: "10000000-0000-4000-8000-000000000001",
+        name: "Nusantara Industri",
+      },
+    ],
+    hasNext: false,
+  };
+}
 function fixtureHref(href: string) {
   const url = new URL(href, window.location.origin);
   if (url.origin !== window.location.origin || url.pathname !== "/foundation")

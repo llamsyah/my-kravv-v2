@@ -32,12 +32,20 @@ function load(file) {
         }),
       };
     if (
+      (name === "./actions" &&
+        file.endsWith(path.join("captures", "inbox.tsx"))) ||
       name.endsWith("/auth/actions") ||
       name.endsWith("/foundation/actions") ||
       (name === "./actions" &&
         file.endsWith(path.join("auth", "logout-form.tsx")))
     )
       return {
+        saveCaptureAction: async () => {
+          throw Error("Offline actions blocked");
+        },
+        findCaptureCompaniesAction: async () => {
+          throw Error("Offline actions blocked");
+        },
         logout: async () => {
           throw Error("Offline actions blocked");
         },
@@ -64,6 +72,7 @@ function load(file) {
   };
   const source = fs.readFileSync(file, "utf8");
   const output = ts.transpileModule(source, {
+    fileName: file,
     compilerOptions: {
       jsx: ts.JsxEmit.ReactJSX,
       module: ts.ModuleKind.CommonJS,

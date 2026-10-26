@@ -21,6 +21,7 @@ const users = {
   B: { id: "20000000-0000-4000-8000-000000000002" },
 };
 const rows = [];
+const captureRows = [];
 let sequence = 100;
 const id = (n) => `10000000-0000-4000-8000-${String(n).padStart(12, "0")}`;
 for (const actor of ["A", "B"])
@@ -120,6 +121,42 @@ function fakeSdk(_url, _key, options) {
     },
     rpc: async (name, args) => {
       journal.push({ actor: actor(), rpc: name, args });
+      if (name === "v3_capture_contract")
+        return c.failure === "capture-schema"
+          ? { data: null, error: { code: "PGRST202" } }
+          : { data: 1, error: null };
+      if (name === "v3_create_capture") {
+        if (
+          !user() ||
+          c.failure === "capture-write" ||
+          (args.p_company_id &&
+            !rows.some(
+              (r) => r.id === args.p_company_id && r.user_id === user().id,
+            ))
+        )
+          return { data: null, error: { message: "PRIVATE CAPTURE DETAIL" } };
+        let saved = captureRows.find(
+          (r) => r.user_id === user().id && r.request_id === args.p_request_id,
+        );
+        if (
+          saved &&
+          (saved.raw_text !== args.p_raw_text ||
+            saved.company_id !== args.p_company_id)
+        )
+          return { data: null, error: { message: "PRIVATE CONFLICT DETAIL" } };
+        if (!saved) {
+          saved = {
+            id: id(++sequence),
+            user_id: user().id,
+            request_id: args.p_request_id,
+            raw_text: args.p_raw_text,
+            company_id: args.p_company_id,
+            created_at: new Date(1800000000000 + sequence).toISOString(),
+          };
+          captureRows.push(saved);
+        }
+        return { data: [saved], error: null };
+      }
       if (name === "v3_company_management_contract")
         return c.failure === "capability"
           ? { data: null, error: { code: "unexpected" } }
@@ -149,7 +186,7 @@ function fakeSdk(_url, _key, options) {
       };
     },
     from(table) {
-      if (!["companies", "user_settings"].includes(table))
+      if (!["companies", "user_settings", "captures"].includes(table))
         throw Error("Unreviewed synthetic table");
       const filters = [],
         orders = [];
@@ -174,11 +211,20 @@ function fakeSdk(_url, _key, options) {
           (c.failure === "theme" && table === "user_settings")
         )
           return { data: null, error: { message: "PRIVATE DB DETAIL" } };
-        const store = table === "companies" ? rows : settings;
+        if (c.failure === "capture-read" && table === "captures")
+          return { data: null, error: { message: "PRIVATE CAPTURE DETAIL" } };
+        const store =
+          table === "companies"
+            ? rows
+            : table === "captures"
+              ? captureRows
+              : settings;
         let found = store.filter(
           (r) =>
             r.user_id === user().id &&
-            filters.every(([key, value]) => r[key] === value),
+            filters.every(([key, value]) =>
+              Array.isArray(value) ? value.includes(r[key]) : r[key] === value,
+            ),
         );
         if (mode === "insert") {
           if (input.user_id !== user().id)
@@ -200,8 +246,12 @@ function fakeSdk(_url, _key, options) {
           found = [record];
         }
         if (mode === "update") for (const r of found) Object.assign(r, input);
-        for (const key of orders.toReversed())
-          found.sort((a, b) => String(a[key]).localeCompare(String(b[key])));
+        for (const [key, ascending] of orders.toReversed())
+          found.sort(
+            (a, b) =>
+              String(a[key]).localeCompare(String(b[key])) *
+              (ascending ? 1 : -1),
+          );
         if (range) found = found.slice(range[0], range[1] + 1);
         if (limit) found = found.slice(0, limit);
         const project = (r) =>
@@ -220,8 +270,12 @@ function fakeSdk(_url, _key, options) {
           filters.push([k, v]);
           return this;
         },
-        order(k) {
-          orders.push(k);
+        in(k, values) {
+          filters.push([k, values]);
+          return this;
+        },
+        order(k, options = {}) {
+          orders.push([k, options.ascending !== false]);
           return this;
         },
         range(a, b) {
@@ -430,6 +484,17 @@ const server = http.createServer(async (req, res) => {
         );
       else if (url.pathname === "/__offline/theme")
         result = await actions.saveFoundationThemeAction(form.get("theme"));
+      else if (url.pathname === "/__offline/capture")
+        result = await load(
+          path.join(root, "src/features/captures/actions.ts"),
+        ).saveCaptureAction(
+          {
+            request_id: form.get("request_id"),
+            raw_text: form.get("raw_text"),
+            company_id: form.get("company_id") || null,
+          },
+          form.get("expected_owner"),
+        );
       else {
         res.writeHead(404);
         res.end();
@@ -766,6 +831,68 @@ try {
       !switched[1].text.includes("A-PRIVATE"),
     "Concurrent HTTP request isolation",
   );
+  if (process.argv.includes("--captures")) {
+    const captureForm = {
+      request_id: "40000000-0000-4000-8000-000000000001",
+      raw_text: "  A-CAPTURE-PRIVATE\nOriginal 😀  ",
+      company_id: id(1),
+      expected_owner: users.A.id,
+    };
+    r = await request("/foundation?view=captures");
+    check(r.response.status === 307);
+    r = await request("/foundation?view=captures", {
+      actor: "A",
+      failure: "capture-schema",
+    });
+    check(r.text.includes("menunggu pembaruan skema"));
+    r = await request("/__offline/capture", {
+      actor: "A",
+      method: "POST",
+      form: captureForm,
+    });
+    check(r.json().capture?.raw_text === captureForm.raw_text);
+    check(captureRows.length === 1);
+    r = await request("/__offline/capture", {
+      actor: "A",
+      method: "POST",
+      form: captureForm,
+    });
+    check(r.json().capture?.id === captureRows[0].id);
+    check(captureRows.length === 1);
+    r = await request("/foundation?view=captures", { actor: "A" });
+    check(r.text.includes("A-CAPTURE-PRIVATE"));
+    check(captures.at(-2).key === users.A.id);
+    r = await request("/foundation?view=captures", { actor: "B" });
+    check(!r.text.includes("A-CAPTURE-PRIVATE"));
+    check(captures.at(-2).key === users.B.id);
+    check(r.text.includes("Ruang untuk ide yang belum selesai"));
+    r = await request("/__offline/capture", {
+      actor: "B",
+      method: "POST",
+      form: captureForm,
+    });
+    check(!!r.json().error);
+    check(captureRows.length === 1);
+    r = await request("/__offline/capture", {
+      actor: "B",
+      method: "POST",
+      form: { ...captureForm, expected_owner: users.B.id, request_id: id(500) },
+    });
+    check(!!r.json().error);
+    check(captureRows.length === 1);
+    r = await request("/foundation?view=captures", {
+      actor: "A",
+      failure: "capture-read",
+    });
+    check(r.text.includes("Penampungan belum dapat dimuat"));
+    check(!r.text.includes("A-CAPTURE-PRIVATE"));
+    r = await request("/foundation?view=captures", { actor: "A" });
+    check(r.text.includes("A-CAPTURE-PRIVATE"));
+    check(
+      captures.at(-2).props.captureState.items[0].raw_text ===
+        captureForm.raw_text,
+    );
+  }
   for (const call of journal.filter((v) => v.table && v.mode !== "insert")) {
     check(
       call.filters.some(

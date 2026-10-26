@@ -272,7 +272,8 @@ test("Home integrates creation and compact owned-company shortcuts without fabri
   assert.ok(section?.includes("Cari nama perusahaan"));
   assert.ok(!html.includes("Ada perusahaan yang ingin kamu pahami?"));
   assert.ok(!html.includes("homeAside"));
-  assert.ok(!html.includes("Quick Capture"));
+  assert.ok(html.includes("Quick Capture"));
+  assert.ok(html.includes("/foundation?view=captures"));
   assert.ok(!html.includes("Inbox"));
   assert.ok(!html.includes("AI review"));
   assert.ok(!/<img[\s>]/.test(html));

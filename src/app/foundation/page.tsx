@@ -12,6 +12,11 @@ import {
 } from "@/features/v3-workspace/management-contract";
 import { V3Workspace } from "@/features/v3-workspace/workspace";
 import { workspaceLocation } from "@/features/v3-workspace/model";
+import { captureSchemaReady, listCaptures } from "@/server/captures/service";
+import {
+  parseCapturePage,
+  type CaptureInboxState,
+} from "@/features/captures/contract";
 
 export const dynamic = "force-dynamic";
 
@@ -24,6 +29,28 @@ export default async function FoundationPage({
   const search = await searchParams;
   const location = workspaceLocation(search);
   const directory = parseDirectorySearch(search);
+  const captureState: CaptureInboxState = {
+    ready: false,
+    failed: false,
+    items: [],
+    page: parseCapturePage(search.capture_page),
+    hasNext: false,
+  };
+  if (location.view === "captures") {
+    try {
+      captureState.ready = await captureSchemaReady(supabase);
+      if (captureState.ready)
+        Object.assign(
+          captureState,
+          await listCaptures(supabase, captureState.page),
+        );
+    } catch {
+      captureState.ready = false;
+      captureState.failed = true;
+      captureState.items = [];
+      captureState.hasNext = false;
+    }
+  }
   let companies: WorkspaceCompany[] = [],
     selectedCompany: WorkspaceCompany | undefined;
   let metadataReady = false,
@@ -59,6 +86,8 @@ export default async function FoundationPage({
   return (
     <V3Workspace
       key={user.id}
+      ownerId={user.id}
+      captureState={captureState}
       companies={companies}
       selectedCompany={selectedCompany ?? null}
       location={location}

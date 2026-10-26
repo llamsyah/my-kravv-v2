@@ -38,6 +38,8 @@ import {
   type WorkspaceLocation,
 } from "./model";
 import styles from "./workspace.module.css";
+import { CaptureInbox } from "../captures/inbox";
+import type { CaptureInboxState } from "../captures/contract";
 function subscribeViewport(changed: () => void) {
   const query = window.matchMedia("(max-width: 720px)");
   query.addEventListener("change", changed);
@@ -60,6 +62,8 @@ export function V3Workspace({
   directory: directoryState,
   selectedCompany,
   initialTheme = "light",
+  ownerId,
+  captureState,
 }: {
   companies: WorkspaceCompany[];
   location: WorkspaceLocation;
@@ -67,6 +71,8 @@ export function V3Workspace({
   directory?: DirectoryState;
   selectedCompany?: WorkspaceCompany | null;
   initialTheme?: Theme;
+  ownerId?: string;
+  captureState?: CaptureInboxState;
 }) {
   const browserTheme = useSyncExternalStore(
     subscribeThemePreference,
@@ -134,6 +140,7 @@ export function V3Workspace({
       : (selectedCompany ?? undefined);
   const inCompany = location.view === "company" || location.view === "edit";
   const workspace = inCompany && !!company && !failed;
+  const captures = location.view === "captures";
   const home = location.view === "home",
     directory = location.view === "companies";
   const filtered = directoryState
@@ -141,15 +148,17 @@ export function V3Workspace({
     : findWorkspaceCompanies(companies, query);
   const title = home
     ? "Ruang berpikirmu,"
-    : directory
-      ? "Perusahaan"
-      : location.view === "new"
-        ? "Tambah perusahaan"
-        : location.view === "edit"
-          ? metadataReady
-            ? "Ubah perusahaan"
-            : "Ubah nama perusahaan"
-          : (company?.name ?? "Perusahaan tidak tersedia");
+    : captures
+      ? "Penampungan"
+      : directory
+        ? "Perusahaan"
+        : location.view === "new"
+          ? "Tambah perusahaan"
+          : location.view === "edit"
+            ? metadataReady
+              ? "Ubah perusahaan"
+              : "Ubah nama perusahaan"
+            : (company?.name ?? "Perusahaan tidak tersedia");
   const createLink = (
     <Link className={styles.primary} href={workspaceHref("new")}>
       <Icon name="plus" />
@@ -179,10 +188,16 @@ export function V3Workspace({
             </Link>
             <Link
               href={workspaceHref("companies")}
-              aria-current={!home ? "page" : undefined}
+              aria-current={!home && !captures ? "page" : undefined}
             >
               <Icon name="building" />
               Perusahaan
+            </Link>
+            <Link
+              href={workspaceHref("captures")}
+              aria-current={captures ? "page" : undefined}
+            >
+              <Icon name="plus" /> Quick Capture
             </Link>
           </nav>
           <div className={styles.headerTools}>
@@ -276,6 +291,8 @@ export function V3Workspace({
                       <Icon name="arrowLeft" />
                       Semua perusahaan
                     </Link>
+                  ) : captures ? (
+                    "RUANG PRIBADI / PENAMPUNGAN"
                   ) : home ? (
                     "BERANDA"
                   ) : directory ? (
@@ -321,7 +338,21 @@ export function V3Workspace({
               </div>
               {directory && !failed && createLink}
             </div>
-            {failed ? (
+            {captures ? (
+              <CaptureInbox
+                key={ownerId ?? "unavailable"}
+                ownerId={ownerId ?? ""}
+                state={
+                  captureState ?? {
+                    ready: false,
+                    failed: true,
+                    items: [],
+                    page: 0,
+                    hasNext: false,
+                  }
+                }
+              />
+            ) : failed ? (
               <State title="Perusahaan belum dapat dimuat." error>
                 <p>
                   Sambungan belum tersedia. Daftar perusahaanmu tidak diubah.

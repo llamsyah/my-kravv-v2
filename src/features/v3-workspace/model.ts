@@ -11,7 +11,8 @@ export const workspaceCompanySchema = z.object({
   short_note: z.string().max(2000).nullable().optional(),
 });
 export type WorkspaceCompany = z.infer<typeof workspaceCompanySchema>;
-export type WorkspaceView = "home" | "companies" | "company" | "new" | "edit";
+export type WorkspaceView =
+  "home" | "companies" | "company" | "new" | "edit" | "captures";
 export type WorkspaceLocation = { view: WorkspaceView; companyId?: string };
 
 export function workspaceLocation(
@@ -23,6 +24,7 @@ export function workspaceLocation(
     "company",
     "new",
     "edit",
+    "captures",
   ];
   const view =
     typeof search.view === "string" &&

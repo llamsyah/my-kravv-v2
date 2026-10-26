@@ -56,6 +56,7 @@ const hooks = {
 };
 const Link = () => null;
 const imports = {
+  "../captures/inbox": { CaptureInbox: () => null },
   react: hooks,
   "react/jsx-runtime": jsx,
   "next/link": { __esModule: true, default: Link },

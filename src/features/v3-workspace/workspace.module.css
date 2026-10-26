@@ -1323,6 +1323,13 @@
     margin-top: 30px;
   }
 }
+@media (max-width: 480px) {
+  .globalNav a {
+    padding-inline: 7px;
+    gap: 5px;
+    font-size: 12px;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   .companyTile {
     padding: 17px;

@@ -1,0 +1,207 @@
+.inbox {
+  display: grid;
+  gap: 32px;
+  max-width: 880px;
+}
+.composer {
+  background: var(--v-panel);
+  border: 1px solid var(--v-line);
+  border-radius: 16px;
+  padding: clamp(18px, 3vw, 28px);
+  box-shadow: 0 6px 24px #00000004;
+}
+.sectionHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+.sectionHeading > span {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--v-muted);
+  white-space: nowrap;
+}
+.composer > p {
+  margin-bottom: 20px;
+}
+.composer form > label {
+  display: block;
+  margin: 18px 0 8px;
+  font-weight: 600;
+}
+.composer textarea {
+  display: block;
+  line-height: 1.8;
+  min-height: 164px;
+}
+.hint {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--v-muted);
+  font-size: 11px;
+  margin-top: 8px;
+}
+.picker {
+  margin: 18px 0;
+  border-block: 1px solid var(--v-line);
+  padding: 12px 0;
+}
+.picker summary {
+  cursor: pointer;
+  color: var(--v-muted);
+  overflow-wrap: anywhere;
+}
+.pickerBody {
+  padding: 14px 0 0;
+}
+.search {
+  display: flex;
+  gap: 8px;
+  margin: 6px 0 12px;
+}
+.search button,
+.paging button,
+.pickerBody > p button {
+  background: var(--v-panel);
+  color: var(--v-text);
+  border: 1px solid var(--v-line);
+  border-radius: 8px;
+  min-height: 40px;
+  padding: 6px 12px;
+}
+.choices,
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.choices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+.choices button {
+  width: 100%;
+  text-align: left;
+  background: var(--v-panel);
+  border: 1px solid var(--v-line);
+  border-radius: 6px;
+  color: var(--v-text);
+  min-height: 44px;
+  padding: 8px 12px;
+  overflow-wrap: anywhere;
+}
+.choices button:hover,
+.choices button[aria-pressed="true"] {
+  background: var(--v-selected);
+  border-color: var(--v-green);
+}
+.footer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+  font-size: 12px;
+}
+.save {
+  background: var(--v-green);
+  color: var(--v-on-green);
+  border: 1px solid var(--v-green);
+  border-radius: 9px;
+  padding: 11px 18px;
+  min-height: 44px;
+  font-weight: 600;
+}
+.save:hover:not(:disabled) {
+  filter: brightness(0.94);
+}
+.notice,
+.error,
+.empty {
+  border: 1px solid var(--v-line);
+  padding: 18px;
+  border-radius: 10px;
+  background: var(--v-panel);
+}
+.error {
+  color: var(--v-error);
+  margin-block: 14px;
+}
+.error p + p {
+  margin-top: 8px;
+}
+.listSection > .sectionHeading {
+  margin-bottom: 16px;
+}
+.list {
+  display: grid;
+  gap: 12px;
+}
+.capture {
+  background: var(--v-panel);
+  border: 1px solid var(--v-line);
+  border-radius: 12px;
+  padding: 20px 24px;
+}
+.captureMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-size: 11px;
+  color: var(--v-muted);
+}
+.captureMeta > span {
+  border-radius: 5px;
+  padding: 3px 8px;
+  background: var(--v-selected);
+  color: var(--v-green);
+}
+.captureMeta a {
+  color: inherit;
+}
+.capture .raw {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.85;
+  color: var(--v-text);
+}
+.paging {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
+  font-size: 12px;
+  flex-wrap: wrap;
+}
+.paging a,
+.error a {
+  color: var(--v-green);
+}
+@media (max-width: 720px) {
+  .sectionHeading {
+    align-items: start;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .hint {
+    flex-direction: column;
+    gap: 4px;
+  }
+  .choices {
+    grid-template-columns: 1fr;
+  }
+  .capture {
+    padding: 18px;
+  }
+  .footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}

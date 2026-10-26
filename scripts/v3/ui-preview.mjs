@@ -29,9 +29,11 @@ const cleanup = () => {
 };
 const mock = path.join(fixtures, "mocks.tsx");
 const actions = new Set(
-  ["src/features/foundation/actions", "src/features/auth/actions"].map((file) =>
-    path.join(root, file),
-  ),
+  [
+    "src/features/foundation/actions",
+    "src/features/auth/actions",
+    "src/features/captures/actions",
+  ].map((file) => path.join(root, file)),
 );
 const compiler = webpack({
   mode: "development",
@@ -64,7 +66,14 @@ const compiler = webpack({
             options: {
               modules: {
                 exportLocalsConvention: "asIs",
-                getLocalIdent: (_context, _ident, name) => "v3preview_" + name,
+                // Preserve module isolation in the fixture bundle as in Next.
+                getLocalIdent: (context, _ident, name) =>
+                  "v3preview_" +
+                  path
+                    .basename(context.resourcePath)
+                    .replace(/[^a-zA-Z0-9]/g, "_") +
+                  "_" +
+                  name,
               },
               esModule: true,
               import: false,
