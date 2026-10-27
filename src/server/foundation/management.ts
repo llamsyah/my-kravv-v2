@@ -12,6 +12,8 @@ import {
   directoryPageSize,
   directoryQuery,
   themeSchema,
+  directorySortSchema,
+  type DirectorySort,
 } from "../../features/v3-workspace/management-contract.ts";
 
 const metadataFields = "id,user_id,name,ticker,exchange,sector,short_note";
@@ -48,6 +50,7 @@ export async function loadCompanyDirectory(
   query: unknown,
   page: unknown,
   ready: boolean,
+  sort?: DirectorySort,
 ) {
   const owner = await verifiedOwner(client);
   const q = directoryQuery.safeParse(query),
@@ -55,7 +58,38 @@ export async function loadCompanyDirectory(
   if (!q.success || !p.success)
     throw new FoundationError("Pencarian perusahaan tidak valid.");
   let result;
-  if (ready) {
+  if (sort !== undefined) {
+    if (!directorySortSchema.safeParse(sort).success)
+      throw new FoundationError();
+    // Sort globally BEFORE range/limit. Home and workspace pickers retain the
+    // original RPC path. These columns already have authenticated SELECT grants.
+    const ordering = {
+      updated: ["updated_at", false],
+      created: ["created_at", true],
+      name: ["name", true],
+    } as const;
+    const [column, ascending] = ordering[sort];
+    let request = client
+      .from("companies")
+      .select((ready ? metadataFields : basicFields) + ",created_at,updated_at")
+      .eq("user_id", owner)
+      .order(column, { ascending })
+      .order("id", { ascending: true });
+    if (q.data) {
+      // Literal substring, not user-supplied regex. Quote PostgREST reserved
+      // characters separately; unlike ILIKE, IMATCH does not alias * to %.
+      const literal = q.data.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const value =
+        '"' + literal.replace(/\\/g, "\\\\").replace(/"/g, '\\"') + '"';
+      request = ready
+        ? request.or(`name.imatch.${value},ticker.imatch.${value}`)
+        : request.filter("name", "imatch", literal);
+    }
+    result = await request.range(
+      p.data * directoryPageSize,
+      p.data * directoryPageSize + directoryPageSize,
+    );
+  } else if (ready) {
     // Parameters stay separate from SQL/filter syntax. The invoker RPC preserves RLS.
     result = await client.rpc("v3_company_directory", {
       p_query: q.data,
@@ -84,7 +118,18 @@ export async function loadCompanyDirectory(
     result.data.length > directoryPageSize + 1
   )
     throw new FoundationError();
-  const items = result.data.map((value) => row(value, owner, ready));
+  const items = result.data.map((value) => {
+    const item = row(value, owner, ready);
+    if (sort !== undefined) {
+      const dates = workspaceCompanySchema
+        .pick({ created_at: true, updated_at: true })
+        .required()
+        .safeParse(value);
+      if (!dates.success) throw new FoundationError();
+      return { ...item, ...dates.data };
+    }
+    return item;
+  });
   if (new Set(items.map((item) => item.id)).size !== items.length)
     throw new FoundationError();
   return {

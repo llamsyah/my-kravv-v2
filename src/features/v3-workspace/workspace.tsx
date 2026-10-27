@@ -13,7 +13,7 @@ import { Icon } from "../../components/ui/icon";
 import { LogoutForm } from "../auth/logout-form";
 import { CompanyEditor } from "./company-editor";
 import { CompanySidebar } from "./company-sidebar";
-import { CompanySearch, CompanyPagination } from "./directory-controls";
+import { CompanyDirectory } from "./company-directory";
 import {
   directoryHref,
   directoryQuery,
@@ -32,8 +32,6 @@ import {
   subscribeSidebarPreference,
 } from "./sidebar-preference";
 import {
-  companyInitials,
-  findWorkspaceCompanies,
   selectedWorkspaceCompany,
   workspaceHref,
   type WorkspaceCompany,
@@ -145,7 +143,6 @@ export function V3Workspace({
   }, [sidebar]);
   const [context, setContext] = useState(false);
   const contextControl = useRef<HTMLButtonElement>(null);
-  const [query, setQuery] = useState("");
   const company =
     selectedCompany === undefined
       ? selectedWorkspaceCompany(companies, location)
@@ -159,9 +156,6 @@ export function V3Workspace({
   }, [ownerId]);
   const home = location.view === "home",
     directory = location.view === "companies";
-  const filtered = directoryState
-    ? companies
-    : findWorkspaceCompanies(companies, query);
   const title = home
     ? "Ruang berpikirmu,"
     : research
@@ -291,6 +285,7 @@ export function V3Workspace({
         className={styles.canvas}
         data-workspace={workspace}
         data-home={home}
+        data-directory={directory}
       >
         <div
           className={styles.layout}
@@ -315,7 +310,7 @@ export function V3Workspace({
                 {themeError}
               </p>
             )}
-            {!home && (
+            {!home && !directory && (
               <>
                 <div className={styles.breadcrumb}>
                   <div className={styles.workspaceTrail}>
@@ -405,6 +400,13 @@ export function V3Workspace({
                 companiesFailed={failed}
                 captureState={captureState}
                 researchState={researchState}
+              />
+            ) : directory ? (
+              <CompanyDirectory
+                key={ownerId ?? "unavailable"}
+                companies={companies}
+                state={directoryState}
+                failed={failed}
               />
             ) : research ? (
               <ResearchWorkspace
@@ -551,190 +553,7 @@ export function V3Workspace({
                   </div>
                 </section>
               </>
-            ) : (
-              <div className={styles.dashboard} data-home={home}>
-                <section
-                  className={styles.companySection}
-                  data-dashboard-module={home ? "companies" : undefined}
-                  aria-labelledby="company-list-title"
-                >
-                  <div className={styles.sectionHeading}>
-                    <div>
-                      <h2 id="company-list-title">
-                        Perusahaanmu{" "}
-                        <span className={styles.count}>
-                          {companies.length}
-                          {directoryState?.hasNext ? "+" : ""}
-                        </span>
-                      </h2>
-                    </div>
-                    {home && createLink}
-                  </div>
-                  <div className={styles.directoryTools}>
-                    {directoryState ? (
-                      <CompanySearch
-                        state={directoryState}
-                        view={home ? "home" : "companies"}
-                        label={
-                          metadataReady
-                            ? "Cari nama atau ticker"
-                            : "Cari nama perusahaan"
-                        }
-                      />
-                    ) : (
-                      <div className={styles.search}>
-                        <Icon name="search" />
-                        <label className="sr-only" htmlFor="company-find">
-                          Cari nama perusahaan
-                        </label>
-                        <input
-                          id="company-find"
-                          type="search"
-                          value={query}
-                          onChange={(e) => setQuery(e.target.value)}
-                          maxLength={200}
-                          placeholder="Cari nama perusahaan…"
-                        />
-                        {query && (
-                          <button
-                            onClick={() => setQuery("")}
-                            aria-label="Hapus pencarian"
-                          >
-                            ×
-                          </button>
-                        )}
-                      </div>
-                    )}
-                    <span className={styles.meta} role="status">
-                      {directoryState
-                        ? `${companies.length} perusahaan di halaman ini`
-                        : `${filtered.length} dari ${companies.length} dimuat`}
-                    </span>
-                    {home && (
-                      <Link
-                        className={styles.textLink}
-                        href={directoryHref(
-                          "companies",
-                          directoryState?.query ?? "",
-                          0,
-                        )}
-                      >
-                        Lihat direktori <Icon name="arrowRight" />
-                      </Link>
-                    )}
-                  </div>
-                  {!directoryState && companies.length >= 100 && (
-                    <p className={styles.notice}>
-                      Menampilkan hingga 100 perusahaan pertama. Pencarian
-                      terbatas pada daftar yang dimuat.
-                    </p>
-                  )}
-                  {!companies.length &&
-                  !directoryState?.query &&
-                  !directoryState?.page ? (
-                    <State title="Mulai dari satu perusahaan.">
-                      <p>Cukup sebuah nama. Informasi lainnya bisa menyusul.</p>
-                      {!home && (
-                        <Link
-                          className={styles.primary}
-                          href={workspaceHref("new")}
-                        >
-                          Tambah perusahaan pertama
-                        </Link>
-                      )}
-                    </State>
-                  ) : !filtered.length ? (
-                    <State title="Tidak ada nama yang cocok.">
-                      <p>Coba nama lain atau hapus pencarian.</p>
-                    </State>
-                  ) : (
-                    <ul
-                      className={home ? styles.companyGrid : styles.directory}
-                    >
-                      {(home ? filtered.slice(0, 6) : filtered).map(
-                        (item, index) => (
-                          <li key={item.id}>
-                            {home ? (
-                              <Link
-                                className={styles.companyTile}
-                                href={workspaceHref("company", item.id)}
-                                aria-label={"Buka ruang " + item.name}
-                              >
-                                <div className={styles.tileIdentity}>
-                                  <h3>{item.name}</h3>
-                                  <span className={styles.meta}>
-                                    {[item.ticker, item.exchange]
-                                      .filter(Boolean)
-                                      .join(" · ") || "Overview perusahaan"}
-                                  </span>
-                                </div>
-                                <Icon name="arrowRight" />
-                              </Link>
-                            ) : (
-                              <>
-                                <span
-                                  className={styles.rowNumber}
-                                  aria-hidden="true"
-                                >
-                                  {String(index + 1).padStart(2, "0")}
-                                </span>
-                                <span
-                                  className={styles.monogram}
-                                  aria-hidden="true"
-                                >
-                                  {companyInitials(item.name)}
-                                </span>
-                                <div>
-                                  <Link
-                                    className={styles.companyName}
-                                    href={workspaceHref("company", item.id)}
-                                  >
-                                    {item.name}
-                                  </Link>
-                                  <p>
-                                    {[item.ticker, item.exchange, item.sector]
-                                      .filter(Boolean)
-                                      .join(" · ") || "Workspace pribadi"}
-                                  </p>
-                                </div>
-                                <Link
-                                  className={styles.rowAction}
-                                  href={workspaceHref("company", item.id)}
-                                  aria-label={"Buka ruang " + item.name}
-                                >
-                                  Buka ruang
-                                  <Icon name="arrowRight" />
-                                </Link>
-                              </>
-                            )}
-                          </li>
-                        ),
-                      )}
-                    </ul>
-                  )}
-                  {directory && directoryState && (
-                    <CompanyPagination
-                      state={directoryState}
-                      view="companies"
-                      label="Halaman direktori perusahaan"
-                    />
-                  )}
-                  {home && (filtered.length > 6 || directoryState?.hasNext) && (
-                    <Link
-                      className={styles.moreLink}
-                      href={directoryHref(
-                        "companies",
-                        directoryState?.query ?? "",
-                        0,
-                      )}
-                    >
-                      Lihat seluruh perusahaan di direktori
-                      <Icon name="arrowRight" />
-                    </Link>
-                  )}
-                </section>
-              </div>
-            )}
+            ) : null}
           </main>
           {workspace && (
             <aside

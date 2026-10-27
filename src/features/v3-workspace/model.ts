@@ -9,6 +9,8 @@ export const workspaceCompanySchema = z.object({
   exchange: z.string().max(80).nullable().optional(),
   sector: z.string().max(120).nullable().optional(),
   short_note: z.string().max(2000).nullable().optional(),
+  created_at: z.iso.datetime({ offset: true }).optional(),
+  updated_at: z.iso.datetime({ offset: true }).optional(),
 });
 export type WorkspaceCompany = z.infer<typeof workspaceCompanySchema>;
 export type WorkspaceView =

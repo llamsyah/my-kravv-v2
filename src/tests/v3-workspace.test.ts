@@ -83,7 +83,8 @@ test("Light-first V3 directory renders real navigation and an honest empty state
   assert.ok(html.includes('aria-label="Navigasi utama"'));
   assert.ok(html.includes("Mulai dari satu perusahaan."));
   assert.ok(html.includes("Tambah perusahaan pertama"));
-  assert.ok(!html.includes("Diarsipkan"));
+  assert.ok(html.includes("Arsip belum tersedia"));
+  assert.ok(!html.includes(">Aktif<"));
   assert.ok(!html.includes("Hapus perusahaan"));
 });
 test("Load failure and inaccessible-company states never render empty success or company data", () => {
@@ -517,4 +518,69 @@ test("Isolated interactive preview compiles actual UI with mocked boundaries and
   );
   assert.notEqual(combined.status, 0);
   assert.ok(!combined.stdout.includes("Synthetic UI preview:"));
+});
+
+test("Reference directory defaults to horizontal rows with truthful fields, distinct real actions and no invented archive/metrics", () => {
+  const html = render({
+    companies: [
+      {
+        ...company,
+        ticker: "SYN",
+        sector: "Contoh",
+        exchange: "Sintetis",
+        short_note: "Catatan pribadi & bukan fakta pasar",
+        updated_at: "2026-10-27T06:00:00Z",
+      },
+    ],
+    location: { view: "companies" },
+    directory: {
+      query: "SYN",
+      page: 1,
+      hasNext: true,
+      metadataReady: true,
+      sort: "name",
+    },
+  });
+  for (const text of [
+    'data-directory="true"',
+    'data-view="list"',
+    "Urutkan perusahaan",
+    'value="name" selected=""',
+    "Catatan pribadi",
+    "Tersimpan",
+    "27 Okt 2026",
+    'dateTime="2026-10-27T06:00:00Z"',
+    "Buka workspace",
+    "Arsip belum tersedia",
+    "Tampilan grid",
+    "sort=name",
+  ])
+    assert.ok(html.includes(text), text);
+  assert.ok(
+    html.includes("/foundation?view=company&amp;company=" + company.id),
+  );
+  assert.ok(html.includes("/foundation?view=edit&amp;company=" + company.id));
+  assert.ok(!html.includes(">Aktif<"));
+  assert.ok(!html.includes("Thought</span>"));
+  assert.ok(!html.includes("<img"));
+  const noResults = render({
+    companies: [],
+    location: { view: "companies" },
+    directory: {
+      query: "missing",
+      page: 0,
+      hasNext: false,
+      metadataReady: true,
+      sort: "updated",
+    },
+  });
+  assert.ok(noResults.includes("Tidak ada perusahaan yang cocok."));
+  assert.ok(noResults.includes("Hapus pencarian"));
+  const missing = render({
+    companies: [company],
+    location: { view: "companies" },
+  });
+  assert.ok(missing.includes("Belum ada catatan"));
+  assert.ok(missing.includes("Belum tersedia"));
+  assert.ok(!missing.includes("dateTime="));
 });

@@ -1439,3 +1439,19 @@
     width: 100%;
   }
 }
+
+/* Directory shares the accepted Home frame without altering other routes. */
+.canvas[data-directory="true"] {
+  max-width: 1536px;
+  padding: 0 44px 20px;
+}
+@media (max-width: 1050px) {
+  .canvas[data-directory="true"] {
+    padding: 0 26px 20px;
+  }
+}
+@media (max-width: 720px) {
+  .canvas[data-directory="true"] {
+    padding: 0 16px 20px;
+  }
+}

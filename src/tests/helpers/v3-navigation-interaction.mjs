@@ -63,6 +63,7 @@ const imports = {
       },
     }),
   },
+  "./company-directory": { CompanyDirectory: () => null },
   "./home-dashboard": { HomeDashboard: () => null },
   "../research/workspace": { ResearchWorkspace: () => null },
   "../research/contract": { researchHref: () => "/foundation?view=research" },

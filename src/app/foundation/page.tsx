@@ -8,6 +8,7 @@ import {
 import type { WorkspaceCompany } from "@/features/v3-workspace/model";
 import {
   parseDirectorySearch,
+  parseDirectorySort,
   type Theme,
 } from "@/features/v3-workspace/management-contract";
 import { V3Workspace } from "@/features/v3-workspace/workspace";
@@ -39,6 +40,8 @@ export default async function FoundationPage({
   const location = workspaceLocation(search);
   const home = location.view === "home";
   const directory = parseDirectorySearch(home ? {} : search);
+  const directorySort =
+    location.view === "companies" ? parseDirectorySort(search.sort) : undefined;
   const research = researchLocation(search);
   const researchState: ResearchPageState = {
     ready: false,
@@ -131,6 +134,7 @@ export default async function FoundationPage({
       directory.query,
       directory.page,
       metadataReady,
+      directorySort,
     );
     companies = loaded.items;
     hasNext = loaded.hasNext;
@@ -160,7 +164,7 @@ export default async function FoundationPage({
       companies={companies}
       selectedCompany={selectedCompany ?? null}
       location={location}
-      directory={{ ...directory, hasNext, metadataReady }}
+      directory={{ ...directory, hasNext, metadataReady, sort: directorySort }}
       initialTheme={initialTheme}
       failed={failed}
     />

@@ -4,6 +4,7 @@ import { workspaceLocation } from "../../../src/features/v3-workspace/model";
 import Loading from "../../../src/app/foundation/loading";
 import {
   parseDirectorySearch,
+  parseDirectorySort,
   directoryPageSize,
   themeSchema,
 } from "../../../src/features/v3-workspace/management-contract";
@@ -38,6 +39,8 @@ if (search.state === "long-name")
 const metadataReady = search.state !== "legacy";
 const enriched = companies.map((company, index) => ({
   ...company,
+  created_at: `2026-10-${String(20 + index).padStart(2, "0")}T04:00:00.000Z`,
+  updated_at: `2026-10-${String(24 + index).padStart(2, "0")}T06:30:00.000Z`,
   ticker: "SIM" + (index + 1),
   exchange: "Bursa sintetis",
   sector: "Sektor contoh",
@@ -55,7 +58,23 @@ const all =
       ? enriched
       : companies;
 const directory = parseDirectorySearch(search);
+const sort =
+  search.view === "companies" ? parseDirectorySort(search.sort) : undefined;
 const matching = findWorkspaceCompanies(all, directory.query);
+if (sort)
+  matching.sort((a, b) => {
+    const key =
+      sort === "name"
+        ? "name"
+        : sort === "created"
+          ? "created_at"
+          : "updated_at";
+    const value = String(a[key as keyof typeof a] ?? "").localeCompare(
+      String(b[key as keyof typeof b] ?? ""),
+      "id",
+    );
+    return (sort === "updated" ? -value : value) || a.id.localeCompare(b.id);
+  });
 const items = matching.slice(
   directory.page * directoryPageSize,
   (directory.page + 1) * directoryPageSize,
@@ -79,6 +98,7 @@ createRoot(document.getElementById("preview")!).render(
       }
       directory={{
         ...directory,
+        sort,
         metadataReady,
         hasNext: matching.length > (directory.page + 1) * directoryPageSize,
       }}

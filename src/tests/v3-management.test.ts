@@ -2,12 +2,13 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import { createHash } from "node:crypto";
 import { spawnSync } from "node:child_process";
-import type { SupabaseClient } from "@supabase/supabase-js";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { test } from "node:test";
 import {
   companyMetadataInput,
   parseDirectorySearch,
   directoryHref,
+  parseDirectorySort,
 } from "../features/v3-workspace/management-contract.ts";
 import {
   companyManagementReady,
@@ -28,6 +29,11 @@ const input = {
   short_note: "Catatan\npribadi",
 };
 const row = { id, user_id: owner, ...input };
+const datedRow = {
+  ...row,
+  created_at: "2026-10-20T04:00:00Z",
+  updated_at: "2026-10-27T06:00:00Z",
+};
 function mock(
   rows: unknown[] = [],
   contract: unknown = 1,
@@ -53,6 +59,8 @@ function mock(
         "order",
         "range",
         "ilike",
+        "or",
+        "filter",
         "insert",
         "update",
       ])
@@ -373,4 +381,114 @@ test("Verification separates catalog assertions from observed definitions and ne
       sql,
     ),
   );
+});
+
+test("Directory sorts globally before bounded paging, retains dates, and keeps legacy/Home RPC unchanged", async () => {
+  for (const [sort, field, ascending] of [
+    ["updated", "updated_at", false],
+    ["created", "created_at", true],
+    ["name", "name", true],
+  ] as const) {
+    const config = mock([{ data: [datedRow], error: null }]);
+    const result = await loadCompanyDirectory(config.client, "", 2, true, sort);
+    assert.equal(result.items[0].updated_at, datedRow.updated_at);
+    assert.deepEqual(
+      config.calls.filter((c) => c[0] === "order"),
+      [
+        ["order", field, { ascending }],
+        ["order", "id", { ascending: true }],
+      ],
+    );
+    assert.ok(
+      config.calls.findIndex((c) => c[0] === "order") <
+        config.calls.findIndex((c) => c[0] === "range"),
+    );
+    assert.deepEqual(config.calls.at(-1), ["range", 48, 72]);
+    assert.ok(
+      config.calls.some(
+        (c) => c[0] === "eq" && c[1] === "user_id" && c[2] === owner,
+      ),
+    );
+  }
+  for (const records of [
+    [{ ...datedRow, user_id: foreign }],
+    [datedRow, datedRow],
+    [row],
+    [{ ...datedRow, updated_at: "invalid" }],
+  ])
+    await assert.rejects(() =>
+      loadCompanyDirectory(
+        mock([{ data: records, error: null }]).client,
+        "",
+        0,
+        true,
+        "updated",
+      ),
+    );
+  const invalid = mock();
+  await assert.rejects(() =>
+    loadCompanyDirectory(invalid.client, "", 0, true, "user_id" as never),
+  );
+  assert.equal(invalid.calls.length, 0);
+  const legacy = mock([{ data: [datedRow], error: null }]);
+  await loadCompanyDirectory(legacy.client, "a*", 0, false, "name");
+  assert.deepEqual(
+    legacy.calls.find((c) => c[0] === "filter"),
+    ["filter", "name", "imatch", "a\\*"],
+  );
+  assert.equal(parseDirectorySort(["name", "updated"]), "updated");
+  assert.equal(parseDirectorySort("foreign"), "updated");
+  assert.equal(
+    directoryHref("companies", "ABC", 2, undefined, "name"),
+    "/foundation?view=companies&q=ABC&page=2&sort=name",
+  );
+});
+
+test("Directory SDK serialization quotes filter syntax and escapes regex while keeping ticker/name literal search", async () => {
+  for (const query of [
+    'a*%_\\"),user_id.eq.foreign',
+    "(a|b)+[x].$^?{3}",
+    "日本, A: B",
+  ]) {
+    const urls: URL[] = [];
+    const client = createClient(
+      "https://offline.invalid",
+      "offline-publishable",
+      {
+        auth: { persistSession: false, autoRefreshToken: false },
+        global: {
+          fetch: async (url) => {
+            urls.push(new URL(String(url)));
+            return new Response(JSON.stringify([datedRow]), {
+              status: 200,
+              headers: { "Content-Type": "application/json" },
+            });
+          },
+        },
+      },
+    );
+    client.auth.getUser = (async () => ({
+      data: { user: { id: owner } },
+      error: null,
+    })) as typeof client.auth.getUser;
+    await loadCompanyDirectory(client, query, 1, true, "updated");
+    assert.equal(urls.length, 1);
+    const params = urls[0].searchParams;
+    assert.equal(params.get("user_id"), "eq." + owner);
+    assert.equal(params.get("order"), "updated_at.desc,id.asc");
+    assert.equal(params.get("offset"), "24");
+    assert.equal(params.get("limit"), "25");
+    const expression = params.get("or")!;
+    const matched =
+      /^\(name\.imatch\."((?:\\.|[^"\\])*)",ticker\.imatch\."((?:\\.|[^"\\])*)"\)$/.exec(
+        expression,
+      );
+    assert.ok(matched, "Only two fixed, quoted filter terms can be serialized");
+    assert.equal(matched[1], matched[2]);
+    const literal = new RegExp(matched[1].replace(/\\([\\"])/g, "$1"), "i");
+    assert.ok(literal.test("prefix " + query + " suffix"));
+    assert.ok(!literal.test("different unrelated company"));
+    assert.ok(!literal.test("aanythingZ"));
+    assert.equal([...params.keys()].filter((k) => k === "user_id").length, 1);
+  }
 });

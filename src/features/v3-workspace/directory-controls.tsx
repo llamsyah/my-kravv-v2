@@ -31,7 +31,9 @@ export function CompanySearch({
           new FormData(event.currentTarget).get("q"),
         );
         if (parsed.success)
-          router.push(directoryHref(view, parsed.data, 0, companyId));
+          router.push(
+            directoryHref(view, parsed.data, 0, companyId, state.sort),
+          );
       }}
     >
       <input type="hidden" name="view" value={view} />
@@ -53,7 +55,7 @@ export function CompanySearch({
       </button>
       {state.query && (
         <Link
-          href={directoryHref(view, "", 0, companyId)}
+          href={directoryHref(view, "", 0, companyId, state.sort)}
           className={styles.textLink}
         >
           Hapus pencarian
@@ -79,7 +81,13 @@ export function CompanyPagination({
       {state.page > 0 && (
         <Link
           className={styles.secondary}
-          href={directoryHref(view, state.query, state.page - 1, companyId)}
+          href={directoryHref(
+            view,
+            state.query,
+            state.page - 1,
+            companyId,
+            state.sort,
+          )}
         >
           Sebelumnya
         </Link>
@@ -88,7 +96,13 @@ export function CompanyPagination({
       {state.hasNext && state.page < 10000 && (
         <Link
           className={styles.secondary}
-          href={directoryHref(view, state.query, state.page + 1, companyId)}
+          href={directoryHref(
+            view,
+            state.query,
+            state.page + 1,
+            companyId,
+            state.sort,
+          )}
         >
           Berikutnya
         </Link>

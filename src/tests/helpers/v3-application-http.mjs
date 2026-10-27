@@ -213,6 +213,7 @@ function fakeSdk(_url, _key, options) {
         input,
         range,
         limit,
+        nameOrTicker,
         single = false;
       const execute = () => {
         journal.push({
@@ -246,6 +247,11 @@ function fakeSdk(_url, _key, options) {
               Array.isArray(value) ? value.includes(r[key]) : r[key] === value,
             ),
         );
+        if (nameOrTicker)
+          found = found.filter(
+            (r) =>
+              nameOrTicker.test(r.name) || nameOrTicker.test(r.ticker ?? ""),
+          );
         if (mode === "insert") {
           if (input.user_id !== user().id)
             return { data: null, error: { message: "PRIVATE RLS DETAIL" } };
@@ -292,6 +298,19 @@ function fakeSdk(_url, _key, options) {
         },
         in(k, values) {
           filters.push([k, values]);
+          return this;
+        },
+        or(value) {
+          // Only the directory's fixed two-column, quoted literal-regex shape.
+          const match =
+            /^name\.imatch\."((?:\\.|[^"\\])*)",ticker\.imatch\."((?:\\.|[^"\\])*)"$/.exec(
+              value,
+            );
+          assert.ok(
+            match && match[1] === match[2],
+            "Unexpected synthetic search grammar",
+          );
+          nameOrTicker = new RegExp(match[1].replace(/\\([\\"])/g, "$1"), "i");
           return this;
         },
         order(k, options = {}) {
@@ -639,14 +658,16 @@ try {
       .at(-1)
       .invalidations.some((v) => v[0] === "/" && v[1] === "layout"),
   );
-  r = await request("/foundation?view=companies", { actor: "A" });
+  r = await request("/foundation?view=companies&sort=created", { actor: "A" });
   check(r.text.includes("A-PRIVATE-01") && !r.text.includes("B-PRIVATE"));
   check(!r.text.includes("A-PRIVATE-25"), "24 visible rows");
   check(r.text.includes("page=1"));
   check(r.text.includes('data-theme="dark"'));
   const keyA = captures.at(-2).key;
   check(keyA === users.A.id, "Workspace keyed to verified identity");
-  r = await request("/foundation?view=companies&page=1", { actor: "A" });
+  r = await request("/foundation?view=companies&page=1&sort=created", {
+    actor: "A",
+  });
   check(r.text.includes("A-PRIVATE-25") && !r.text.includes("A-PRIVATE-01"));
   r = await request(
     `/foundation?view=company&company=${id(1)}&q=A-PRIVATE-26&page=0`,
@@ -661,7 +682,11 @@ try {
   r = await request("/foundation?view=companies&q=x&q=y&page=-1", {
     actor: "A",
   });
-  check(r.text.includes("A-PRIVATE-01"), "Ambiguous search falls back safely");
+  check(
+    r.text.includes("A-PRIVATE-26") && !r.text.includes("A-PRIVATE-01"),
+    "Ambiguous search falls back to globally updated order safely",
+  );
+  check(r.text.includes("sort=updated"), "Page links preserve updated sorting");
   r = await request(`/foundation?view=company&company=${id(1)}`, {
     actor: "B",
   });

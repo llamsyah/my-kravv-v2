@@ -28,11 +28,18 @@ export type Theme = z.infer<typeof themeSchema>;
 export const directoryPageSize = 24;
 export const directoryQuery = z.string().trim().max(200);
 export const directoryPage = z.number().int().min(0).max(10000);
+export const directorySortSchema = z.enum(["updated", "created", "name"]);
+export type DirectorySort = z.infer<typeof directorySortSchema>;
+export function parseDirectorySort(value: unknown): DirectorySort {
+  const parsed = directorySortSchema.safeParse(value);
+  return parsed.success ? parsed.data : "updated";
+}
 export type DirectoryState = {
   query: string;
   page: number;
   hasNext: boolean;
   metadataReady: boolean;
+  sort?: DirectorySort;
 };
 export function parseDirectorySearch(
   search: Record<string, string | string[] | undefined>,
@@ -54,11 +61,13 @@ export function directoryHref(
   query: string,
   page: number,
   companyId?: string,
+  sort?: DirectorySort,
 ) {
   const params = new URLSearchParams({ view });
   if (companyId && z.uuid().safeParse(companyId).success)
     params.set("company", companyId);
   if (query) params.set("q", query);
   if (page) params.set("page", String(page));
+  if (sort) params.set("sort", directorySortSchema.parse(sort));
   return "/foundation?" + params;
 }
