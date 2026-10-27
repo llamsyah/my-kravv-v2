@@ -56,6 +56,14 @@ const hooks = {
 };
 const Link = () => null;
 const imports = {
+  "next/navigation": {
+    useRouter: () => ({
+      push(href) {
+        route = href;
+      },
+    }),
+  },
+  "./home-dashboard": { HomeDashboard: () => null },
   "../research/workspace": { ResearchWorkspace: () => null },
   "../research/contract": { researchHref: () => "/foundation?view=research" },
   "../research/session": { clearResearchRecovery: () => true },

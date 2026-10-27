@@ -114,9 +114,9 @@ const state = {
   page: 0,
   hasNext: false,
 };
-function draw(ownerId = A, stateValue = state) {
+function draw(ownerId = A, stateValue = state, variant = "inbox", onConfirmed) {
   cursor = 0;
-  return CaptureInbox({ ownerId, state: stateValue });
+  return CaptureInbox({ ownerId, state: stateValue, variant, onConfirmed });
 }
 function nodes(value) {
   if (Array.isArray(value)) return value.flatMap(nodes);
@@ -184,4 +184,78 @@ tree = draw(B, { ...state, ready: false });
 const count = sent.length;
 await form(tree).props.onSubmit(event);
 assert.equal(sent.length, count);
+// Home shares the exact action/validation/replay implementation, but stays Home
+// and exposes only a confirmed server record to the recent-Captures projection.
+store = [];
+currentOwner = A;
+fail = true;
+const confirmed = [];
+const onConfirmed = (capture) => confirmed.push(capture);
+tree = draw(A, state, "home", onConfirmed);
+text(tree).props.onChange({ target: { value: raw } });
+tree = draw(A, state, "home", onConfirmed);
+await form(tree).props.onSubmit(event);
+assert.equal(confirmed.length, 0);
+tree = draw(A, state, "home", onConfirmed);
+assert.equal(text(tree).props.value, raw);
+const homeAttempt = sent.at(-1);
+fail = false;
+await form(tree).props.onSubmit(event);
+assert.deepEqual(sent.at(-1), homeAttempt);
+assert.equal(confirmed.length, 1);
+assert.equal(confirmed[0].raw_text, raw);
+assert.equal(confirmed[0].user_id, A);
+assert.equal(confirmed[0].company_name, null);
+assert.deepEqual(
+  routes,
+  ["/foundation?view=captures"],
+  "Home confirmation never navigates away",
+);
+tree = draw(A, state, "home", onConfirmed);
+assert.equal(text(tree).props.value, "");
+const { HomeDashboard } = load("src/features/v3-workspace/home-dashboard.tsx", {
+  react: hooks,
+  "react/jsx-runtime": jsx,
+  "next/link": { __esModule: true, default: () => null },
+  "../../components/ui/icon": { Icon: () => null },
+  "../captures/inbox": { CaptureInbox },
+  "../captures/contract": contract,
+  "../research/contract": researchContract,
+  "./model": model,
+  "./home-dashboard.module.css": {
+    __esModule: true,
+    default: new Proxy({}, { get: (_, k) => k }),
+  },
+});
+store = [];
+function drawHome(owner = A) {
+  cursor = 0;
+  return HomeDashboard({
+    owner,
+    companies: [],
+    companiesFailed: false,
+    captureState: state,
+  });
+}
+let homeTree = drawHome();
+assert.equal(
+  nodes(homeTree).some((n) => n.props?.children === raw),
+  false,
+  "No optimistic Capture before confirmation",
+);
+const homeComposer = one(homeTree, (n) => n.type === CaptureInbox);
+homeComposer.props.onConfirmed(confirmed[0]);
+homeTree = drawHome();
+assert.equal(
+  nodes(homeTree).some((n) => n.props?.children === raw),
+  true,
+  "Confirmed Capture immediately appears in recent list",
+);
+store = [];
+homeTree = drawHome(B);
+assert.equal(
+  nodes(homeTree).some((n) => n.props?.children === raw),
+  false,
+  "New account component has no previous capture projection",
+);
 console.log("CAPTURE_INTERACTIONS_PASS");

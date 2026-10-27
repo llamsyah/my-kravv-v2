@@ -254,7 +254,7 @@ test("Server-paged switcher preserves selected company outside the result page a
   assert.ok(!html.includes("Ruang ini tidak dapat dibuka."));
 });
 
-test("Home integrates creation and compact owned-company shortcuts without fabricated dashboard modules", () => {
+test("Reference Home restores independent composer/research/inbox/review/company sections with compact primary navigation", () => {
   const companies = Array.from({ length: 8 }, (_, index) => ({
     ...company,
     id: "10000000-0000-4000-8000-" + String(index + 1).padStart(12, "0"),
@@ -263,13 +263,26 @@ test("Home integrates creation and compact owned-company shortcuts without fabri
   const html = render({ companies, location: { view: "home" } });
   assert.ok(html.includes("Ruang berpikirmu,"));
   assert.ok(html.includes("lebih terarah."));
-  assert.equal((html.match(/aria-label="Buka ruang /g) ?? []).length, 6);
-  assert.ok(html.includes("Lihat seluruh perusahaan di direktori"));
+  assert.equal((html.match(/aria-label="Buka ruang /g) ?? []).length, 4);
+  assert.ok(html.includes("Lihat semua perusahaan"));
   const section = html.match(
     /<section[^>]*data-dashboard-module="companies"[\s\S]*?<\/section>/,
   )?.[0];
   assert.ok(section?.includes("Tambah perusahaan"));
-  assert.ok(section?.includes("Cari nama perusahaan"));
+  assert.ok(html.includes('role="search"'));
+  for (const title of [
+    "Catat cepat",
+    "Lanjutkan dari terakhir",
+    "Penampungan terbaru",
+    "Perlu ditinjau",
+    "Perusahaanmu",
+  ])
+    assert.ok(html.includes(title));
+  const nav =
+    html.match(/<nav[^>]*aria-label="Navigasi utama"[\s\S]*?<\/nav>/)?.[0] ??
+    "";
+  assert.equal((nav.match(/<a /g) ?? []).length, 2);
+  assert.ok(!nav.includes("Quick Capture") && !nav.includes("Ruang Riset"));
   assert.ok(!html.includes("Ada perusahaan yang ingin kamu pahami?"));
   assert.ok(!html.includes("homeAside"));
   assert.ok(html.includes("Quick Capture"));
@@ -277,6 +290,94 @@ test("Home integrates creation and compact owned-company shortcuts without fabri
   assert.ok(!html.includes("Inbox"));
   assert.ok(!html.includes("AI review"));
   assert.ok(!/<img[\s>]/.test(html));
+});
+
+test("Home uses real recent draft/Capture fields, escaped previews, independent writing links and truthful review state", () => {
+  const capture = {
+    id: "30000000-0000-4000-8000-000000000001",
+    request_id: "40000000-0000-4000-8000-000000000001",
+    user_id: company.user_id,
+    raw_text: "<script>original source</script>",
+    company_id: company.id,
+    company_name: company.name,
+    created_at: "2026-10-27T04:00:00.000Z",
+  };
+  const draft = {
+    id: "50000000-0000-4000-8000-000000000001",
+    user_id: company.user_id,
+    title: "Pertanyaan asli",
+    body: "<img src=x>Hipotesis",
+    company_id: company.id,
+    company_name: company.name,
+    mode: "blank",
+    revision: 3,
+    source_capture_id: null,
+    created_at: capture.created_at,
+    updated_at: capture.created_at,
+  };
+  const props = {
+    companies: [company],
+    ownerId: company.user_id,
+    location: { view: "home" },
+    captureState: {
+      ready: true,
+      failed: false,
+      page: 0,
+      hasNext: false,
+      items: [capture],
+    },
+    researchState: {
+      ready: true,
+      failed: false,
+      page: 0,
+      hasNext: false,
+      items: [draft],
+      selected: null,
+      history: [],
+      historyHasNext: false,
+      source: null,
+      unavailable: false,
+    },
+  };
+  const html = render(props);
+  assert.ok(
+    html.includes("Lanjutkan menulis") && html.includes("draft=" + draft.id),
+  );
+  assert.ok(
+    html.includes("Pertanyaan asli") && html.includes("Draf tersimpan · r3"),
+  );
+  assert.ok(html.includes("&lt;script&gt;original source&lt;/script&gt;"));
+  assert.ok(html.includes("&lt;img src=x&gt;Hipotesis"));
+  assert.ok(!html.includes("<img src=x>"));
+  assert.ok(html.includes("capture=" + capture.id));
+  assert.ok(html.includes("Status tinjauan belum tersedia."));
+  assert.ok(!html.includes("usulan baru"));
+  const empty = render({
+    ...props,
+    companies: [],
+    researchState: { ...props.researchState, items: [] },
+    captureState: { ...props.captureState, items: [] },
+  });
+  assert.ok(
+    empty.includes("Buat draf") &&
+      empty.includes("Tidak perlu membuat Capture"),
+  );
+  assert.ok(empty.includes("Catatan pertamamu akan muncul"));
+  const failed = render({
+    ...props,
+    companies: [],
+    failed: true,
+    researchState: { ...props.researchState, failed: true, items: [] },
+    captureState: { ...props.captureState, failed: true, items: [] },
+  });
+  assert.ok(
+    failed.includes("Riset belum dapat dimuat") &&
+      failed.includes("Catatan belum dapat dimuat") &&
+      failed.includes("Perusahaan belum dapat dimuat"),
+  );
+  assert.ok(
+    !failed.includes("Pertanyaan asli") && !failed.includes("original source"),
+  );
 });
 
 test("Workspace integrates sidebar controls and keeps optional context and future destinations disclosed", () => {

@@ -205,3 +205,204 @@
     flex-direction: column;
   }
 }
+
+/* The same guarded composer, presented inline on the reference Home. */
+.sectionHeading > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.sectionHeading > div > span {
+  color: var(--v-green);
+  background: var(--v-selected);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+}
+.sectionHeading > a {
+  color: var(--v-green);
+  background: var(--v-selected);
+  border-radius: 10px;
+  padding: 9px 14px;
+  font-size: 11px;
+  white-space: nowrap;
+}
+.inbox[data-home-composer] {
+  max-width: none;
+}
+.inbox[data-home-composer] .composer {
+  padding: 22px;
+  border-radius: 18px;
+}
+.inbox[data-home-composer] .sectionHeading {
+  margin: 0 0 6px;
+}
+.inbox[data-home-composer] .sectionHeading h2 {
+  font-size: 20px;
+}
+.inbox[data-home-composer] .composer > p {
+  font-size: 12px;
+  margin-bottom: 18px;
+  padding-left: 4px;
+}
+.inbox[data-home-composer] form {
+  background: color-mix(in srgb, var(--v-canvas) 65%, var(--v-panel));
+  border: 1px solid var(--v-line);
+  border-radius: 14px;
+  padding: 16px 20px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: end;
+  gap: 8px 14px;
+}
+.inbox[data-home-composer] textarea {
+  grid-column: 1/-1;
+  border: 0;
+  background: transparent;
+  min-height: 58px;
+  padding: 0 2px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.inbox[data-home-composer] .hint {
+  grid-column: 1;
+  grid-row: 3;
+  margin: 0;
+  font-size: 10px;
+  align-self: center;
+}
+.inbox[data-home-composer] .hint > span:first-child {
+  display: none;
+}
+.inbox[data-home-composer] .picker {
+  position: relative;
+  grid-column: 2;
+  grid-row: 3;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  min-width: 220px;
+}
+.inbox[data-home-composer] .picker > summary {
+  padding: 10px 14px;
+  min-height: 42px;
+  background: var(--v-panel);
+  border: 1px solid var(--v-line);
+  border-radius: 10px;
+  font-size: 12px;
+}
+.inbox[data-home-composer] .pickerBody {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  width: min(370px, 80vw);
+  z-index: 15;
+  background: var(--v-panel);
+  border: 1px solid var(--v-line);
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 12px 30px #16271a20;
+}
+.inbox[data-home-composer] .footer {
+  grid-column: 3;
+  grid-row: 3;
+  margin: 0;
+  position: relative;
+}
+.inbox[data-home-composer] .footer > span:not(:empty) {
+  position: absolute;
+  right: 0;
+  top: 50px;
+  white-space: nowrap;
+  color: var(--v-green);
+  font-size: 10px;
+}
+.inbox[data-home-composer] .save {
+  min-width: 170px;
+  border-radius: 10px;
+  font-size: 12px;
+  box-shadow: 0 5px 10px #244c2d12;
+}
+.inbox[data-home-composer] .error {
+  grid-column: 1/-1;
+  grid-row: 4;
+  margin-bottom: 0;
+}
+@media (max-width: 720px) {
+  .inbox[data-home-composer] .composer {
+    padding: 18px;
+  }
+  .inbox[data-home-composer] .sectionHeading {
+    flex-direction: row;
+    align-items: start;
+    gap: 12px;
+  }
+  .inbox[data-home-composer] .sectionHeading > div {
+    gap: 5px;
+  }
+  .inbox[data-home-composer] .sectionHeading > a {
+    font-size: 10px;
+    padding: 8px;
+  }
+  .inbox[data-home-composer] .sectionHeading h2 {
+    font-size: 18px;
+  }
+  .inbox[data-home-composer] form {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 14px;
+    gap: 12px;
+  }
+  .inbox[data-home-composer] textarea {
+    min-height: 95px;
+  }
+  .inbox[data-home-composer] .hint {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .inbox[data-home-composer] .picker {
+    grid-column: 1;
+    grid-row: 3;
+    min-width: 0;
+  }
+  .inbox[data-home-composer] .pickerBody {
+    position: static;
+    margin-top: 8px;
+    width: auto;
+  }
+  .inbox[data-home-composer] .footer {
+    grid-column: 1;
+    grid-row: 4;
+  }
+  .inbox[data-home-composer] .save {
+    width: 100%;
+  }
+  .inbox[data-home-composer] .footer > span:not(:empty) {
+    position: static;
+  }
+  .inbox[data-home-composer] .error {
+    grid-row: 5;
+  }
+}
+
+.inbox[data-home-composer] .composer {
+  padding: 20px;
+}
+.inbox[data-home-composer] .composer > p {
+  margin-bottom: 12px;
+}
+.inbox[data-home-composer] form {
+  padding-block: 12px;
+  row-gap: 6px;
+}
+.inbox[data-home-composer] textarea {
+  min-height: 42px;
+}
+@media (max-width: 720px) {
+  .inbox[data-home-composer] .composer {
+    padding: 18px;
+  }
+  .inbox[data-home-composer] textarea {
+    min-height: 95px;
+  }
+}

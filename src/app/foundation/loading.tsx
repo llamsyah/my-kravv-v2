@@ -3,7 +3,7 @@ export default function Loading() {
   return (
     <div className={styles.workspace}>
       <main className={styles.canvas} role="status" aria-live="polite">
-        <h1>Menyiapkan ruang perusahaan…</h1>
+        <h1>Menyiapkan ruang pribadi…</h1>
         <p>Memuat data akun ini.</p>
       </main>
     </div>

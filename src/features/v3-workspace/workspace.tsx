@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   useState,
   useRef,
@@ -15,6 +16,7 @@ import { CompanySidebar } from "./company-sidebar";
 import { CompanySearch, CompanyPagination } from "./directory-controls";
 import {
   directoryHref,
+  directoryQuery,
   type DirectoryState,
   type Theme,
 } from "./management-contract";
@@ -39,6 +41,7 @@ import {
 } from "./model";
 import styles from "./workspace.module.css";
 import { CaptureInbox } from "../captures/inbox";
+import { HomeDashboard } from "./home-dashboard";
 import type { CaptureInboxState } from "../captures/contract";
 import { ResearchWorkspace } from "../research/workspace";
 import { researchHref } from "../research/contract";
@@ -82,6 +85,7 @@ export function V3Workspace({
   researchState?: ResearchPageState;
   researchCompany?: string;
 }) {
+  const router = useRouter();
   const browserTheme = useSyncExternalStore(
     subscribeThemePreference,
     readThemePreference,
@@ -195,7 +199,7 @@ export function V3Workspace({
           <nav className={styles.globalNav} aria-label="Navigasi utama">
             <Link
               href={workspaceHref("home")}
-              aria-current={home ? "page" : undefined}
+              aria-current={home || captures ? "page" : undefined}
             >
               <Icon name="home" />
               Beranda
@@ -209,19 +213,37 @@ export function V3Workspace({
               <Icon name="building" />
               Perusahaan
             </Link>
-            <Link
-              href={workspaceHref("captures")}
-              aria-current={captures ? "page" : undefined}
-            >
-              <Icon name="plus" /> Quick Capture
-            </Link>
-            <Link
-              href={researchHref()}
-              aria-current={research ? "page" : undefined}
-            >
-              <Icon name="pencil" /> Ruang Riset
-            </Link>
           </nav>
+          <form
+            className={styles.headerSearch}
+            action="/foundation"
+            method="get"
+            role="search"
+            aria-label="Pencarian perusahaan"
+            onSubmit={(event) => {
+              event.preventDefault();
+              const parsed = directoryQuery.safeParse(
+                new FormData(event.currentTarget).get("q"),
+              );
+              if (parsed.success)
+                router.push(directoryHref("companies", parsed.data, 0));
+            }}
+          >
+            <input type="hidden" name="view" value="companies" />
+            <label className="sr-only" htmlFor="header-company-search">
+              Cari perusahaan
+            </label>
+            <input
+              id="header-company-search"
+              type="search"
+              name="q"
+              placeholder="Cari perusahaan atau ticker…"
+              maxLength={200}
+            />
+            <button type="submit" aria-label="Cari perusahaan">
+              <Icon name="search" />
+            </button>
+          </form>
           <div className={styles.headerTools}>
             <button
               className={styles.iconButton}
@@ -293,85 +315,98 @@ export function V3Workspace({
                 {themeError}
               </p>
             )}
-            <div className={styles.breadcrumb}>
-              <div className={styles.workspaceTrail}>
-                {workspace && (compact || !sidebar) && (
-                  <button
-                    ref={sidebarControl}
-                    type="button"
-                    className={styles.navigationToggle}
-                    aria-label="Buka navigasi perusahaan"
-                    aria-expanded={sidebar}
-                    aria-controls="v3-company-sidebar"
-                    onClick={() => {
-                      if (compact) setMobileSidebar(true);
-                      else setSidebarPreference(true);
-                    }}
-                  >
-                    <Icon name="panelLeftOpen" />
-                    <span>Navigasi</span>
-                  </button>
-                )}
-                <span>
-                  {workspace && !sidebar ? (
-                    <Link
-                      className={styles.sideReturn}
-                      href={workspaceHref("companies")}
-                      aria-label="Semua perusahaan"
+            {!home && (
+              <>
+                <div className={styles.breadcrumb}>
+                  <div className={styles.workspaceTrail}>
+                    {workspace && (compact || !sidebar) && (
+                      <button
+                        ref={sidebarControl}
+                        type="button"
+                        className={styles.navigationToggle}
+                        aria-label="Buka navigasi perusahaan"
+                        aria-expanded={sidebar}
+                        aria-controls="v3-company-sidebar"
+                        onClick={() => {
+                          if (compact) setMobileSidebar(true);
+                          else setSidebarPreference(true);
+                        }}
+                      >
+                        <Icon name="panelLeftOpen" />
+                        <span>Navigasi</span>
+                      </button>
+                    )}
+                    <span>
+                      {workspace && !sidebar ? (
+                        <Link
+                          className={styles.sideReturn}
+                          href={workspaceHref("companies")}
+                          aria-label="Semua perusahaan"
+                        >
+                          <Icon name="arrowLeft" />
+                          Semua perusahaan
+                        </Link>
+                      ) : research ? (
+                        "RUANG PRIBADI / RISET"
+                      ) : captures ? (
+                        "RUANG PRIBADI / PENAMPUNGAN"
+                      ) : home ? (
+                        "BERANDA"
+                      ) : directory ? (
+                        "DIREKTORI PERUSAHAAN"
+                      ) : location.view === "new" ? (
+                        "PERUSAHAAN / BARU"
+                      ) : (
+                        "PERUSAHAAN / OVERVIEW"
+                      )}
+                    </span>
+                  </div>
+                  {workspace && (
+                    <button
+                      ref={contextControl}
+                      className={styles.contextToggle}
+                      onClick={() => setContext(!context)}
+                      aria-expanded={context}
+                      aria-controls="v3-company-context"
                     >
-                      <Icon name="arrowLeft" />
-                      Semua perusahaan
-                    </Link>
-                  ) : research ? (
-                    "RUANG PRIBADI / RISET"
-                  ) : captures ? (
-                    "RUANG PRIBADI / PENAMPUNGAN"
-                  ) : home ? (
-                    "BERANDA"
-                  ) : directory ? (
-                    "DIREKTORI PERUSAHAAN"
-                  ) : location.view === "new" ? (
-                    "PERUSAHAAN / BARU"
-                  ) : (
-                    "PERUSAHAAN / OVERVIEW"
+                      <Icon name="alert" />
+                      Tentang workspace
+                    </button>
                   )}
-                </span>
-              </div>
-              {workspace && (
-                <button
-                  ref={contextControl}
-                  className={styles.contextToggle}
-                  onClick={() => setContext(!context)}
-                  aria-expanded={context}
-                  aria-controls="v3-company-context"
-                >
-                  <Icon name="alert" />
-                  Tentang workspace
-                </button>
-              )}
-            </div>
-            <div className={home ? styles.homeHeading : styles.pageHeading}>
-              <div>
-                <h1>
-                  {title}
-                  {home && <span>lebih terarah.</span>}
-                </h1>
-                {directory && (
-                  <p className={styles.lead}>
-                    Seluruh ruang perusahaanmu, dalam satu tempat.
-                  </p>
-                )}
-                {workspace && (
-                  <p className={styles.lead}>
-                    {location.view === "edit"
-                      ? "Perbarui identitas, tanpa mengubah isi ruangmu."
-                      : "Overview · Ruang penelitian pribadi"}
-                  </p>
-                )}
-              </div>
-              {directory && !failed && createLink}
-            </div>
-            {research ? (
+                </div>
+                <div className={home ? styles.homeHeading : styles.pageHeading}>
+                  <div>
+                    <h1>
+                      {title}
+                      {home && <span>lebih terarah.</span>}
+                    </h1>
+                    {directory && (
+                      <p className={styles.lead}>
+                        Seluruh ruang perusahaanmu, dalam satu tempat.
+                      </p>
+                    )}
+                    {workspace && (
+                      <p className={styles.lead}>
+                        {location.view === "edit"
+                          ? "Perbarui identitas, tanpa mengubah isi ruangmu."
+                          : "Overview · Ruang penelitian pribadi"}
+                      </p>
+                    )}
+                  </div>
+                  {directory && !failed && createLink}
+                </div>
+              </>
+            )}
+            {home ? (
+              <HomeDashboard
+                key={ownerId ?? "unavailable"}
+                owner={ownerId ?? ""}
+                companies={companies}
+                companiesFailed={failed}
+                captureState={captureState}
+                researchState={researchState}
+              />
+            ) : research ? (
               <ResearchWorkspace
                 key={ownerId ?? "unavailable"}
                 owner={ownerId ?? ""}

@@ -22,6 +22,19 @@ const users = {
 };
 const rows = [];
 const captureRows = [];
+const researchRows = ["A", "B"].map((actor, index) => ({
+  id: "50000000-0000-4000-8000-" + String(index + 1).padStart(12, "0"),
+  user_id: users[actor].id,
+  company_id:
+    "10000000-0000-4000-8000-" + String(index === 0 ? 1 : 51).padStart(12, "0"),
+  source_capture_id: null,
+  title: `${actor}-RESEARCH-PRIVATE`,
+  body: `${actor}-DRAFT-BODY`,
+  mode: "blank",
+  revision: 1,
+  created_at: "2026-10-27T04:00:00.000Z",
+  updated_at: "2026-10-27T04:00:00.000Z",
+}));
 let sequence = 100;
 const id = (n) => `10000000-0000-4000-8000-${String(n).padStart(12, "0")}`;
 for (const actor of ["A", "B"])
@@ -121,6 +134,7 @@ function fakeSdk(_url, _key, options) {
     },
     rpc: async (name, args) => {
       journal.push({ actor: actor(), rpc: name, args });
+      if (name === "v3_research_contract") return { data: 1, error: null };
       if (name === "v3_capture_contract")
         return c.failure === "capture-schema"
           ? { data: null, error: { code: "PGRST202" } }
@@ -186,7 +200,11 @@ function fakeSdk(_url, _key, options) {
       };
     },
     from(table) {
-      if (!["companies", "user_settings", "captures"].includes(table))
+      if (
+        !["companies", "user_settings", "captures", "research_drafts"].includes(
+          table,
+        )
+      )
         throw Error("Unreviewed synthetic table");
       const filters = [],
         orders = [];
@@ -218,7 +236,9 @@ function fakeSdk(_url, _key, options) {
             ? rows
             : table === "captures"
               ? captureRows
-              : settings;
+              : table === "research_drafts"
+                ? researchRows
+                : settings;
         let found = store.filter(
           (r) =>
             r.user_id === user().id &&
@@ -852,6 +872,24 @@ try {
     });
     check(r.json().capture?.raw_text === captureForm.raw_text);
     check(captureRows.length === 1);
+    r = await request("/foundation?view=home&research_page=9&capture_page=9", {
+      actor: "A",
+    });
+    check(
+      r.text.includes("A-CAPTURE-PRIVATE") &&
+        r.text.includes("A-RESEARCH-PRIVATE"),
+      "Home must render the current owner's confirmed Capture and most recent draft",
+    );
+    check(!r.text.includes("B-RESEARCH-PRIVATE"));
+    check(
+      r.text.includes("Catat cepat") && r.text.includes("Lanjutkan menulis"),
+    );
+    r = await request("/foundation?view=home", { actor: "B" });
+    check(
+      r.text.includes("B-RESEARCH-PRIVATE") &&
+        !r.text.includes("A-RESEARCH-PRIVATE") &&
+        !r.text.includes("A-CAPTURE-PRIVATE"),
+    );
     r = await request("/__offline/capture", {
       actor: "A",
       method: "POST",

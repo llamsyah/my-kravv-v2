@@ -37,7 +37,8 @@ export default async function FoundationPage({
   const { supabase, user } = await requireAuthenticatedSession();
   const search = await searchParams;
   const location = workspaceLocation(search);
-  const directory = parseDirectorySearch(search);
+  const home = location.view === "home";
+  const directory = parseDirectorySearch(home ? {} : search);
   const research = researchLocation(search);
   const researchState: ResearchPageState = {
     ready: false,
@@ -51,11 +52,11 @@ export default async function FoundationPage({
     source: null,
     unavailable: false,
   };
-  if (location.view === "research") {
+  if (location.view === "research" || home) {
     try {
       researchState.ready = await researchReady(supabase);
       if (researchState.ready) {
-        if (research.draft) {
+        if (!home && research.draft) {
           researchState.selected = await getResearchDraft(
             supabase,
             research.draft,
@@ -74,9 +75,13 @@ export default async function FoundationPage({
         } else {
           Object.assign(
             researchState,
-            await listResearchDrafts(supabase, research.page, research.company),
+            await listResearchDrafts(
+              supabase,
+              home ? 0 : research.page,
+              home ? undefined : research.company,
+            ),
           );
-          if (research.capture)
+          if (!home && research.capture)
             researchState.source = await researchSource(
               supabase,
               research.capture,
@@ -95,10 +100,10 @@ export default async function FoundationPage({
     ready: false,
     failed: false,
     items: [],
-    page: parseCapturePage(search.capture_page),
+    page: home ? 0 : parseCapturePage(search.capture_page),
     hasNext: false,
   };
-  if (location.view === "captures") {
+  if (location.view === "captures" || home) {
     try {
       captureState.ready = await captureSchemaReady(supabase);
       if (captureState.ready)

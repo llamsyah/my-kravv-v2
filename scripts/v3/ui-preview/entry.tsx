@@ -87,7 +87,24 @@ createRoot(document.getElementById("preview")!).render(
       researchState={{
         ready: search.state !== "schema-pending",
         failed: search.state === "error",
-        items: [],
+        items:
+          search.state === "empty" || search.state === "error"
+            ? []
+            : [
+                {
+                  id: "50000000-0000-4000-8000-000000000001",
+                  user_id: owner,
+                  title: "Apakah margin ini berkelanjutan?",
+                  body: "Menelaah perubahan biaya bahan baku dan bauran produk sebelum menyimpulkan keberlanjutan margin. Data sintetis, bukan fakta pasar.",
+                  mode: "guided",
+                  company_id: companies[0].id,
+                  company_name: companies[0].name,
+                  source_capture_id: null,
+                  revision: 3,
+                  created_at: "2026-10-27T04:00:00.000Z",
+                  updated_at: "2026-10-27T06:30:00.000Z",
+                },
+              ],
         hasNext: false,
         page: 0,
         selected: search.draft

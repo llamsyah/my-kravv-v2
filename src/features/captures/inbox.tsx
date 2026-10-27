@@ -10,6 +10,7 @@ import {
   captureHref,
   captureTime,
   type CaptureInboxState,
+  type CaptureItem,
 } from "./contract";
 import { workspaceHref } from "../v3-workspace/model";
 import styles from "./inbox.module.css";
@@ -19,10 +20,15 @@ type Choice = { id: string; name: string; ticker?: string | null };
 export function CaptureInbox({
   ownerId,
   state,
+  variant = "inbox",
+  onConfirmed,
 }: {
   ownerId: string;
   state: CaptureInboxState;
+  variant?: "inbox" | "home";
+  onConfirmed?: (capture: CaptureItem) => void;
 }) {
+  const home = variant === "home";
   const router = useRouter();
   const [text, setText] = useState("");
   const [company, setCompany] = useState<Choice | null>(null);
@@ -109,7 +115,12 @@ export function CaptureInbox({
       setCompany(null);
       setAttempt(null);
       setSaved(true);
-      router.replace(captureHref());
+      if (home)
+        onConfirmed?.({
+          ...result.capture,
+          company_name: company?.name ?? null,
+        });
+      else router.replace(captureHref());
       router.refresh();
       textarea.current?.focus();
     } catch {
@@ -123,17 +134,28 @@ export function CaptureInbox({
     }
   }
   return (
-    <div className={styles.inbox}>
+    <div className={styles.inbox} data-home-composer={home || undefined}>
       <section
         className={styles.composer}
         aria-labelledby="capture-compose-title"
       >
         <div className={styles.sectionHeading}>
-          <h2 id="capture-compose-title">Tangkap dulu, susun nanti.</h2>
-          <span>QUICK CAPTURE</span>
+          <div>
+            <h2 id="capture-compose-title">
+              {home ? "Catat cepat" : "Tangkap dulu, susun nanti."}
+            </h2>
+            <span>Quick Capture</span>
+          </div>
+          {home && (
+            <Link href={captureHref()}>
+              Lihat penampungan <span aria-hidden="true">→</span>
+            </Link>
+          )}
         </div>
         <p>
-          Observasi, pertanyaan, atau hipotesis. Simpan apa adanya, tanpa AI.
+          {home
+            ? "Tulis apa saja yang sedang kamu pikirkan. Catatan masuk ke penampungan, bukan otomatis menjadi Thought."
+            : "Observasi, pertanyaan, atau hipotesis. Simpan apa adanya, tanpa AI."}
         </p>
         {!state.ready && !state.failed && (
           <p className={styles.notice} role="status">
@@ -141,14 +163,17 @@ export function CaptureInbox({
           </p>
         )}
         <form onSubmit={save} aria-busy={pending}>
-          <label htmlFor="capture-text">
+          <label
+            htmlFor="capture-text"
+            className={home ? "sr-only" : undefined}
+          >
             Catatan mentah <span aria-hidden="true">*</span>
           </label>
           <textarea
             ref={textarea}
             id="capture-text"
             name="raw_text"
-            rows={6}
+            rows={home ? 2 : 6}
             value={text}
             onChange={(e) => {
               setText(e.target.value);
@@ -157,7 +182,11 @@ export function CaptureInbox({
             readOnly={pending || !!attempt}
             required
             aria-describedby="capture-text-hint capture-save-status"
-            placeholder="Apa yang sedang kamu perhatikan?"
+            placeholder={
+              home
+                ? "Apa yang sedang kamu pikirkan?"
+                : "Apa yang sedang kamu perhatikan?"
+            }
           />
           <div className={styles.hint} id="capture-text-hint">
             <span>Teks asli dipertahankan. Bukan rekaman Thought.</span>
@@ -271,7 +300,9 @@ export function CaptureInbox({
                 ? "Menyimpan…"
                 : attempt
                   ? "Coba ulang catatan ini"
-                  : "Simpan ke Penampungan"}
+                  : home
+                    ? "Simpan catatan"
+                    : "Simpan ke Penampungan"}
             </button>
             <span id="capture-save-status" role="status" aria-live="polite">
               {pending
@@ -283,82 +314,88 @@ export function CaptureInbox({
           </div>
         </form>
       </section>
-      <section
-        aria-labelledby="capture-list-title"
-        className={styles.listSection}
-      >
-        <div className={styles.sectionHeading}>
-          <h2 id="capture-list-title">Penampungan</h2>
-          <span>TERBARU DAHULU</span>
-        </div>
-        {state.failed ? (
-          <div className={styles.error} role="alert">
-            <h3>Penampungan belum dapat dimuat.</h3>
-            <p>
-              Catatan tersimpan tidak diubah. Muat ulang untuk memeriksa
-              sambungan.
-            </p>
-            <a href={captureHref(state.page)}>Muat ulang inbox</a>
+      {!home && (
+        <section
+          aria-labelledby="capture-list-title"
+          className={styles.listSection}
+        >
+          <div className={styles.sectionHeading}>
+            <h2 id="capture-list-title">Penampungan</h2>
+            <span>TERBARU DAHULU</span>
           </div>
-        ) : !state.ready ? null : !state.items.length ? (
-          <div className={styles.empty}>
-            <h3>
-              {state.page
-                ? "Tidak ada catatan di halaman ini."
-                : "Ruang untuk ide yang belum selesai."}
-            </h3>
-            <p>
-              {state.page
-                ? "Kembali ke halaman sebelumnya."
-                : "Catatan pertamamu akan muncul di sini. Tidak harus rapi atau punya perusahaan."}
-            </p>
-          </div>
-        ) : (
-          <ol className={styles.list}>
-            {state.items.map((item) => (
-              <li key={item.id}>
-                <article className={styles.capture}>
-                  <div className={styles.captureMeta}>
-                    <span>
-                      {item.company_id ? (
-                        <Link href={workspaceHref("company", item.company_id)}>
-                          {item.company_name}
-                        </Link>
-                      ) : (
-                        "Tanpa perusahaan"
+          {state.failed ? (
+            <div className={styles.error} role="alert">
+              <h3>Penampungan belum dapat dimuat.</h3>
+              <p>
+                Catatan tersimpan tidak diubah. Muat ulang untuk memeriksa
+                sambungan.
+              </p>
+              <a href={captureHref(state.page)}>Muat ulang inbox</a>
+            </div>
+          ) : !state.ready ? null : !state.items.length ? (
+            <div className={styles.empty}>
+              <h3>
+                {state.page
+                  ? "Tidak ada catatan di halaman ini."
+                  : "Ruang untuk ide yang belum selesai."}
+              </h3>
+              <p>
+                {state.page
+                  ? "Kembali ke halaman sebelumnya."
+                  : "Catatan pertamamu akan muncul di sini. Tidak harus rapi atau punya perusahaan."}
+              </p>
+            </div>
+          ) : (
+            <ol className={styles.list}>
+              {state.items.map((item) => (
+                <li key={item.id}>
+                  <article className={styles.capture}>
+                    <div className={styles.captureMeta}>
+                      <span>
+                        {item.company_id ? (
+                          <Link
+                            href={workspaceHref("company", item.company_id)}
+                          >
+                            {item.company_name}
+                          </Link>
+                        ) : (
+                          "Tanpa perusahaan"
+                        )}
+                      </span>
+                      <time dateTime={item.created_at}>
+                        {captureTime(item.created_at)}
+                      </time>
+                    </div>
+                    <p className={styles.raw}>{item.raw_text}</p>
+                    <Link
+                      href={researchHref(
+                        undefined,
+                        item.company_id ?? undefined,
+                        item.id,
                       )}
-                    </span>
-                    <time dateTime={item.created_at}>
-                      {captureTime(item.created_at)}
-                    </time>
-                  </div>
-                  <p className={styles.raw}>{item.raw_text}</p>
-                  <Link
-                    href={researchHref(
-                      undefined,
-                      item.company_id ?? undefined,
-                      item.id,
-                    )}
-                  >
-                    Kembangkan menjadi draf →
-                  </Link>
-                </article>
-              </li>
-            ))}
-          </ol>
-        )}
-        {state.ready && !state.failed && (state.page > 0 || state.hasNext) && (
-          <nav className={styles.paging} aria-label="Halaman Penampungan">
-            {state.page > 0 && (
-              <Link href={captureHref(state.page - 1)}>Lebih baru</Link>
+                    >
+                      Kembangkan menjadi draf →
+                    </Link>
+                  </article>
+                </li>
+              ))}
+            </ol>
+          )}
+          {state.ready &&
+            !state.failed &&
+            (state.page > 0 || state.hasNext) && (
+              <nav className={styles.paging} aria-label="Halaman Penampungan">
+                {state.page > 0 && (
+                  <Link href={captureHref(state.page - 1)}>Lebih baru</Link>
+                )}
+                <span>Halaman {state.page + 1}</span>
+                {state.hasNext && state.page < 10000 && (
+                  <Link href={captureHref(state.page + 1)}>Lebih lama</Link>
+                )}
+              </nav>
             )}
-            <span>Halaman {state.page + 1}</span>
-            {state.hasNext && state.page < 10000 && (
-              <Link href={captureHref(state.page + 1)}>Lebih lama</Link>
-            )}
-          </nav>
-        )}
-      </section>
+        </section>
+      )}
     </div>
   );
 }
