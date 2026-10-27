@@ -1,4 +1,30 @@
 import type { AnchorHTMLAttributes } from "react";
+export async function researchMutationAction() {
+  return {
+    ok: false as const,
+    error: "Pratinjau sintetis: tidak ada penyimpanan ke server.",
+    code: "unavailable",
+  };
+}
+export async function reloadResearchAction() {
+  return {
+    ok: false as const,
+    error: "Pratinjau sintetis: tidak ada versi server.",
+  };
+}
+export async function researchHistoryAction() {
+  return { ok: true as const, items: [], hasNext: false };
+}
+export async function researchReasoningAction() {
+  return {
+    ok: false as const,
+    error: "Pratinjau: tidak ada inferensi atau biaya AI.",
+    code: "AI_DISABLED",
+  };
+}
+export async function researchAIHistoryAction() {
+  return { ok: true as const, runs: [] };
+}
 export async function saveCaptureAction() {
   await new Promise((resolve) => setTimeout(resolve, 500));
   return {

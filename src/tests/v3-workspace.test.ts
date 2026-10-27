@@ -292,7 +292,8 @@ test("Workspace integrates sidebar controls and keeps optional context and futur
   assert.ok(sidebar?.includes('aria-label="Navigasi perusahaan"'));
   assert.match(html, /<aside[^>]*id="v3-company-context"[^>]*hidden=""/);
   assert.match(html, /<details[^>]*><summary>[^<]*<svg[\s\S]*?Area penelitian/);
-  assert.equal((html.match(/aria-disabled="true"/g) ?? []).length, 4);
+  assert.equal((html.match(/aria-disabled="true"/g) ?? []).length, 2);
+  assert.ok(html.includes("view=research"));
   assert.ok(!html.includes("Sembunyikan navigasi"));
   assert.ok(!html.includes("Sembunyikan konteks"));
   assert.ok(!html.includes("Segera hadir"));

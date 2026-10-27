@@ -690,7 +690,7 @@ test("accounting rejects untrusted ownership receipts and never sends credential
     "p_user_id",
   ]);
 });
-test("capture and existing pages/actions never reach AI; only the explicit Refine action graph may", () => {
+test("ordinary capture/draft actions never reach AI; only explicit Refine and Research reasoning action graphs may", () => {
   const walk = (dir: string): string[] =>
     readdirSync(dir, { withFileTypes: true }).flatMap((e) =>
       e.isDirectory() ? walk(resolve(dir, e.name)) : [resolve(dir, e.name)],
@@ -719,7 +719,10 @@ test("capture and existing pages/actions never reach AI; only the explicit Refin
     (p) =>
       /\.(ts|tsx)$/.test(p) &&
       !p.replaceAll("\\", "/").includes("/features/refinements/") &&
-      !p.replaceAll("\\", "/").includes("/refine/"),
+      !p.replaceAll("\\", "/").includes("/refine/") &&
+      !p
+        .replaceAll("\\", "/")
+        .endsWith("/features/research/reasoning-actions.ts"),
   ))
     visit(path);
   assert.ok(visited.size > 20);

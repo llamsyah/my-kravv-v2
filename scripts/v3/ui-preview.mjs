@@ -33,6 +33,8 @@ const actions = new Set(
     "src/features/foundation/actions",
     "src/features/auth/actions",
     "src/features/captures/actions",
+    "src/features/research/actions",
+    "src/features/research/reasoning-actions",
   ].map((file) => path.join(root, file)),
 );
 const compiler = webpack({

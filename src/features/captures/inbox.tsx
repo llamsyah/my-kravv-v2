@@ -13,6 +13,7 @@ import {
 } from "./contract";
 import { workspaceHref } from "../v3-workspace/model";
 import styles from "./inbox.module.css";
+import { researchHref } from "../research/contract";
 
 type Choice = { id: string; name: string; ticker?: string | null };
 export function CaptureInbox({
@@ -332,6 +333,15 @@ export function CaptureInbox({
                     </time>
                   </div>
                   <p className={styles.raw}>{item.raw_text}</p>
+                  <Link
+                    href={researchHref(
+                      undefined,
+                      item.company_id ?? undefined,
+                      item.id,
+                    )}
+                  >
+                    Kembangkan menjadi draf →
+                  </Link>
                 </article>
               </li>
             ))}

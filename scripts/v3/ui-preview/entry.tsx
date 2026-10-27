@@ -84,6 +84,31 @@ createRoot(document.getElementById("preview")!).render(
       }}
       initialTheme={theme.success ? theme.data : "light"}
       ownerId={owner}
+      researchState={{
+        ready: search.state !== "schema-pending",
+        failed: search.state === "error",
+        items: [],
+        hasNext: false,
+        page: 0,
+        selected: search.draft
+          ? {
+              id: search.draft,
+              user_id: owner,
+              title: "Apakah margin ini berkelanjutan?",
+              body: "# Pertanyaan riset\n\nApakah peningkatan margin berasal dari bauran produk atau perubahan biaya?\n\n## Asumsi\n\n- Perubahan belum tentu permanen.\n- Data sintetis, bukan fakta pasar.",
+              mode: "guided",
+              company_id: companies[0].id,
+              source_capture_id: null,
+              revision: 1,
+              created_at: "2026-10-27T04:00:00.000Z",
+              updated_at: "2026-10-27T04:00:00.000Z",
+            }
+          : null,
+        history: [],
+        historyHasNext: false,
+        source: null,
+        unavailable: false,
+      }}
       captureState={{
         ready: search.state !== "schema-pending",
         failed: search.state === "error",

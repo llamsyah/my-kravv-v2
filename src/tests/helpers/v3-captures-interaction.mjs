@@ -5,6 +5,7 @@ import ts from "typescript";
 import * as jsx from "react/jsx-runtime";
 import * as contract from "../../features/captures/contract.ts";
 import * as model from "../../features/v3-workspace/model.ts";
+import * as researchContract from "../../features/research/contract.ts";
 let store = [],
   cursor = 0,
   fail = true,
@@ -90,6 +91,7 @@ const { CaptureInbox } = load("src/features/captures/inbox.tsx", {
     useRouter: () => ({ replace: (href) => routes.push(href), refresh() {} }),
   },
   "./contract": contract,
+  "../research/contract": researchContract,
   "../v3-workspace/model": model,
   "./inbox.module.css": {
     __esModule: true,

@@ -195,13 +195,11 @@ export function CompanySidebar({
           </summary>
           <p>Belum tersedia pada tahap ini.</p>
           <ul>
-            {["Ruang Tulis", "Pemikiran", "Explore", "Referensi"].map(
-              (label) => (
-                <li key={label}>
-                  <span aria-disabled="true">{label}</span>
-                </li>
-              ),
-            )}
+            {["Explore", "Referensi"].map((label) => (
+              <li key={label}>
+                <span aria-disabled="true">{label}</span>
+              </li>
+            ))}
           </ul>
         </details>
       </nav>

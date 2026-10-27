@@ -12,6 +12,15 @@ import {
 } from "@/features/v3-workspace/management-contract";
 import { V3Workspace } from "@/features/v3-workspace/workspace";
 import { workspaceLocation } from "@/features/v3-workspace/model";
+import {
+  researchReady,
+  listResearchDrafts,
+  getResearchDraft,
+  researchHistory,
+  researchSource,
+  type ResearchPageState,
+} from "@/server/research/service";
+import { researchLocation } from "@/features/research/contract";
 import { captureSchemaReady, listCaptures } from "@/server/captures/service";
 import {
   parseCapturePage,
@@ -29,6 +38,59 @@ export default async function FoundationPage({
   const search = await searchParams;
   const location = workspaceLocation(search);
   const directory = parseDirectorySearch(search);
+  const research = researchLocation(search);
+  const researchState: ResearchPageState = {
+    ready: false,
+    failed: false,
+    items: [],
+    hasNext: false,
+    page: research.page,
+    selected: null,
+    history: [],
+    historyHasNext: false,
+    source: null,
+    unavailable: false,
+  };
+  if (location.view === "research") {
+    try {
+      researchState.ready = await researchReady(supabase);
+      if (researchState.ready) {
+        if (research.draft) {
+          researchState.selected = await getResearchDraft(
+            supabase,
+            research.draft,
+          );
+          researchState.unavailable = !researchState.selected;
+          if (researchState.selected) {
+            const history = await researchHistory(supabase, research.draft);
+            researchState.history = history.items;
+            researchState.historyHasNext = history.hasNext;
+            if (researchState.selected.source_capture_id)
+              researchState.source = await researchSource(
+                supabase,
+                researchState.selected.source_capture_id,
+              );
+          }
+        } else {
+          Object.assign(
+            researchState,
+            await listResearchDrafts(supabase, research.page, research.company),
+          );
+          if (research.capture)
+            researchState.source = await researchSource(
+              supabase,
+              research.capture,
+            );
+        }
+      }
+    } catch {
+      researchState.failed = true;
+      researchState.items = [];
+      researchState.selected = null;
+      researchState.history = [];
+      researchState.source = null;
+    }
+  }
   const captureState: CaptureInboxState = {
     ready: false,
     failed: false,
@@ -88,6 +150,8 @@ export default async function FoundationPage({
       key={user.id}
       ownerId={user.id}
       captureState={captureState}
+      researchState={researchState}
+      researchCompany={research.company}
       companies={companies}
       selectedCompany={selectedCompany ?? null}
       location={location}

@@ -40,6 +40,10 @@ import {
 import styles from "./workspace.module.css";
 import { CaptureInbox } from "../captures/inbox";
 import type { CaptureInboxState } from "../captures/contract";
+import { ResearchWorkspace } from "../research/workspace";
+import { researchHref } from "../research/contract";
+import { clearResearchRecovery } from "../research/session";
+import type { ResearchPageState } from "../../server/research/service";
 function subscribeViewport(changed: () => void) {
   const query = window.matchMedia("(max-width: 720px)");
   query.addEventListener("change", changed);
@@ -64,6 +68,8 @@ export function V3Workspace({
   initialTheme = "light",
   ownerId,
   captureState,
+  researchState,
+  researchCompany,
 }: {
   companies: WorkspaceCompany[];
   location: WorkspaceLocation;
@@ -73,6 +79,8 @@ export function V3Workspace({
   initialTheme?: Theme;
   ownerId?: string;
   captureState?: CaptureInboxState;
+  researchState?: ResearchPageState;
+  researchCompany?: string;
 }) {
   const browserTheme = useSyncExternalStore(
     subscribeThemePreference,
@@ -141,6 +149,10 @@ export function V3Workspace({
   const inCompany = location.view === "company" || location.view === "edit";
   const workspace = inCompany && !!company && !failed;
   const captures = location.view === "captures";
+  const research = location.view === "research";
+  useEffect(() => {
+    if (ownerId) clearResearchRecovery(ownerId);
+  }, [ownerId]);
   const home = location.view === "home",
     directory = location.view === "companies";
   const filtered = directoryState
@@ -148,17 +160,19 @@ export function V3Workspace({
     : findWorkspaceCompanies(companies, query);
   const title = home
     ? "Ruang berpikirmu,"
-    : captures
-      ? "Penampungan"
-      : directory
-        ? "Perusahaan"
-        : location.view === "new"
-          ? "Tambah perusahaan"
-          : location.view === "edit"
-            ? metadataReady
-              ? "Ubah perusahaan"
-              : "Ubah nama perusahaan"
-            : (company?.name ?? "Perusahaan tidak tersedia");
+    : research
+      ? "Ruang riset"
+      : captures
+        ? "Penampungan"
+        : directory
+          ? "Perusahaan"
+          : location.view === "new"
+            ? "Tambah perusahaan"
+            : location.view === "edit"
+              ? metadataReady
+                ? "Ubah perusahaan"
+                : "Ubah nama perusahaan"
+              : (company?.name ?? "Perusahaan tidak tersedia");
   const createLink = (
     <Link className={styles.primary} href={workspaceHref("new")}>
       <Icon name="plus" />
@@ -188,7 +202,9 @@ export function V3Workspace({
             </Link>
             <Link
               href={workspaceHref("companies")}
-              aria-current={!home && !captures ? "page" : undefined}
+              aria-current={
+                !home && !captures && !research ? "page" : undefined
+              }
             >
               <Icon name="building" />
               Perusahaan
@@ -198,6 +214,12 @@ export function V3Workspace({
               aria-current={captures ? "page" : undefined}
             >
               <Icon name="plus" /> Quick Capture
+            </Link>
+            <Link
+              href={researchHref()}
+              aria-current={research ? "page" : undefined}
+            >
+              <Icon name="pencil" /> Ruang Riset
             </Link>
           </nav>
           <div className={styles.headerTools}>
@@ -228,7 +250,16 @@ export function V3Workspace({
                     : "Tema diingat di perangkat ini. Sinkronisasi akun menunggu pembaruan skema."}
                 </p>
                 <p>Pengaturan akun belum tersedia.</p>
-                <LogoutForm />
+                <div
+                  onSubmitCapture={() => {
+                    if (!clearResearchRecovery())
+                      setThemeError(
+                        "Buffer riset lokal belum dapat dibersihkan. Periksa perangkat bersama sebelum menyerahkannya.",
+                      );
+                  }}
+                >
+                  <LogoutForm />
+                </div>
               </div>
             </details>
           </div>
@@ -291,6 +322,8 @@ export function V3Workspace({
                       <Icon name="arrowLeft" />
                       Semua perusahaan
                     </Link>
+                  ) : research ? (
+                    "RUANG PRIBADI / RISET"
                   ) : captures ? (
                     "RUANG PRIBADI / PENAMPUNGAN"
                   ) : home ? (
@@ -338,7 +371,27 @@ export function V3Workspace({
               </div>
               {directory && !failed && createLink}
             </div>
-            {captures ? (
+            {research ? (
+              <ResearchWorkspace
+                key={ownerId ?? "unavailable"}
+                owner={ownerId ?? ""}
+                company={researchCompany}
+                state={
+                  researchState ?? {
+                    ready: false,
+                    failed: true,
+                    items: [],
+                    hasNext: false,
+                    page: 0,
+                    selected: null,
+                    history: [],
+                    historyHasNext: false,
+                    source: null,
+                    unavailable: false,
+                  }
+                }
+              />
+            ) : captures ? (
               <CaptureInbox
                 key={ownerId ?? "unavailable"}
                 ownerId={ownerId ?? ""}
@@ -451,9 +504,15 @@ export function V3Workspace({
                   <div>
                     <h2>Ruang penelitian</h2>
                     <p>
-                      Penulisan, pemikiran, eksplorasi, dan referensi belum
-                      tersedia di tahap ini.
+                      Kembangkan riset, rekam Thought, dan baca riwayat tanpa
+                      mengubah catatan asli.
                     </p>
+                    <Link
+                      className={styles.secondary}
+                      href={researchHref(undefined, company.id)}
+                    >
+                      Buka Ruang Riset
+                    </Link>
                   </div>
                 </section>
               </>

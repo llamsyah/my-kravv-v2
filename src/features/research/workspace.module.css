@@ -1,0 +1,116 @@
+.research {
+  display: grid;
+  gap: 22px;
+  max-width: 1060px;
+}
+.panel {
+  border: 1px solid var(--v-line);
+  border-radius: 12px;
+  padding: clamp(16px, 3vw, 28px);
+  background: var(--v-panel);
+  display: grid;
+  gap: 14px;
+}
+.panel label {
+  display: grid;
+  gap: 6px;
+  margin-block: 10px;
+}
+.panel fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.panel select {
+  color: var(--v-text);
+  background: var(--v-panel);
+  border: 1px solid var(--v-line);
+  min-height: 42px;
+  padding: 8px;
+  border-radius: 6px;
+  width: 100%;
+}
+.panel button {
+  background: var(--v-selected);
+  color: var(--v-green);
+  border: 1px solid var(--v-line);
+  border-radius: 7px;
+  min-height: 40px;
+  padding: 8px 12px;
+  margin: 3px 6px 3px 0;
+}
+.panel button:hover:not(:disabled) {
+  border-color: var(--v-green);
+}
+.panel textarea {
+  font:
+    14px/1.8 ui-monospace,
+    monospace;
+  min-height: 300px;
+  tab-size: 2;
+}
+.panel pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font:
+    14px/1.8 ui-monospace,
+    monospace;
+  border: 1px solid var(--v-line);
+  padding: 14px;
+  border-radius: 7px;
+  max-height: 650px;
+  overflow: auto;
+}
+.panel details {
+  border-block: 1px solid var(--v-line);
+  padding-block: 12px;
+}
+.panel summary {
+  cursor: pointer;
+  color: var(--v-green);
+}
+.panel a,
+.toolbar a {
+  color: var(--v-green);
+}
+.toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  justify-content: space-between;
+}
+.toolbar span,
+.directory span,
+.directory time {
+  font-size: 12px;
+  color: var(--v-muted);
+}
+.directory {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+.directory a {
+  display: grid;
+  gap: 4px;
+  padding: 14px;
+  border: 1px solid var(--v-line);
+  border-radius: 7px;
+}
+.panel .removed {
+  border-left: 4px solid var(--v-error);
+}
+.panel .added {
+  border-left: 4px solid var(--v-green);
+}
+@media (max-width: 720px) {
+  .panel textarea {
+    min-height: 360px;
+  }
+  .toolbar {
+    align-items: start;
+  }
+}

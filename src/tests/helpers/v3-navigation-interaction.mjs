@@ -56,6 +56,9 @@ const hooks = {
 };
 const Link = () => null;
 const imports = {
+  "../research/workspace": { ResearchWorkspace: () => null },
+  "../research/contract": { researchHref: () => "/foundation?view=research" },
+  "../research/session": { clearResearchRecovery: () => true },
   "../captures/inbox": { CaptureInbox: () => null },
   react: hooks,
   "react/jsx-runtime": jsx,

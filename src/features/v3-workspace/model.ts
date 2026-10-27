@@ -12,7 +12,7 @@ export const workspaceCompanySchema = z.object({
 });
 export type WorkspaceCompany = z.infer<typeof workspaceCompanySchema>;
 export type WorkspaceView =
-  "home" | "companies" | "company" | "new" | "edit" | "captures";
+  "home" | "companies" | "company" | "new" | "edit" | "captures" | "research";
 export type WorkspaceLocation = { view: WorkspaceView; companyId?: string };
 
 export function workspaceLocation(
@@ -25,6 +25,7 @@ export function workspaceLocation(
     "new",
     "edit",
     "captures",
+    "research",
   ];
   const view =
     typeof search.view === "string" &&

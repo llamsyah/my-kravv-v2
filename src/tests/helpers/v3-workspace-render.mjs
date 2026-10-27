@@ -32,6 +32,9 @@ function load(file) {
         }),
       };
     if (
+      (file.includes(path.join("features", "research")) &&
+        (name === "./actions" || name === "./reasoning-actions")) ||
+      name.endsWith("/captures/actions") ||
       (name === "./actions" &&
         file.endsWith(path.join("captures", "inbox.tsx"))) ||
       name.endsWith("/auth/actions") ||
@@ -40,6 +43,25 @@ function load(file) {
         file.endsWith(path.join("auth", "logout-form.tsx")))
     )
       return {
+        researchMutationAction: async () => ({
+          ok: false,
+          error: "Offline actions blocked",
+        }),
+        reloadResearchAction: async () => ({
+          ok: false,
+          error: "Offline actions blocked",
+        }),
+        researchHistoryAction: async () => ({
+          ok: true,
+          items: [],
+          hasNext: false,
+        }),
+        researchReasoningAction: async () => ({
+          ok: false,
+          error: "Offline actions blocked",
+          code: "AI_DISABLED",
+        }),
+        researchAIHistoryAction: async () => ({ ok: true, runs: [] }),
         saveCaptureAction: async () => {
           throw Error("Offline actions blocked");
         },

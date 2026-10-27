@@ -1324,7 +1324,11 @@
   }
 }
 @media (max-width: 480px) {
+  .globalNav {
+    flex-wrap: wrap;
+  }
   .globalNav a {
+    flex-basis: 45%;
     padding-inline: 7px;
     gap: 5px;
     font-size: 12px;
