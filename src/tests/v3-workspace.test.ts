@@ -116,7 +116,8 @@ test("Owned overview exposes independent panels and name editing while future se
   assert.ok(html.includes("Ganti perusahaan"));
   assert.ok(html.includes("Ubah nama"));
   assert.ok(html.includes("Penghapusan perusahaan belum tersedia."));
-  assert.ok(html.includes('aria-disabled="true"'));
+  assert.ok(html.includes("section=explore"));
+  assert.ok(html.includes("section=references"));
   assert.ok(!html.includes("/thoughts"));
   assert.ok(!html.includes("/refinements"));
 });
@@ -393,8 +394,20 @@ test("Workspace integrates sidebar controls and keeps optional context and futur
   assert.ok(sidebar?.includes('aria-label="Ganti perusahaan"'));
   assert.ok(sidebar?.includes('aria-label="Navigasi perusahaan"'));
   assert.match(html, /<aside[^>]*id="v3-company-context"[^>]*hidden=""/);
-  assert.match(html, /<details[^>]*><summary>[^<]*<svg[\s\S]*?Area penelitian/);
-  assert.equal((html.match(/aria-disabled="true"/g) ?? []).length, 2);
+  const nav =
+    sidebar?.match(
+      /<nav[^>]*aria-label="Navigasi perusahaan"[\s\S]*?<\/nav>/,
+    )?.[0] ?? "";
+  assert.equal((nav.match(/<a /g) ?? []).length, 5);
+  for (const label of [
+    "Overview",
+    "Ruang Tulis",
+    "Pemikiran",
+    "Explore",
+    "Referensi",
+  ])
+    assert.ok(nav.includes(label));
+  assert.ok(!nav.includes("Area penelitian"));
   assert.ok(html.includes("view=research"));
   assert.ok(!html.includes("Sembunyikan navigasi"));
   assert.ok(!html.includes("Sembunyikan konteks"));
@@ -583,4 +596,126 @@ test("Reference directory defaults to horizontal rows with truthful fields, dist
   assert.ok(missing.includes("Belum ada catatan"));
   assert.ok(missing.includes("Belum tersedia"));
   assert.ok(!missing.includes("dateTime="));
+});
+
+test("Reference Overview shows scoped drafts and immutable revisions while keeping notes distinct from a thesis", () => {
+  const state = {
+    ready: true,
+    failed: false,
+    drafts: [
+      {
+        id: "50000000-0000-4000-8000-000000000001",
+        user_id: company.user_id,
+        company_id: company.id,
+        title: "Draf kerja milikku",
+        revision: 4,
+        updated_at: "2026-10-27T04:00:00Z",
+      },
+    ],
+    draftsHasNext: true,
+    versions: [
+      {
+        id: "60000000-0000-4000-8000-000000000001",
+        user_id: company.user_id,
+        company_id: company.id,
+        draft_id: "50000000-0000-4000-8000-000000000001",
+        thought_id: "70000000-0000-4000-8000-000000000001",
+        number: 2,
+        title: "Kesimpulan tersimpan",
+        created_at: "2026-10-26T04:00:00Z",
+      },
+    ],
+    versionsHasNext: false,
+    page: 0,
+    selectedVersion: null,
+  };
+  const props = {
+    companies: [
+      {
+        ...company,
+        short_note: "Catatan <script>pribadi</script>",
+        ticker: "SYN",
+      },
+    ],
+    location: { view: "company", companyId: company.id },
+    ownerId: company.user_id,
+    directory: { query: "", page: 0, hasNext: false, metadataReady: true },
+    companyResearch: state,
+  };
+  const html = render(props);
+  for (const text of [
+    "Ringkasan perusahaan &amp; catatan saya",
+    "Lanjutan dari ruang tulis",
+    "Ringkasan workspace",
+    "Pemikiran terbaru",
+    "Referensi terbaru",
+    "Draf kerja milikku",
+    "Kesimpulan tersimpan",
+    "Edit catatan",
+    "bukan tesis investasi",
+    "Revisi bukan jumlah Thought unik",
+  ])
+    assert.ok(html.includes(text), text);
+  assert.ok(html.includes("Catatan &lt;script&gt;pribadi&lt;/script&gt;"));
+  assert.ok(
+    html.includes(
+      "draft=50000000-0000-4000-8000-000000000001&amp;company=" + company.id,
+    ),
+  );
+  assert.ok(html.includes("version=60000000-0000-4000-8000-000000000001"));
+  const empty = render({
+    ...props,
+    companyResearch: { ...state, drafts: [], versions: [] },
+  });
+  assert.ok(empty.includes("Mulai draf baru"));
+  assert.ok(empty.includes("Belum ada Thought"));
+  const failed = render({
+    ...props,
+    companyResearch: {
+      ...state,
+      failed: true,
+      ready: false,
+      drafts: [],
+      versions: [],
+    },
+  });
+  assert.ok(failed.includes('role="alert"'));
+  assert.ok(!failed.includes("Draf kerja milikku"));
+  assert.ok(!failed.includes("Kesimpulan tersimpan"));
+  const unavailable = render({
+    ...props,
+    location: { view: "company", companyId: company.id, section: "references" },
+  });
+  assert.ok(unavailable.includes("Belum ada koleksi referensi"));
+  assert.ok(!unavailable.includes(".pdf"));
+});
+
+test("Writing retains the Company shell and switching context cannot leave a prior Company selected", () => {
+  const html = render({
+    companies: [company],
+    selectedCompany: company,
+    ownerId: company.user_id,
+    location: { view: "research", companyId: company.id },
+    researchCompany: company.id,
+    researchState: {
+      ready: true,
+      failed: false,
+      items: [],
+      hasNext: false,
+      page: 0,
+      selected: null,
+      history: [],
+      historyHasNext: false,
+      source: null,
+      unavailable: false,
+    },
+  });
+  const nav =
+    html.match(
+      /<nav[^>]*aria-label="Navigasi perusahaan"[\s\S]*?<\/nav>/,
+    )?.[0] ?? "";
+  assert.match(nav, /<a[^>]*view=research[^>]*aria-current="page"/);
+  assert.ok(html.includes(company.name));
+  assert.ok(html.includes("Draf baru"));
+  assert.ok(nav.includes("company=" + company.id));
 });

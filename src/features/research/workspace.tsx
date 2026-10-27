@@ -171,7 +171,7 @@ export function ResearchWorkspace({
           setPendingOperation(null);
         }
       } else {
-        router.push(researchHref(r.draft.id));
+        router.push(researchHref(r.draft.id, r.draft.company_id ?? undefined));
         router.refresh();
       }
     } catch {
@@ -186,7 +186,7 @@ export function ResearchWorkspace({
     return (
       <section className={styles.panel} role="alert">
         <h2>Ruang riset belum dapat dimuat.</h2>
-        <a href={researchHref()}>Muat ulang</a>
+        <a href={researchHref(undefined, company)}>Muat ulang</a>
       </section>
     );
   if (!state.ready)
@@ -284,7 +284,7 @@ export function ResearchWorkspace({
               <ul className={styles.directory}>
                 {state.items.map((d) => (
                   <li key={d.id}>
-                    <Link href={researchHref(d.id)}>
+                    <Link href={researchHref(d.id, d.company_id ?? undefined)}>
                       <strong>{d.title}</strong>
                       <span>
                         {d.company_id ? d.company_name : "Tanpa perusahaan"} ·
@@ -716,7 +716,7 @@ function DraftEditor({
         </button>
         {feedback && <p role="status">{feedback}</p>}
       </section>
-      <section className={styles.panel}>
+      <section className={styles.panel} id="research-history">
         <h2>Riwayat Thought</h2>
         {!history.length ? (
           <p>Belum ada Thought. Menyimpan draf tidak membuat riwayat ini.</p>

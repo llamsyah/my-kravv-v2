@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { companySections, type CompanySection } from "./model.ts";
 
 const optionalLine = (max: number) =>
   z
@@ -62,6 +63,8 @@ export function directoryHref(
   page: number,
   companyId?: string,
   sort?: DirectorySort,
+  section?: CompanySection,
+  draftId?: string,
 ) {
   const params = new URLSearchParams({ view });
   if (companyId && z.uuid().safeParse(companyId).success)
@@ -69,5 +72,14 @@ export function directoryHref(
   if (query) params.set("q", query);
   if (page) params.set("page", String(page));
   if (sort) params.set("sort", directorySortSchema.parse(sort));
+  if (
+    view === "company" &&
+    params.has("company") &&
+    section &&
+    companySections.includes(section)
+  )
+    params.set("section", section);
+  if (view === "research" && draftId && z.uuid().safeParse(draftId).success)
+    params.set("draft", draftId);
   return "/foundation?" + params;
 }

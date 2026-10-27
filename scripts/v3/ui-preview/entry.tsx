@@ -1,3 +1,4 @@
+import { emptyCompanyResearch } from "../../../src/features/v3-workspace/company-research-contract";
 import { createRoot } from "react-dom/client";
 import { V3Workspace } from "../../../src/features/v3-workspace/workspace";
 import { workspaceLocation } from "../../../src/features/v3-workspace/model";
@@ -79,7 +80,30 @@ const items = matching.slice(
   directory.page * directoryPageSize,
   (directory.page + 1) * directoryPageSize,
 );
-const selectedCompany = all.find((company) => company.id === search.company);
+const previewCompany =
+  search.company ??
+  (search.view === "research" &&
+  search.draft === "50000000-0000-4000-8000-000000000001"
+    ? companies[0].id
+    : undefined);
+const selectedCompany = all.find((company) => company.id === previewCompany);
+const hasCompanyResearch =
+  selectedCompany?.id === companies[0].id && search.state !== "research-empty";
+const previewSelected =
+  selectedCompany &&
+  (search.view === "company" ||
+    search.view === "research" ||
+    search.view === "edit")
+    ? {
+        ...selectedCompany,
+        short_note:
+          "Catatan sintetis: telusuri perubahan margin, biaya distribusi, dan bauran produk sebelum menyusun kesimpulan. Fokus riset saat ini adalah memeriksa asumsi dan mencari bukti pembanding. Ini bukan fakta pasar atau tesis investasi.",
+      }
+    : selectedCompany;
+const previewVersionIndex = [1, 2, 3].findIndex(
+  (n) =>
+    search.version === "60000000-0000-4000-8000-" + String(n).padStart(12, "0"),
+);
 const theme = themeSchema.safeParse(
   window.localStorage.getItem("my-kravv:v3:preview-account-theme"),
 );
@@ -94,7 +118,7 @@ createRoot(document.getElementById("preview")!).render(
       selectedCompany={
         search.state === "empty" || search.state === "error"
           ? null
-          : (selectedCompany ?? null)
+          : (previewSelected ?? null)
       }
       directory={{
         ...directory,
@@ -104,11 +128,69 @@ createRoot(document.getElementById("preview")!).render(
       }}
       initialTheme={theme.success ? theme.data : "light"}
       ownerId={owner}
+      companyResearch={{
+        ...emptyCompanyResearch(),
+        ready: search.state !== "schema-pending",
+        failed: search.state === "research-error",
+        drafts:
+          !hasCompanyResearch || !selectedCompany
+            ? []
+            : [
+                {
+                  id: "50000000-0000-4000-8000-000000000001",
+                  user_id: owner,
+                  company_id: selectedCompany.id,
+                  title: "Apakah margin ini berkelanjutan?",
+                  revision: 3,
+                  updated_at: "2026-10-27T06:30:00Z",
+                },
+              ],
+        versions:
+          !hasCompanyResearch || !selectedCompany
+            ? []
+            : [1, 2, 3].map((n) => ({
+                id: "60000000-0000-4000-8000-" + String(n).padStart(12, "0"),
+                user_id: owner,
+                company_id: selectedCompany.id,
+                draft_id: "50000000-0000-4000-8000-000000000001",
+                thought_id: "70000000-0000-4000-8000-000000000001",
+                number: 4 - n,
+                title: [
+                  "Margin membaik, penyebabnya perlu diuji",
+                  "Asumsi biaya distribusi belum terkonfirmasi",
+                  "Pertanyaan awal tentang bauran produk",
+                ][n - 1],
+                created_at: `2026-10-${28 - n}T04:00:00Z`,
+              })),
+        selectedVersion:
+          search.version &&
+          previewVersionIndex >= 0 &&
+          hasCompanyResearch &&
+          selectedCompany
+            ? {
+                id: search.version,
+                user_id: owner,
+                company_id: selectedCompany.id,
+                draft_id: "50000000-0000-4000-8000-000000000001",
+                thought_id: "70000000-0000-4000-8000-000000000001",
+                number: 3,
+                draft_revision: 3,
+                title: "Margin membaik, penyebabnya perlu diuji",
+                body: "Revisi sintetis yang tersimpan. Ini bukan fakta pasar atau saran investasi.",
+                message: "Catatan sintetis",
+                created_at: "2026-10-27T04:00:00Z",
+              }
+            : null,
+      }}
       researchState={{
         ready: search.state !== "schema-pending",
         failed: search.state === "error",
         items:
-          search.state === "empty" || search.state === "error"
+          search.state === "empty" ||
+          search.state === "error" ||
+          (search.view === "research" &&
+            search.company &&
+            search.company !== companies[0].id)
             ? []
             : [
                 {
@@ -177,7 +259,9 @@ createRoot(document.getElementById("preview")!).render(
                 },
               ],
       }}
-      location={workspaceLocation(search)}
+      location={workspaceLocation(
+        previewCompany ? { ...search, company: previewCompany } : search,
+      )}
       failed={search.state === "error"}
     />
   ),

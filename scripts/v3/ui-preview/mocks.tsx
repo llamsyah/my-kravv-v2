@@ -51,7 +51,7 @@ function fixtureHref(href: string) {
   const state = new URLSearchParams(window.location.search).get("state");
   if (state === "many" || state === "legacy")
     url.searchParams.set("state", state);
-  return url.pathname + url.search;
+  return url.pathname + url.search + url.hash;
 }
 export default function PreviewLink({
   children,

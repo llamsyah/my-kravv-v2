@@ -7,15 +7,20 @@ import {
   type DirectoryState,
 } from "./management-contract";
 import styles from "./workspace.module.css";
+import type { CompanySection } from "./model";
 export function CompanySearch({
   state,
   view,
   companyId,
+  section,
+  draftId,
   label = "Cari perusahaan",
 }: {
   state: DirectoryState;
   view: string;
   companyId?: string;
+  section?: CompanySection;
+  draftId?: string;
   label?: string;
 }) {
   const router = useRouter();
@@ -32,7 +37,15 @@ export function CompanySearch({
         );
         if (parsed.success)
           router.push(
-            directoryHref(view, parsed.data, 0, companyId, state.sort),
+            directoryHref(
+              view,
+              parsed.data,
+              0,
+              companyId,
+              state.sort,
+              section,
+              draftId,
+            ),
           );
       }}
     >
@@ -55,7 +68,15 @@ export function CompanySearch({
       </button>
       {state.query && (
         <Link
-          href={directoryHref(view, "", 0, companyId, state.sort)}
+          href={directoryHref(
+            view,
+            "",
+            0,
+            companyId,
+            state.sort,
+            section,
+            draftId,
+          )}
           className={styles.textLink}
         >
           Hapus pencarian
@@ -68,11 +89,15 @@ export function CompanyPagination({
   state,
   view,
   companyId,
+  section,
+  draftId,
   label,
 }: {
   state: DirectoryState;
   view: string;
   companyId?: string;
+  section?: CompanySection;
+  draftId?: string;
   label: string;
 }) {
   if (!state.hasNext && !state.page) return null;
@@ -87,6 +112,8 @@ export function CompanyPagination({
             state.page - 1,
             companyId,
             state.sort,
+            section,
+            draftId,
           )}
         >
           Sebelumnya
@@ -102,6 +129,8 @@ export function CompanyPagination({
             state.page + 1,
             companyId,
             state.sort,
+            section,
+            draftId,
           )}
         >
           Berikutnya

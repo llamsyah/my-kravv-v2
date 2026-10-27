@@ -12,6 +12,7 @@ import {
 import styles from "./workspace.module.css";
 import { CompanySearch, CompanyPagination } from "./directory-controls";
 import type { DirectoryState } from "./management-contract";
+import { researchHref } from "../research/contract";
 
 function closeDisclosure(event: KeyboardEvent<HTMLDetailsElement>) {
   if (event.key !== "Escape" || !event.currentTarget.open) return;
@@ -51,6 +52,7 @@ export function CompanySidebar({
   open,
   onClose,
   directory,
+  draftId,
 }: {
   company: WorkspaceCompany;
   companies: WorkspaceCompany[];
@@ -59,6 +61,7 @@ export function CompanySidebar({
   open: boolean;
   onClose: () => void;
   directory?: DirectoryState;
+  draftId?: string;
 }) {
   const [query, setQuery] = useState("");
   const dialog = useRef<HTMLDialogElement>(null);
@@ -111,15 +114,21 @@ export function CompanySidebar({
           <Icon name="panelLeftClose" />
         </button>
       </div>
-      <h2 id="v3-sidebar-title" className={styles.sideLabel}>
-        WORKSPACE
+      <h2 id="v3-sidebar-title" className="sr-only">
+        Workspace perusahaan
       </h2>
       <details className={styles.switcher} onKeyDown={closeDisclosure}>
         <summary aria-label="Ganti perusahaan">
           <span className={styles.monogram} aria-hidden="true">
             {companyInitials(company.name)}
           </span>
-          <strong>{company.name}</strong>
+          <span className={styles.sideIdentity}>
+            <strong>{company.name}</strong>
+            <small>
+              {[company.ticker, company.sector].filter(Boolean).join(" · ") ||
+                "Workspace pribadi"}
+            </small>
+          </span>
           <Icon name="chevronDown" />
         </summary>
         <div className={styles.switcherBody}>
@@ -128,6 +137,8 @@ export function CompanySidebar({
               state={directory}
               view={location.view}
               companyId={company.id}
+              section={location.section}
+              draftId={draftId}
               label="Cari perusahaan milikmu"
             />
           ) : (
@@ -149,7 +160,11 @@ export function CompanySidebar({
             {filtered.map((item) => (
               <li key={item.id}>
                 <Link
-                  href={workspaceHref("company", item.id)}
+                  href={
+                    location.view === "research"
+                      ? researchHref(undefined, item.id)
+                      : workspaceHref("company", item.id, location.section)
+                  }
                   onClick={navigate}
                   aria-current={item.id === company.id ? "page" : undefined}
                 >
@@ -165,6 +180,8 @@ export function CompanySidebar({
               state={directory}
               view={location.view}
               companyId={company.id}
+              section={location.section}
+              draftId={draftId}
               label="Halaman pemilih perusahaan"
             />
           )}
@@ -181,27 +198,48 @@ export function CompanySidebar({
       <nav className={styles.companyNav} aria-label="Navigasi perusahaan">
         <Link
           href={workspaceHref("company", company.id)}
-          aria-current={location.view === "company" ? "page" : undefined}
+          aria-current={
+            location.view === "company" && !location.section
+              ? "page"
+              : undefined
+          }
           onClick={navigate}
         >
           <Icon name="overview" />
           Overview
         </Link>
-        <details className={styles.futureAreas} onKeyDown={closeDisclosure}>
-          <summary>
-            <Icon name="read" />
-            Area penelitian
-            <Icon name="chevronDown" />
-          </summary>
-          <p>Belum tersedia pada tahap ini.</p>
-          <ul>
-            {["Explore", "Referensi"].map((label) => (
-              <li key={label}>
-                <span aria-disabled="true">{label}</span>
-              </li>
-            ))}
-          </ul>
-        </details>
+        <Link
+          href={researchHref(undefined, company.id)}
+          aria-current={location.view === "research" ? "page" : undefined}
+          onClick={navigate}
+        >
+          <Icon name="read" />
+          Ruang Tulis
+        </Link>
+        <Link
+          href={workspaceHref("company", company.id, "thoughts")}
+          aria-current={location.section === "thoughts" ? "page" : undefined}
+          onClick={navigate}
+        >
+          <Icon name="thought" />
+          Pemikiran
+        </Link>
+        <Link
+          href={workspaceHref("company", company.id, "explore")}
+          aria-current={location.section === "explore" ? "page" : undefined}
+          onClick={navigate}
+        >
+          <Icon name="compass" />
+          Explore
+        </Link>
+        <Link
+          href={workspaceHref("company", company.id, "references")}
+          aria-current={location.section === "references" ? "page" : undefined}
+          onClick={navigate}
+        >
+          <Icon name="book" />
+          Referensi
+        </Link>
       </nav>
       <div className={styles.sidebarFoot}>
         <Icon name="user" />

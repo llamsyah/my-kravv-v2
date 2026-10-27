@@ -15,7 +15,13 @@ export const workspaceCompanySchema = z.object({
 export type WorkspaceCompany = z.infer<typeof workspaceCompanySchema>;
 export type WorkspaceView =
   "home" | "companies" | "company" | "new" | "edit" | "captures" | "research";
-export type WorkspaceLocation = { view: WorkspaceView; companyId?: string };
+export const companySections = ["thoughts", "explore", "references"] as const;
+export type CompanySection = (typeof companySections)[number];
+export type WorkspaceLocation = {
+  view: WorkspaceView;
+  companyId?: string;
+  section?: CompanySection;
+};
 
 export function workspaceLocation(
   search: Record<string, string | string[] | undefined>,
@@ -34,20 +40,42 @@ export function workspaceLocation(
     views.includes(search.view as WorkspaceView)
       ? (search.view as WorkspaceView)
       : "home";
-  if (view === "company" || view === "edit") {
+  if (view === "company" || view === "edit" || view === "research") {
     const id = z.uuid().safeParse(search.company);
-    return { view, ...(id.success ? { companyId: id.data } : {}) };
+    const section =
+      view === "company" &&
+      id.success &&
+      typeof search.section === "string" &&
+      companySections.includes(search.section as CompanySection)
+        ? (search.section as CompanySection)
+        : undefined;
+    return {
+      view,
+      ...(id.success ? { companyId: id.data } : {}),
+      ...(section ? { section } : {}),
+    };
   }
   return { view };
 }
-export function workspaceHref(view: WorkspaceView, companyId?: string) {
+export function workspaceHref(
+  view: WorkspaceView,
+  companyId?: string,
+  section?: CompanySection,
+) {
   const query = new URLSearchParams({ view });
   if (
-    (view === "company" || view === "edit") &&
+    (view === "company" || view === "edit" || view === "research") &&
     companyId &&
     z.uuid().safeParse(companyId).success
   )
     query.set("company", companyId);
+  if (
+    view === "company" &&
+    query.has("company") &&
+    section &&
+    companySections.includes(section)
+  )
+    query.set("section", section);
   return "/foundation?" + query.toString();
 }
 export function selectedWorkspaceCompany(

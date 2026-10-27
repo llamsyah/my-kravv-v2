@@ -2,6 +2,13 @@ import type { SVGProps } from "react";
 
 // Small local vocabulary, shared by Server Components and client islands.
 const paths = {
+  thought: ["M9 18h6m-5 3h4", "M8 14a7 7 0 1 1 8 0l-1 2H9Z"],
+  compass: ["M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0", "m16 8-3 5-5 3 3-5Z"],
+  book: [
+    "M12 5v16",
+    "M12 5C9 3 5 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-3-1-7-1-10 1Z",
+  ],
+  chart: ["M4 14h3v7H4ZM10 9h3v12h-3ZM16 3h3v18h-3Z"],
   home: ["m3 10 9-7 9 7v10H3Z", "M9 20v-7h6v7"],
   building: [
     "M3 21h18M5 21V5h8v16M13 10h6v11",

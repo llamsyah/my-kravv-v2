@@ -13,6 +13,8 @@ import { Icon } from "../../components/ui/icon";
 import { LogoutForm } from "../auth/logout-form";
 import { CompanyEditor } from "./company-editor";
 import { CompanySidebar } from "./company-sidebar";
+import { CompanyOverview, CompanyHeader } from "./company-overview";
+import type { CompanyResearchState } from "./company-research-contract";
 import { CompanyDirectory } from "./company-directory";
 import {
   directoryHref,
@@ -42,7 +44,6 @@ import { CaptureInbox } from "../captures/inbox";
 import { HomeDashboard } from "./home-dashboard";
 import type { CaptureInboxState } from "../captures/contract";
 import { ResearchWorkspace } from "../research/workspace";
-import { researchHref } from "../research/contract";
 import { clearResearchRecovery } from "../research/session";
 import type { ResearchPageState } from "../../server/research/service";
 function subscribeViewport(changed: () => void) {
@@ -71,6 +72,7 @@ export function V3Workspace({
   captureState,
   researchState,
   researchCompany,
+  companyResearch,
 }: {
   companies: WorkspaceCompany[];
   location: WorkspaceLocation;
@@ -82,6 +84,7 @@ export function V3Workspace({
   captureState?: CaptureInboxState;
   researchState?: ResearchPageState;
   researchCompany?: string;
+  companyResearch?: CompanyResearchState;
 }) {
   const router = useRouter();
   const browserTheme = useSyncExternalStore(
@@ -147,7 +150,10 @@ export function V3Workspace({
     selectedCompany === undefined
       ? selectedWorkspaceCompany(companies, location)
       : (selectedCompany ?? undefined);
-  const inCompany = location.view === "company" || location.view === "edit";
+  const inCompany =
+    location.view === "company" ||
+    location.view === "edit" ||
+    (location.view === "research" && !!location.companyId);
   const workspace = inCompany && !!company && !failed;
   const captures = location.view === "captures";
   const research = location.view === "research";
@@ -302,6 +308,7 @@ export function V3Workspace({
               open={sidebar}
               onClose={closeSidebar}
               directory={directoryState}
+              draftId={research ? researchState?.selected?.id : undefined}
             />
           )}
           <main id="v3-main" tabIndex={-1} className={styles.main}>
@@ -341,6 +348,26 @@ export function V3Workspace({
                           <Icon name="arrowLeft" />
                           Semua perusahaan
                         </Link>
+                      ) : workspace && company ? (
+                        <>
+                          <Link href={workspaceHref("companies")}>
+                            Perusahaan
+                          </Link>
+                          <span aria-hidden="true"> › </span>
+                          <Link href={workspaceHref("company", company.id)}>
+                            {company.name}
+                          </Link>
+                          {location.view === "research"
+                            ? " / Ruang Tulis"
+                            : location.section
+                              ? " / " +
+                                {
+                                  thoughts: "Pemikiran",
+                                  explore: "Explore",
+                                  references: "Referensi",
+                                }[location.section]
+                              : ""}
+                        </>
                       ) : research ? (
                         "RUANG PRIBADI / RISET"
                       ) : captures ? (
@@ -369,27 +396,33 @@ export function V3Workspace({
                     </button>
                   )}
                 </div>
-                <div className={home ? styles.homeHeading : styles.pageHeading}>
-                  <div>
-                    <h1>
-                      {title}
-                      {home && <span>lebih terarah.</span>}
-                    </h1>
-                    {directory && (
-                      <p className={styles.lead}>
-                        Seluruh ruang perusahaanmu, dalam satu tempat.
-                      </p>
-                    )}
-                    {workspace && (
-                      <p className={styles.lead}>
-                        {location.view === "edit"
-                          ? "Perbarui identitas, tanpa mengubah isi ruangmu."
-                          : "Overview · Ruang penelitian pribadi"}
-                      </p>
-                    )}
+                {workspace && company && location.view !== "edit" ? (
+                  <CompanyHeader company={company} />
+                ) : (
+                  <div
+                    className={home ? styles.homeHeading : styles.pageHeading}
+                  >
+                    <div>
+                      <h1>
+                        {title}
+                        {home && <span>lebih terarah.</span>}
+                      </h1>
+                      {directory && (
+                        <p className={styles.lead}>
+                          Seluruh ruang perusahaanmu, dalam satu tempat.
+                        </p>
+                      )}
+                      {workspace && (
+                        <p className={styles.lead}>
+                          {location.view === "edit"
+                            ? "Perbarui identitas, tanpa mengubah isi ruangmu."
+                            : "Overview · Ruang penelitian pribadi"}
+                        </p>
+                      )}
+                    </div>
+                    {directory && !failed && createLink}
                   </div>
-                  {directory && !failed && createLink}
-                </div>
+                )}
               </>
             )}
             {home ? (
@@ -408,11 +441,13 @@ export function V3Workspace({
                 state={directoryState}
                 failed={failed}
               />
-            ) : research ? (
+            ) : research && (!inCompany || (!failed && company)) ? (
               <ResearchWorkspace
-                key={ownerId ?? "unavailable"}
+                key={
+                  (ownerId ?? "unavailable") + ":" + (company?.id ?? "personal")
+                }
                 owner={ownerId ?? ""}
-                company={researchCompany}
+                company={company?.id ?? researchCompany}
                 state={
                   researchState ?? {
                     ready: false,
@@ -475,84 +510,12 @@ export function V3Workspace({
                 />
               </section>
             ) : workspace && company ? (
-              <>
-                <section className={styles.overviewCard}>
-                  <div className={styles.sectionHeading}>
-                    <span className={styles.sectionIcon}>
-                      <Icon name="building" />
-                    </span>
-                    <h2>Detail perusahaan</h2>
-                  </div>
-                  <div className={styles.identityRow}>
-                    <div>
-                      <h3>Nama tampilan</h3>
-                      <p>Ubah nama yang ditampilkan di seluruh ruangmu.</p>
-                    </div>
-                    <Link
-                      className={styles.secondary}
-                      href={workspaceHref("edit", company.id)}
-                    >
-                      <Icon name="pencil" />
-                      {metadataReady ? "Ubah metadata" : "Ubah nama"}
-                    </Link>
-                  </div>
-                  {metadataReady && (
-                    <dl className={styles.metadataSummary}>
-                      <div>
-                        <dt>Ticker</dt>
-                        <dd>{company.ticker || "Belum diisi"}</dd>
-                      </div>
-                      <div>
-                        <dt>Bursa</dt>
-                        <dd>{company.exchange || "Belum diisi"}</dd>
-                      </div>
-                      <div>
-                        <dt>Sektor</dt>
-                        <dd>{company.sector || "Belum diisi"}</dd>
-                      </div>
-                      <div>
-                        <dt>Catatan pribadi</dt>
-                        <dd className={styles.privateNote}>
-                          {company.short_note || "Belum diisi"}
-                        </dd>
-                      </div>
-                    </dl>
-                  )}
-                  {!metadataReady && (
-                    <details
-                      className={styles.capabilities}
-                      onKeyDown={closeDisclosure}
-                    >
-                      <summary>
-                        Informasi tambahan
-                        <Icon name="chevronDown" />
-                      </summary>
-                      <p>
-                        Saat ini hanya nama perusahaan. Ticker, sektor, dan
-                        catatan pribadi belum tersedia.
-                      </p>
-                    </details>
-                  )}
-                </section>
-                <section className={styles.researchNote}>
-                  <span className={styles.sectionIcon}>
-                    <Icon name="read" />
-                  </span>
-                  <div>
-                    <h2>Ruang penelitian</h2>
-                    <p>
-                      Kembangkan riset, rekam Thought, dan baca riwayat tanpa
-                      mengubah catatan asli.
-                    </p>
-                    <Link
-                      className={styles.secondary}
-                      href={researchHref(undefined, company.id)}
-                    >
-                      Buka Ruang Riset
-                    </Link>
-                  </div>
-                </section>
-              </>
+              <CompanyOverview
+                company={company}
+                state={companyResearch}
+                section={location.section}
+                metadataReady={metadataReady}
+              />
             ) : null}
           </main>
           {workspace && (

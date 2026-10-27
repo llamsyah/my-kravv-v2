@@ -35,6 +35,19 @@ const researchRows = ["A", "B"].map((actor, index) => ({
   created_at: "2026-10-27T04:00:00.000Z",
   updated_at: "2026-10-27T04:00:00.000Z",
 }));
+const versionRows = researchRows.map((d, index) => ({
+  id: "60000000-0000-4000-8000-" + String(index + 1).padStart(12, "0"),
+  user_id: d.user_id,
+  company_id: d.company_id,
+  draft_id: d.id,
+  thought_id: "70000000-0000-4000-8000-" + String(index + 1).padStart(12, "0"),
+  number: 1,
+  draft_revision: 1,
+  title: (index ? "B" : "A") + "-COMMITTED-PRIVATE",
+  body: (index ? "B" : "A") + "-IMMUTABLE-PRIVATE",
+  message: "Synthetic",
+  created_at: d.created_at,
+}));
 let sequence = 100;
 const id = (n) => `10000000-0000-4000-8000-${String(n).padStart(12, "0")}`;
 for (const actor of ["A", "B"])
@@ -201,9 +214,13 @@ function fakeSdk(_url, _key, options) {
     },
     from(table) {
       if (
-        !["companies", "user_settings", "captures", "research_drafts"].includes(
-          table,
-        )
+        ![
+          "companies",
+          "user_settings",
+          "captures",
+          "research_drafts",
+          "research_versions",
+        ].includes(table)
       )
         throw Error("Unreviewed synthetic table");
       const filters = [],
@@ -239,7 +256,9 @@ function fakeSdk(_url, _key, options) {
               ? captureRows
               : table === "research_drafts"
                 ? researchRows
-                : settings;
+                : table === "research_versions"
+                  ? versionRows
+                  : settings;
         let found = store.filter(
           (r) =>
             r.user_id === user().id &&
@@ -876,6 +895,81 @@ try {
       !switched[1].text.includes("A-PRIVATE"),
     "Concurrent HTTP request isolation",
   );
+  if (process.argv.includes("--company")) {
+    r = await request(`/foundation?view=company&company=${id(1)}`, {
+      actor: "A",
+    });
+    check(
+      r.text.includes("A-RESEARCH-PRIVATE") &&
+        r.text.includes("A-COMMITTED-PRIVATE") &&
+        !r.text.includes("B-COMMITTED-PRIVATE"),
+    );
+    check(
+      r.text.includes("section=thoughts") && captures.at(-2).key === users.A.id,
+    );
+    r = await request(`/foundation?view=company&company=${id(2)}`, {
+      actor: "A",
+    });
+    check(
+      !r.text.includes("A-RESEARCH-PRIVATE") &&
+        !r.text.includes("A-COMMITTED-PRIVATE") &&
+        r.text.includes("Belum ada draf"),
+    );
+    r = await request(`/foundation?view=company&company=${id(1)}`, {
+      actor: "B",
+    });
+    check(
+      r.text.includes("Ruang ini tidak dapat dibuka") &&
+        !r.text.includes("A-RESEARCH-PRIVATE"),
+    );
+    r = await request(
+      `/foundation?view=research&company=${id(1)}&draft=${researchRows[0].id}`,
+      { actor: "A" },
+    );
+    check(
+      r.text.includes("A-DRAFT-BODY") &&
+        r.text.includes('aria-label="Navigasi perusahaan"'),
+    );
+    r = await request(
+      `/foundation?view=research&company=${id(2)}&draft=${researchRows[0].id}`,
+      { actor: "A" },
+    );
+    check(
+      r.text.includes("Ruang riset belum dapat dimuat") &&
+        !r.text.includes("A-DRAFT-BODY"),
+    );
+    r = await request(`/foundation?view=research&draft=${researchRows[0].id}`, {
+      actor: "A",
+    });
+    check(
+      r.text.includes("A-DRAFT-BODY") &&
+        captures.at(-2).props.location.companyId === id(1),
+    );
+    r = await request(`/foundation?view=company&company=${id(51)}`, {
+      actor: "B",
+    });
+    check(
+      r.text.includes("B-COMMITTED-PRIVATE") &&
+        !r.text.includes("A-COMMITTED-PRIVATE"),
+    );
+    r = await request(
+      `/foundation?view=company&company=${id(1)}&section=thoughts&draft=${researchRows[0].id}&version=${versionRows[0].id}`,
+      { actor: "A" },
+    );
+    check(
+      r.text.includes("A-IMMUTABLE-PRIVATE") &&
+        !r.text.includes("B-IMMUTABLE-PRIVATE") &&
+        !r.text.includes("textarea"),
+    );
+    r = await request(
+      `/foundation?view=company&company=${id(2)}&section=thoughts&draft=${researchRows[0].id}&version=${versionRows[0].id}`,
+      { actor: "A" },
+    );
+    check(
+      r.text.includes("Riset perusahaan belum dapat dimuat") &&
+        !r.text.includes("A-IMMUTABLE-PRIVATE"),
+    );
+  }
   if (process.argv.includes("--captures")) {
     const captureForm = {
       request_id: "40000000-0000-4000-8000-000000000001",

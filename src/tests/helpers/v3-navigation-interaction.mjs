@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import ts from "typescript";
 import * as jsx from "react/jsx-runtime";
+import { researchHref } from "../../features/research/contract.ts";
 import * as model from "../../features/v3-workspace/model.ts";
 import * as theme from "../../features/v3-workspace/theme-preference.ts";
 import * as management from "../../features/v3-workspace/management-contract.ts";
@@ -63,10 +64,14 @@ const imports = {
       },
     }),
   },
+  "./company-overview": {
+    CompanyOverview: () => null,
+    CompanyHeader: () => null,
+  },
   "./company-directory": { CompanyDirectory: () => null },
   "./home-dashboard": { HomeDashboard: () => null },
   "../research/workspace": { ResearchWorkspace: () => null },
-  "../research/contract": { researchHref: () => "/foundation?view=research" },
+  "../research/contract": { researchHref },
   "../research/session": { clearResearchRecovery: () => true },
   "../captures/inbox": { CaptureInbox: () => null },
   react: hooks,

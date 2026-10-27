@@ -1455,3 +1455,97 @@
     padding: 0 16px 20px;
   }
 }
+
+/* Shared company research shell; accepted Home/Directory rules are unchanged. */
+.canvas[data-workspace="true"] {
+  max-width: 1536px;
+  padding: 0 36px 18px;
+}
+.layout[data-workspace="true"][data-expanded="true"] {
+  grid-template-columns: 260px minmax(0, 1fr);
+}
+.layout[data-workspace="true"][data-expanded="true"][data-context="true"] {
+  grid-template-columns: 260px minmax(0, 1fr) 250px;
+}
+.layout[data-workspace="true"] > .main {
+  padding: 28px 0 28px 24px;
+}
+.canvas[data-workspace="true"] .breadcrumb {
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: 12px;
+}
+.canvas[data-workspace="true"] .breadcrumb a:hover {
+  color: var(--v-green);
+}
+.sidebar {
+  padding: 22px 20px 24px 0;
+}
+.sidebarHead {
+  margin-bottom: 16px;
+}
+.switcher > summary {
+  background: transparent;
+  border-color: transparent;
+  padding: 8px 0;
+  gap: 14px;
+}
+.switcher > summary:hover {
+  background: var(--v-selected);
+}
+.switcher > summary .monogram {
+  width: 52px;
+  height: 56px;
+  border-radius: 14px;
+  background: var(--v-green);
+  color: var(--v-panel);
+  font-size: 20px;
+}
+.sideIdentity {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  flex: 1;
+}
+.sideIdentity strong {
+  font-size: 15px;
+  line-height: 1.4;
+}
+.sideIdentity small {
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--v-muted);
+  overflow-wrap: anywhere;
+}
+.companyNav {
+  margin-top: 24px;
+  gap: 9px;
+}
+.companyNav > a {
+  font-size: 14px;
+  gap: 15px;
+  padding: 11px 14px;
+}
+@media (max-width: 1120px) {
+  .layout[data-workspace="true"][data-expanded="true"] {
+    grid-template-columns: 220px minmax(0, 1fr);
+  }
+  .layout[data-workspace="true"] > .main {
+    padding-left: 20px;
+  }
+  .canvas[data-workspace="true"] {
+    padding-inline: 24px;
+  }
+}
+@media (max-width: 720px) {
+  .canvas[data-workspace="true"] {
+    padding: 0 16px 18px;
+  }
+  .layout[data-workspace="true"][data-expanded="true"],
+  .layout[data-workspace="true"][data-expanded="true"][data-context="true"] {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .layout[data-workspace="true"] > .main {
+    padding: 24px 0;
+  }
+}

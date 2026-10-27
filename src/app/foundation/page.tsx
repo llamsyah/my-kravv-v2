@@ -1,3 +1,5 @@
+import { loadCompanyResearch } from "@/server/research/company-overview";
+import { emptyCompanyResearch } from "@/features/v3-workspace/company-research-contract";
 import { requireAuthenticatedSession } from "@/server/auth/session";
 import {
   companyManagementReady,
@@ -55,50 +57,6 @@ export default async function FoundationPage({
     source: null,
     unavailable: false,
   };
-  if (location.view === "research" || home) {
-    try {
-      researchState.ready = await researchReady(supabase);
-      if (researchState.ready) {
-        if (!home && research.draft) {
-          researchState.selected = await getResearchDraft(
-            supabase,
-            research.draft,
-          );
-          researchState.unavailable = !researchState.selected;
-          if (researchState.selected) {
-            const history = await researchHistory(supabase, research.draft);
-            researchState.history = history.items;
-            researchState.historyHasNext = history.hasNext;
-            if (researchState.selected.source_capture_id)
-              researchState.source = await researchSource(
-                supabase,
-                researchState.selected.source_capture_id,
-              );
-          }
-        } else {
-          Object.assign(
-            researchState,
-            await listResearchDrafts(
-              supabase,
-              home ? 0 : research.page,
-              home ? undefined : research.company,
-            ),
-          );
-          if (!home && research.capture)
-            researchState.source = await researchSource(
-              supabase,
-              research.capture,
-            );
-        }
-      }
-    } catch {
-      researchState.failed = true;
-      researchState.items = [];
-      researchState.selected = null;
-      researchState.history = [];
-      researchState.source = null;
-    }
-  }
   const captureState: CaptureInboxState = {
     ready: false,
     failed: false,
@@ -154,13 +112,100 @@ export default async function FoundationPage({
     hasNext = false;
     initialTheme = "light";
   }
+  if (
+    home ||
+    (location.view === "research" &&
+      !failed &&
+      (!location.companyId || selectedCompany))
+  ) {
+    try {
+      researchState.ready = await researchReady(supabase);
+      if (researchState.ready) {
+        if (!home && research.draft) {
+          researchState.selected = await getResearchDraft(
+            supabase,
+            research.draft,
+          );
+          researchState.unavailable = !researchState.selected;
+          if (
+            researchState.selected &&
+            research.company &&
+            researchState.selected.company_id !== research.company
+          )
+            throw new Error("Company context mismatch");
+          if (researchState.selected?.company_id && !location.companyId) {
+            selectedCompany = await getManagedCompany(
+              supabase,
+              researchState.selected.company_id,
+              metadataReady,
+            );
+            if (!selectedCompany) throw new Error("Company unavailable");
+            location.companyId = selectedCompany.id;
+          }
+          if (researchState.selected) {
+            const history = await researchHistory(supabase, research.draft);
+            researchState.history = history.items;
+            researchState.historyHasNext = history.hasNext;
+            if (researchState.selected.source_capture_id)
+              researchState.source = await researchSource(
+                supabase,
+                researchState.selected.source_capture_id,
+              );
+          }
+        } else {
+          Object.assign(
+            researchState,
+            await listResearchDrafts(
+              supabase,
+              home ? 0 : research.page,
+              home ? undefined : research.company,
+            ),
+          );
+          if (!home && research.capture)
+            researchState.source = await researchSource(
+              supabase,
+              research.capture,
+            );
+        }
+      }
+    } catch {
+      researchState.failed = true;
+      researchState.items = [];
+      researchState.selected = null;
+      researchState.history = [];
+      researchState.source = null;
+    }
+  }
+  let companyResearch = emptyCompanyResearch();
+  if (
+    !failed &&
+    selectedCompany &&
+    location.view === "company" &&
+    (!location.section || location.section === "thoughts")
+  ) {
+    try {
+      companyResearch = await loadCompanyResearch(
+        supabase,
+        selectedCompany.id,
+        location.section === "thoughts" ? research.page : 0,
+        location.section === "thoughts" &&
+          typeof search.version === "string" &&
+          research.draft
+          ? { version: search.version, draft: research.draft }
+          : undefined,
+      );
+    } catch {
+      companyResearch = { ...emptyCompanyResearch(), failed: true };
+    }
+  }
   return (
     <V3Workspace
       key={user.id}
       ownerId={user.id}
       captureState={captureState}
       researchState={researchState}
-      researchCompany={research.company}
+      researchCompany={location.companyId ?? research.company}
+      companyResearch={companyResearch}
       companies={companies}
       selectedCompany={selectedCompany ?? null}
       location={location}
