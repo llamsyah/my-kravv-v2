@@ -135,62 +135,6 @@ export function ResearchWorkspace({
   company?: string;
   companyName?: string;
 }) {
-  const router = useRouter();
-  const [title, setTitle] = useState("Riset tanpa judul"),
-    [mode, setMode] = useState<DraftFields["mode"]>("blank"),
-    [companyId, setCompany] = useState<string | null>(
-      company ?? state.source?.company_id ?? null,
-    );
-  const [pendingOperation, setPendingOperation] =
-    useState<ResearchMutation | null>(null);
-  const [busy, setBusy] = useState(false),
-    [error, setError] = useState(""),
-    operation = useRef<ResearchMutation | null>(null),
-    sending = useRef(false),
-    alive = useRef(true);
-  useEffect(() => {
-    alive.current = true;
-    return () => {
-      alive.current = false;
-    };
-  }, []);
-  async function create(event: React.FormEvent) {
-    event.preventDefault();
-    if (sending.current || !state.ready) return;
-    sending.current = true;
-    setBusy(true);
-    setError("");
-    const m = operation.current ?? {
-      kind: "create" as const,
-      operation: crypto.randomUUID(),
-      title,
-      company_id: companyId,
-      capture_id: state.source?.id ?? null,
-      mode,
-    };
-    operation.current = m;
-    setPendingOperation(m);
-    try {
-      const r = await researchMutationAction(m, owner);
-      if (!alive.current) return;
-      if (!r.ok || !r.draft) {
-        setError(r.ok ? "Draf belum terkonfirmasi." : r.error);
-        if (!r.ok && ["invalid", "account", "conflict"].includes(r.code)) {
-          operation.current = null;
-          setPendingOperation(null);
-        }
-      } else {
-        router.push(researchHref(r.draft.id, r.draft.company_id ?? undefined));
-        router.refresh();
-      }
-    } catch {
-      if (alive.current)
-        setError("Pembuatan belum terkonfirmasi. Ulangi operasi yang sama.");
-    } finally {
-      sending.current = false;
-      if (alive.current) setBusy(false);
-    }
-  }
   if (state.failed)
     return (
       <section className={styles.panel} role="alert">
@@ -229,169 +173,40 @@ export function ResearchWorkspace({
           companyName={companyName}
         />
       ) : (
-        <NewDraftFrame source={state.source} companyName={companyName}>
-          <section className={styles.panel}>
-            <h2>{state.source ? "Mulai riset dari Capture" : "Draf baru"}</h2>
-            {state.source && (
-              <details open>
-                <summary>Capture asli · tetap disimpan</summary>
-                <pre>{state.source.raw_text}</pre>
-                <p>
-                  Capture ini hanya disalin sebagai titik awal. Membukanya lagi
-                  akan melanjutkan draf yang sama.
-                </p>
-              </details>
-            )}
-            <form onSubmit={create}>
-              <fieldset disabled={busy || !!pendingOperation}>
-                <label>
-                  Judul
-                  <input
-                    required
-                    maxLength={200}
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                  />
-                </label>
-                <label>
-                  Pendekatan
-                  <select
-                    value={mode}
-                    onChange={(e) =>
-                      setMode(e.target.value as DraftFields["mode"])
-                    }
-                  >
-                    <option value="blank">Kosong</option>
-                    <option value="guided">Terpandu</option>
-                    <option value="assisted">Pendamping</option>
-                  </select>
-                </label>
-                <p>
-                  Semua pendekatan memakai dokumen yang sama. Tidak ada
-                  permintaan AI otomatis.
-                </p>
-              </fieldset>
-              <CompanyChoice
-                owner={owner}
-                id={companyId}
-                onChange={setCompany}
-                disabled={busy || !!pendingOperation}
-              />
-              <button disabled={busy || !title.trim()} type="submit">
-                {busy
-                  ? "Membuat…"
-                  : pendingOperation
-                    ? "Ulangi pembuatan yang sama"
-                    : "Buka draf"}
-              </button>
-              {error && <p role="alert">{error}</p>}
-            </form>
-          </section>
-          <section className={styles.panel}>
-            <h2>Lanjutkan riset</h2>
-            {!state.items.length ? (
-              <p>Belum ada draf. Mulai dari pertanyaan atau Capture.</p>
-            ) : (
-              <ul className={styles.directory}>
-                {state.items.map((d) => (
-                  <li key={d.id}>
-                    <Link href={researchHref(d.id, d.company_id ?? undefined)}>
-                      <strong>{d.title}</strong>
-                      <span>
-                        {d.company_id ? d.company_name : "Tanpa perusahaan"} ·
-                        revisi kerja {d.revision}
-                      </span>
-                      <time dateTime={d.updated_at}>
-                        {new Date(d.updated_at)
-                          .toISOString()
-                          .slice(0, 16)
-                          .replace("T", " ")}{" "}
-                        UTC
-                      </time>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            )}
-            <nav aria-label="Halaman draf">
-              {state.page > 0 && (
-                <Link
-                  href={researchHref(
-                    undefined,
-                    company,
-                    undefined,
-                    state.page - 1,
-                  )}
-                >
-                  Lebih baru
-                </Link>
-              )}
-              {state.hasNext && state.page < 10000 && (
-                <Link
-                  href={researchHref(
-                    undefined,
-                    company,
-                    undefined,
-                    state.page + 1,
-                  )}
-                >
-                  Lebih lama
-                </Link>
-              )}
-            </nav>
-          </section>
-        </NewDraftFrame>
+        <DraftEditor
+          key={
+            "entry:" +
+            owner +
+            ":" +
+            (company ?? "personal") +
+            ":" +
+            (state.source?.id ?? "blank")
+          }
+          draft={{
+            id:
+              "entry:" +
+              (company ?? "personal") +
+              ":" +
+              (state.source?.id ?? "blank"),
+            user_id: owner,
+            title: "Catatan tanpa judul",
+            body: state.source?.raw_text ?? "",
+            mode: "blank",
+            company_id: company ?? state.source?.company_id ?? null,
+            source_capture_id: state.source?.id ?? null,
+            revision: 1,
+            created_at: "",
+            updated_at: "",
+          }}
+          entry
+          owner={owner}
+          initialHistory={[]}
+          historyHasNext={false}
+          source={state.source}
+          directory={state}
+          companyName={companyName}
+        />
       )}
-    </div>
-  );
-}
-function NewDraftFrame({
-  children,
-  source,
-  companyName,
-}: {
-  children: React.ReactNode;
-  source: ResearchPageState["source"];
-  companyName?: string;
-}) {
-  const [desktopOpen, setDesktopOpen] = useState(true),
-    [mobileOpen, setMobileOpen] = useState(false),
-    [area, setArea] = useState(0);
-  const narrow = useCompactCompanion(),
-    open = narrow ? mobileOpen : desktopOpen;
-  const setOpen = (value: boolean) =>
-    narrow ? setMobileOpen(value) : setDesktopOpen(value);
-  const opener = useRef<HTMLButtonElement>(null);
-  return (
-    <div className={styles.writingLayout} data-companion={open}>
-      <div className={styles.writingMain}>
-        <header className={styles.newDocumentHead}>
-          <div>
-            <p>{companyName ?? "Ruang pribadi"} / Penulisan</p>
-            <h1>Ruang Tulis</h1>
-            <span>Mulai draf baru atau lanjutkan tulisanmu.</span>
-          </div>
-          <button
-            ref={opener}
-            type="button"
-            aria-expanded={open}
-            aria-controls="writing-companion"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? "Sembunyikan Companion" : "Buka Companion"}
-          </button>
-        </header>
-        <div className={styles.newDraft}>{children}</div>
-      </div>
-      <WritingCompanion
-        id="writing-companion"
-        open={open}
-        onClose={() => setOpen(false)}
-        opener={opener}
-        area={area}
-        onArea={setArea}
-        source={source}
-      />
     </div>
   );
 }
@@ -402,7 +217,7 @@ function DraftNavigation({
   onLeave,
 }: {
   state: ResearchPageState;
-  current: string;
+  current?: string;
   company?: string;
   onLeave: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }) {
@@ -464,7 +279,8 @@ function DraftNavigation({
   );
 }
 function DraftEditor({
-  draft,
+  draft: initialDraft,
+  entry = false,
   owner,
   initialHistory,
   historyHasNext,
@@ -473,6 +289,7 @@ function DraftEditor({
   companyName,
 }: {
   draft: Draft;
+  entry?: boolean;
   owner: string;
   initialHistory: ThoughtVersion[];
   historyHasNext: boolean;
@@ -480,17 +297,35 @@ function DraftEditor({
   directory: ResearchPageState;
   companyName?: string;
 }) {
+  const router = useRouter();
   const [session] = useState(
-    () => new WritingSession(draft, (m) => researchMutationAction(m, owner)),
+    () =>
+      new WritingSession(
+        initialDraft,
+        (m) => researchMutationAction(m, owner),
+        undefined,
+        undefined,
+        entry
+          ? {
+              capture: initialDraft.source_capture_id,
+              onSaved: (row) => {
+                router.replace(
+                  researchHref(row.id, row.company_id ?? undefined),
+                );
+                router.refresh();
+              },
+            }
+          : undefined,
+      ),
   );
   const state = useSyncExternalStore(
     session.subscribe,
     session.getSnapshot,
     session.getServerSnapshot,
   );
-  const [desktopCompanion, setDesktopCompanion] = useState(
-      draft.mode !== "blank",
-    ),
+  const draft = session.row;
+  const unsavedEntry = session.isEntry;
+  const [desktopCompanion, setDesktopCompanion] = useState(true),
     [mobileCompanion, setMobileCompanion] = useState(false),
     [area, setArea] = useState(0);
   const compactCompanion = useCompactCompanion(),
@@ -531,7 +366,7 @@ function DraftEditor({
   const edit = (field: Partial<DraftFields>) =>
     session.edit({ ...state.fields, ...field });
   async function mutate(kind: "commit" | "restore") {
-    if (sending.current || busy) return;
+    if (sending.current || busy || unsavedEntry) return;
     if (!operation.current && state.status !== "saved") {
       setFeedback(
         "Simpan dan pastikan draf bersih sebelum merekam atau memulihkan.",
@@ -704,7 +539,7 @@ function DraftEditor({
           <div className={styles.documentTrail}>
             <DraftNavigation
               state={directory}
-              current={draft.id}
+              current={unsavedEntry ? undefined : draft.id}
               company={draft.company_id ?? undefined}
               onLeave={leaveDraft}
             />
@@ -747,7 +582,8 @@ function DraftEditor({
           <div className={styles.documentMeta}>
             <span role="status" data-status={state.status}>
               <i />
-              {writingStatus(state.status)} · r{state.revision}
+              {unsavedEntry ? "Belum tersimpan" : writingStatus(state.status)}
+              {!unsavedEntry && ` · r${state.revision}`}
             </span>
             <label>
               <span className="sr-only">Pendekatan</span>
@@ -908,14 +744,17 @@ function DraftEditor({
               kata · {state.fields.body.length.toLocaleString("id-ID")} karakter
             </span>
             <span id="research-save-help">
-              Autosave 1 detik · tanpa Thought otomatis
+              {unsavedEntry
+                ? "Simpan untuk membuat draf · buffer lokal aktif"
+                : "Autosave 1 detik · tanpa Thought otomatis"}
             </span>
             <button
               type="button"
               onClick={() => session.save()}
               disabled={
                 blocked ||
-                ["saving", "saved", "conflict"].includes(state.status)
+                ["saving", "conflict"].includes(state.status) ||
+                (!unsavedEntry && state.status === "saved")
               }
             >
               Simpan / ulangi penyimpanan
@@ -935,7 +774,9 @@ function DraftEditor({
             !!server ||
             !!pendingOperation) && (
             <div>
-              <button onClick={loadServer}>Periksa versi server</button>
+              <button disabled={unsavedEntry} onClick={loadServer}>
+                Periksa versi server
+              </button>
               {server && (
                 <details open>
                   <summary>
@@ -1015,7 +856,10 @@ function DraftEditor({
               )
             }
             disabled={
-              busy || state.status !== "saved" || !state.fields.body.trim()
+              unsavedEntry ||
+              busy ||
+              state.status !== "saved" ||
+              !state.fields.body.trim()
             }
           >
             {busy
@@ -1088,15 +932,21 @@ function DraftEditor({
         onArea={setArea}
         source={source}
         ai={
-          <ReasoningPanel
-            owner={owner}
-            draftId={draft.id}
-            revision={state.revision}
-            dirty={state.status !== "saved"}
-            sourceAvailable={!!source}
-            companyAvailable={!!state.fields.company_id}
-            version={view}
-          />
+          unsavedEntry ? (
+            <p>
+              Simpan draf untuk membuka AI Review. Penyedia belum diaktifkan.
+            </p>
+          ) : (
+            <ReasoningPanel
+              owner={owner}
+              draftId={draft.id}
+              revision={state.revision}
+              dirty={state.status !== "saved"}
+              sourceAvailable={!!source}
+              companyAvailable={!!state.fields.company_id}
+              version={view}
+            />
+          )
         }
       />
     </div>

@@ -1,4 +1,9 @@
-import { draftFields, type Draft, type DraftFields } from "./contract.ts";
+import {
+  draftRow,
+  draftFields,
+  type Draft,
+  type DraftFields,
+} from "./contract.ts";
 import type { ResearchMutation } from "../../server/research/service.ts";
 const prefix = "my-kravv:v3:kjcvgjfwlmyfroiqlbmw:research:";
 const liveSessions = new Set<WritingSession>();
@@ -47,6 +52,12 @@ export class WritingSession {
   private restored = false;
   private revoked = false;
   private attempt: Extract<ResearchMutation, { kind: "save" }> | null = null;
+  private entry?: { capture: string | null; onSaved: (row: Draft) => void };
+  private creation: Extract<ResearchMutation, { kind: "create" }> | null = null;
+  private created: Draft | null = null;
+  get isEntry() {
+    return !!this.entry && !this.created;
+  }
   private snapshot: WritingState;
   readonly initial: WritingState;
   readonly key: string;
@@ -59,8 +70,10 @@ export class WritingSession {
     send: (m: ResearchMutation) => Promise<Reply>,
     storage: () => StoragePort = () => window.sessionStorage,
     uuid = () => crypto.randomUUID(),
+    entry?: { capture: string | null; onSaved: (row: Draft) => void },
   ) {
-    this.row = row;
+    this.entry = entry;
+    this.row = { ...row };
     this.send = send;
     this.storage = storage;
     this.uuid = uuid;
@@ -96,6 +109,9 @@ export class WritingSession {
         fields: this.snapshot.fields,
         revision: this.snapshot.revision,
         attempt: this.attempt,
+        ...(this.entry
+          ? { creation: this.creation, created: this.created }
+          : {}),
       });
       let bytes = data.length,
         slots = 0;
@@ -123,6 +139,42 @@ export class WritingSession {
         parsed = draftFields.safeParse(v.fields);
       if (!parsed.success || !Number.isInteger(v.revision) || v.revision < 1)
         throw Error();
+      if (this.entry) {
+        if (v.creation) {
+          const c = v.creation;
+          if (
+            c.kind !== "create" ||
+            !isUuid(c.operation) ||
+            c.capture_id !== this.entry.capture ||
+            !draftFields.safeParse({
+              title: c.title,
+              body: "",
+              mode: c.mode,
+              company_id: c.company_id,
+            }).success
+          )
+            throw Error();
+          this.creation = {
+            kind: "create",
+            operation: c.operation,
+            title: c.title,
+            mode: c.mode,
+            company_id: c.company_id,
+            capture_id: c.capture_id,
+          };
+        }
+        if (v.created) {
+          const parsedRow = draftRow.parse(v.created);
+          if (
+            !this.creation ||
+            parsedRow.user_id !== this.row.user_id ||
+            parsedRow.source_capture_id !== this.entry.capture
+          )
+            throw Error();
+          this.created = parsedRow;
+          Object.assign(this.row, parsedRow);
+        }
+      }
       // Recovered operations never gain authority: service independently verifies user,
       // ID, payload and expected revision. Only exact own-draft save envelopes enter.
       if (v.attempt) {
@@ -139,13 +191,14 @@ export class WritingSession {
       this.snapshot = {
         fields: parsed.data,
         revision: v.revision,
-        status: this.attempt
-          ? "uncertain"
-          : v.revision !== this.row.revision
-            ? "conflict"
-            : same(parsed.data, this.initial.fields)
-              ? "saved"
-              : "dirty",
+        status:
+          this.attempt || (this.entry && this.creation && !this.created)
+            ? "uncertain"
+            : v.revision !== this.row.revision
+              ? "conflict"
+              : same(parsed.data, this.initial.fields)
+                ? "saved"
+                : "dirty",
         error: "Buffer lokal ditemukan. Periksa isinya sebelum menyimpan.",
         storageError: false,
       };
@@ -188,7 +241,7 @@ export class WritingSession {
   }
   private schedule() {
     clearTimeout(this.timer);
-    if (this.active && this.snapshot.status === "dirty")
+    if (!this.isEntry && this.active && this.snapshot.status === "dirty")
       this.timer = setTimeout(() => {
         void this.save();
       }, 1000);
@@ -196,7 +249,8 @@ export class WritingSession {
   async save() {
     clearTimeout(this.timer);
     if (this.flight || !this.active) return false;
-    if (!this.attempt && this.snapshot.status === "saved") return true;
+    if (!this.isEntry && !this.attempt && this.snapshot.status === "saved")
+      return true;
     if (!this.attempt && !draftFields.safeParse(this.snapshot.fields).success) {
       this.snapshot = {
         ...this.snapshot,
@@ -206,6 +260,73 @@ export class WritingSession {
       return false;
     }
     if (!this.attempt && this.snapshot.status === "conflict") return false;
+    if (this.isEntry) {
+      if (!this.snapshot.fields.body.trim()) {
+        this.snapshot = {
+          ...this.snapshot,
+          error: "Tulis catatan sebelum menyimpan draf baru.",
+        };
+        this.emit();
+        return false;
+      }
+      this.creation ??= {
+        kind: "create",
+        operation: this.uuid(),
+        title: this.snapshot.fields.title,
+        mode: this.snapshot.fields.mode,
+        company_id: this.snapshot.fields.company_id,
+        capture_id: this.entry!.capture,
+      };
+      this.flight = true;
+      this.snapshot = { ...this.snapshot, status: "saving", error: null };
+      this.persist();
+      this.emit();
+      // Recovery evidence must exist before a new persistent document can be requested.
+      if (this.snapshot.storageError) {
+        this.flight = false;
+        this.snapshot = {
+          ...this.snapshot,
+          status: "uncertain",
+          error: "Buffer lokal wajib tersedia sebelum membuat draf.",
+        };
+        this.emit();
+        return false;
+      }
+      try {
+        const result = await this.send(this.creation);
+        if (!this.active) return false;
+        if (!result.ok || !result.draft) throw Error();
+        const row = draftRow.parse(result.draft);
+        if (
+          row.user_id !== this.row.user_id ||
+          row.source_capture_id !== this.entry!.capture
+        )
+          throw Error();
+        this.created = row;
+        Object.assign(this.row, row);
+        this.snapshot = {
+          ...this.snapshot,
+          revision: row.revision,
+          status: "dirty",
+        };
+        this.persist();
+        if (this.snapshot.storageError) throw Error();
+      } catch {
+        if (this.active) {
+          this.snapshot = {
+            ...this.snapshot,
+            status: "uncertain",
+            error:
+              "Pembuatan belum terkonfirmasi. Teks dan identitas operasi dipertahankan; simpan ulang operasi yang sama.",
+          };
+          this.persist();
+          this.emit();
+        }
+        return false;
+      } finally {
+        this.flight = false;
+      }
+    }
     const attempt = this.attempt ?? {
       kind: "save" as const,
       operation: this.uuid(),
@@ -218,6 +339,16 @@ export class WritingSession {
     this.snapshot = { ...this.snapshot, status: "saving", error: null };
     this.persist();
     this.emit();
+    if (this.entry && this.snapshot.storageError) {
+      this.flight = false;
+      this.snapshot = {
+        ...this.snapshot,
+        status: "uncertain",
+        error: "Buffer lokal belum terkonfirmasi; permintaan ditahan.",
+      };
+      this.emit();
+      return false;
+    }
     try {
       const result = await this.send(attempt);
       if (!this.active) return false;
@@ -257,6 +388,7 @@ export class WritingSession {
       };
       this.persist();
       this.emit();
+      if (clean && this.entry) this.entry.onSaved(saved);
       return clean;
     } catch {
       if (this.active) {
