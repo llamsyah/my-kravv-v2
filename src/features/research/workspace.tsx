@@ -10,7 +10,6 @@ import {
 import { findCaptureCompaniesAction } from "../captures/actions";
 import { WritingSession } from "./session";
 import {
-  guidance,
   researchHref,
   textChanges,
   type Draft,
@@ -21,6 +20,14 @@ import type {
   ResearchPageState,
   ResearchMutation,
 } from "../../server/research/service";
+import { WritingCompanion, useCompactCompanion } from "./companion";
+import { Icon } from "../../components/ui/icon";
+import {
+  writingAreas,
+  writingStatus,
+  formatMarkdown,
+  type MarkdownCommand,
+} from "./writing-tools";
 import { ReasoningPanel } from "./reasoning-panel";
 import styles from "./workspace.module.css";
 
@@ -121,10 +128,12 @@ export function ResearchWorkspace({
   owner,
   state,
   company,
+  companyName,
 }: {
   owner: string;
   state: ResearchPageState;
   company?: string;
+  companyName?: string;
 }) {
   const router = useRouter();
   const [title, setTitle] = useState("Riset tanpa judul"),
@@ -216,9 +225,11 @@ export function ResearchWorkspace({
           initialHistory={state.history}
           historyHasNext={state.historyHasNext}
           source={state.source}
+          directory={state}
+          companyName={companyName}
         />
       ) : (
-        <>
+        <NewDraftFrame source={state.source} companyName={companyName}>
           <section className={styles.panel}>
             <h2>{state.source ? "Mulai riset dari Capture" : "Draf baru"}</h2>
             {state.source && (
@@ -329,9 +340,127 @@ export function ResearchWorkspace({
               )}
             </nav>
           </section>
-        </>
+        </NewDraftFrame>
       )}
     </div>
+  );
+}
+function NewDraftFrame({
+  children,
+  source,
+  companyName,
+}: {
+  children: React.ReactNode;
+  source: ResearchPageState["source"];
+  companyName?: string;
+}) {
+  const [desktopOpen, setDesktopOpen] = useState(true),
+    [mobileOpen, setMobileOpen] = useState(false),
+    [area, setArea] = useState(0);
+  const narrow = useCompactCompanion(),
+    open = narrow ? mobileOpen : desktopOpen;
+  const setOpen = (value: boolean) =>
+    narrow ? setMobileOpen(value) : setDesktopOpen(value);
+  const opener = useRef<HTMLButtonElement>(null);
+  return (
+    <div className={styles.writingLayout} data-companion={open}>
+      <div className={styles.writingMain}>
+        <header className={styles.newDocumentHead}>
+          <div>
+            <p>{companyName ?? "Ruang pribadi"} / Penulisan</p>
+            <h1>Ruang Tulis</h1>
+            <span>Mulai draf baru atau lanjutkan tulisanmu.</span>
+          </div>
+          <button
+            ref={opener}
+            type="button"
+            aria-expanded={open}
+            aria-controls="writing-companion"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? "Sembunyikan Companion" : "Buka Companion"}
+          </button>
+        </header>
+        <div className={styles.newDraft}>{children}</div>
+      </div>
+      <WritingCompanion
+        id="writing-companion"
+        open={open}
+        onClose={() => setOpen(false)}
+        opener={opener}
+        area={area}
+        onArea={setArea}
+        source={source}
+      />
+    </div>
+  );
+}
+function DraftNavigation({
+  state,
+  current,
+  company,
+  onLeave,
+}: {
+  state: ResearchPageState;
+  current: string;
+  company?: string;
+  onLeave: (e: React.MouseEvent<HTMLAnchorElement>) => void;
+}) {
+  return (
+    <details
+      className={styles.draftPicker}
+      onKeyDown={(e) => {
+        if (e.key !== "Escape") return;
+        e.preventDefault();
+        e.currentTarget.open = false;
+        e.currentTarget.querySelector("summary")?.focus();
+      }}
+    >
+      <summary>
+        <Icon name="read" size="small" />
+        Draf saya
+        <Icon name="chevronDown" size="small" />
+      </summary>
+      <div>
+        <Link onClick={onLeave} href={researchHref(undefined, company)}>
+          + Draf baru / semua draf
+        </Link>
+        <ul>
+          {state.items.map((d) => (
+            <li key={d.id}>
+              <Link
+                onClick={onLeave}
+                aria-current={d.id === current ? "page" : undefined}
+                href={researchHref(d.id, d.company_id ?? undefined)}
+              >
+                <strong>{d.title}</strong>
+                <small>Revisi kerja {d.revision}</small>
+              </Link>
+            </li>
+          ))}
+        </ul>
+        {!state.items.length && <p>Belum ada draf lain yang dimuat.</p>}
+        <nav aria-label="Halaman pemilih draf">
+          {state.page > 0 && (
+            <Link
+              onClick={onLeave}
+              href={researchHref(current, company, undefined, state.page - 1)}
+            >
+              Lebih baru
+            </Link>
+          )}
+          {state.hasNext && state.page < 10000 && (
+            <Link
+              onClick={onLeave}
+              href={researchHref(current, company, undefined, state.page + 1)}
+            >
+              Lebih lama
+            </Link>
+          )}
+        </nav>
+        <p>Perubahan yang belum tersimpan tetap memerlukan konfirmasi.</p>
+      </div>
+    </details>
   );
 }
 function DraftEditor({
@@ -340,12 +469,16 @@ function DraftEditor({
   initialHistory,
   historyHasNext,
   source,
+  directory,
+  companyName,
 }: {
   draft: Draft;
   owner: string;
   initialHistory: ThoughtVersion[];
   historyHasNext: boolean;
   source: ResearchPageState["source"];
+  directory: ResearchPageState;
+  companyName?: string;
 }) {
   const [session] = useState(
     () => new WritingSession(draft, (m) => researchMutationAction(m, owner)),
@@ -355,6 +488,17 @@ function DraftEditor({
     session.getSnapshot,
     session.getServerSnapshot,
   );
+  const [desktopCompanion, setDesktopCompanion] = useState(
+      draft.mode !== "blank",
+    ),
+    [mobileCompanion, setMobileCompanion] = useState(false),
+    [area, setArea] = useState(0);
+  const compactCompanion = useCompactCompanion(),
+    companion = compactCompanion ? mobileCompanion : desktopCompanion;
+  const setCompanion = (value: boolean) =>
+    compactCompanion ? setMobileCompanion(value) : setDesktopCompanion(value);
+  const companionControl = useRef<HTMLButtonElement>(null),
+    textarea = useRef<HTMLTextAreaElement>(null);
   const [history, setHistory] = useState(initialHistory),
     [historyPage, setHistoryPage] = useState(0),
     [hasNext, setNext] = useState(historyHasNext),
@@ -514,267 +658,448 @@ function DraftEditor({
     state.fields.body === last.body &&
     state.fields.company_id === last.company_id &&
     state.status === "saved";
+  const blocked = busy || !!pendingOperation;
+  function format(command: MarkdownCommand) {
+    if (blocked || !textarea.current) return;
+    const changed = formatMarkdown(
+      state.fields.body,
+      textarea.current.selectionStart,
+      textarea.current.selectionEnd,
+      command,
+    );
+    edit({ body: changed.body });
+    requestAnimationFrame(() => {
+      textarea.current?.focus();
+      textarea.current?.setSelectionRange(changed.start, changed.end);
+    });
+  }
+  function insertHeading() {
+    if (blocked) return;
+    const pos = textarea.current?.selectionStart ?? state.fields.body.length;
+    edit({
+      body:
+        state.fields.body.slice(0, pos) +
+        "\n\n## " +
+        writingAreas[area].title +
+        "\n\n" +
+        state.fields.body.slice(pos),
+    });
+    textarea.current?.focus();
+  }
+  const leaveDraft = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    if (
+      state.status !== "saved" &&
+      !window.confirm(
+        state.storageError
+          ? "Buffer peramban tidak tersedia. Salin teks sebelum berpindah. Tetap tinggalkan draf ini?"
+          : "Penyimpanan belum terkonfirmasi. Buffer lokal dipertahankan bila tersedia. Berpindah draf sekarang?",
+      )
+    )
+      event.preventDefault();
+  };
   return (
-    <>
-      <div className={styles.toolbar}>
-        <Link href={researchHref()}>← Semua draf</Link>
-        <span>
-          Working Tree ·{" "}
-          {latest ? `Thought terakhir v${latest}` : "belum direkam"}
-        </span>
-      </div>
-      <section className={styles.panel}>
-        <div className={styles.toolbar}>
-          <h2>Ruang Tulis</h2>
-          <span role="status">
-            {
-              {
-                saved: "Tersimpan",
-                dirty: "Belum tersimpan",
-                saving: "Menyimpan…",
-                uncertain: "Penyimpanan belum pasti",
-                conflict: "Konflik revisi",
-              }[state.status]
-            }{" "}
-            · r{state.revision}
-          </span>
-        </div>
-        <fieldset disabled={busy || !!pendingOperation}>
-          <label>
-            Judul
-            <input
-              value={state.fields.title}
-              maxLength={200}
-              onChange={(e) => edit({ title: e.target.value })}
+    <div className={styles.writingLayout} data-companion={companion}>
+      <div className={styles.writingMain} data-mode={state.fields.mode}>
+        <header className={styles.documentHead}>
+          <div className={styles.documentTrail}>
+            <DraftNavigation
+              state={directory}
+              current={draft.id}
+              company={draft.company_id ?? undefined}
+              onLeave={leaveDraft}
             />
-          </label>
-          <label>
-            Pendekatan
-            <select
-              value={state.fields.mode}
-              onChange={(e) =>
-                edit({ mode: e.target.value as DraftFields["mode"] })
+            <span>{companyName ?? "Ruang pribadi"} / Ruang Tulis</span>
+          </div>
+          <div className={styles.documentActions}>
+            <a href="#research-history">
+              <Icon name="clock" size="small" />
+              Lihat versi
+            </a>
+            <a className={styles.recordAction} href="#research-commit">
+              <Icon name="check" size="small" />
+              Rekam Thought…
+            </a>
+            <button
+              ref={companionControl}
+              type="button"
+              aria-label={
+                companion ? "Sembunyikan Companion" : "Buka Companion"
               }
+              aria-expanded={companion}
+              aria-controls="writing-companion"
+              onClick={() => setCompanion(!companion)}
             >
-              <option value="blank">Kosong</option>
-              <option value="guided">Terpandu</option>
-              <option value="assisted">Pendamping</option>
-            </select>
-          </label>
-          <CompanyChoice
-            owner={owner}
-            id={state.fields.company_id}
-            onChange={(company_id) => edit({ company_id })}
-          />
+              <Icon name="panelLeftOpen" size="small" />
+              Companion
+            </button>
+          </div>
+          <h1 className={styles.documentTitle} aria-label={state.fields.title}>
+            <label>
+              <span className="sr-only">Judul</span>
+              <input
+                value={state.fields.title}
+                maxLength={200}
+                disabled={blocked}
+                onChange={(e) => edit({ title: e.target.value })}
+              />
+            </label>
+          </h1>
+          <div className={styles.documentMeta}>
+            <span role="status" data-status={state.status}>
+              <i />
+              {writingStatus(state.status)} · r{state.revision}
+            </span>
+            <label>
+              <span className="sr-only">Pendekatan</span>
+              <select
+                value={state.fields.mode}
+                disabled={blocked}
+                onChange={(e) =>
+                  edit({ mode: e.target.value as DraftFields["mode"] })
+                }
+              >
+                <option value="blank">Kosong</option>
+                <option value="guided">Terpandu</option>
+                <option value="assisted">Pendamping</option>
+              </select>
+            </label>
+            <details className={styles.documentOptions}>
+              <summary>Konteks dokumen</summary>
+              <CompanyChoice
+                owner={owner}
+                id={state.fields.company_id}
+                disabled={blocked}
+                onChange={(company_id) => edit({ company_id })}
+              />
+            </details>
+          </div>
+        </header>
+        <section className={styles.editorSurface} aria-label="Kanvas penulisan">
+          <div
+            className={styles.markdownToolbar}
+            role="toolbar"
+            aria-label="Format Markdown"
+          >
+            <label>
+              <span className="sr-only">Format paragraf</span>
+              <select
+                disabled={blocked}
+                value="paragraph"
+                onChange={(e) => {
+                  if (e.target.value === "heading") format("heading");
+                }}
+              >
+                <option value="paragraph">Paragraf</option>
+                <option value="heading">Judul bagian · H2</option>
+              </select>
+            </label>
+            {(
+              [
+                ["bold", "Tebal", "B"],
+                ["italic", "Miring", "I"],
+                ["list", "Daftar", "☷"],
+                ["quote", "Kutipan", "❞"],
+                ["code", "Kode", "{ }"],
+              ] as const
+            ).map(([command, label, symbol]) => (
+              <button
+                type="button"
+                key={command}
+                disabled={blocked}
+                aria-label={label}
+                title={label}
+                onClick={() => format(command)}
+              >
+                {symbol}
+              </button>
+            ))}
+          </div>
           {state.fields.mode === "guided" && (
-            <aside>
-              <h3>Pertanyaan penuntun · tidak mengubah teks</h3>
-              <ul>
-                {guidance.map((p) => (
-                  <li key={p}>{p}</li>
-                ))}
-              </ul>
-            </aside>
+            <div className={styles.guidedIntro}>
+              <div className={styles.areaTitle}>
+                <span>{area + 1}</span>
+                <div>
+                  <h3>{writingAreas[area].title}</h3>
+                  <p>{writingAreas[area].description}</p>
+                </div>
+              </div>
+              <div className={styles.guidingQuestions}>
+                <h4>
+                  <Icon name="thought" size="small" />
+                  Pertanyaan pemandu
+                </h4>
+                <ul>
+                  {writingAreas[area].questions.map((q) => (
+                    <li key={q}>{q}</li>
+                  ))}
+                </ul>
+                <button
+                  type="button"
+                  disabled={blocked}
+                  onClick={insertHeading}
+                >
+                  Tambahkan judul bagian ke teks
+                </button>
+              </div>
+            </div>
           )}
-          {state.fields.mode === "assisted" && (
-            <p>
-              Tulis secara manual atau minta tinjauan di panel AI. Memilih
-              pendekatan ini tidak mengirim data.
-            </p>
-          )}
-          <label>
-            Isi riset · Markdown
+          <label className={styles.bodyLabel}>
+            <span className="sr-only">Isi riset · Markdown</span>
             <textarea
-              rows={20}
+              ref={textarea}
+              rows={state.fields.mode === "guided" ? 5 : 22}
               value={state.fields.body}
+              disabled={blocked}
               onChange={(e) => edit({ body: e.target.value })}
+              onKeyDown={(e) => {
+                if (
+                  (e.ctrlKey || e.metaKey) &&
+                  ["b", "i", "s"].includes(e.key.toLowerCase())
+                ) {
+                  e.preventDefault();
+                  if (e.key.toLowerCase() === "s") {
+                    if (
+                      !blocked &&
+                      !["saving", "conflict"].includes(state.status)
+                    )
+                      void session.save();
+                  } else
+                    format(e.key.toLowerCase() === "b" ? "bold" : "italic");
+                }
+              }}
+              placeholder={
+                companyName
+                  ? "Mulai menulis pemikiranmu tentang " + companyName + "…"
+                  : "Mulai dari pengamatan, pertanyaan, atau hipotesismu…"
+              }
               spellCheck
               aria-describedby="research-save-help"
             />
           </label>
-        </fieldset>
-        <p id="research-save-help">
-          Autosave setelah 1 detik tanpa perubahan, satu operasi pada satu
-          waktu. Tidak ada rekaman Thought otomatis.
-        </p>
-        <div className={styles.toolbar}>
+          {state.fields.mode === "guided" && (
+            <nav
+              className={styles.guidedSections}
+              aria-label="Area panduan dalam kanvas"
+            >
+              {writingAreas.map(
+                (item, n) =>
+                  n !== area && (
+                    <button
+                      type="button"
+                      key={item.title}
+                      onClick={() => setArea(n)}
+                    >
+                      <span>{n + 1}</span>
+                      <div>
+                        <strong>{item.title}</strong>
+                        <small>{item.description}</small>
+                      </div>
+                      <Icon name="arrowRight" size="small" />
+                    </button>
+                  ),
+              )}
+            </nav>
+          )}
+          <footer className={styles.editorFooter}>
+            <span>
+              {state.fields.body.trim()
+                ? state.fields.body.trim().split(/\s+/u).length
+                : 0}{" "}
+              kata · {state.fields.body.length.toLocaleString("id-ID")} karakter
+            </span>
+            <span id="research-save-help">
+              Autosave 1 detik · tanpa Thought otomatis
+            </span>
+            <button
+              type="button"
+              onClick={() => session.save()}
+              disabled={
+                blocked ||
+                ["saving", "saved", "conflict"].includes(state.status)
+              }
+            >
+              Simpan / ulangi penyimpanan
+            </button>
+          </footer>
+        </section>
+        <div className={styles.recovery}>
+          {state.error && <p role="alert">{state.error}</p>}
+          {state.storageError && (
+            <p role="alert">
+              Perlindungan buffer peramban tidak tersedia. Simpan atau salin
+              teks sebelum meninggalkan halaman.
+            </p>
+          )}
+          {(state.status === "conflict" ||
+            state.status === "uncertain" ||
+            !!server ||
+            !!pendingOperation) && (
+            <div>
+              <button onClick={loadServer}>Periksa versi server</button>
+              {server && (
+                <details open>
+                  <summary>
+                    Versi server r{server.revision} · teks lokal tetap di editor
+                  </summary>
+                  <h3>{server.title}</h3>
+                  <pre>{server.body}</pre>
+                  <button
+                    onClick={() => {
+                      if (
+                        window.confirm(
+                          "Ganti teks lokal dengan versi server? Salin perubahan lokal yang masih dibutuhkan terlebih dahulu.",
+                        )
+                      ) {
+                        session.acceptServer(server, false);
+                        setServer(null);
+                        operation.current = null;
+                        setPendingOperation(null);
+                      }
+                    }}
+                  >
+                    Gunakan versi server
+                  </button>
+                  <button
+                    onClick={() => {
+                      if (
+                        window.confirm(
+                          "Gunakan teks lokal dengan dasar revisi server terbaru? Penyimpanan tetap harus dikonfirmasi.",
+                        )
+                      ) {
+                        session.acceptServer(server, true);
+                        setServer(null);
+                        operation.current = null;
+                        setPendingOperation(null);
+                      }
+                    }}
+                  >
+                    Pertahankan teks lokal, pakai dasar server
+                  </button>
+                </details>
+              )}
+            </div>
+          )}
+          {source && (
+            <details>
+              <summary>Capture sumber · asli, tidak diubah</summary>
+              <pre>{source.raw_text}</pre>
+            </details>
+          )}
+        </div>
+        <section className={styles.panel} id="research-commit">
+          <h2>Tinjau & rekam Thought</h2>
+          <p>
+            {committed
+              ? "Konten sesuai Thought terakhir."
+              : "Perubahan Working Tree tidak mengubah riwayat."}{" "}
+            Rekaman berikutnya terkait dokumen yang sama.
+          </p>
+          <details>
+            <summary>Periksa snapshot yang akan direkam</summary>
+            <h3>{state.fields.title}</h3>
+            <pre>{state.fields.body}</pre>
+          </details>
+          <label>
+            Pesan singkat · opsional
+            <input
+              value={message}
+              maxLength={500}
+              disabled={busy || !!pendingOperation}
+              onChange={(e) => setMessage(e.target.value)}
+            />
+          </label>
           <button
-            type="button"
-            onClick={() => session.save()}
+            onClick={() =>
+              mutate(
+                operation.current?.kind === "restore" ? "restore" : "commit",
+              )
+            }
             disabled={
-              busy ||
-              state.status === "saving" ||
-              state.status === "saved" ||
-              state.status === "conflict"
+              busy || state.status !== "saved" || !state.fields.body.trim()
             }
           >
-            Simpan / ulangi penyimpanan
+            {busy
+              ? "Memproses…"
+              : pendingOperation
+                ? "Ulangi operasi yang sama"
+                : `Rekam Thought v${latest + 1}`}
           </button>
-          <span>
-            {state.fields.body.length.toLocaleString("id-ID")} / 100.000
-            karakter
-          </span>
-        </div>
-        {state.error && <p role="alert">{state.error}</p>}
-        {state.storageError && (
-          <p role="alert">
-            Perlindungan buffer peramban tidak tersedia. Simpan atau salin teks
-            sebelum meninggalkan halaman.
-          </p>
-        )}
-        {(state.status === "conflict" ||
-          state.status === "uncertain" ||
-          !!server ||
-          !!pendingOperation) && (
-          <div>
-            <button onClick={loadServer}>Periksa versi server</button>
-            {server && (
-              <details open>
-                <summary>
-                  Versi server r{server.revision} · teks lokal tetap di editor
-                </summary>
-                <h3>{server.title}</h3>
-                <pre>{server.body}</pre>
-                <button
-                  onClick={() => {
-                    if (
-                      window.confirm(
-                        "Ganti teks lokal dengan versi server? Salin perubahan lokal yang masih dibutuhkan terlebih dahulu.",
-                      )
-                    ) {
-                      session.acceptServer(server, false);
-                      setServer(null);
-                      operation.current = null;
-                      setPendingOperation(null);
-                    }
-                  }}
-                >
-                  Gunakan versi server
-                </button>
-                <button
-                  onClick={() => {
-                    if (
-                      window.confirm(
-                        "Gunakan teks lokal dengan dasar revisi server terbaru? Penyimpanan tetap harus dikonfirmasi.",
-                      )
-                    ) {
-                      session.acceptServer(server, true);
-                      setServer(null);
-                      operation.current = null;
-                      setPendingOperation(null);
-                    }
-                  }}
-                >
-                  Pertahankan teks lokal, pakai dasar server
-                </button>
-              </details>
-            )}
-          </div>
-        )}
-        {source && (
-          <details>
-            <summary>Capture sumber · asli, tidak diubah</summary>
-            <pre>{source.raw_text}</pre>
-          </details>
-        )}
-      </section>
-      <section className={styles.panel}>
-        <h2>Tinjau & rekam Thought</h2>
-        <p>
-          {committed
-            ? "Konten sesuai Thought terakhir."
-            : "Perubahan Working Tree tidak mengubah riwayat."}{" "}
-          Rekaman berikutnya terkait dokumen yang sama.
-        </p>
-        <details>
-          <summary>Periksa snapshot yang akan direkam</summary>
-          <h3>{state.fields.title}</h3>
-          <pre>{state.fields.body}</pre>
-        </details>
-        <label>
-          Pesan singkat · opsional
-          <input
-            value={message}
-            maxLength={500}
-            disabled={busy || !!pendingOperation}
-            onChange={(e) => setMessage(e.target.value)}
-          />
-        </label>
-        <button
-          onClick={() =>
-            mutate(operation.current?.kind === "restore" ? "restore" : "commit")
-          }
-          disabled={
-            busy || state.status !== "saved" || !state.fields.body.trim()
-          }
-        >
-          {busy
-            ? "Memproses…"
-            : pendingOperation
-              ? "Ulangi operasi yang sama"
-              : `Rekam Thought v${latest + 1}`}
-        </button>
-        {feedback && <p role="status">{feedback}</p>}
-      </section>
-      <section className={styles.panel} id="research-history">
-        <h2>Riwayat Thought</h2>
-        {!history.length ? (
-          <p>Belum ada Thought. Menyimpan draf tidak membuat riwayat ini.</p>
-        ) : (
-          <ol>
-            {history.map((v) => (
-              <li key={v.id}>
-                <button disabled={busy} onClick={() => setView(v)}>
-                  v{v.number} · {v.title}
-                </button>{" "}
-                <time dateTime={v.created_at}>
-                  {v.created_at.slice(0, 16).replace("T", " ")} UTC
-                </time>
-                <p>{v.message || "Tanpa pesan"}</p>
-                <button onClick={() => setCompare(v)}>
-                  Pilih dasar perbandingan
-                </button>
-              </li>
-            ))}
-          </ol>
-        )}
-        <div className={styles.toolbar}>
-          <button
-            disabled={busy || historyPage === 0}
-            onClick={() => loadHistory(historyPage - 1)}
-          >
-            Versi lebih baru
-          </button>
-          <button
-            disabled={busy || !hasNext}
-            onClick={() => loadHistory(historyPage + 1)}
-          >
-            Versi lebih lama
-          </button>
-        </div>
-        {view && (
-          <article>
-            <h3>Snapshot v{view.number} · hanya baca</h3>
-            <pre>{view.body}</pre>
+          {feedback && <p role="status">{feedback}</p>}
+        </section>
+        <section className={styles.panel} id="research-history">
+          <h2>Riwayat Thought</h2>
+          {!history.length ? (
+            <p>Belum ada Thought. Menyimpan draf tidak membuat riwayat ini.</p>
+          ) : (
+            <ol>
+              {history.map((v) => (
+                <li key={v.id}>
+                  <button disabled={busy} onClick={() => setView(v)}>
+                    v{v.number} · {v.title}
+                  </button>{" "}
+                  <time dateTime={v.created_at}>
+                    {v.created_at.slice(0, 16).replace("T", " ")} UTC
+                  </time>
+                  <p>{v.message || "Tanpa pesan"}</p>
+                  <button onClick={() => setCompare(v)}>
+                    Pilih dasar perbandingan
+                  </button>
+                </li>
+              ))}
+            </ol>
+          )}
+          <div className={styles.toolbar}>
             <button
-              disabled={busy || !!pendingOperation || state.status !== "saved"}
-              onClick={() => mutate("restore")}
+              disabled={busy || historyPage === 0}
+              onClick={() => loadHistory(historyPage - 1)}
             >
-              Pulihkan versi ini ke Working Tree…
+              Versi lebih baru
             </button>
-            {compare && <VersionDiff before={compare} after={view} />}
-          </article>
-        )}
-      </section>
-      <ReasoningPanel
-        owner={owner}
-        draftId={draft.id}
-        revision={state.revision}
-        dirty={state.status !== "saved"}
-        sourceAvailable={!!source}
-        version={view}
+            <button
+              disabled={busy || !hasNext}
+              onClick={() => loadHistory(historyPage + 1)}
+            >
+              Versi lebih lama
+            </button>
+          </div>
+          {view && (
+            <article>
+              <h3>Snapshot v{view.number} · hanya baca</h3>
+              <pre>{view.body}</pre>
+              <button
+                disabled={
+                  busy || !!pendingOperation || state.status !== "saved"
+                }
+                onClick={() => mutate("restore")}
+              >
+                Pulihkan versi ini ke Working Tree…
+              </button>
+              {compare && <VersionDiff before={compare} after={view} />}
+            </article>
+          )}
+        </section>
+      </div>
+      <WritingCompanion
+        id="writing-companion"
+        open={companion}
+        onClose={() => setCompanion(false)}
+        opener={companionControl}
+        area={area}
+        onArea={setArea}
+        source={source}
+        ai={
+          <ReasoningPanel
+            owner={owner}
+            draftId={draft.id}
+            revision={state.revision}
+            dirty={state.status !== "saved"}
+            sourceAvailable={!!source}
+            companyAvailable={!!state.fields.company_id}
+            version={view}
+          />
+        }
       />
-    </>
+    </div>
   );
 }
 function VersionDiff({

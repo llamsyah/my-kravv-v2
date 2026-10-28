@@ -928,7 +928,15 @@ try {
     );
     check(
       r.text.includes("A-DRAFT-BODY") &&
-        r.text.includes('aria-label="Navigasi perusahaan"'),
+        r.text.includes('aria-label="Navigasi perusahaan"') &&
+        captures
+          .at(-2)
+          .props.researchState.items.some((d) => d.id === researchRows[0].id) &&
+        captures
+          .at(-2)
+          .props.researchState.items.every(
+            (d) => d.user_id === users.A.id && d.company_id === id(1),
+          ),
     );
     r = await request(
       `/foundation?view=research&company=${id(2)}&draft=${researchRows[0].id}`,

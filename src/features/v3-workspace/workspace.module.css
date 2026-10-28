@@ -1549,3 +1549,27 @@
     padding: 24px 0;
   }
 }
+
+/* Writing uses the accepted Company sidebar, with a document-centred inner canvas. */
+.canvas[data-writing="true"] {
+  max-width: 1640px;
+}
+.canvas[data-writing="true"][data-workspace="true"]
+  .layout[data-expanded="true"] {
+  grid-template-columns: 228px minmax(0, 1fr);
+}
+.canvas[data-writing="true"][data-workspace="true"] .layout > .main {
+  padding: 20px 0 24px 18px;
+}
+.canvas[data-writing="true"] .breadcrumb {
+  margin-bottom: 14px;
+}
+@media (max-width: 720px) {
+  .canvas[data-writing="true"][data-workspace="true"]
+    .layout[data-expanded="true"] {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .canvas[data-writing="true"][data-workspace="true"] .layout > .main {
+    padding: 18px 0;
+  }
+}

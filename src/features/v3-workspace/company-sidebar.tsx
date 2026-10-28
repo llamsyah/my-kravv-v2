@@ -28,7 +28,11 @@ export function cycleDrawerFocus(event: KeyboardEvent<HTMLDialogElement>) {
     event.currentTarget.querySelectorAll<HTMLElement>(
       'a[href], button:not([disabled]), input:not([disabled]), summary, [tabindex="0"]',
     ),
-  ).filter((element) => element.getClientRects().length > 0);
+  ).filter(
+    (element) =>
+      element.getClientRects().length > 0 &&
+      element.getAttribute?.("tabindex") !== "-1",
+  );
   const first = controls[0],
     last = controls.at(-1);
   const active = event.currentTarget.ownerDocument.activeElement;

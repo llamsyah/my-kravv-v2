@@ -207,7 +207,9 @@ export function V3Workspace({
             <Link
               href={workspaceHref("companies")}
               aria-current={
-                !home && !captures && !research ? "page" : undefined
+                !home && !captures && (!research || workspace)
+                  ? "page"
+                  : undefined
               }
             >
               <Icon name="building" />
@@ -292,12 +294,13 @@ export function V3Workspace({
         data-workspace={workspace}
         data-home={home}
         data-directory={directory}
+        data-writing={research}
       >
         <div
           className={styles.layout}
           data-workspace={workspace}
           data-expanded={sidebar}
-          data-context={workspace && context}
+          data-context={workspace && !research && context}
         >
           {workspace && company && (
             <CompanySidebar
@@ -383,7 +386,7 @@ export function V3Workspace({
                       )}
                     </span>
                   </div>
-                  {workspace && (
+                  {workspace && !research && (
                     <button
                       ref={contextControl}
                       className={styles.contextToggle}
@@ -396,7 +399,9 @@ export function V3Workspace({
                     </button>
                   )}
                 </div>
-                {workspace && company && location.view !== "edit" ? (
+                {research ? null : workspace &&
+                  company &&
+                  location.view !== "edit" ? (
                   <CompanyHeader company={company} />
                 ) : (
                   <div
@@ -448,6 +453,7 @@ export function V3Workspace({
                 }
                 owner={ownerId ?? ""}
                 company={company?.id ?? researchCompany}
+                companyName={company?.name}
                 state={
                   researchState ?? {
                     ready: false,
@@ -518,7 +524,7 @@ export function V3Workspace({
               />
             ) : null}
           </main>
-          {workspace && (
+          {workspace && !research && (
             <aside
               className={styles.context}
               id="v3-company-context"

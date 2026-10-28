@@ -143,6 +143,16 @@ export default async function FoundationPage({
             location.companyId = selectedCompany.id;
           }
           if (researchState.selected) {
+            // The selected-document route previously omitted the bounded picker list.
+            // Reuse the same owned service, after validating actual Company context.
+            Object.assign(
+              researchState,
+              await listResearchDrafts(
+                supabase,
+                research.page,
+                researchState.selected.company_id ?? undefined,
+              ),
+            );
             const history = await researchHistory(supabase, research.draft);
             researchState.history = history.items;
             researchState.historyHasNext = history.hasNext;

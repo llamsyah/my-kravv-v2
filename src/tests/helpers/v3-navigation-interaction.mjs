@@ -4,6 +4,7 @@ import fs from "node:fs";
 import ts from "typescript";
 import * as jsx from "react/jsx-runtime";
 import { researchHref } from "../../features/research/contract.ts";
+import * as writingTools from "../../features/research/writing-tools.ts";
 import * as model from "../../features/v3-workspace/model.ts";
 import * as theme from "../../features/v3-workspace/theme-preference.ts";
 import * as management from "../../features/v3-workspace/management-contract.ts";
@@ -214,4 +215,121 @@ for (compact of [false, true]) {
 }
 console.log(
   "Directory navigation and sidebar presentation remain independent on desktop/mobile.",
+);
+
+// The same event harness exercises the actual contextual panel and AI controls.
+compact = false;
+imports["./writing-tools"] = writingTools;
+imports["../v3-workspace/company-sidebar"] = { cycleDrawerFocus: () => {} };
+const { WritingCompanion } = load("src/features/research/companion.tsx");
+let closed = 0,
+  area = 0,
+  requests = 0;
+const aiNode = { type: "synthetic-review", props: {} };
+const companionProps = {
+  id: "test-companion",
+  open: true,
+  onClose: () => {
+    closed++;
+  },
+  opener: { current: null },
+  area,
+  onArea: (n) => {
+    area = n;
+  },
+  source: null,
+  ai: aiNode,
+};
+const companionState = [];
+const companion = () => draw(WritingCompanion, companionProps, companionState);
+let companionTree = companion();
+one(
+  companionTree,
+  (n) => n.props?.role === "tab" && n.props.children === "AI Review",
+).props.onClick();
+companionTree = companion();
+assert.equal(
+  one(companionTree, (n) => n.props?.id === "test-companion-pane-2").props
+    .children,
+  aiNode,
+);
+assert.equal(
+  one(companionTree, (n) => n.props?.id === "test-companion-pane-2").props
+    .hidden,
+  false,
+);
+one(
+  companionTree,
+  (n) => n.props?.role === "tab" && n.props.children === "Bahan",
+).props.onClick();
+companionTree = companion();
+assert.equal(
+  one(companionTree, (n) => n.props?.id === "test-companion-pane-2").props
+    .children,
+  aiNode,
+);
+assert.equal(
+  one(companionTree, (n) => n.props?.id === "test-companion-pane-2").props
+    .hidden,
+  true,
+);
+one(
+  companionTree,
+  (n) => n.props?.["aria-label"] === "Tutup Companion",
+).props.onClick();
+assert.equal(closed, 1);
+imports["./reasoning-actions"] = {
+  researchReasoningAction: async () => {
+    requests++;
+    return { ok: false, code: "AI_DISABLED", error: "Synthetic disabled" };
+  },
+  researchAIHistoryAction: async () => {
+    requests++;
+    return { ok: true, runs: [] };
+  },
+};
+const { ReasoningPanel } = load("src/features/research/reasoning-panel.tsx");
+const reasoningState = [];
+const reasoning = () =>
+  draw(
+    ReasoningPanel,
+    {
+      owner: company.user_id,
+      draftId: company.id,
+      revision: 1,
+      dirty: false,
+      sourceAvailable: false,
+      companyAvailable: false,
+      version: null,
+    },
+    reasoningState,
+  );
+let reasoningTree = reasoning();
+one(
+  reasoningTree,
+  (n) => n.type === "button" && n.props.children === "Clarify",
+).props.onClick();
+reasoningTree = reasoning();
+assert.equal(requests, 0);
+assert.equal(
+  one(
+    reasoningTree,
+    (n) => n.type === "button" && n.props.children === "Clarify",
+  ).props["aria-pressed"],
+  true,
+);
+await one(
+  reasoningTree,
+  (n) => n.type === "button" && n.props.className === "aiRun",
+).props.onClick();
+assert.equal(requests, 1);
+reasoningTree = reasoning();
+assert.ok(
+  nodes(reasoningTree).some(
+    (n) =>
+      n.props?.role === "alert" && n.props.children === "Synthetic disabled",
+  ),
+);
+console.log(
+  "Companion tabs retain mounted review state; AI selection is inert until one explicit run.",
 );

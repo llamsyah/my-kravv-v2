@@ -6,6 +6,7 @@ import {
 } from "./reasoning-actions";
 import type { ResearchAIRun, ReasoningRequest } from "./reasoning-contract";
 import type { ThoughtVersion } from "./contract";
+import { Icon } from "../../components/ui/icon";
 import styles from "./workspace.module.css";
 export function ReasoningPanel({
   owner,
@@ -13,6 +14,7 @@ export function ReasoningPanel({
   revision,
   dirty,
   sourceAvailable,
+  companyAvailable = true,
   version,
 }: {
   owner: string;
@@ -20,8 +22,11 @@ export function ReasoningPanel({
   revision: number;
   dirty: boolean;
   sourceAvailable: boolean;
+  companyAvailable?: boolean;
   version: ThoughtVersion | null;
 }) {
+  const [selectedMode, setSelectedMode] =
+    useState<ReasoningRequest["mode"]>("CHALLENGE");
   const [company, setCompany] = useState(false),
     [capture, setCapture] = useState(false),
     [includeVersion, setVersion] = useState(false),
@@ -114,48 +119,58 @@ export function ReasoningPanel({
     }
   }
   return (
-    <section className={styles.panel}>
-      <h2>Tinjauan penalaran AI</h2>
+    <section className={styles.aiReview}>
+      <div className={styles.aiIdentity}>
+        <Icon name="thought" />
+        <div>
+          <h2>Thinking Partner</h2>
+          <p>Tinjauan penalaran AI · tulisan tetap milikmu.</p>
+        </div>
+      </div>
       <p>
         Opsional. AI menelaah argumen, bukan memutuskan investasi. Teks tidak
         pernah diterapkan otomatis. Aktivasi penyedia masih memerlukan
         persetujuan terpisah.
       </p>
-      <fieldset disabled={busy || !!pendingOperation}>
-        <legend>Konteks yang akan dikirim</legend>
-        <p>
-          Judul dan seluruh isi draf tersimpan r{revision}. Dokumen terlalu
-          besar akan ditolak, tidak dipotong diam-diam.
-        </p>
-        <label>
-          <input
-            type="checkbox"
-            checked={company}
-            onChange={(e) => setCompany(e.target.checked)}
-          />{" "}
-          Metadata perusahaan terkait
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            disabled={!sourceAvailable}
-            checked={capture}
-            onChange={(e) => setCapture(e.target.checked)}
-          />{" "}
-          Capture sumber
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            disabled={!version}
-            checked={includeVersion}
-            onChange={(e) => setVersion(e.target.checked)}
-          />{" "}
-          Snapshot Thought yang sedang dibuka{" "}
-          {version ? `v${version.number}` : ""}
-        </label>
-      </fieldset>
-      <div>
+      <details className={styles.aiContext}>
+        <summary>Konteks yang akan ditinjau · r{revision}</summary>
+        <fieldset disabled={busy || !!pendingOperation}>
+          <legend>Konteks yang akan dikirim</legend>
+          <p>
+            Judul dan seluruh isi draf tersimpan r{revision}. Dokumen terlalu
+            besar akan ditolak, tidak dipotong diam-diam.
+          </p>
+          <label>
+            <input
+              type="checkbox"
+              disabled={!companyAvailable}
+              checked={company}
+              onChange={(e) => setCompany(e.target.checked)}
+            />{" "}
+            Metadata perusahaan terkait
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              disabled={!sourceAvailable}
+              checked={capture}
+              onChange={(e) => setCapture(e.target.checked)}
+            />{" "}
+            Capture sumber
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              disabled={!version}
+              checked={includeVersion}
+              onChange={(e) => setVersion(e.target.checked)}
+            />{" "}
+            Snapshot Thought yang sedang dibuka{" "}
+            {version ? `v${version.number}` : ""}
+          </label>
+        </fieldset>
+      </details>
+      <div className={styles.aiModes} role="group" aria-label="Mode AI Review">
         {(["CLARIFY", "CHALLENGE", "GAP_CHECK"] as const).map((mode) => (
           <button
             key={mode}
@@ -164,16 +179,38 @@ export function ReasoningPanel({
               dirty ||
               (!!pendingOperation && pendingOperation.mode !== mode)
             }
-            onClick={() => run(mode)}
+            aria-pressed={selectedMode === mode}
+            onClick={() => setSelectedMode(mode)}
           >
             {mode === "CLARIFY"
-              ? "Perjelas · Clarify"
+              ? "Clarify"
               : mode === "CHALLENGE"
-                ? "Uji argumen · Challenge"
-                : "Periksa celah · Gap Check"}
+                ? "Challenge"
+                : "Gap Check"}
           </button>
         ))}
       </div>
+      <button
+        className={styles.aiRun}
+        type="button"
+        disabled={busy || dirty}
+        onClick={() => run(selectedMode)}
+      >
+        {busy
+          ? "Menunggu…"
+          : pendingOperation
+            ? "Periksa operasi yang sama"
+            : "▷ Jalankan " +
+              {
+                CLARIFY: "Clarify",
+                CHALLENGE: "Challenge",
+                GAP_CHECK: "Gap Check",
+              }[selectedMode]}
+      </button>
+      <p className={styles.muted}>
+        Penyedia belum diaktifkan. Gate server tetap menolak eksekusi tanpa
+        persetujuan terpisah.
+      </p>
       {dirty && <p>Simpan dan pastikan revisi bersih sebelum meminta AI.</p>}
       {busy && (
         <p role="status">
@@ -185,7 +222,7 @@ export function ReasoningPanel({
         Muat riwayat AI · 10 terbaru
       </button>
       {runs.map((run) => (
-        <article key={run.id}>
+        <article key={run.id} className={styles.aiResult}>
           <h3>
             {run.mode} · r{run.source_revision} · {run.status}
           </h3>
@@ -216,7 +253,7 @@ export function ReasoningPanel({
             Object.entries(run.output)
               .filter(([k]) => k !== "mode")
               .map(([key, value]) => (
-                <section key={key}>
+                <section key={key} className={styles.feedbackSection}>
                   <h4>{labels[key] ?? key}</h4>
                   <ResultValue value={value} />
                 </section>
@@ -249,6 +286,10 @@ export function ReasoningPanel({
           )}
         </article>
       ))}
+      <p className={styles.guideNote}>
+        Percakapan lanjutan belum tersedia. Hasil adalah snapshot tinjauan;
+        tidak ada penulisan ulang atau penerapan otomatis.
+      </p>
     </section>
   );
 }
